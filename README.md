@@ -19,9 +19,9 @@ Here are some ideas to get you started:
 
 I am a student of **Debrecen University**, Hungary, majoring in **Computer Science**. I hope to be a **Full-stack** in the future.
 
-- :telescope: I’m focus on **My university studies** && [**My Blog**](https://mogeko.github.io).  
-- :seedling: I’m learning <img src="https://img.shields.io/badge/-JavaScript-eed718?style=flat&logo=javascript&logoColor=ffffff"> && <img src="https://img.shields.io/badge/-TypeScript-0381cb?style=flat&logo=typescript&logoColor=ffffff">.  
-- :books: I want to learn <img src="https://img.shields.io/badge/-Node.js-3C873A?style=flat&logo=Node.js&logoColor=ffffff">.  
+- :telescope: I’m focus on **My university studies** && [**My Blog**](https://mogeko.github.io).
+- :seedling: I’m learning <img src="https://img.shields.io/badge/-JavaScript-eed718?style=flat&logo=javascript&logoColor=ffffff"> && <img src="https://img.shields.io/badge/-TypeScript-0381cb?style=flat&logo=typescript&logoColor=ffffff">.
+- :books: I want to learn <img src="https://img.shields.io/badge/-Node.js-3C873A?style=flat&logo=Node.js&logoColor=ffffff"> later.
 - :speech_balloon: Ask me about **How to use Github Pages to host a personal blog**.
 
 ### :microscope: Tech && Tools Preference
