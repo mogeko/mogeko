@@ -17,7 +17,7 @@ Here are some ideas to get you started:
 
 <img align="right" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&icon_color=CE1D2D&text_color=718096&bg_color=ffffff&hide_title=true&hide_border=true&include_all_commits=true" width="480px">
 
-I am a student of **Debrecen University**, Hungary, majoring in **Computer Science**. I hope to make a **Full-stack** in the future.
+I am a student of **Debrecen University**, Hungary, majoring in **Computer Science**. I hope to be a **Full-stack** in the future.
 
 - :telescope: I’m focus on **My university studies** && [**My Blog**](https://mogeko.github.io).  
 - :seedling: I’m learning <img src="https://img.shields.io/badge/-JavaScript-eed718?style=flat&logo=javascript&logoColor=ffffff"> && <img src="https://img.shields.io/badge/-TypeScript-0381cb?style=flat&logo=typescript&logoColor=ffffff">.  
