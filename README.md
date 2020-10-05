@@ -20,7 +20,7 @@ Here are some ideas to get you started:
 I am a student of **Debrecen University**, Hungary, majoring in **Computer Science**. I hope to make a **Full-stack** in the future.
 
 - 🔭 I’m focus on **My university studies** && [**My Blog**](https://mogeko.github.io).
-- 🌱 I’m learning <img src="https://img.shields.io/badge/-JavaScript-eed718?style=flat&logo=javascript&logoColor=ffffff"> && <img src="https://img.shields.io/badge/-TypeScript-0381cb?style=flat&logo=typescript&logoColor=ffffff"> now.
+- 🌱 I’m learning <img src="https://img.shields.io/badge/-JavaScript-eed718?style=flat&logo=javascript&logoColor=ffffff"> && <img src="https://img.shields.io/badge/-TypeScript-0381cb?style=flat&logo=typescript&logoColor=ffffff">.
 - 📚 I want to learn <img src="https://img.shields.io/badge/-Node.js-3C873A?style=flat&logo=Node.js&logoColor=ffffff">.
 - 💬 Ask me about **How to use Github Pages to host a personal blog**.
 
