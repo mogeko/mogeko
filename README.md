@@ -19,16 +19,16 @@ Here are some ideas to get you started:
 
 I am a student of **Debrecen University**, Hungary, majoring in **Computer Science**. I hope to make a **Full-stack** in the future.
 
-- 🔭 I’m focus on **My university studies** && [**My Blog**](https://mogeko.github.io).
-- 🌱 I’m learning <img src="https://img.shields.io/badge/-JavaScript-eed718?style=flat&logo=javascript&logoColor=ffffff"> && <img src="https://img.shields.io/badge/-TypeScript-0381cb?style=flat&logo=typescript&logoColor=ffffff">.
-- 📚 I want to learn <img src="https://img.shields.io/badge/-Node.js-3C873A?style=flat&logo=Node.js&logoColor=ffffff">.
-- 💬 Ask me about **How to use Github Pages to host a personal blog**.
+- :telescope: I’m focus on **My university studies** && [**My Blog**](https://mogeko.github.io).  
+- :seedling: I’m learning <img src="https://img.shields.io/badge/-JavaScript-eed718?style=flat&logo=javascript&logoColor=ffffff"> && <img src="https://img.shields.io/badge/-TypeScript-0381cb?style=flat&logo=typescript&logoColor=ffffff">.  
+- :books: I want to learn <img src="https://img.shields.io/badge/-Node.js-3C873A?style=flat&logo=Node.js&logoColor=ffffff">.  
+- :speech_balloon: Ask me about **How to use Github Pages to host a personal blog**.
 
-### Tech & Tools Preference
+### :microscope: Tech && Tools Preference
 
 <img src="https://img.shields.io/badge/-HTML5-E34F26?style=flat&logo=html5&logoColor=ffffff"> <img src="https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css3&logoColor=ffffff"> <img src="https://img.shields.io/badge/-JavaScript-eed718?style=flat&logo=javascript&logoColor=ffffff"> <img src="https://img.shields.io/badge/-TypeScript-0381cb?style=flat&logo=typescript&logoColor=ffffff"> <img src="https://img.shields.io/badge/-Java-d64d37?style=flat&logo=java&logoColor=ffffff"> <img src="https://img.shields.io/badge/-Python-366b98?style=flat&logo=python&logoColor=ffffff"> <img src="https://img.shields.io/badge/-Rust-7c512e?style=flat&logo=rust&logoColor=ffffff"> <img src="http://img.shields.io/badge/-Git-F1502F?style=flat&logo=git&logoColor=ffffff"> <img src="http://img.shields.io/badge/-Github-000000?style=flat&logo=github&logoColor=ffffff"> <img src="http://img.shields.io/badge/-VS%20Code-007ACC?style=flat&logo=visual%20studio%20code&logoColor=ffffff"> <img src="https://img.shields.io/badge/-Linux-3c3c3c?style=flat&logo=linux&logoColor=ffffff"> <img src="https://img.shields.io/badge/-Docker-066aa0?style=flat&logo=docker&logoColor=ffffff"> <img src="https://img.shields.io/badge/-Hugo-c70077?style=flat&logo=hugo&logoColor=ffffff">
 
-📫 How to reach me:
+### :mailbox: How to reach me:
 
 - GitHub: [Mogeko](https://github.com/Mogeko) (Why not follow me?:eyes:)
 
