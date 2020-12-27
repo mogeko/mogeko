@@ -30,16 +30,18 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 ![CSS3][shield_css3]
 ![JavaScript][shield_javascript]
 ![TypeScript][shield_typescript]
-![React][shield_react]
 ![Java][shield_java]
 ![Python][shield_python]
 ![Rust][shield_rust]
 ![C++][shield_cpp]
+![React][shield_react]
+![Sass][shield_sass]
 ![Git][shield_git]
 ![GitHub][shield_github]
 ![VS Code][shield_vs-code]
 ![Linux][shield_linux]
 ![Docker][shield_docker]
+![Gataby][shield_gatsby]
 ![Hugo][shield_hugo]
 
 ### :mailbox: How to reach me:
@@ -58,6 +60,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 [shield_cpp]: https://img.shields.io/badge/-C++-005697?style=flat&logo=c%2B%2B&logoColor=ffffff
 [shield_css3]: https://img.shields.io/badge/-CSS3-1572B6?style=flat&logo=css3&logoColor=ffffff
 [shield_docker]: https://img.shields.io/badge/-Docker-066aa0?style=flat&logo=docker&logoColor=ffffff
+[shield_gatsby]: https://img.shields.io/badge/-Gatsby-663399?style=flat&logo=gatsby&logoColor=ffffff
 [shield_git]: http://img.shields.io/badge/-Git-F1502F?style=flat&logo=git&logoColor=ffffff
 [shield_github]: http://img.shields.io/badge/-GitHub-000000?style=flat&logo=github&logoColor=ffffff
 [shield_html5]: https://img.shields.io/badge/-HTML5-E34F26?style=flat&logo=html5&logoColor=ffffff
@@ -69,5 +72,6 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 [shield_python]: https://img.shields.io/badge/-Python-366b98?style=flat&logo=python&logoColor=ffffff
 [shield_react]: https://img.shields.io/badge/-React-53c1de?style=flat&logo=react&logoColor=ffffff
 [shield_rust]: https://img.shields.io/badge/-Rust-7c512e?style=flat&logo=rust&logoColor=ffffff
+[shield_sass]: https://img.shields.io/badge/-Sass-cf649a?style=flat&logo=sass&logoColor=ffffff
 [shield_typescript]: https://img.shields.io/badge/-TypeScript-0381cb?style=flat&logo=typescript&logoColor=ffffff
 [shield_vs-code]: http://img.shields.io/badge/-VS%20Code-007ACC?style=flat&logo=visual%20studio%20code&logoColor=ffffff
