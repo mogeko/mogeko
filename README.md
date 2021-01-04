@@ -26,7 +26,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 
 ### :microscope: Tech && Tools Preference
 
-![HTML5][shield_html5] ![CSS3][shield_css3] ![JavaScript][shield_javascript] ![TypeScript][shield_typescript] ![Java][shield_java] ![Python][shield_python] ![Rust][shield_rust] ![C++][shield_cpp] ![React][shield_react] ![Sass][shield_sass] ![Git][shield_git] ![GitHub][shield_github] ![VS Code][shield_vs-code] ![Linux][shield_linux] ![Docker][shield_docker] ![Gataby][shield_gatsby] ![Hugo][shield_hugo]
+![HTML5][shield_html5] ![CSS3][shield_css3] ![JavaScript][shield_javascript] ![TypeScript][shield_typescript] ![Java][shield_java] ![Python][shield_python] ![Rust][shield_rust] ![C++][shield_cpp] ![React][shield_react] ![Sass][shield_sass] ![Git][shield_git] ![GitHub][shield_github] ![VS Code][shield_vs-code] ![Linux][shield_linux] ![FreeBSD] ![Docker][shield_docker] ![Gataby][shield_gatsby] ![Hugo][shield_hugo]
 
 ### :mailbox: How to reach me:
 
