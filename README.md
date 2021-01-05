@@ -21,7 +21,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 
 - :telescope: I’m focus on **My university studies** && [**My Blog**][blog].
 - :seedling: I’m learning ![React][shield_react] && ![TypeScript][shield_typescript].
-- :books: I want to learn ![Node.js][shield_node-js] later.
+- :books: I want to learn ![Haskell][shield_haskell] later.
 - :speech_balloon: Ask me about **How to use Github Pages to host a personal blog**.
 
 ### :microscope: Tech && Tools Preference
