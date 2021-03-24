@@ -20,8 +20,8 @@ Here are some ideas to get you started:
 I am a student of **Debrecen University**, Hungary, majoring in **Computer Science**. I hope to be a **Full-stack** in the future.
 
 - :telescope: I’m focus on **My university studies** && [**My Blog**][blog].
-- :seedling: I’m learning ![React][shield_react] && ![TypeScript][shield_typescript].
-- :books: I want to learn ![Haskell][shield_haskell] later.
+- :seedling: I’m learning ![Haskell][shield_haskell].
+- :books: I want to learn ![Kotlin][shield_kotlin] later.
 - :speech_balloon: Ask me about **How to use Github Pages to host a personal blog**.
 
 ### :microscope: Tech && Tools Preference
