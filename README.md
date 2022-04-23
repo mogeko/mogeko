@@ -20,13 +20,13 @@ Here are some ideas to get you started:
 I am a student of **Debrecen University**, Hungary, majoring in **Computer Science**. I hope to be a **Full-stack** in the future.
 
 - :telescope: I’m focus on **My university studies** && [**My Blog**][blog].
-- :seedling: I’m learning ![badge_haskell].
-- :books: I want to learn ![badge_kotlin] later.
+- :seedling: I’m learning ![badge_elixir].
+- :books: I want to learn ![badge_erlang] later.
 - :speech_balloon: Ask me about **How to use Github Pages to host a personal blog**.
 
 ### :microscope: Tech && Tools Preference
 
-![badge_html5] ![badge_css3] ![badge_javascript] ![badge_typescript] ![badge_java] ![badge_python] ![badge_rust] ![badge_cpp] ![badge_react] ![badge_sass] ![badge_git] ![badge_github] ![badge_vs-code] ![badge_linux] ![badge_freebsd] ![badge_docker] ![badge_gatsby] ![badge_hugo]
+![badge_html5] ![badge_css3] ![badge_javascript] ![badge_typescript] ![badge_java] ![badge_python] ![badge_rust] ![badge_cpp] ![badge_react] ![badge_sass] ![badge_git] ![badge_github] ![badge_vs-code] ![badge_linux] ![badge_freebsd] ![badge_docker] ![badge_gatsby] ![badge_hugo] ![badge_elixir]
 
 ### :mailbox: How to reach me:
 
