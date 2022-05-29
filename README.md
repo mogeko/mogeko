@@ -41,7 +41,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 
 <!-- Skills -->
 
-[skills]: https://skillicons.dev/icons?i=html,css,js,ts,java,py,rust,cpp,elixr,md,regex,react,sass,tailwind,graphql,jest,git,github,eclipse,idea,vim,vscode,bash,azure,linux,bsd,docker,cloudflare,gatsby,nextjs
+[skills]: https://skillicons.dev/icons?i=html,css,js,ts,react,gatsby,nextjs,sass,tailwind,graphql,jest,java,py,rust,php,cpp,elixr,md,regex,redis,postgres,git,eclipse,idea,vim,vscode,bash,ps,ai,docker,linux,bsd,github,gitlab,stackoverflow,azure,cloudflare
 <!-- badge Links -->
 [badge_angular]: https://img.shields.io/badge/-Angular-DD0031?style=flat&logo=angular&logoColor=ffffff
 [badge_c]: https://img.shields.io/badge/-C-A8B9CC?style=flat&logo=c&logoColor=ffffff
