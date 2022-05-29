@@ -37,14 +37,14 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 
 ### :mailbox: How to reach me:
 
-- GitHub: [Mogeko][github] (Why not follow me? :eyes:)
+- GitHub: [mogeko][github] (Why not follow me? :eyes:)
 - Email: [zhengjunyi@live.com][e-mail]
 
 
 <!-- Links -->
 [blog]: https://mogeko.github.io
 [e-mail]: mailto:zhengjunyi@live.com
-[github]: https://github.com/Mogeko
+[github]: https://github.com/mogeko
 
 <!-- Skills -->
 
