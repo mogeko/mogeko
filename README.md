@@ -19,14 +19,14 @@ Here are some ideas to get you started:
 
 I am a student of **Debrecen University**, Hungary, majoring in **Computer Science**. I hope to be a **Full-stack** in the future.
 
-- :telescope: I’m focus on **My university studies** && [**My Blog**][blog].
-- :seedling: I’m learning ![badge_elixir].
-- :books: I want to learn ![badge_erlang] later.
+- :telescope: I’m focus on **My university studies** & [**My Blog**][blog].
+- :seedling: I’m learning ![badge_elixir] & ![badge_next-js].
+- :books: I want to learn ![badge_haskell] later.
 - :speech_balloon: Ask me about **How to use Github Pages to host a personal blog**.
 
 ### :microscope: Tech && Tools Preference
 
-![badge_html5] ![badge_css3] ![badge_javascript] ![badge_typescript] ![badge_java] ![badge_python] ![badge_rust] ![badge_cpp] ![badge_react] ![badge_sass] ![badge_git] ![badge_github] ![badge_vs-code] ![badge_linux] ![badge_freebsd] ![badge_docker] ![badge_gatsby] ![badge_hugo] ![badge_elixir]
+![skills]
 
 ### :mailbox: How to reach me:
 
@@ -38,6 +38,10 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 [blog]: https://mogeko.github.io
 [e-mail]: mailto:zhengjunyi@live.com
 [github]: https://github.com/Mogeko
+
+<!-- Skills -->
+
+[skills]: https://skillicons.dev/icons?i=html,css,js,ts,java,py,rust,cpp,elixr,md,regex,react,sass,tailwind,jest,git,github,vim,vscode,bash,azure,linux,bsd,docker,cloudflare,gatsby,nextjs
 
 <!-- badge Links -->
 [badge_angular]: https://img.shields.io/badge/-Angular-DD0031?style=flat&logo=angular&logoColor=ffffff
@@ -68,6 +72,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 [badge_lua]: https://img.shields.io/badge/-Lua-2C2D72?style=flat&logo=lua&logoColor=ffffff
 [badge_mongodb]: https://img.shields.io/badge/-MongoDB-47A248?style=flat&logo=mongodb&logoColor=ffffff
 [badge_mysql]: https://img.shields.io/badge/-MySQL-4479A1?style=flat&logo=mysql&logoColor=ffffff
+[badge_next-js]: https://img.shields.io/badge/-Next.js-000000?style=flat&logo=Next.js&logoColor=ffffff
 [badge_node-js]: https://img.shields.io/badge/-Node.js-339933?style=flat&logo=Node.js&logoColor=ffffff
 [badge_openstack]: https://img.shields.io/badge/-OpenStack-ED1944?style=flat&logo=openstack&logoColor=ffffff
 [badge_open-shift]: https://img.shields.io/badge/-Open%20Shift-EE0000?style=flat&logo=red-hat-open-shift&logoColor=ffffff
