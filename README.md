@@ -21,7 +21,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 
 - :telescope: I’m focus on **My university studies** & [**My Blog**][blog].
 - :seedling: I’m learning ![badge_elixir] & ![badge_next-js].
-- :books: I want to learn ![badge_haskell] later.
+- :books: I want to learn ![badge_figma] later.
 - :speech_balloon: Ask me about **How to use Github Pages to host a personal blog**.
 
 ### :microscope: Tech && Tools Preference
@@ -53,6 +53,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 [badge_electron]: https://img.shields.io/badge/-Electron-47848F?style=flat&logo=electron&logoColor=ffffff
 [badge_elixir]: https://img.shields.io/badge/-Elixir-4B275F?style=flat&logo=elixir&logoColor=ffffff
 [badge_erlang]: https://img.shields.io/badge/-Erlang-A90533?style=flat&logo=erlang&logoColor=ffffff
+[badge_figma]: https://img.shields.io/badge/-Figma-f24e1e?style=flat&logo=figma&logoColor=ffffff
 [badge_flutter]: https://img.shields.io/badge/-Flutter-02569B?style=flat&logo=flutter&logoColor=ffffff
 [badge_freebsd]: https://img.shields.io/badge/-FreeBSD-AB2B28?style=flat&logo=freebsd&logoColor=ffffff
 [badge_gatsby]: https://img.shields.io/badge/-Gatsby-663399?style=flat&logo=gatsby&logoColor=ffffff
