@@ -16,9 +16,9 @@ Here are some ideas to get you started:
 -->
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&disable_animations=true&include_all_commits=true&title_color=ff6e96&icon_color=79dafa&text_color=f8f8f2&bg_color=282a36">
-  <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&disable_animations=true&include_all_commits=true">
-  <img align="right" width="480px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&disable_animations=true&include_all_commits=true">
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&title_color=ff6e96&icon_color=79dafa&text_color=f8f8f2&bg_color=282a36">
+  <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true">
+  <img align="right" width="480px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true">
 </picture>
 
 
