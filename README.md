@@ -15,7 +15,12 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-<img align="right" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&icon_color=CE1D2D&text_color=718096&bg_color=ffffff&hide_border=true&include_all_commits=true" width="480px">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&include_all_commits=true">
+  <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&icon_color=CE1D2D&text_color=718096&bg_color=ffffff&hide_border=true&include_all_commits=true">
+  <img align="right"  alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&include_all_commits=true">
+</picture>
+
 
 I am a student of **Debrecen University**, Hungary, majoring in **Computer Science**. I hope to be a **Full-stack** in the future.
 
