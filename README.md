@@ -15,7 +15,13 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-<img align="right" width="460px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&disable_animations=true&theme=dracula">
+<a href="https://github.com/mogeko#gh-light-mode-only">
+  <img align="right" width="460px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&disable_animations=true#gh-light-mode-only">
+</a>
+
+<a href="https://github.com/mogeko#gh-dark-mode-only">
+  <img align="right" width="460px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&disable_animations=true&theme=dracula#gh-dark-mode-only">
+</a>
 
 <!-- <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&disable_animations=true&theme=dracula">
