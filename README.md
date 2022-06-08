@@ -16,7 +16,7 @@ Here are some ideas to get you started:
 -->
 
 <a href="https://github.com/mogeko#gh-light-mode-only">
-  <img align="right" width="460px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&disable_animations=true#gh-light-mode-only">
+  <img align="right" width="460px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&include_all_commits=true&disable_animations=true#gh-light-mode-only">
 </a>
 
 <a href="https://github.com/mogeko#gh-dark-mode-only">
@@ -39,7 +39,11 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 
 ### :microscope: Tech && Tools Preference
 
-![skills]
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=html,css,js,ts,react,gatsby,nextjs,sass,tailwind,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,md,regex,nodejs,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,cloudflare">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=html,css,js,ts,react,gatsby,nextjs,sass,tailwind,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,md,regex,nodejs,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,cloudflare&theme=light">
+  <img alt="Skills" src="https://skillicons.dev/icons?i=html,css,js,ts,react,gatsby,nextjs,sass,tailwind,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,md,regex,nodejs,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,cloudflare&theme=light">
+</picture>
 
 ### :mailbox: How to reach me:
 
@@ -54,7 +58,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 
 <!-- Skills -->
 
-[skills]: https://skillicons.dev/icons?i=html,css,js,ts,react,gatsby,nextjs,sass,tailwind,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixr,latex,md,regex,nodejs,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,cloudflare
+[skills]: https://skillicons.dev/icons?i=html,css,js,ts,react,gatsby,nextjs,sass,tailwind,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,md,regex,nodejs,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,cloudflare
 
 <!-- badge Links -->
 [badge_angular]: https://img.shields.io/badge/-Angular-DD0031?style=flat&logo=angular&logoColor=ffffff
