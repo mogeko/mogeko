@@ -39,11 +39,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 
 ### :microscope: Tech && Tools Preference
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=html,css,js,ts,react,gatsby,nextjs,sass,tailwind,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,md,regex,nodejs,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,cloudflare">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=html,css,js,ts,react,gatsby,nextjs,sass,tailwind,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,md,regex,nodejs,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,cloudflare&theme=light">
-  <img alt="Skills" src="https://skillicons.dev/icons?i=html,css,js,ts,react,gatsby,nextjs,sass,tailwind,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,md,regex,nodejs,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,cloudflare&theme=light">
-</picture>
+![skillicons](https://skillicons.dev/icons?i=html,css,js,ts,react,astro,gatsby,nextjs,sass,tailwind,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,md,regex,nodejs,webpack,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare)
 
 ### :mailbox: How to reach me:
 
