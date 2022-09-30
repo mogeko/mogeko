@@ -51,7 +51,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
   </thead>
   <tbody>
     <tr>
-      <td rowspan="4"><img width="125px" alt="University of Debrecen" src="./unideb-logo.png"></td>
+      <td rowspan="4"><img alt="University of Debrecen" src="./assets/unideb-logo.png"></td>
       <td>:calendar: Duration</td>
       <td>Since 2020.08 to now</td>
     </tr>
