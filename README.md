@@ -51,7 +51,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
   </thead>
   <tbody>
     <tr>
-      <td rowspan="4"><img alt="University of Debrecen" src="./assets/unideb-logo.png"></td>
+      <td rowspan="5"><img alt="University of Debrecen" src="./assets/unideb-logo.png"></td>
       <td>:calendar: Duration</td>
       <td>Since 2020.08 to now</td>
     </tr>
@@ -66,6 +66,10 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
     <tr>
       <td>:globe_with_meridians: Website</td>
       <td>http://www.inf.unideb.hu</td>
+    </tr>
+    <tr>
+      <td>:dart: GPA</td>
+      <td>3.77 / 5</td>
     </tr>
     <tr>
       <td colspan="3">
