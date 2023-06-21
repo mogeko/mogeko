@@ -89,7 +89,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
             <li>:white_check_mark: High-level programming languages 1 lab</li>
             <li>:white_check_mark: High-level programming languages 1</li>
             <li>:white_check_mark: High-level programming languages 2</li>
-            <li>:dart: Introduction to computer science</li>
+            <li>:white_check_mark: Introduction to computer science</li>
             <li>:white_check_mark: Introduction to programming</li>
             <li>:white_check_mark: Logic in computer science</li>
             <li>:white_check_mark: Network architectures and protocols</li>
@@ -97,7 +97,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
             <li>:white_check_mark: Software development methodologies</li>
             <li>:white_check_mark: Software engineering and technologies</li>
             <li>:dart: Thesis</li>
-            <li>:dart: Web application development</li>
+            <li>:white_check_mark: Web application development</li>
             <li>:white_check_mark: Web technologies</li>
           </ul>
         </details>
@@ -108,14 +108,14 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
         <details>
           <summary>:books: Elective course</summary>
           <ul>
-            <li>:dart: Basics of GIS</li>
+            <li>:white_check_mark: Basics of GIS</li>
             <li>:white_check_mark: Blockhain technology</li>
             <li>:white_check_mark: Cloud computing</li>
-            <li>:dart: Computer Statistics</li>
+            <li>:white_check_mark: Computer Statistics</li>
             <li>:white_check_mark: High-level programming languages 3</li>
-            <li>:dart: Mobile application development</li>
+            <li>:white_check_mark: Mobile application development</li>
             <li>:white_check_mark: NoSQL databases</li>
-            <li>:dart: Operation of infocommunication systems</li>
+            <li>:white_check_mark: Operation of infocommunication systems</li>
             <li>:white_check_mark: Software testing</li>
           </ul>
         </details>
