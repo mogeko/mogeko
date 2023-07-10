@@ -81,11 +81,12 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
             <li>:white_check_mark: Calculus</li>
             <li>:white_check_mark: Computer aided mathematics and visualization</li>
             <li>:white_check_mark: Credit Completed in Other Institution</li>
-            <li>:dart: Data structures and algorithms</li>
+            <li>:white_check_mark: Data structures and algorithms</li>
             <li>:white_check_mark: Database systems lab</li>
             <li>:white_check_mark: Database systems</li>
             <li>:white_check_mark: Discrete mathematics</li>
             <li>:dart: Foundations of artificial intelligence</li>
+            <li>:white_check_mark: Foundations of computer security</li>
             <li>:white_check_mark: High-level programming languages 1 lab</li>
             <li>:white_check_mark: High-level programming languages 1</li>
             <li>:white_check_mark: High-level programming languages 2</li>
@@ -108,14 +109,17 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
         <details>
           <summary>:books: Elective course</summary>
           <ul>
+            <li>:white_check_mark: 3D printing and modeling</li>
             <li>:white_check_mark: Basics of GIS</li>
             <li>:white_check_mark: Blockhain technology</li>
             <li>:white_check_mark: Cloud computing</li>
             <li>:white_check_mark: Computer Statistics</li>
             <li>:white_check_mark: High-level programming languages 3</li>
+            <li>:white_check_mark: Image processing in practice</li>
+            <li>:white_check_mark: Introduction to 3D game development</li>
             <li>:white_check_mark: Mobile application development</li>
             <li>:white_check_mark: NoSQL databases</li>
-            <li>:white_check_mark: Operation of infocommunication systems</li>
+            <li>:white_check_mark: Scripting Languages</li>
             <li>:white_check_mark: Software testing</li>
           </ul>
         </details>
