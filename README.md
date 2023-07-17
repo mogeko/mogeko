@@ -43,12 +43,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 
 ### :microscope: Tech && Tools Preference
 
-<!-- ![skillicons](https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,astro,gatsby,tailwind,sass,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,nodejs,vite,rollupjs,webpack,redis,postgres,git,vscode,visualstudio,eclipse,idea,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare#gh-dark-mode-only) -->
-
-<picture>
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,astro,gatsby,tailwind,sass,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,nodejs,vite,rollupjs,webpack,redis,postgres,git,vscode,visualstudio,eclipse,idea,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare&theme=light">
-  <img alt="Skills" src="https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,astro,gatsby,tailwind,sass,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,nodejs,vite,rollupjs,webpack,redis,postgres,git,vscode,visualstudio,eclipse,idea,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare">
-</picture>
+![skillicons](https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,astro,gatsby,tailwind,sass,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,nodejs,vite,rollupjs,webpack,redis,postgres,git,vscode,visualstudio,eclipse,idea,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare#gh-dark-mode-only)
 
 ### :mortar_board: Education
 
