@@ -27,7 +27,7 @@ Here are some ideas to get you started:
 
 <a href="https://github.com/mogeko">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&disable_animations=true&theme=onedark">
+    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&disable_animations=true&theme=one_dark_pro">
     <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&include_all_commits=true&disable_animations=true">
     <img align="right" width="480px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&include_all_commits=true&disable_animations=true">
   </picture>
