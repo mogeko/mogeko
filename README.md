@@ -39,7 +39,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 
 ### :microscope: Tech && Tools Preference
 
-![skillicons](https://skillicons.dev/icons?i=html,css,js,ts,react,astro,nextjs,gatsby,sass,tailwind,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,nodejs,vite,rollupjs,webpack,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare)
+![skillicons](https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,astro,gatsby,tailwind,sass,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,nodejs,vite,rollupjs,webpack,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare)
 
 ### :mortar_board: Education
 
