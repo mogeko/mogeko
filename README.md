@@ -15,19 +15,23 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-<a href="https://github.com/mogeko#gh-light-mode-only">
+
+
+<!-- <a href="https://github.com/mogeko#gh-light-mode-only">
   <img align="right" width="460px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&include_all_commits=true&disable_animations=true#gh-light-mode-only">
 </a>
 
 <a href="https://github.com/mogeko#gh-dark-mode-only">
   <img align="right" width="460px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&disable_animations=true&theme=dracula#gh-dark-mode-only">
-</a>
+</a> -->
 
-<!-- <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&disable_animations=true&theme=dracula">
-  <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&disable_animations=true">
-  <img align="right" width="480px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&disable_animations=true">
-</picture> -->
+<a href="https://github.com/mogeko">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&hide_border=true&include_all_commits=true&disable_animations=true&theme=onedark">
+    <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&include_all_commits=true&disable_animations=true">
+    <img align="right" width="480px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&include_all_commits=true&disable_animations=true">
+  </picture>
+</a>
 
 
 I am a student of **Debrecen University**, Hungary, majoring in **Computer Science**. I hope to be a **Full-stack** in the future.
@@ -39,7 +43,13 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 
 ### :microscope: Tech && Tools Preference
 
-![skillicons](https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,astro,gatsby,tailwind,sass,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,nodejs,vite,rollupjs,webpack,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare)
+<!-- ![skillicons](https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,astro,gatsby,tailwind,sass,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,nodejs,vite,rollupjs,webpack,redis,postgres,git,vscode,visualstudio,eclipse,idea,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare#gh-dark-mode-only) -->
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="[https://raw.githubusercontent.com/GiorgosXou/Random-stuff/main/Programming/StackOverflow/Answers/70200610_11465149/w2.png](https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,astro,gatsby,tailwind,sass,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,nodejs,vite,rollupjs,webpack,redis,postgres,git,vscode,visualstudio,eclipse,idea,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare&theme=dark)">
+  <source media="(prefers-color-scheme: light)" srcset="[https://raw.githubusercontent.com/GiorgosXou/Random-stuff/main/Programming/StackOverflow/Answers/70200610_11465149/b2.png](https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,astro,gatsby,tailwind,sass,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,nodejs,vite,rollupjs,webpack,redis,postgres,git,vscode,visualstudio,eclipse,idea,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare&theme=light)">
+  <img alt="Shows a black logo in light color mode and a white one in dark color mode." src="https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,astro,gatsby,tailwind,sass,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,nodejs,vite,rollupjs,webpack,redis,postgres,git,vscode,visualstudio,eclipse,idea,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare">
+</picture>
 
 ### :mortar_board: Education
 
