@@ -45,6 +45,14 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 
 ![skillicons](https://skillicons.dev/icons?i=html,css,js,ts,react,nextjs,astro,gatsby,tailwind,sass,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,nodejs,vite,rollupjs,webpack,redis,postgres,git,vscode,visualstudio,eclipse,idea,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,vercel,cloudflare#gh-dark-mode-only)
 
+### :date: Contribution Graph
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://mogeko.github.io/mogeko/github-contribution-grid-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://mogeko.github.io/mogeko/github-contribution-grid-snake.svg" />
+  <img alt="github-snake" src="https://mogeko.github.io/mogeko/github-contribution-grid-snake.svg" />
+</picture>
+
 ### :mortar_board: Education
 
 <table style="width: 100%;">
