@@ -89,7 +89,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
             <li>:white_check_mark: Database systems lab</li>
             <li>:white_check_mark: Database systems</li>
             <li>:white_check_mark: Discrete mathematics</li>
-            <li>:dart: Foundations of artificial intelligence</li>
+            <li>:white_check_mark: Foundations of artificial intelligence</li>
             <li>:white_check_mark: Foundations of computer security</li>
             <li>:white_check_mark: High-level programming languages 1 lab</li>
             <li>:white_check_mark: High-level programming languages 1</li>
