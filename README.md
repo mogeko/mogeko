@@ -65,7 +65,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
     <tr>
       <td rowspan="5"><img alt="University of Debrecen" src="./assets/unideb-logo.png"></td>
       <td>:calendar: Duration</td>
-      <td>Since 2020.08 to now</td>
+      <td>Since 2020.08 to 2024.02</td>
     </tr>
     <tr>
       <td>:microscope: Major</td>
@@ -109,7 +109,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
             <li>:white_check_mark: Operating systems</li>
             <li>:white_check_mark: Software development methodologies</li>
             <li>:white_check_mark: Software engineering and technologies</li>
-            <li>:dart: Thesis</li>
+            <li>:white_check_mark: Thesis</li>
             <li>:white_check_mark: Web application development</li>
             <li>:white_check_mark: Web technologies</li>
           </ul>
