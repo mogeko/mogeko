@@ -1,5 +1,5 @@
 {
-  "name": "mogeko-blog",
+  "name": "mogeko",
   "type": "module",
   "version": "0.0.1",
   "private": true,
@@ -16,7 +16,7 @@
   ],
   "devDependencies": {
     "@types/node": "^20.11.16",
-    "@types/react": "^18.2.54",
+    "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.18",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
