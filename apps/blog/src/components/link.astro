@@ -1,0 +1,15 @@
+---
+const { class: className, ...props } = Astro.props;
+
+type Props = astroHTML.JSX.AnchorHTMLAttributes;
+---
+
+<a
+  class:list={[
+    "text-primary relative font-bold underline-offset-4 hover:underline",
+    className,
+  ]}
+  {...props}
+>
+  <slot />
+</a>

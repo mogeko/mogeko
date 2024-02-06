@@ -1,0 +1,27 @@
+{
+  "name": "mogeko-blog",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev",
+    "start": "turbo run start",
+    "build": "turbo run build",
+    "sync": "turbo run sync",
+    "lint": "turbo run lint",
+    "fmt": "turbo run fmt"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "@types/react": "^18.2.54",
+    "@types/react-dom": "^18.2.18",
+    "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.13.0",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "turbo": "^1.12.2",
+    "typescript": "^5.3.3"
+  }
+}

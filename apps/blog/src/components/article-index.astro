@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Link from "@/components/link.astro";
+import { format } from "date-fns";
+import { MdStar } from "react-icons/md";
+
+const {
+  group: [year, articles],
+} = Astro.props;
+
+type Entry = CollectionEntry<"posts">;
+type Props = {
+  group: [number, Pick<Entry, "slug" | "data">[]];
+};
+---
+
+<div class="flex flex-col gap-2">
+  <h2 class="text-3xl font-bold">{year}</h2>
+  {
+    articles.map(({ data, slug }) => (
+      <p class="inline-flex flex-row items-center gap-1 text-2xl">
+        {data.mark && (
+          <MdStar className="h-6 w-6 mr-2 ml-[-2.25rem] text-primary" />
+        )}
+        <Link href={`./posts/${slug}`}>{data.title}</Link>
+        <span class="text-muted select-none self-end text-xl">
+          {format(data.date, "MM/dd")}
+        </span>
+      </p>
+    ))
+  }
+</div>
