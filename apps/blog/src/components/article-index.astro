@@ -18,13 +18,15 @@ type Props = {
   <h2 class="text-3xl font-bold">{year}</h2>
   {
     articles.map(({ data, slug }) => (
-      <p class="inline-flex flex-row items-center gap-1 text-2xl">
+      <p class="inline-flex flex-row items-center gap-1 text-xl">
         {data.mark && (
-          <MdStar className="h-6 w-6 mr-2 ml-[-2.25rem] text-primary" />
+          <MdStar className="h-5 w-5 mr-1 ml-[-1.75rem] text-primary" />
         )}
-        <Link href={`./posts/${slug}`}>{data.title}</Link>
-        <span class="text-muted select-none self-end text-xl">
-          {format(data.date, "MM/dd")}
+        <span>
+          <Link href={`./posts/${slug}`}>{data.title}</Link>
+          <span class="text-muted select-none self-end text-base">
+            {format(data.date, "MM/dd")}
+          </span>
         </span>
       </p>
     ))
