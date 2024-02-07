@@ -4,6 +4,7 @@ import Heading3 from "@/components/mdx/h3.astro";
 import Heading4 from "@/components/mdx/h4.astro";
 import Paragraph from "@/components/mdx/p.astro";
 import Blockquote from "@/components/mdx/blockquote.astro";
+import OrderedList from "@/components/mdx/ol.astro";
 import UnoderedList from "@/components/mdx/ul.astro";
 import Link from "@/components/link.astro";
 import InlineCode from "@/components/mdx/code.astro";
@@ -16,6 +17,7 @@ export const components = {
   h4: Heading4,
   p: Paragraph,
   blockquote: Blockquote,
+  ol: OrderedList,
   ul: UnoderedList,
   a: Link,
   code: InlineCode,

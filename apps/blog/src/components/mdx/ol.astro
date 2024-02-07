@@ -1,0 +1,15 @@
+---
+const { class: className, ...props } = Astro.props;
+
+type Props = astroHTML.JSX.OlHTMLAttributes;
+---
+
+<ol
+  class:list={[
+    "marker:text-primary list-decimal pl-5 font-medium leading-[1.1] [&>li]:mb-4 [&>li]:pl-3",
+    className,
+  ]}
+  {...props}
+>
+  <slot />
+</ol>
