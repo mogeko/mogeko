@@ -7,9 +7,16 @@ type Props = astroHTML.JSX.HTMLAttributes;
 ---
 
 <nav
-  class="sticky top-0 z-10 mx-auto flex w-full flex-row items-center justify-end px-6 py-4 backdrop-blur-sm"
+  class:list={[
+    "sticky top-0 z-10 mx-auto flex w-full flex-row items-center justify-end px-6 py-4 backdrop-blur-sm",
+    className,
+  ]}
+  {...props}
 >
-  <Link href="/" class="relative text-lg font-bold" variant="underline"
-    >Home</Link
+  <Link
+    class="relative text-lg font-bold"
+    variant="underline"
+    href="/"
+    data-astro-prefetch>Home</Link
   >
 </nav>

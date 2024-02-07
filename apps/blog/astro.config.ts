@@ -24,4 +24,5 @@ export default defineConfig({
     mdx(),
     sitemap(),
   ],
+  prefetch: true,
 });

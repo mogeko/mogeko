@@ -23,7 +23,11 @@ type Props = {
           <MdStar className="h-5 w-5 mr-1 ml-[-1.75rem] text-primary" />
         )}
         <span>
-          <Link class="font-semibold" href={`./posts/${slug}`}>
+          <Link
+            class="font-semibold"
+            href={`./posts/${slug}`}
+            data-astro-prefetch
+          >
             {data.title}
           </Link>
           <span class="text-muted select-none self-end text-base">
