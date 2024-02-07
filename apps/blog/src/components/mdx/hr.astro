@@ -1,0 +1,14 @@
+---
+import { Separator } from "@/components/ui/separator";
+import type { SeparatorProps } from "@radix-ui/react-separator";
+
+const { class: className, ...props } = Astro.props;
+
+type Props = Omit<SeparatorProps, "orientation"> & astroHTML.JSX.HTMLAttributes;
+---
+
+<Separator
+  orientation="horizontal"
+  className={className ?? void 0}
+  {...props}
+/>;
