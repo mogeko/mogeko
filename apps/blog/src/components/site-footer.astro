@@ -1,12 +1,16 @@
 ---
 import Link from "@/components/ui/link.astro";
+import { Separator } from "@/components/ui/separator";
 import { siteConfig } from "@/config/site";
 
 const { author, footer } = siteConfig;
 ---
 
-<footer class="border-primary border-t-2 px-14 py-6">
-  <p class="flex flex-col items-center justify-center md:flex-row md:gap-1">
+<footer class="flex flex-col items-center justify-stretch">
+  <Separator />
+  <p
+    class="m-auto flex flex-col items-center justify-center px-14 py-6 md:flex-row md:gap-1"
+  >
     <span>
       Copyright &copy; {footer?.copyrightYear ?? new Date().getFullYear()}
       <span>by <Link href={author.url}>{author.name}</Link></span>
