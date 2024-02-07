@@ -1,0 +1,26 @@
+---
+import { format } from "date-fns";
+import type { CollectionEntry } from "astro:content";
+
+const { class: className, data, ...props } = Astro.props;
+
+type Props = {
+  data: CollectionEntry<"posts">["data"];
+} & astroHTML.JSX.HTMLAttributes;
+---
+
+<header class:list={["flex flex-col items-start", className]} {...props}>
+  <h1 class="flex-1 pb-10 text-5xl font-bold">{data.title}</h1>
+  <p class="text-secondary font-bold">{format(data.date, "PPP")}</p>
+  {
+    data.tags && (
+      <div class="flex flex-row gap-2 py-4">
+        {data.tags.map((tag) => (
+          <span class="text-accent bg-background inline-flex h-8 items-center justify-center whitespace-nowrap rounded-full border-2 border-current px-4 py-2 text-xs font-semibold">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )
+  }
+</header>

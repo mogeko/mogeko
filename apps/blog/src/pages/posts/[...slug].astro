@@ -1,5 +1,7 @@
 ---
 import Layout from "@/layouts/base-layout.astro";
+import SiteHeader from "@/components/post-header.astro";
+import Header from "@/components/article-header.astro";
 import { getCollection } from "astro:content";
 import { components } from "@/lib/typography";
 import type { GetStaticPaths } from "astro";
@@ -17,7 +19,9 @@ const { Content } = await entry.render();
 ---
 
 <Layout title={entry.data.title}>
-  <article class="flex-1">
+  <article class="m-auto flex-1 px-6 pb-32 pt-8">
+    <SiteHeader slot="before-header" />
+    <Header data={entry.data} />
     <main><Content components={components} /></main>
   </article>
 </Layout>
