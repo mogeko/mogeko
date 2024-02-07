@@ -4,7 +4,8 @@ import Heading3 from "@/components/mdx/h3.astro";
 import Heading4 from "@/components/mdx/h4.astro";
 import Paragraph from "@/components/mdx/p.astro";
 import Blockquote from "@/components/mdx/blockquote.astro";
-import List from "@/components/mdx/ul.astro";
+import UnoderedList from "@/components/mdx/ul.astro";
+import Link from "@/components/link.astro";
 import InlineCode from "@/components/mdx/code.astro";
 import Image from "@/components/mdx/img.astro";
 
@@ -15,7 +16,8 @@ export const components = {
   h4: Heading4,
   p: Paragraph,
   blockquote: Blockquote,
-  ul: List,
+  ul: UnoderedList,
+  a: Link,
   code: InlineCode,
   img: Image,
 };

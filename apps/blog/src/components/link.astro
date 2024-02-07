@@ -1,15 +1,25 @@
 ---
-const { class: className, ...props } = Astro.props;
+import { cva, type VariantProps } from "class-variance-authority";
 
-type Props = astroHTML.JSX.AnchorHTMLAttributes;
+const { class: className, variant, ...props } = Astro.props;
+const linkVariants = cva("relative", {
+  variants: {
+    variant: {
+      default:
+        "hover:shadow-primary shadow-[inset_0_-1px_0_0] hover:shadow-[inset_0_-.5em_0_0_var(--tw-shadow-color)]",
+      underline:
+        "hover:shadow-primary text-primary hover:shadow-[inset_0_-2px_0_0_var(--primary)]",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+type Props = astroHTML.JSX.AnchorHTMLAttributes &
+  VariantProps<typeof linkVariants>;
 ---
 
-<a
-  class:list={[
-    "text-primary relative font-bold underline-offset-4 hover:underline",
-    className,
-  ]}
-  {...props}
->
+<a class:list={[linkVariants({ variant }), className]} {...props}>
   <slot />
 </a>
