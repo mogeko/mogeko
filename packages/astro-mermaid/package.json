@@ -18,7 +18,9 @@
   "scripts": {
     "test": "vitest run",
     "cov": "vitest run --coverage",
-    "build": "tsup"
+    "build": "tsup",
+    "lint": "prettier --check .",
+    "fmt": "prettier --write ."
   },
   "dependencies": {
     "shiki": "^1.0.0"
