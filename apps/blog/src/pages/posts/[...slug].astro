@@ -21,7 +21,7 @@ const { Content } = await entry.render();
 <Layout title={entry.data.title}>
   <article class="m-auto max-w-2xl flex-1 pb-32 pt-8">
     <SiteHeader slot="before-header" />
-    <Header data={entry.data} />
+    <Header slot="header" data={entry.data} />
     <main><Content components={components} /></main>
   </article>
 </Layout>

@@ -5,7 +5,10 @@ type Props = astroHTML.JSX.HTMLAttributes;
 ---
 
 <h3
-  class:list={["scroll-m-20 text-2xl font-semibold tracking-tight", className]}
+  class:list={[
+    "croll-m-20 text-2xl font-bold tracking-tight lg:text-3xl [&:not(:first-child)]:mb-5 [&:not(:first-child)]:mt-10",
+    className,
+  ]}
   {...props}
 >
   <slot />
