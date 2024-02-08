@@ -9,7 +9,9 @@
     "build": "turbo run build",
     "sync": "turbo run sync",
     "lint": "turbo run lint",
-    "fmt": "turbo run fmt"
+    "fmt": "turbo run fmt",
+    "test": "turbo run test",
+    "cov": "turbo run cov"
   },
   "workspaces": [
     "apps/*",

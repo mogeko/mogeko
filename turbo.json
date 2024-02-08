@@ -8,6 +8,8 @@
       "outputs": ["dist/**", ".astro/**"]
     },
     "start": { "dependsOn": ["build"], "cache": false, "persistent": true },
+    "test": { "dependsOn": ["^build"], "outputs": [] },
+    "cov": { "dependsOn": ["^build"], "outputs": [] },
     "sync": {
       "dependsOn": ["^build"],
       "dotEnv": [".env.local", ".env.development"],

@@ -16,6 +16,8 @@
     "./shiki-transformer": "./dist/shiki-transformer.js"
   },
   "scripts": {
+    "test": "vitest run",
+    "cov": "vitest run --coverage",
     "build": "tsup"
   },
   "dependencies": {
@@ -28,6 +30,7 @@
     "prettier": "^3.2.5",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
+    "vite-tsconfig-paths": "^4.3.1",
     "vitest": "^1.2.2"
   }
 }
