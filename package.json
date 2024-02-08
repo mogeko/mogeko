@@ -12,7 +12,8 @@
     "fmt": "turbo run fmt"
   },
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "devDependencies": {
     "@types/node": "^20.11.16",

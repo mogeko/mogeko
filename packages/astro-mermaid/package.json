@@ -1,0 +1,33 @@
+{
+  "name": "astro-mermaid",
+  "version": "0.0.1",
+  "description": "Astro Integration for Mermaid",
+  "type": "module",
+  "types": "dist/astro-mermaid.d.ts",
+  "private": true,
+  "keywords": [
+    "astro-integration",
+    "mermaid"
+  ],
+  "author": "Mogeko <zhengjunyi@live.com>",
+  "license": "MIT",
+  "exports": {
+    ".": "./dist/astro-mermaid.js",
+    "./shiki-transformer": "./dist/shiki-transformer.js"
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "dependencies": {
+    "shiki": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "@vitest/coverage-v8": "^1.2.2",
+    "astro": "^4.3.2",
+    "prettier": "^3.2.5",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2"
+  }
+}
