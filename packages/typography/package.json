@@ -12,7 +12,11 @@
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsup"
+    "test": "vitest run",
+    "cov": "vitest run --coverage",
+    "build": "tsup",
+    "lint": "prettier --check .",
+    "fmt": "prettier --write ."
   },
   "dependencies": {
     "tailwindcss": "^3.4.1"
