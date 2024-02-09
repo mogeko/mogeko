@@ -15,8 +15,6 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-
-
 <!-- <a href="https://github.com/mogeko#gh-light-mode-only">
   <img align="right" width="460px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&include_all_commits=true&disable_animations=true#gh-light-mode-only">
 </a>
@@ -32,7 +30,6 @@ Here are some ideas to get you started:
     <img align="right" width="480px" alt="GitHub Stats Card" src="https://github-readme-stats.vercel.app/api?username=mogeko&show_icons=true&include_all_commits=true&disable_animations=true">
   </picture>
 </a>
-
 
 I am a student of **Debrecen University**, Hungary, majoring in **Computer Science**. I hope to be a **Full-stack** in the future.
 
@@ -63,7 +60,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
   </thead>
   <tbody>
     <tr>
-      <td rowspan="5"><img alt="University of Debrecen" src="./assets/unideb-logo.png"></td>
+      <td rowspan="5"><img alt="University of Debrecen" src="https://github.com/mogeko/mogeko/assets/26341224/b69cbfa7-cb9e-4df6-b3d9-4ad12103062d"></td>
       <td>:calendar: Duration</td>
       <td>Since 2020.08 to 2024.02</td>
     </tr>
@@ -145,8 +142,8 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 - GitHub: [mogeko][github] (Why not follow me? :eyes:)
 - Email: [zhengjunyi@live.com][e-mail]
 
-
 <!-- Links -->
+
 [blog]: https://mogeko.github.io
 [e-mail]: mailto:zhengjunyi@live.com
 [github]: https://github.com/mogeko
@@ -156,6 +153,7 @@ I am a student of **Debrecen University**, Hungary, majoring in **Computer Scien
 [skills]: https://skillicons.dev/icons?i=html,css,js,ts,react,gatsby,nextjs,sass,tailwind,styledcomponents,graphql,jest,java,py,rust,php,c,cpp,elixir,latex,md,regex,nodejs,redis,postgres,git,eclipse,idea,visualstudio,vscode,vim,docker,bash,ps,ai,linux,bsd,github,gitlab,stackoverflow,azure,cloudflare
 
 <!-- badge Links -->
+
 [badge_angular]: https://img.shields.io/badge/-Angular-DD0031?style=flat&logo=angular&logoColor=ffffff
 [badge_c]: https://img.shields.io/badge/-C-A8B9CC?style=flat&logo=c&logoColor=ffffff
 [badge_c-sharp]: https://img.shields.io/badge/-C%23-239120?style=flat&logo=c-sharp&logoColor=ffffff

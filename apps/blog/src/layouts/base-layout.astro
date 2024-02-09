@@ -1,0 +1,26 @@
+---
+import "@/styles/globals.css";
+
+import Footer from "@/components/site-footer.astro";
+
+const { title } = Astro.props;
+
+type Props = { title: string };
+---
+
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-background min-h-screen font-sans antialiased">
+    <slot name="before-header" />
+    <div class="relative m-auto flex min-h-screen max-w-3xl flex-col">
+      <slot name="header" />
+      <slot />
+      <slot name="footer"><Footer /></slot>
+    </div>
+    <slot name="after-footer" />
+  </body>
+</html>

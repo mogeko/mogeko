@@ -1,0 +1,27 @@
+---
+import Layout from "@/layouts/base-layout.astro";
+import SiteHeader from "@/components/post-header.astro";
+import Header from "@/components/article-header.astro";
+import { getCollection } from "astro:content";
+import { components } from "@/lib/typography";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async () => {
+  const entries = await getCollection("posts");
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title}>
+  <article class="m-auto max-w-2xl flex-1 pb-32 pt-8">
+    <SiteHeader slot="before-header" />
+    <Header slot="header" data={entry.data} />
+    <main><Content components={components} /></main>
+  </article>
+</Layout>

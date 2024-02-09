@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`addMermaidClass > Add mermaid class to code block 1`] = `
+"<pre class="shiki nord mermaid" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"></span>
+<span class="line"><span style="color:#D8DEE9FF">flowchart TD</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    A[Christmas] -->|Get money| B(Go shopping)</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    B --> C{Let me think}</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    C -->|One| D[Laptop]</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    C -->|Two| E[iPhone]</span></span>
+<span class="line"><span style="color:#D8DEE9FF">    C -->|Three| F[fa:fa-car Car]</span></span>
+<span class="line"></span></code></pre>"
+`;

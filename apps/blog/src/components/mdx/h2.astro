@@ -1,0 +1,15 @@
+---
+const { class: className, ...props } = Astro.props;
+
+type Props = astroHTML.JSX.HTMLAttributes;
+---
+
+<h2
+  class:list={[
+    "lg:tetx-4xl scroll-m-20 pb-2 text-3xl font-extrabold tracking-tight [&:not(:first-child)]:mb-4 [&:not(:first-child)]:mt-12",
+    className,
+  ]}
+  {...props}
+>
+  <slot />
+</h2>
