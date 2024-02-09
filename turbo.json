@@ -4,7 +4,7 @@
     "dev": { "dependsOn": ["^build"], "cache": false, "persistent": true },
     "build": {
       "dependsOn": ["^build"],
-      "dotEnv": [".env.local", ".env.development"],
+      "dotEnv": [".env.local", ".env.production"],
       "outputs": ["dist/**", ".astro/**"]
     },
     "start": { "dependsOn": ["build"], "cache": false, "persistent": true },
@@ -12,10 +12,11 @@
     "cov": { "dependsOn": ["^build"], "outputs": [] },
     "sync": {
       "dependsOn": ["^build"],
-      "dotEnv": [".env.local", ".env.development"],
+      "dotEnv": [".env.local", ".env.production"],
       "outputs": [".astro/**"]
     },
     "lint": { "outputs": [] },
     "fmt": { "cache": false, "outputs": [] }
-  }
+  },
+  "globalDotEnv": [".env"]
 }
