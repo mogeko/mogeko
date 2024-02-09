@@ -10,7 +10,7 @@ import mermaid from "rehype-mermaid";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://mogeko.me",
+  site: "https://mogeko-blog.vercel.app",
   markdown: {
     shikiConfig: {
       theme: "andromeeda",
