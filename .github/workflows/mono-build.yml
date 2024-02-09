@@ -24,7 +24,7 @@ jobs:
           node-version: 21
           cache: "pnpm"
       - name: Cache Turborepo Tasks
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}/node_modules/.cache/turbo
           key: ${{ runner.os }}-turbo-build-${{ hashFiles('**/pnpm-lock.yaml') }}
