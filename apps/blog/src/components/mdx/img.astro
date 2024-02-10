@@ -7,10 +7,10 @@ type Props = astroHTML.JSX.ImgHTMLAttributes;
 {
   props.title ? (
     <figure class="flex flex-col items-center gap-2">
-      <img class:list={["flex-1 rounded-sm", className]} {...props} />
+      <img class:list={["flex-1", className]} {...props} />
       <figcaption class="text-sm italic">{props.title}</figcaption>
     </figure>
   ) : (
-    <img class:list={["rounded-sm", className]} {...props} />
+    <img class={className} {...props} />
   )
 }

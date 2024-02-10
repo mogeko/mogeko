@@ -1,9 +1,12 @@
 ---
+import "@fontsource/fira-code";
+
 import Layout from "@/layouts/base-layout.astro";
 import SiteHeader from "@/components/post-header.astro";
 import Header from "@/components/article-header.astro";
+import Horizontal from "@/components/mdx/hr.astro";
+import Image from "@/components/mdx/img.astro";
 import { getCollection } from "astro:content";
-import { components } from "@/lib/typography";
 import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (async () => {
@@ -23,7 +26,14 @@ const { Content } = await entry.render();
     <SiteHeader slot="before-header" />
     <Header slot="header" data={entry.data} />
     <main class="blog-post lg:blog-post-lg">
-      <Content components={components} />
+      <Content components={{ hr: Horizontal, img: Image }} />
     </main>
   </article>
 </Layout>
+
+<style>
+  main.blog-post :global(code) {
+    font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco,
+      Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+</style>

@@ -1,7 +1,6 @@
 ---
 import { format } from "date-fns";
 import type { CollectionEntry } from "astro:content";
-import H1 from "@/components/mdx/h1.astro";
 
 const { class: className, data, ...props } = Astro.props;
 
@@ -11,7 +10,9 @@ type Props = {
 ---
 
 <header class:list={["flex flex-col items-start", className]} {...props}>
-  <H1 class="flex-1 pb-10 tracking-normal">{data.title}</H1>
+  <h1 class="flex-1 scroll-m-20 pb-10 text-4xl font-[900] lg:text-5xl">
+    {data.title}
+  </h1>
   <p class="text-secondary font-bold">{format(data.date, "PPP")}</p>
   {
     data.tags && (
