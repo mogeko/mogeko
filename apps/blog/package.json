@@ -20,6 +20,7 @@
     "@astrojs/sitemap": "^3.0.5",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/fira-code": "^5.0.16",
+    "@mogeko/typography": "workspace:^",
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "astro": "^4.3.2",

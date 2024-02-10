@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "description": "A typography plugin for Tailwind CSS",
   "type": "module",
-  "main": "src/index.ts",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.js"
+  },
   "private": true,
   "keywords": [
     "typography",
@@ -15,6 +19,7 @@
     "test": "vitest run",
     "cov": "vitest run --coverage",
     "build": "tsup",
+    "dev": "tsup --watch",
     "lint": "prettier --check .",
     "fmt": "prettier --write ."
   },

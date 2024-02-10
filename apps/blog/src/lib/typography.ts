@@ -1,4 +1,3 @@
-import Heading1 from "@/components/mdx/h1.astro";
 import Heading2 from "@/components/mdx/h2.astro";
 import Heading3 from "@/components/mdx/h3.astro";
 import Heading4 from "@/components/mdx/h4.astro";
@@ -12,7 +11,7 @@ import Image from "@/components/mdx/img.astro";
 import Horizontal from "@/components/mdx/hr.astro";
 
 export const components = {
-  h1: Heading1,
+  // h1: Heading1,
   h2: Heading2,
   h3: Heading3,
   h4: Heading4,

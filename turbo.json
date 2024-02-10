@@ -1,7 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "dev": { "dependsOn": ["^build"], "cache": false, "persistent": true },
+    "dev": { "cache": false, "persistent": true },
     "build": {
       "dependsOn": ["^build"],
       "dotEnv": [".env.local", ".env.production"],
