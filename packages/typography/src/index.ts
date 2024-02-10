@@ -1,5 +1,6 @@
 import plugin from "tailwindcss/plugin";
 import { styles } from "@/style";
+import { mergeDeepRight } from "ramda";
 
 export default plugin.withOptions<{
   className?: string;
@@ -9,13 +10,13 @@ export default plugin.withOptions<{
       const modifiers = theme("typography", {});
 
       addComponents(
-        Object.entries(modifiers).map(([key, value]) => {
-          if (key === "DEFAULT") {
-            return { [`.${className}`]: value as any };
-          } else {
-            return { [`.${className}-${key}`]: value as any };
-          }
-        }),
+        Object.entries(mergeDeepRight(styles, modifiers)).map(
+          ([key, value]) => {
+            return {
+              [`.${className}${key === "DEFAULT" ? "" : `-${key}`}`]: value,
+            } as { [key: string]: any };
+          },
+        ),
       );
     };
   },

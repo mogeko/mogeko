@@ -2,10 +2,13 @@
 
 exports[`typography styles > default styles 1`] = `
 {
+  "--tw-prose-muted": "#e2e8f0",
+  "--tw-prose-primary": "#0f172a",
+  "--tw-prose-radius": "0.5rem",
   "a": {
     "&:hover": {
       "--tw-shadow": "inset 0 -0.5em 0 0 var(--tw-shadow-color)",
-      "--tw-shadow-color": "hsl(var(--primary))",
+      "--tw-shadow-color": "var(--tw-prose-primary)",
       "--tw-shadow-colored": "inset 0 -0.5em 0 0 var(--tw-shadow-color)",
     },
     "--tw-shadow": "inset 0 -1px 0 0",
@@ -14,7 +17,7 @@ exports[`typography styles > default styles 1`] = `
     "position": "relative",
   },
   "blockquote": {
-    "borderColor": "hsl(var(--primary))",
+    "borderColor": "var(--tw-prose-primary)",
     "borderLeftWidth": "5px",
     "fontStyle": "italic",
     "lineHeight": "1.75rem",
@@ -24,7 +27,7 @@ exports[`typography styles > default styles 1`] = `
   },
   "code": {
     "&:not(:where(.astro-code *))": {
-      "backgroundColor": "hsl(var(--muted))",
+      "backgroundColor": "var(--tw-prose-muted)",
       "borderRadius": "0.25rem",
       "fontSize": "0.875rem",
       "fontWeight": 600,
@@ -72,7 +75,7 @@ exports[`typography styles > default styles 1`] = `
     "lineHeight": "1.75rem",
   },
   "img": {
-    "borderRadius": "calc(var(--radius) - 4px)",
+    "borderRadius": "calc(var(--tw-prose-radius) - 4px)",
   },
   "ol": {
     "listStyleType": "decimal",
@@ -80,7 +83,7 @@ exports[`typography styles > default styles 1`] = `
   "ol, ul": {
     "& > li": {
       "&::marker": {
-        "color": "hsl(var(--primary))",
+        "color": "var(--tw-prose-primary)",
       },
       "marginBottom": "1rem",
       "paddingLeft": "0.75rem",
