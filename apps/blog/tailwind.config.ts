@@ -65,6 +65,13 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      typography: {
+        DEFAULT: {
+          "--tw-prose-primary": "hsl(var(--primary))",
+          "--tw-prose-muted": "hsl(var(--muted))",
+          "--tw-prose-radius": "var(--radius)",
+        },
+      },
     },
   },
   plugins: [

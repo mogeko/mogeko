@@ -110,6 +110,42 @@ export const styles: Styles = {
         marginTop: rem(24),
       },
     },
+    table: {
+      fontSize: rem(14),
+      lineHeight: 1.7,
+      margin: `${rem(24)} 0`,
+      overflowY: "auto",
+      width: "100%",
+      tr: {
+        borderTopWidth: "2px",
+        margin: 0,
+        padding: 0,
+        "td, th": {
+          border: "2px solid var(--tw-prose-primary)",
+          padding: `${rem(8)} ${rem(16)}`,
+          textAlign: "left",
+          "&[align=center]": {
+            textAlign: "center",
+          },
+          "&[align=right]": {
+            textAlign: "right",
+          },
+        },
+        td: {
+          textAlign: "left",
+          "&[align=center]": {
+            textAlign: "center",
+          },
+          "&[align=right]": {
+            textAlign: "right",
+          },
+        },
+        th: {
+          fontWeight: 700,
+          textAlign: "center",
+        },
+      },
+    },
     ul: {
       listStyleType: "disc",
     },
