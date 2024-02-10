@@ -1,0 +1,213 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`typography plugin > default styles 1`] = `
+"*, ::before, ::after {
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-pan-x:  ;
+    --tw-pan-y:  ;
+    --tw-pinch-zoom:  ;
+    --tw-scroll-snap-strictness: proximity;
+    --tw-gradient-from-position:  ;
+    --tw-gradient-via-position:  ;
+    --tw-gradient-to-position:  ;
+    --tw-ordinal:  ;
+    --tw-slashed-zero:  ;
+    --tw-numeric-figure:  ;
+    --tw-numeric-spacing:  ;
+    --tw-numeric-fraction:  ;
+    --tw-ring-inset:  ;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgb(59 130 246 / 0.5);
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    --tw-blur:  ;
+    --tw-brightness:  ;
+    --tw-contrast:  ;
+    --tw-grayscale:  ;
+    --tw-hue-rotate:  ;
+    --tw-invert:  ;
+    --tw-saturate:  ;
+    --tw-sepia:  ;
+    --tw-drop-shadow:  ;
+    --tw-backdrop-blur:  ;
+    --tw-backdrop-brightness:  ;
+    --tw-backdrop-contrast:  ;
+    --tw-backdrop-grayscale:  ;
+    --tw-backdrop-hue-rotate:  ;
+    --tw-backdrop-invert:  ;
+    --tw-backdrop-opacity:  ;
+    --tw-backdrop-saturate:  ;
+    --tw-backdrop-sepia:  ;
+}
+::backdrop {
+    --tw-border-spacing-x: 0;
+    --tw-border-spacing-y: 0;
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    --tw-pan-x:  ;
+    --tw-pan-y:  ;
+    --tw-pinch-zoom:  ;
+    --tw-scroll-snap-strictness: proximity;
+    --tw-gradient-from-position:  ;
+    --tw-gradient-via-position:  ;
+    --tw-gradient-to-position:  ;
+    --tw-ordinal:  ;
+    --tw-slashed-zero:  ;
+    --tw-numeric-figure:  ;
+    --tw-numeric-spacing:  ;
+    --tw-numeric-fraction:  ;
+    --tw-ring-inset:  ;
+    --tw-ring-offset-width: 0px;
+    --tw-ring-offset-color: #fff;
+    --tw-ring-color: rgb(59 130 246 / 0.5);
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    --tw-blur:  ;
+    --tw-brightness:  ;
+    --tw-contrast:  ;
+    --tw-grayscale:  ;
+    --tw-hue-rotate:  ;
+    --tw-invert:  ;
+    --tw-saturate:  ;
+    --tw-sepia:  ;
+    --tw-drop-shadow:  ;
+    --tw-backdrop-blur:  ;
+    --tw-backdrop-brightness:  ;
+    --tw-backdrop-contrast:  ;
+    --tw-backdrop-grayscale:  ;
+    --tw-backdrop-hue-rotate:  ;
+    --tw-backdrop-invert:  ;
+    --tw-backdrop-opacity:  ;
+    --tw-backdrop-saturate:  ;
+    --tw-backdrop-sepia:  ;
+}
+.prose a {
+    --tw-shadow: inset 0 -1px 0 0;
+    --tw-shadow-colored: inset 0 -1px 0 0 var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    position: relative;
+}
+.prose a:hover {
+    --tw-shadow: inset 0 -0.5em 0 0 var(--tw-shadow-color);
+    --tw-shadow-color: hsl(var(--primary));
+    --tw-shadow-colored: inset 0 -0.5em 0 0 var(--tw-shadow-color);
+}
+.prose blockquote {
+    border-color: hsl(var(--primary));
+    border-left-width: 5px;
+    font-style: italic;
+    line-height: 1.75rem;
+    margin: 0 1.75rem 1.75rem 1.5rem;
+    opacity: 0.8;
+    padding-left: 1.25rem;
+}
+.prose code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.prose code:not(:where(.astro-code *)) {
+    background-color: hsl(var(--muted));
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    padding: 0.2rem 0.3rem;
+    position: relative;
+}
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    letter-spacing: -0.025em;
+    scroll-margin: 5rem;
+}
+.prose h1 {
+    font-size: 2.25rem;
+    font-weight: 900;
+    line-height: 2.5rem;
+}
+.prose h1:not(:first-child) {
+    margin: 3.5rem 0 1.75rem;
+}
+.prose h2 {
+    font-size: 1.875rem;
+    font-weight: 800;
+    line-height: 2.25rem;
+    padding-bottom: 0.5rem;
+}
+.prose h2:not(:first-child) {
+    margin: 3rem 0 1.5rem;
+}
+.prose h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 2rem;
+}
+.prose h3:not(:first-child) {
+    margin: 2.5rem 0 1.25rem;
+}
+.prose h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.75rem;
+}
+.prose h4:not(:first-child) {
+    margin: 2rem 0 1rem;
+}
+.prose img {
+    border-radius: calc(var(--radius) - 4px);
+}
+.prose ol, .prose ul {
+    font-weight: 500;
+    line-height: 1.1;
+    margin-top: 1rem;
+}
+.prose ol > li, .prose ul > li {
+    margin-bottom: 1rem;
+    padding-left: 0.75rem;
+}
+.prose ol > li::marker, .prose ul > li::marker {
+    color: hsl(var(--primary));
+}
+.prose ol {
+    list-style-type: decimal;
+}
+.prose p {
+    letter-spacing: -0.01em;
+    line-height: 1.75rem;
+}
+.prose p:not(:last-child) {
+    margin-top: 1.5rem;
+}
+.prose ul {
+    list-style-type: disc;
+}
+@media (min-width: 1024px) {
+    .lg\\:prose-lg h1 {
+        font-size: 3rem;
+        line-height: 1;
+    }
+    .lg\\:prose-lg h2 {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+    }
+    .lg\\:prose-lg h3 {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
+}"
+`;

@@ -1,15 +1,15 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
-    "dev": { "dependsOn": ["^build"], "cache": false, "persistent": true },
+    "dev": { "cache": false, "persistent": true },
     "build": {
       "dependsOn": ["^build"],
       "dotEnv": [".env.local", ".env.production"],
       "outputs": ["dist/**", ".astro/**"]
     },
     "start": { "dependsOn": ["build"], "cache": false, "persistent": true },
-    "test": { "dependsOn": ["^build"], "outputs": [] },
-    "cov": { "dependsOn": ["^build"], "outputs": [] },
+    "test": { "inputs": ["tests/**/*", "src/**/*"], "outputs": [] },
+    "cov": { "inputs": ["tests/**/*", "src/**/*"], "outputs": [] },
     "sync": {
       "dependsOn": ["^build"],
       "dotEnv": [".env.local", ".env.production"],

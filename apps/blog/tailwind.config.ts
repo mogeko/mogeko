@@ -67,5 +67,10 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("@mogeko/typography")({
+      className: "blog-post",
+    }),
+    require("tailwindcss-animate"),
+  ],
 } satisfies Config;
