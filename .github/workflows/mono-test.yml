@@ -1,4 +1,4 @@
-name: Monorepo Build
+name: Monorepo Test
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build Monorepo Packages
+    name: Test Monorepo Packages
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,4 +29,6 @@ jobs:
           key: ${{ runner.os }}-turbo-build-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: ${{ runner.os }}-turbo-
       - run: pnpm install -rw --frozen-lockfile
-      - run: pnpm run build
+      - run: pnpm run lint
+      - run: pnpm run test
+      - run: pnpm run cov
