@@ -10,5 +10,5 @@ export default defineConfig({
       provider: "v8",
     },
   },
-  plugins: [tsconfigPaths() as any],
+  plugins: [tsconfigPaths()],
 });

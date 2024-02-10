@@ -1,5 +1,3 @@
-import colors from "tailwindcss/colors";
-
 const round = (num: number) => {
   return num
     .toFixed(7)

@@ -30,6 +30,7 @@
     "@vitest/coverage-v8": "^1.2.2",
     "astro": "^4.3.2",
     "prettier": "^3.2.5",
+    "tsconfig": "workspace:^",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",
     "vite-tsconfig-paths": "^4.3.1",
