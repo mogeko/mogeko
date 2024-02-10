@@ -3,16 +3,16 @@
   "version": "0.0.1",
   "description": "`tsconfig.json` files shared in this project",
   "private": true,
-  "scripts": {
-    "lint": "prettier --check .",
-    "fmt": "prettier --write ."
-  },
   "keywords": [
     "typescript",
     "tsconfig"
   ],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
+  "scripts": {
+    "lint": "prettier --check .",
+    "fmt": "prettier --write ."
+  },
   "devDependencies": {
     "prettier": "^3.2.5",
     "typescript": "^5.3.3"
