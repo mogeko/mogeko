@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`typography styles > default styles 1`] = `
+{
+  "h1": {
+    "&:not(:first-child)": {
+      "margin": "3.5rem 0 1.75rem",
+    },
+    "fontSize": "2.25rem",
+    "fontWeight": "900",
+    "letterSpacing": "-0.025em",
+    "lineHeight": "2.5rem",
+    "scrollMargin": "5rem",
+  },
+}
+`;
+
+exports[`typography styles > default styles 2`] = `
+{
+  "h1": {
+    "fontSize": "3rem",
+    "lineHeight": "1",
+  },
+}
+`;
