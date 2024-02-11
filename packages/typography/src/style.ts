@@ -1,3 +1,4 @@
+import colors from "tailwindcss/colors";
 import type { CSSObject } from "@emotion/serialize";
 
 const round = (num: number) => {
@@ -8,10 +9,12 @@ const round = (num: number) => {
 };
 const rem = (px: number) => `${round(px / 16)}rem`;
 const em = (px: number, base: number) => `${round(px / base)}em`;
-const hsl = (val: string) => `hsl(${val})`;
 
 export const styles: Styles = {
   DEFAULT: {
+    "--tw-prose-primary": colors.slate[900],
+    "--tw-prose-muted": colors.slate[200],
+    "--tw-prose-radius": rem(8),
     a: {
       "--tw-shadow": "inset 0 -1px 0 0",
       "--tw-shadow-colored": "inset 0 -1px 0 0 var(--tw-shadow-color)",
@@ -20,13 +23,14 @@ export const styles: Styles = {
       position: "relative",
       "&:hover": {
         "--tw-shadow": `inset 0 ${em(-8, 16)} 0 0 var(--tw-shadow-color)`,
-        "--tw-shadow-color": hsl("var(--primary)"),
+        "--tw-shadow-color": "var(--tw-prose-primary)",
         "--tw-shadow-colored": `inset 0 ${em(-8, 16)} 0 0 var(--tw-shadow-color)`,
       },
     },
     blockquote: {
-      borderColor: hsl("var(--primary)"),
+      borderColor: "var(--tw-prose-primary)",
       borderLeftWidth: "5px",
+      fontSize: rem(14),
       fontStyle: "italic",
       lineHeight: rem(28),
       margin: `0 ${rem(28)} ${rem(28)} ${rem(24)}`,
@@ -36,7 +40,7 @@ export const styles: Styles = {
     code: {
       fontFamily: `ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`,
       "&:not(:where(.astro-code *))": {
-        backgroundColor: hsl("var(--muted)"),
+        backgroundColor: "var(--tw-prose-muted)",
         borderRadius: rem(4),
         fontSize: rem(14),
         fontWeight: 600,
@@ -83,7 +87,7 @@ export const styles: Styles = {
       },
     },
     img: {
-      borderRadius: "calc(var(--radius) - 4px)",
+      borderRadius: "calc(var(--tw-prose-radius) - 4px)",
     },
     "ol, ul": {
       fontWeight: 500,
@@ -93,7 +97,7 @@ export const styles: Styles = {
         marginBottom: rem(16),
         paddingLeft: rem(12),
         "&::marker": {
-          color: hsl("var(--primary)"),
+          color: "var(--tw-prose-primary)",
         },
       },
     },
@@ -105,6 +109,61 @@ export const styles: Styles = {
       lineHeight: rem(28),
       "&:not(:last-child)": {
         marginTop: rem(24),
+      },
+    },
+    pre: {
+      borderRadius: "calc(var(--tw-prose-radius) - 4px)",
+      margin: `${rem(24)} 0`,
+      padding: `${rem(12)} ${rem(16)}`,
+      fontSize: rem(14),
+      fontWeight: 400,
+      lineHeight: 1.7,
+      "& > code": {
+        fontWeight: "inherit",
+        color: "inherit",
+        fontSize: "inherit",
+        fontFamily: "inherit",
+        lineHeight: "inherit",
+        backgroundColor: "transparent",
+        borderWidth: 0,
+        borderRadius: 0,
+        padding: 0,
+      },
+    },
+    table: {
+      fontSize: rem(14),
+      lineHeight: 1.7,
+      margin: `${rem(24)} 0`,
+      overflowY: "auto",
+      width: "100%",
+      tr: {
+        borderTopWidth: "2px",
+        margin: 0,
+        padding: 0,
+        "td, th": {
+          border: "2px solid var(--tw-prose-primary)",
+          padding: `${rem(8)} ${rem(16)}`,
+          textAlign: "left",
+          "&[align=center]": {
+            textAlign: "center",
+          },
+          "&[align=right]": {
+            textAlign: "right",
+          },
+        },
+        td: {
+          textAlign: "left",
+          "&[align=center]": {
+            textAlign: "center",
+          },
+          "&[align=right]": {
+            textAlign: "right",
+          },
+        },
+        th: {
+          fontWeight: 700,
+          textAlign: "center",
+        },
       },
     },
     ul: {
@@ -128,6 +187,5 @@ export const styles: Styles = {
 };
 
 export type Styles = {
-  [key: string]: CSSObject;
-  DEFAULT: CSSObject;
+  [key in string | number | symbol]: CSSObject;
 };

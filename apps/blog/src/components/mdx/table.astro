@@ -1,0 +1,11 @@
+---
+const props = Astro.props;
+
+type Props = astroHTML.JSX.TableHTMLAttributes;
+---
+
+<div class="my-6 w-full overflow-y-auto">
+  <table {...props}>
+    <slot />
+  </table>
+</div>
