@@ -30,6 +30,7 @@ export const styles: Styles = {
     blockquote: {
       borderColor: "var(--tw-prose-primary)",
       borderLeftWidth: "5px",
+      fontSize: rem(14),
       fontStyle: "italic",
       lineHeight: rem(28),
       margin: `0 ${rem(28)} ${rem(28)} ${rem(24)}`,
@@ -108,6 +109,25 @@ export const styles: Styles = {
       lineHeight: rem(28),
       "&:not(:last-child)": {
         marginTop: rem(24),
+      },
+    },
+    pre: {
+      borderRadius: "calc(var(--tw-prose-radius) - 4px)",
+      margin: `${rem(24)} 0`,
+      padding: `${rem(12)} ${rem(16)}`,
+      fontSize: rem(14),
+      fontWeight: 400,
+      lineHeight: 1.7,
+      "& > code": {
+        fontWeight: "inherit",
+        color: "inherit",
+        fontSize: "inherit",
+        fontFamily: "inherit",
+        lineHeight: "inherit",
+        backgroundColor: "transparent",
+        borderWidth: 0,
+        borderRadius: 0,
+        padding: 0,
       },
     },
     table: {

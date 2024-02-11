@@ -19,6 +19,7 @@ exports[`typography styles > default styles 1`] = `
   "blockquote": {
     "borderColor": "var(--tw-prose-primary)",
     "borderLeftWidth": "5px",
+    "fontSize": "0.875rem",
     "fontStyle": "italic",
     "lineHeight": "1.75rem",
     "margin": "0 1.75rem 1.75rem 1.5rem",
@@ -98,6 +99,25 @@ exports[`typography styles > default styles 1`] = `
     },
     "letterSpacing": "-0.01em",
     "lineHeight": "1.75rem",
+  },
+  "pre": {
+    "& > code": {
+      "backgroundColor": "transparent",
+      "borderRadius": 0,
+      "borderWidth": 0,
+      "color": "inherit",
+      "fontFamily": "inherit",
+      "fontSize": "inherit",
+      "fontWeight": "inherit",
+      "lineHeight": "inherit",
+      "padding": 0,
+    },
+    "borderRadius": "calc(var(--tw-prose-radius) - 4px)",
+    "fontSize": "0.875rem",
+    "fontWeight": 400,
+    "lineHeight": 1.7,
+    "margin": "1.5rem 0",
+    "padding": "0.75rem 1rem",
   },
   "table": {
     "fontSize": "0.875rem",
