@@ -28,6 +28,7 @@
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "turbo": "^1.12.3",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite-node": "^1.2.2"
   }
 }

@@ -38,6 +38,9 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
+      vite-node:
+        specifier: ^1.2.2
+        version: 1.2.2(@types/node@20.11.17)
 
   apps/blog:
     dependencies:
@@ -1474,6 +1477,7 @@ packages:
     resolution: {integrity: sha512-gKb0enTmRCzXSSUJDq6/sPcqrfCv2mkkG6Jt/clpn5eiCbKTY+SgZUxo+p8ZKMof5dCp9vHQUAB7wOUTod22wQ==}
     dependencies:
       undici-types: 5.26.5
+    dev: true
 
   /@types/node@20.11.17:
     resolution: {integrity: sha512-QmgQZGWu1Yw9TDyAP9ZzpFJKynYNeOvwMJmaxABfieQoVoiVOS6MN1WSpqpRcbeA5+RW82kraAVxCCJg+780Qw==}
@@ -7204,6 +7208,7 @@ packages:
       rollup: 4.9.6
     optionalDependencies:
       fsevents: 2.3.3
+    dev: true
 
   /vite@5.0.12(@types/node@20.11.17):
     resolution: {integrity: sha512-4hsnEkG3q0N4Tzf1+t6NdN9dg/L3BM+q8SWgbSPnJvrgH2kgdyzfVJwbR1ic69/4uMJJ/3dqDZZE5/WwqW8U1w==}
@@ -7319,7 +7324,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 5.0.12(@types/node@20.11.16)
+      vite: 5.0.12(@types/node@20.11.17)
 
   /vitest@1.2.2(@types/node@20.11.16):
     resolution: {integrity: sha512-d5Ouvrnms3GD9USIK36KG8OZ5bEvKEkITFtnGv56HFaSlbItJuYr7hv2Lkn903+AvRAgSixiamozUVfORUekjw==}
