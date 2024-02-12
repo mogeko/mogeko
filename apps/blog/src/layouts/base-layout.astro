@@ -10,9 +10,15 @@ type Props = { title: string };
 
 <html lang="en">
   <head>
+    <title>{title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body
     class="bg-background selection:bg-primary selection:text-primary-foreground min-h-screen font-sans antialiased"
