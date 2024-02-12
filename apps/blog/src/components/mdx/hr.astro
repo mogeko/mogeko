@@ -1,11 +1,12 @@
 ---
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/utils";
 import type { SeparatorProps } from "@radix-ui/react-separator";
-import { cn } from "@/lib/utils";
+import type { HTMLAttributes } from "astro/types";
 
 const { class: className, ...props } = Astro.props;
 
-type Props = Omit<SeparatorProps, "orientation"> & astroHTML.JSX.HTMLAttributes;
+type Props = Omit<SeparatorProps, "orientation"> & HTMLAttributes<"div">;
 ---
 
 <Separator
@@ -13,3 +14,4 @@ type Props = Omit<SeparatorProps, "orientation"> & astroHTML.JSX.HTMLAttributes;
   className={cn("my-14", className)}
   {...props}
 />
+@/utils

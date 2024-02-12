@@ -8,12 +8,21 @@ import sitemap from "@astrojs/sitemap";
 import emoji from "remark-emoji";
 import mermaid from "rehype-mermaid";
 
+import {
+  transformerNotationDiff,
+  transformerNotationErrorLevel,
+} from "shikiji-transformers";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://mogeko-blog.vercel.app",
   markdown: {
     shikiConfig: {
       theme: "andromeeda",
+      transformers: [
+        transformerNotationDiff(),
+        transformerNotationErrorLevel(),
+      ],
     },
     remarkPlugins: [[emoji, { accessible: true }]],
     rehypePlugins: [mermaid],

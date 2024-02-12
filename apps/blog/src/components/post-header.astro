@@ -1,9 +1,10 @@
 ---
 import Link from "@/components/ui/link.astro";
+import type { HTMLAttributes } from "astro/types";
 
 const { class: className, ...props } = Astro.props;
 
-type Props = astroHTML.JSX.HTMLAttributes;
+type Props = HTMLAttributes<"nav">;
 ---
 
 <nav

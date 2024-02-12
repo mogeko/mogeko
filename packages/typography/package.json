@@ -8,13 +8,27 @@
     "require": "./dist/index.cjs",
     "import": "./dist/index.js"
   },
-  "private": true,
+  "private": false,
   "keywords": [
     "typography",
     "tailwind"
   ],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mogeko/mogeko.git",
+    "directory": "packages/typography"
+  },
+  "homepage": "https://github.com/mogeko/mogeko/tree/master/packages/typography#readme",
+  "bugs": {
+    "url": "https://github.com/mogeko/mogeko/issues",
+    "email": "zhengjunyi@live.com"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "test": "vitest run",
     "cov": "vitest run --coverage",

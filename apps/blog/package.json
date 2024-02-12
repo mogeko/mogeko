@@ -20,7 +20,6 @@
     "@astrojs/sitemap": "^3.0.5",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/fira-code": "^5.0.16",
-    "@mogeko/typography": "workspace:^",
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "astro": "^4.3.2",
@@ -33,9 +32,11 @@
     "react-icons": "^5.0.1",
     "rehype-mermaid": "^2.1.0",
     "remark-emoji": "^4.0.1",
+    "shikiji-transformers": "^0.9.18",
     "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
+    "@mogeko/typography": "workspace:^",
     "@types/react": "^18.2.52",
     "@types/react-dom": "^18.2.18",
     "prettier": "^3.2.5",

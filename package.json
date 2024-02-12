@@ -4,20 +4,23 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "test": "turbo run test",
+    "cov": "turbo run cov",
     "dev": "turbo run dev",
     "start": "turbo run start",
     "build": "turbo run build",
     "sync": "turbo run sync",
     "lint": "turbo run lint",
     "fmt": "turbo run fmt",
-    "test": "turbo run test",
-    "cov": "turbo run cov"
+    "changeset": "changeset"
   },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "devDependencies": {
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.1",
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
@@ -25,6 +28,12 @@
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "turbo": "^1.12.3",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite-node": "^1.2.2"
+  },
+  "packageManager": "pnpm@8.15.1",
+  "engines": {
+    "node": ">=20.1.0",
+    "pnpm": ">=8.3.1"
   }
 }

@@ -1,16 +1,18 @@
 ---
-const { class: className, ...props } = Astro.props;
+import type { HTMLAttributes } from "astro/types";
 
-type Props = astroHTML.JSX.ImgHTMLAttributes;
+const props = Astro.props;
+
+type Props = HTMLAttributes<"img">;
 ---
 
 {
   props.title ? (
     <figure class="flex flex-col items-center gap-2">
-      <img class:list={["flex-1", className]} {...props} />
+      <img {...props} />
       <figcaption class="text-sm italic">{props.title}</figcaption>
     </figure>
   ) : (
-    <img class={className} {...props} />
+    <img {...props} />
   )
 }

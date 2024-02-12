@@ -1,12 +1,13 @@
 ---
 import { format } from "date-fns";
 import type { CollectionEntry } from "astro:content";
+import type { HTMLAttributes } from "astro/types";
 
 const { class: className, data, ...props } = Astro.props;
 
 type Props = {
   data: CollectionEntry<"posts">["data"];
-} & astroHTML.JSX.HTMLAttributes;
+} & HTMLAttributes<"header">;
 ---
 
 <header class:list={["flex flex-col items-start", className]} {...props}>

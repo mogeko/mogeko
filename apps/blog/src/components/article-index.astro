@@ -1,20 +1,22 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import Link from "@/components/ui/link.astro";
 import { format } from "date-fns";
 import { MdStar } from "react-icons/md";
+import type { CollectionEntry } from "astro:content";
+import type { HTMLAttributes } from "astro/types";
 
 const {
+  class: className,
   group: [year, articles],
 } = Astro.props;
 
 type Entry = CollectionEntry<"posts">;
 type Props = {
   group: [number, Pick<Entry, "slug" | "data">[]];
-};
+} & HTMLAttributes<"div">;
 ---
 
-<div class="flex flex-col gap-2">
+<div class:list={["flex flex-col gap-2", className]}>
   <h2 class="text-3xl font-bold">{year}</h2>
   {
     articles.map(({ data, slug }) => (
