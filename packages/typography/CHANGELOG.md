@@ -1,5 +1,11 @@
 # @mogeko/typography
 
+## 0.1.1
+
+### Patch Changes
+
+- [#18](https://github.com/mogeko/mogeko/pull/18) [`a85172a`](https://github.com/mogeko/mogeko/commit/a85172a9511cc4c11de7c0ebb0232f6748c875a0) Thanks [@mogeko](https://github.com/mogeko)! - Update padding values in `<pre>` tag.
+
 ## 0.1.0
 
 ### Minor Changes
