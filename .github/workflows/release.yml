@@ -29,7 +29,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm install -rw --frozen-lockfile
-      - run: pnpm run build
+      - run: pnpm run build --force # Build without cache
       - name: Create Version PR or Publish to NPM
         id: changesets
         uses: changesets/action@v1.4.5

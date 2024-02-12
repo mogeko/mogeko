@@ -11,6 +11,9 @@ jobs:
   build:
     name: Build Monorepo Packages
     runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ github.actor }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up pnpm
@@ -20,11 +23,5 @@ jobs:
         with:
           node-version-file: package.json
           cache: "pnpm"
-      - name: Cache Turborepo Tasks
-        uses: actions/cache@v4
-        with:
-          path: ${{ github.workspace }}/node_modules/.cache/turbo
-          key: ${{ runner.os }}-turbo-build-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-turbo-
       - run: pnpm install -rw --frozen-lockfile
       - run: pnpm run build
