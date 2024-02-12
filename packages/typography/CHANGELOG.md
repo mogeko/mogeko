@@ -1,5 +1,11 @@
 # @mogeko/typography
 
+## 0.1.2
+
+### Patch Changes
+
+- [#20](https://github.com/mogeko/mogeko/pull/20) [`1e92f02`](https://github.com/mogeko/mogeko/commit/1e92f02ced9a57c8bd2567654ba7aef2053fa99e) Thanks [@mogeko](https://github.com/mogeko)! - Remove unnecessary text alignment styles for table cells.
+
 ## 0.1.1
 
 ### Patch Changes
