@@ -11,6 +11,8 @@ import mermaid from "rehype-mermaid";
 import {
   transformerNotationDiff,
   transformerNotationErrorLevel,
+  transformerNotationFocus,
+  transformerNotationHighlight,
 } from "shikiji-transformers";
 
 // https://astro.build/config
@@ -22,6 +24,8 @@ export default defineConfig({
       transformers: [
         transformerNotationDiff(),
         transformerNotationErrorLevel(),
+        transformerNotationFocus(),
+        transformerNotationHighlight(),
       ],
       wrap: true,
     },
