@@ -31,7 +31,7 @@
     "react-icons": "^5.0.1",
     "rehype-mermaid": "^2.1.0",
     "remark-emoji": "^4.0.1",
-    "shikiji-transformers": "^0.9.18",
+    "shikiji-transformers": "^0.10.2",
     "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
