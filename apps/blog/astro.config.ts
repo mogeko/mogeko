@@ -23,6 +23,7 @@ export default defineConfig({
         transformerNotationDiff(),
         transformerNotationErrorLevel(),
       ],
+      wrap: true,
     },
     remarkPlugins: [[emoji, { accessible: true }]],
     rehypePlugins: [mermaid],

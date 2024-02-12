@@ -1,0 +1,60 @@
+@tailwind utilities;
+
+@layer utilities {
+  :root {
+    --shiki-diff-add-color: rgba(16, 185, 129, 0.16);
+    --shiki-diff-add-symbol-color: #3dd68c;
+    --shiki-diff-remove-color: rgba(244, 63, 94, 0.16);
+    --shiki-diff-remove-symbol-color: #cb7676;
+    --shiki-highlight-color: rgba(101, 117, 133, 0.16);
+    --shiki-error-color: rgba(244, 63, 94, 0.16);
+    --shiki-warning-color: rgba(234, 179, 8, 0.16);
+  }
+
+  pre {
+    @apply relative;
+  }
+
+  pre.has-diff > code .line.diff,
+  pre.has-highlighted > code .line.highlighted {
+    @apply mx-[-1.5rem] inline-block w-[calc(100%_+_3rem)] px-6
+    transition-[background-color] duration-500;
+  }
+
+  /* transformerNotationDiff */
+
+  pre.has-diff > code .line.diff::before {
+    @apply absolute left-[10px];
+  }
+
+  pre.has-diff > code .line.diff.add {
+    @apply bg-[var(--shiki-diff-add-color)];
+  }
+
+  pre.has-diff > code .line.diff.add::before {
+    @apply text-[var(--shiki-diff-add-symbol-color)] content-['+'];
+  }
+
+  pre.has-diff > code .line.diff.remove {
+    @apply bg-[var(--shiki-diff-remove-color)] opacity-70;
+  }
+
+  pre.has-diff > code .line.diff.remove::before {
+    @apply text-[var(--shiki-diff-remove-symbol-color)] content-['-'];
+  }
+
+  /* transformerNotationHighlight */
+  pre.has-highlighted > code .line.highlighted {
+    @apply bg-[var(--shiki-highlight-color)];
+  }
+
+  /* transformerNotationErrorLevel */
+
+  pre.has-highlighted > code .line.highlighted.error {
+    @apply bg-[var(--shiki-error-color)];
+  }
+
+  pre.has-highlighted > code .line.highlighted.warning {
+    @apply bg-[var(--shiki-warning-color)];
+  }
+}
