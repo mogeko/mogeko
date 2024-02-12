@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/base-layout.astro";
 import ArticleIndex from "@/components/article-index.astro";
-import { siteConfig } from "@/config/site";
+import { siteConfig } from "@/config";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { getYear, getTime } from "date-fns";
 
@@ -45,3 +45,4 @@ const posts = (
     </section>
   </main>
 </Layout>
+@/site @/config
