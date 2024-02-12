@@ -1,5 +1,5 @@
 ---
-title: 修复 PNPM 与 Node.js 20 的兼容性问题 (`ERR_INVALID_THIS`)
+title: 修复 PNPM 与 Node.js 20 的兼容性问题 (ERR_INVALID_THIS)
 date: 2024-02-11T22:58:38+01:00
 draft: false
 tags: ["Node.js", "PNPM"]
@@ -13,10 +13,10 @@ tags: ["Node.js", "PNPM"]
 Lockfile is up to date, resolution step is skipped
 Progress: resolved 1, reused 0, downloaded 0, added 0
 .                                        | +983 ++++++++++++++++++++++++++++++++
- WARN  GET https://registry.npmjs.org/xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
- WARN  GET https://registry.npmjs.org/xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
- WARN  GET https://registry.npmjs.org/xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
- WARN  GET https://registry.npmjs.org/xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left.
+ WARN  GET https://registry.npmjs.org/xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left. // [!code error]
+ WARN  GET https://registry.npmjs.org/xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left. // [!code error]
+ WARN  GET https://registry.npmjs.org/xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left. // [!code error]
+ WARN  GET https://registry.npmjs.org/xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left. // [!code error]
 // ...
 Error: Process completed with exit code 1.
 ```
@@ -40,8 +40,8 @@ pnpm install -g pnpm@latest
 validateHeaderName(name);
 validateHeaderValue(name, String(value));
 return URLSearchParams.prototype[p].call(
-  receiver,
-  target,
+  receiver, // [!code --]
+  target, // [!code ++]
   String(name).toLowerCase(),
   String(value),
 );
@@ -49,8 +49,8 @@ return URLSearchParams.prototype[p].call(
 return (name) => {
   validateHeaderName(name);
   return URLSearchParams.prototype[p].call(
-    receiver,
-    target,
+    receiver, // [!code --]
+    target, // [!code ++]
     String(name).toLowerCase(),
   );
 };
