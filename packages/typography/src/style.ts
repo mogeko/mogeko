@@ -114,7 +114,7 @@ export const styles: Styles = {
     pre: {
       borderRadius: "calc(var(--tw-prose-radius) - 4px)",
       margin: `${rem(24)} 0`,
-      padding: `${rem(12)} ${rem(16)}`,
+      padding: `${rem(16)} ${rem(24)}`,
       fontSize: rem(14),
       fontWeight: 400,
       lineHeight: 1.7,

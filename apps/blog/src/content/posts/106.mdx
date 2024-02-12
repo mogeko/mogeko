@@ -12,11 +12,11 @@ tags: ["Node.js", "PNPM"]
 ```plaintext
 Lockfile is up to date, resolution step is skipped
 Progress: resolved 1, reused 0, downloaded 0, added 0
-.                                        | +983 ++++++++++++++++++++++++++++++++
- WARN  GET https://registry.npmjs.org/xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left. // [!code error]
- WARN  GET https://registry.npmjs.org/xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left. // [!code error]
- WARN  GET https://registry.npmjs.org/xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left. // [!code error]
- WARN  GET https://registry.npmjs.org/xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left. // [!code error]
+.                                  | +983 ++++++++++++++++++++++++++++++++
+ WARN  GET xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left. // [!code error]
+ WARN  GET xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left. // [!code error]
+ WARN  GET xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left. // [!code error]
+ WARN  GET xxxxx error (ERR_INVALID_THIS). Will retry in 10 seconds. 2 retries left. // [!code error]
 // ...
 Error: Process completed with exit code 1.
 ```
@@ -36,7 +36,8 @@ pnpm install -g pnpm@latest
 具体可以参考 [pnpm/pnpm#6424](https://github.com/pnpm/pnpm/issues/6424) 和 [pnpm/node-fetch@ebe57b](https://github.com/pnpm/node-fetch/commit/ebe57b3986135258dbac010b754fc54de4beb2a8)。
 
 ```js
-// @@ -114,7 +114,7 @@ export default class Headers extends URLSearchParams {
+// @@ -114,7 +114,7 @@
+// export default class Headers extends URLSearchParams {
 validateHeaderName(name);
 validateHeaderValue(name, String(value));
 return URLSearchParams.prototype[p].call(
@@ -45,7 +46,8 @@ return URLSearchParams.prototype[p].call(
   String(name).toLowerCase(),
   String(value),
 );
-// @@ -126,7 +126,7 @@ export default class Headers extends URLSearchParams {
+// @@ -126,7 +126,7 @@
+// export default class Headers extends URLSearchParams {
 return (name) => {
   validateHeaderName(name);
   return URLSearchParams.prototype[p].call(
