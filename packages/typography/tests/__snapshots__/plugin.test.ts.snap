@@ -233,13 +233,6 @@ exports[`typography plugin > default styles 1`] = `
 .prose table tr td, .prose table tr th {
     border: 2px solid var(--tw-prose-primary);
     padding: 0.5rem 1rem;
-    text-align: left;
-}
-.prose table tr td[align=center], .prose table tr th[align=center] {
-    text-align: center;
-}
-.prose table tr td[align=right], .prose table tr th[align=right] {
-    text-align: right;
 }
 .prose table tr td {
     text-align: left;

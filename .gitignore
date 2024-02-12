@@ -32,4 +32,4 @@ pnpm-debug.log*
 
 # misc
 .DS_Store
-*.pem
+*.pem.turbo

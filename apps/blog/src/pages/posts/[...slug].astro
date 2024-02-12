@@ -1,6 +1,6 @@
 ---
-import "@fontsource/fira-code";
 import "@/styles/shiki.css";
+import "@/styles/mdx.css";
 
 import Layout from "@/layouts/base-layout.astro";
 import SiteHeader from "@/components/post-header.astro";
@@ -26,15 +26,8 @@ const { Content } = await entry.render();
   <article class="m-auto max-w-2xl flex-1 pb-32 pt-8">
     <SiteHeader slot="before-header" />
     <Header slot="header" data={entry.data} />
-    <main class="blog-post lg:blog-post-lg">
+    <main class="prose">
       <Content components={{ hr: Horizontal, img: Image }} />
     </main>
   </article>
 </Layout>
-
-<style>
-  main.blog-post :global(code) {
-    font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco,
-      Consolas, "Liberation Mono", "Courier New", monospace;
-  }
-</style>

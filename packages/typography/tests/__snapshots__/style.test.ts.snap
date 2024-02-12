@@ -138,15 +138,8 @@ exports[`typography styles > default styles 1`] = `
         "textAlign": "left",
       },
       "td, th": {
-        "&[align=center]": {
-          "textAlign": "center",
-        },
-        "&[align=right]": {
-          "textAlign": "right",
-        },
         "border": "2px solid var(--tw-prose-primary)",
         "padding": "0.5rem 1rem",
-        "textAlign": "left",
       },
       "th": {
         "fontWeight": 700,

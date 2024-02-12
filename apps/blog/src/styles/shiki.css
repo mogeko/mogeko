@@ -13,7 +13,7 @@
 
   pre,
   pre.astro-code {
-    @apply relative overflow-x-auto rounded-md px-6 py-4;
+    @apply relative overflow-x-auto px-6 py-4;
   }
 
   pre.astro-code > code .line.diff,
