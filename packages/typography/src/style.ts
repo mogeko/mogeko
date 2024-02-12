@@ -143,13 +143,6 @@ export const styles: Styles = {
         "td, th": {
           border: "2px solid var(--tw-prose-primary)",
           padding: `${rem(8)} ${rem(16)}`,
-          textAlign: "left",
-          "&[align=center]": {
-            textAlign: "center",
-          },
-          "&[align=right]": {
-            textAlign: "right",
-          },
         },
         td: {
           textAlign: "left",
