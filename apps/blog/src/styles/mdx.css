@@ -1,0 +1,107 @@
+@tailwind components;
+
+@layer components {
+  :root {
+    --prose-primary-color: hsl(var(--primary));
+    --prose-code-bg-color: hsl(var(--muted));
+  }
+
+  .prose a {
+    @apply relative shadow-[inset_0_-1px_0_0]
+    hover:shadow-[inset_0_-.5em_0_0_var(--tw-shadow-color)]
+    hover:shadow-[var(--prose-primary-color)];
+  }
+
+  .prose blockquote {
+    @apply mb-7 ml-6 mr-7 border-l-[5px] border-[var(--prose-primary-color)] pl-5 text-sm italic leading-7 opacity-80;
+  }
+
+  .prose code:not(:where(.astro-code *)) {
+    @apply relative rounded bg-[var(--prose-code-bg-color)] px-[0.3rem] py-[0.2rem] text-sm font-semibold;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply scroll-m-20 -tracking-wide;
+  }
+
+  .prose h1 {
+    @apply text-4xl font-[900] lg:text-5xl
+    [&:not(:first-child)]:mb-7 [&:not(:first-child)]:mt-14;
+  }
+
+  .prose h2 {
+    @apply pb-2 text-3xl font-extrabold lg:text-4xl
+    [&:not(:first-child)]:mb-6 [&:not(:first-child)]:mt-12;
+  }
+
+  .prose h3 {
+    @apply text-2xl font-bold lg:text-3xl
+    [&:not(:first-child)]:mb-5 [&:not(:first-child)]:mt-10;
+  }
+
+  .prose h4 {
+    @apply text-xl font-semibold
+    [&:not(:first-child)]:mb-4 [&:not(:first-child)]:mt-8;
+  }
+
+  .prose img {
+    @apply rounded-sm;
+  }
+
+  .prose ol,
+  .prose ul {
+    @apply mt-4 font-medium leading-[1.1];
+  }
+
+  .prose ol > li,
+  .prose ul > li {
+    @apply mb-4 pl-3 marker:text-[var(--prose-primary-color)];
+  }
+
+  .prose ol {
+    @apply list-decimal;
+  }
+
+  .prose p {
+    @apply leading-7 -tracking-[0.01em]
+    [&:not(:first-child)]:mt-6;
+  }
+
+  .prose pre {
+    @apply my-6 rounded-md bg-[var(--prose-code-bg-color)] font-normal leading-[1.7];
+  }
+
+  .prose pre > code {
+    @apply rounded-none border-0 bg-inherit p-0 font-[inherit] leading-[inherit] text-inherit;
+  }
+
+  .prose table {
+    @apply my-6 w-full border-collapse overflow-y-auto text-sm leading-[1.7];
+  }
+
+  .prose table tr {
+    @apply m-0 p-0;
+  }
+
+  .prose table tr th,
+  .prose table tr td {
+    @apply border-2 border-[var(--prose-primary-color)] px-4 py-2;
+  }
+
+  .prose table tr td {
+    @apply text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+  }
+
+  .prose table tr th {
+    @apply text-center font-bold;
+  }
+
+  .prose ul {
+    @apply list-disc;
+  }
+}
