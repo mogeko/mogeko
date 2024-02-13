@@ -5,6 +5,7 @@
     "build": {
       "dependsOn": ["^build"],
       "dotEnv": [".env.local", ".env.production"],
+      "env": ["SITE_*"],
       "outputs": ["dist/**", ".astro/**"]
     },
     "start": { "dependsOn": ["build"], "cache": false, "persistent": true },

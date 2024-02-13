@@ -17,7 +17,7 @@ import {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://mogeko-blog.vercel.app",
+  site: "https://v2.mogeko.me",
   markdown: {
     shikiConfig: {
       theme: "andromeeda",

@@ -58,7 +58,7 @@
   }
 
   .prose img {
-    @apply rounded-sm;
+    @apply mx-auto rounded-sm;
   }
 
   .prose ol,
