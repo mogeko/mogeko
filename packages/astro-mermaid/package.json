@@ -28,7 +28,7 @@
   "devDependencies": {
     "@types/node": "^20.11.16",
     "@vitest/coverage-v8": "^1.2.2",
-    "astro": "^4.3.2",
+    "astro": "^4.3.6",
     "prettier": "^3.2.5",
     "tsconfig": "workspace:^",
     "tsup": "^8.0.2",
