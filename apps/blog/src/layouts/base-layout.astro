@@ -2,17 +2,32 @@
 import "@/styles/globals.css";
 
 import Footer from "@/components/site-footer.astro";
+import { siteConfig } from "@/config";
 
-const { title } = Astro.props;
+const { title, keywords, description } = Astro.props;
+const meta = {
+  title: (title ? `${title} - ` : "") + siteConfig.title,
+  description: description ?? siteConfig.description,
+  keywords: [siteConfig.keywords, ...(keywords ?? [])].join(", "),
+  author: siteConfig.author,
+};
 
-type Props = { title: string };
+type Props = { title?: string; keywords?: string[]; description?: string };
 ---
 
 <html lang="en">
   <head>
-    <title>{title}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#e76e50" />
+    <meta name="description" content={meta.description} />
+    <meta name="author" content={siteConfig.author} />
+    <meta name="keywords" content={meta.keywords} />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteConfig.title} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

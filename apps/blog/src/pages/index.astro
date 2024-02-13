@@ -1,7 +1,6 @@
 ---
 import Layout from "@/layouts/base-layout.astro";
 import ArticleIndex from "@/components/article-index.astro";
-import { siteConfig } from "@/config";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { getYear, getTime } from "date-fns";
 
@@ -24,7 +23,7 @@ const posts = (
   );
 ---
 
-<Layout title={siteConfig.title}>
+<Layout>
   <main class="mx-6 mb-32 mt-8 max-w-2xl flex-1">
     <section class="flex flex-col justify-center px-6 py-16">
       <header class="flex flex-col gap-1">
