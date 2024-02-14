@@ -4,6 +4,7 @@ const postCollection = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
+    subtitle: z.string().optional(),
     date: z.date(),
     draft: z.boolean().optional(),
     mark: z.boolean().optional(),

@@ -25,14 +25,15 @@ const posts = (
 ---
 
 <Layout>
-  <section class="mt-8 flex flex-col justify-center px-6 py-16" slot="header">
-    <header class="flex flex-col gap-1">
-      <h1 class="text-primary-foreground text-4xl">
-        Hi! I'm <span class="text-primary">Mogeko</span>
-      </h1>
-      <h2 class="text-secondary text-3xl">Open-source lover & Blogger</h2>
-    </header>
-    <p class="pb-3 pt-5 text-base">
+  <header
+    class="mt-8 flex flex-col justify-center gap-1 px-6 py-16"
+    slot="header"
+  >
+    <h1 class="text-primary-foreground text-4xl">
+      Hi! I'm <span class="text-primary">Mogeko</span>
+    </h1>
+    <h2 class="text-secondary text-3xl">Open-source lover & Blogger</h2>
+    <p class="pb-2 pt-4 text-base">
       Hello, everyone! Welcome to my personal blog. I am a DBA communist and
       blogger. I like to <span
         class="shadow-[inset_0_-2px_0_0_hsl(var(--primary))]">write code</span
@@ -44,7 +45,7 @@ const posts = (
     <p class="inline-flex items-center gap-1">
       I hope you like my blog!<AiFillHeart className="h-4 w-4 text-red-600" />
     </p>
-  </section>
+  </header>
   <main class="mb-32 flex flex-1 flex-col justify-center gap-7 px-6">
     {posts.map((group) => <ArticleIndex group={group} />)}
   </main>
