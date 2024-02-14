@@ -39,7 +39,7 @@ type Props = { title?: string; keywords?: string[]; description?: string };
     class="bg-background selection:bg-primary selection:text-primary-foreground min-h-screen font-sans antialiased"
   >
     <slot name="before-header" />
-    <div class="relative m-auto flex min-h-screen max-w-3xl flex-col">
+    <div class="relative m-auto flex min-h-screen max-w-2xl flex-col">
       <slot name="header" />
       <slot />
       <slot name="footer"><Footer /></slot>
