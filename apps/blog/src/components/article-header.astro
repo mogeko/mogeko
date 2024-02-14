@@ -5,11 +5,10 @@ import { LuCalendarDays, LuTags, LuDot, LuCoffee } from "react-icons/lu";
 import type { CollectionEntry } from "astro:content";
 import type { HTMLAttributes } from "astro/types";
 
-const { class: className, readingTime, data, ...props } = Astro.props;
+const { class: className, data, ...props } = Astro.props;
 
 type Props = {
-  data: CollectionEntry<"posts">["data"];
-  readingTime: string;
+  data: { minutesRead: string } & CollectionEntry<"posts">["data"];
 } & HTMLAttributes<"header">;
 ---
 
@@ -37,7 +36,7 @@ type Props = {
     <LuDot className="h-4 w-4" />
     <span class="inline-flex items-center">
       <LuCoffee className="text-secondary mr-1 h-4 w-4" />
-      {readingTime}
+      {data.minutesRead}
     </span>
     {
       data.tags && (
