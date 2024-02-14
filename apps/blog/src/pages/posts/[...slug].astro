@@ -26,11 +26,9 @@ const {
 ---
 
 <Layout title={entry.data.title} keywords={entry.data.tags}>
-  <article class="m-auto max-w-2xl flex-1 pb-32 pt-8">
-    <SiteHeader slot="before-header" />
-    <Header slot="header" data={{ minutesRead, ...entry.data }} />
-    <main class="prose">
-      <Content components={{ hr: Horizontal, img: Image }} />
-    </main>
-  </article>
+  <SiteHeader class="max-w-2xl" slot="before-header" />
+  <Header class="pt-8" slot="header" data={{ minutesRead, ...entry.data }} />
+  <main class="prose m-auto flex-1">
+    <Content components={{ hr: Horizontal, img: Image }} />
+  </main>
 </Layout>
