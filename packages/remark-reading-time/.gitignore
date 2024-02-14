@@ -1,9 +1,6 @@
 # build output
 dist/
 
-# generated types
-.astro/
-
 # dependencies
 node_modules/
 
@@ -12,9 +9,6 @@ coverage/
 
 # turbo
 .turbo/
-
-# vercel
-.vercel/
 
 # logs
 npm-debug.log*
