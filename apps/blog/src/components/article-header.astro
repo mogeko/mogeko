@@ -1,14 +1,15 @@
 ---
 import Link from "@/components/ui/link.astro";
 import { format } from "date-fns";
-import { LuCalendarDays, LuTags, LuDot } from "react-icons/lu";
+import { LuCalendarDays, LuTags, LuDot, LuCoffee } from "react-icons/lu";
 import type { CollectionEntry } from "astro:content";
 import type { HTMLAttributes } from "astro/types";
 
-const { class: className, data, ...props } = Astro.props;
+const { class: className, readingTime, data, ...props } = Astro.props;
 
 type Props = {
   data: CollectionEntry<"posts">["data"];
+  readingTime: string;
 } & HTMLAttributes<"header">;
 ---
 
@@ -28,22 +29,29 @@ type Props = {
       </h2>
     )
   }
-  <section class="mb-8 flex flex-row items-center justify-start gap-2 text-sm">
+  <section class="mb-8 flex flex-row items-center justify-start gap-1 text-sm">
     <time class="inline-flex items-center">
       <LuCalendarDays className="text-primary mr-1 h-4 w-4" />
       {format(data.date, "PPP")}
     </time>
     <LuDot className="h-4 w-4" />
+    <span class="inline-flex items-center">
+      <LuCoffee className="text-secondary mr-1 h-4 w-4" />
+      {readingTime}
+    </span>
     {
       data.tags && (
-        <div class="text-accent inline-flex items-center gap-2">
-          <LuTags className="h-4 w-4 mr-[-0.25rem]" />
-          {data.tags.map((tag: string) => (
-            <Link href="" variant="tag">
-              #{tag}
-            </Link>
-          ))}
-        </div>
+        <>
+          <LuDot className="h-4 w-4" />
+          <div class="text-accent inline-flex items-center gap-2">
+            <LuTags className="h-4 w-4 mr-[-0.25rem]" />
+            {data.tags.map((tag: string) => (
+              <Link href="" variant="tag">
+                #{tag}
+              </Link>
+            ))}
+          </div>
+        </>
       )
     }
   </section>

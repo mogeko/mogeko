@@ -6,6 +6,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 
 import emoji from "remark-emoji";
+import readingTime from "remark-reading-time";
 import mermaid from "rehype-mermaid";
 
 import {
@@ -29,7 +30,7 @@ export default defineConfig({
       ],
       wrap: true,
     },
-    remarkPlugins: [[emoji, { accessible: true }]],
+    remarkPlugins: [[emoji, { accessible: true }], readingTime],
     rehypePlugins: [mermaid],
   },
   integrations: [

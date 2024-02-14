@@ -19,13 +19,16 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const {
+  Content,
+  remarkPluginFrontmatter: { minutesRead },
+} = await entry.render();
 ---
 
 <Layout title={entry.data.title} keywords={entry.data.tags}>
   <article class="m-auto max-w-2xl flex-1 pb-32 pt-8">
     <SiteHeader slot="before-header" />
-    <Header slot="header" data={entry.data} />
+    <Header slot="header" data={entry.data} readingTime={minutesRead} />
     <main class="prose">
       <Content components={{ hr: Horizontal, img: Image }} />
     </main>

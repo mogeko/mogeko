@@ -95,6 +95,9 @@ importers:
       remark-emoji:
         specifier: ^4.0.1
         version: 4.0.1
+      remark-reading-time:
+        specifier: workspace:^
+        version: link:../../packages/remark-reading-time
       shikiji-transformers:
         specifier: ^0.9.18
         version: 0.9.19
@@ -160,6 +163,31 @@ importers:
       vitest:
         specifier: ^1.2.2
         version: 1.2.2(@types/node@20.11.16)
+
+  packages/remark-reading-time:
+    dependencies:
+      mdast-util-to-string:
+        specifier: ^4.0.0
+        version: 4.0.0
+      reading-time:
+        specifier: ^1.5.0
+        version: 1.5.0
+    devDependencies:
+      '@astrojs/markdown-remark':
+        specifier: ^4.2.1
+        version: 4.2.1
+      prettier:
+        specifier: ^3.2.5
+        version: 3.2.5
+      tsconfig:
+        specifier: workspace:^
+        version: link:../tsconfig
+      tsup:
+        specifier: ^8.0.2
+        version: 8.0.2(postcss@8.4.35)(typescript@5.3.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
 
   packages/tsconfig:
     devDependencies:
@@ -5799,6 +5827,10 @@ packages:
     engines: {node: '>=8.10.0'}
     dependencies:
       picomatch: 2.3.1
+
+  /reading-time@1.5.0:
+    resolution: {integrity: sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==}
+    dev: false
 
   /redent@3.0.0:
     resolution: {integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==}
