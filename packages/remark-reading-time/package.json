@@ -19,7 +19,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "lint": "prettier --check .",
+    "fmt": "prettier --write ."
   },
   "dependencies": {
     "mdast-util-to-string": "^4.0.0",

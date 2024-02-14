@@ -33,7 +33,6 @@
     "test": "vitest run",
     "cov": "vitest run --coverage",
     "build": "tsup",
-    "dev": "tsup --watch",
     "lint": "prettier --check .",
     "fmt": "prettier --write ."
   },
