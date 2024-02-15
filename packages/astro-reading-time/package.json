@@ -33,9 +33,12 @@
     "@vitest/coverage-v8": "^1.2.2",
     "astro": "^4.3.6",
     "prettier": "^3.2.5",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
     "tsconfig": "workspace:^",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3",
+    "unified": "^11.0.4",
     "vite-tsconfig-paths": "^4.3.1",
     "vitest": "^1.2.2"
   }

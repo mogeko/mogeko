@@ -182,6 +182,12 @@ importers:
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
+      remark-parse:
+        specifier: ^11.0.0
+        version: 11.0.0
+      remark-stringify:
+        specifier: ^11.0.0
+        version: 11.0.0
       tsconfig:
         specifier: workspace:^
         version: link:../tsconfig
@@ -191,6 +197,9 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.3.3
+      unified:
+        specifier: ^11.0.4
+        version: 11.0.4
       vite-tsconfig-paths:
         specifier: ^4.3.1
         version: 4.3.1(typescript@5.3.3)

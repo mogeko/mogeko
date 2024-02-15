@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`remarkReadingTime > adds reading time to the frontmatter 1`] = `
+VFile {
+  "cwd": "/Users/mogeko/Workspace/mogeko/packages/astro-reading-time",
+  "data": {
+    "astro": {
+      "frontmatter": {
+        "minutesRead": "1 min read",
+        "wordCount": 7,
+      },
+    },
+  },
+  "history": [],
+  "messages": [],
+  "value": "# Hello, world!
+
+This is a test markdown content.
+",
+}
+`;
