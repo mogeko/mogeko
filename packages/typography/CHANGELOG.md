@@ -1,5 +1,11 @@
 # @mogeko/typography
 
+## 0.1.3
+
+### Patch Changes
+
+- [#31](https://github.com/mogeko/mogeko/pull/31) [`932ad57`](https://github.com/mogeko/mogeko/commit/932ad5761fb499d8488853f71b14d8f32a9316b7) Thanks [@mogeko](https://github.com/mogeko)! - Publish to NPM.
+
 ## 0.1.2
 
 ### Patch Changes
