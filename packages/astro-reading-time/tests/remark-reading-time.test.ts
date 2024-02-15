@@ -18,6 +18,6 @@ describe("remarkReadingTime", () => {
     expect(result.data.astro).toEqual({
       frontmatter: { minutesRead: "1 min read", wordCount: 7 },
     });
-    expect(result).toMatchSnapshot();
+    expect(result.data).toMatchSnapshot();
   });
 });
