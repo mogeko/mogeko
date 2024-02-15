@@ -18,6 +18,8 @@
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
   "scripts": {
+    "test": "vitest run",
+    "cov": "vitest run --coverage",
     "build": "tsup",
     "lint": "prettier --check .",
     "fmt": "prettier --write ."
@@ -28,10 +30,13 @@
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^4.2.1",
+    "@vitest/coverage-v8": "^1.2.2",
     "astro": "^4.3.6",
     "prettier": "^3.2.5",
     "tsconfig": "workspace:^",
     "tsup": "^8.0.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite-tsconfig-paths": "^4.3.1",
+    "vitest": "^1.2.2"
   }
 }
