@@ -1,8 +1,8 @@
 {
   "name": "astro-reading-time",
   "version": "0.0.1",
-  "private": true,
-  "description": "An Astro integration for calculate reading time of Markdown files",
+  "private": false,
+  "description": "An Astro integration for calculate reading time of Markdown/MDX files",
   "type": "module",
   "exports": {
     ".": {
@@ -17,6 +17,20 @@
   ],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mogeko/mogeko.git",
+    "directory": "packages/astro-reading-time"
+  },
+  "homepage": "https://github.com/mogeko/mogeko/tree/master/packages/astro-reading-time#readme",
+  "bugs": {
+    "url": "https://github.com/mogeko/mogeko/issues",
+    "email": "zhengjunyi@live.com"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "test": "vitest run",
     "cov": "vitest run --coverage",
