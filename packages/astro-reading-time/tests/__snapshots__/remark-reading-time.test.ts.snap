@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`remarkReadingTime > adds reading time to the frontmatter 1`] = `
+{
+  "code": "<h1 id="hello-world">Hello, world!</h1>
+<p>This is a test markdown content.</p>",
+  "metadata": {
+    "frontmatter": {
+      "minutesRead": "1 min read",
+      "wordCount": 7,
+    },
+    "headings": [
+      {
+        "depth": 1,
+        "slug": "hello-world",
+        "text": "Hello, world!",
+      },
+    ],
+    "imagePaths": Set {},
+  },
+}
+`;

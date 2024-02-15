@@ -24,10 +24,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: package.json
-          registry-url: "https://npm.pkg.github.com"
           cache: "pnpm"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm install -rw --frozen-lockfile
       - run: pnpm run build --force # Build without cache
       - name: Create Version PR or Publish to NPM
@@ -40,5 +37,5 @@ jobs:
           publish: pnpm changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_ENV: "production"

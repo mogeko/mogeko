@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`readingTime > update the config 1`] = `
+{
+  "hooks": {
+    "astro:config:setup": [Function],
+  },
+  "name": "astro-reading-time",
+}
+`;
