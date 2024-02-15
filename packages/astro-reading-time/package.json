@@ -29,7 +29,6 @@
     "reading-time": "^1.5.0"
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^4.2.1",
     "@vitest/coverage-v8": "^1.2.2",
     "astro": "^4.3.6",
     "prettier": "^3.2.5",
