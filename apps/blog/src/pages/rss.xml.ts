@@ -8,24 +8,22 @@ import type { APIContext } from "astro";
 export async function GET(context: APIContext) {
   const { author, title, description } = siteConfig;
   const processor = await createMarkdownProcessor({ remarkPlugins: [emoji] });
-  const blogs = await Promise.all(
-    (await getCollection("posts")).map(async ({ body, ...rest }) => ({
-      content: (await processor.render(body)).code,
-      ...rest,
-    })),
-  );
+  const blogs = await getCollection("posts");
 
   return rss({
     title: title,
     description: description,
     site: context.site ?? import.meta.env.SITE,
-    items: blogs.map(({ data, slug, content }) => ({
-      title: data.title,
-      description: data.description,
-      author: data.author ?? author,
-      pubDate: data.date,
-      content: content,
-      link: `/posts/${slug}`,
-    })),
+    items: await Promise.all(
+      blogs.map(async ({ data, slug, body }) => ({
+        title: data.title,
+        description: data.description,
+        author: data.author ?? author,
+        content: (await processor.render(body)).code,
+        pubDate: data.date,
+        link: `/posts/${slug}`,
+      })),
+    ),
+    stylesheet: "/rss/pretty-feed-v3.xsl",
   });
 }
