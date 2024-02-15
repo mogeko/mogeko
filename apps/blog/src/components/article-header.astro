@@ -39,10 +39,10 @@ type Props = {
       {data.minutesRead}
     </span>
     {
-      data.tags && (
+      data.tags && data.tags.length > 0 && (
         <>
           <LuDot className="h-4 w-4" />
-          <div class="text-accent inline-flex items-center gap-2">
+          <div class="text-accent inline-flex items-center gap-2 overflow-hidden">
             <LuTags className="h-4 w-4 mr-[-0.25rem]" />
             {data.tags.map((tag: string) => (
               <Link href="" variant="tag">

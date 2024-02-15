@@ -39,3 +39,196 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* mdx */
+
+@layer base {
+  code {
+    font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco,
+      Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+}
+
+@layer components {
+  :root {
+    --prose-primary-color: hsl(var(--primary));
+    --prose-code-bg-color: hsl(var(--muted));
+  }
+
+  .prose a {
+    @apply relative shadow-[inset_0_-1px_0_0]
+    hover:shadow-[inset_0_-.5em_0_0_var(--tw-shadow-color)]
+    hover:shadow-[var(--prose-primary-color)];
+  }
+
+  .prose blockquote {
+    @apply mb-7 ml-6 mr-7 border-l-[5px] border-[var(--prose-primary-color)] pl-5 text-sm italic leading-7 opacity-80;
+  }
+
+  .prose code:not(:where(.astro-code *)) {
+    @apply relative rounded bg-[var(--prose-code-bg-color)] px-[0.3rem] py-[0.2rem] text-sm font-semibold;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply scroll-m-20 -tracking-wide;
+  }
+
+  .prose h1 {
+    @apply text-4xl font-[900] lg:text-5xl
+    [&:not(:first-child)]:mb-7 [&:not(:first-child)]:mt-14;
+  }
+
+  .prose h2 {
+    @apply pb-2 text-3xl font-extrabold lg:text-4xl
+    [&:not(:first-child)]:mb-6 [&:not(:first-child)]:mt-12;
+  }
+
+  .prose h3 {
+    @apply text-2xl font-bold lg:text-3xl
+    [&:not(:first-child)]:mb-5 [&:not(:first-child)]:mt-10;
+  }
+
+  .prose h4 {
+    @apply text-xl font-semibold
+    [&:not(:first-child)]:mb-4 [&:not(:first-child)]:mt-8;
+  }
+
+  .prose img {
+    @apply mx-auto rounded-sm;
+  }
+
+  .prose ol,
+  .prose ul {
+    @apply mt-4 pl-5 font-medium leading-[1.1];
+  }
+
+  .prose ol > li,
+  .prose ul > li {
+    @apply mb-4 pl-2 marker:text-[var(--prose-primary-color)];
+  }
+
+  .prose ol {
+    @apply list-decimal;
+  }
+
+  .prose p {
+    @apply leading-7 -tracking-[0.01em]
+    [&:not(:first-child)]:mt-6;
+  }
+
+  .prose pre {
+    @apply my-6 rounded-md bg-[var(--prose-code-bg-color)] font-normal leading-[1.7];
+  }
+
+  .prose pre > code {
+    @apply rounded-none border-0 bg-inherit p-0 leading-[inherit] text-inherit;
+  }
+
+  .prose strong {
+    @apply font-[900];
+  }
+
+  .prose table {
+    @apply my-6 w-full border-collapse overflow-y-auto text-sm leading-[1.7];
+  }
+
+  .prose table tr {
+    @apply m-0 p-0;
+  }
+
+  .prose table tr th,
+  .prose table tr td {
+    @apply border-2 border-[var(--prose-primary-color)] px-4 py-2;
+  }
+
+  .prose table tr td {
+    @apply text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+  }
+
+  .prose table tr th {
+    @apply text-center font-bold;
+  }
+
+  .prose ul {
+    @apply list-disc;
+  }
+}
+
+/* shiki */
+
+@layer utilities {
+  :root {
+    --shiki-diff-add-color: rgba(16, 185, 129, 0.16);
+    --shiki-diff-add-symbol-color: hsl(151, 65%, 54%);
+    --shiki-diff-remove-color: rgba(244, 63, 94, 0.16);
+    --shiki-diff-remove-symbol-color: hsl(0, 45%, 63%);
+    --shiki-highlight-color: rgba(101, 117, 133, 0.16);
+    --shiki-error-color: rgba(244, 63, 94, 0.16);
+    --shiki-warning-color: rgba(234, 179, 8, 0.16);
+  }
+
+  pre,
+  pre.astro-code {
+    @apply relative overflow-x-auto px-6 py-4;
+  }
+
+  pre.astro-code > code .line.diff,
+  pre.astro-code > code .line.highlighted {
+    @apply mx-[-1.5rem] inline-block w-[calc(100%_+_3rem)] px-6
+    transition-[background-color] duration-500;
+  }
+
+  /* transformerNotationDiff */
+
+  pre.astro-code > code .line.diff::before {
+    @apply absolute left-[0.625rem];
+  }
+
+  pre.astro-code > code .line.diff.add {
+    @apply bg-[var(--shiki-diff-add-color)];
+  }
+
+  pre.astro-code > code .line.diff.add::before {
+    @apply text-[var(--shiki-diff-add-symbol-color)] content-['+'];
+  }
+
+  pre.astro-code > code .line.diff.remove {
+    @apply bg-[var(--shiki-diff-remove-color)] opacity-70;
+  }
+
+  pre.astro-code > code .line.diff.remove::before {
+    @apply text-[var(--shiki-diff-remove-symbol-color)] content-['-'];
+  }
+
+  /* transformerNotationHighlight */
+
+  pre.astro-code > code .line.highlighted {
+    @apply bg-[var(--shiki-highlight-color)];
+  }
+
+  /* transformerNotationErrorLevel */
+
+  pre.astro-code > code .line.highlighted.error {
+    @apply bg-[var(--shiki-error-color)];
+  }
+
+  pre.astro-code > code .line.highlighted.warning {
+    @apply bg-[var(--shiki-warning-color)];
+  }
+
+  /* transformerNotationFocus */
+
+  pre.has-focused .line:not(.focused) {
+    @apply opacity-70 blur-[0.095rem]
+    transition-[filter,opacity] duration-300;
+  }
+
+  pre.has-focused:hover .line:not(.focused) {
+    @apply opacity-100 blur-0;
+  }
+}

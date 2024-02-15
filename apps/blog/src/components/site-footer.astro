@@ -1,21 +1,16 @@
 ---
 import Link from "@/components/ui/link.astro";
-import { Separator } from "@/components/ui/separator";
 ---
 
-<footer class="flex flex-col items-center justify-stretch">
-  <Separator />
-  <p
-    class="m-auto flex flex-col items-center justify-center px-14 py-6 md:flex-row md:gap-1"
-  >
-    <span>
-      Copyright &copy; 2017 - {new Date().getFullYear()}
-      <span>by <Link href="https://github.com/mogeko">Mogeko</Link></span>
-    </span>
-    <span>
-      under <Link href="https://creativecommons.org/licenses/by-nc/4.0">
-        CC BY-NC-SA 4.0
-      </Link>
-    </span>
+<footer
+  class="text-muted flex flex-col items-center justify-stretch px-14 py-20 text-sm"
+>
+  <p>
+    Copyright &copy; 2017 - {new Date().getFullYear()}. All rights reserved.
+  </p>
+  <p>
+    Made by <Link class="hover:text-foreground" href="https://github.com/mogeko"
+      >Mogeko</Link
+    >
   </p>
 </footer>
