@@ -2,11 +2,11 @@ import { defineConfig } from "astro/config";
 
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
+import readingTime from "astro-reading-time";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 
 import emoji from "remark-emoji";
-import readingTime from "remark-reading-time";
 import mermaid from "rehype-mermaid";
 
 import {
@@ -30,12 +30,13 @@ export default defineConfig({
       ],
       wrap: true,
     },
-    remarkPlugins: [[emoji, { accessible: true }], readingTime],
+    remarkPlugins: [[emoji, { accessible: true }]],
     rehypePlugins: [mermaid],
   },
   integrations: [
     react(),
     tailwind({ applyBaseStyles: false }),
+    readingTime(),
     mdx(),
     sitemap(),
   ],

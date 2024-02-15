@@ -68,6 +68,9 @@ importers:
       astro:
         specifier: ^4.3.6
         version: 4.3.6(@types/node@20.11.17)(typescript@5.3.3)
+      astro-reading-time:
+        specifier: workspace:^
+        version: link:../../packages/astro-reading-time
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -92,9 +95,6 @@ importers:
       remark-emoji:
         specifier: ^4.0.1
         version: 4.0.1
-      remark-reading-time:
-        specifier: workspace:^
-        version: link:../../packages/remark-reading-time
       shikiji-transformers:
         specifier: ^0.9.18
         version: 0.9.19
@@ -160,6 +160,34 @@ importers:
       vitest:
         specifier: ^1.2.2
         version: 1.2.2(@types/node@20.11.16)
+
+  packages/astro-reading-time:
+    dependencies:
+      mdast-util-to-string:
+        specifier: ^4.0.0
+        version: 4.0.0
+      reading-time:
+        specifier: ^1.5.0
+        version: 1.5.0
+    devDependencies:
+      '@astrojs/markdown-remark':
+        specifier: ^4.2.1
+        version: 4.2.1
+      astro:
+        specifier: ^4.3.6
+        version: 4.3.6(@types/node@20.11.17)(typescript@5.3.3)
+      prettier:
+        specifier: ^3.2.5
+        version: 3.2.5
+      tsconfig:
+        specifier: workspace:^
+        version: link:../tsconfig
+      tsup:
+        specifier: ^8.0.2
+        version: 8.0.2(postcss@8.4.35)(typescript@5.3.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
 
   packages/remark-reading-time:
     dependencies:
@@ -1493,7 +1521,6 @@ packages:
     resolution: {integrity: sha512-gKb0enTmRCzXSSUJDq6/sPcqrfCv2mkkG6Jt/clpn5eiCbKTY+SgZUxo+p8ZKMof5dCp9vHQUAB7wOUTod22wQ==}
     dependencies:
       undici-types: 5.26.5
-    dev: true
 
   /@types/node@20.11.17:
     resolution: {integrity: sha512-QmgQZGWu1Yw9TDyAP9ZzpFJKynYNeOvwMJmaxABfieQoVoiVOS6MN1WSpqpRcbeA5+RW82kraAVxCCJg+780Qw==}
@@ -2024,7 +2051,6 @@ packages:
       - supports-color
       - terser
       - typescript
-    dev: false
 
   /autoprefixer@10.4.17(postcss@8.4.35):
     resolution: {integrity: sha512-/cpVNRLSfhOtcGflT13P2794gVSgmPgTR+erw5ifnMLZb0UnSlkK4tquLmkd3BhA+nLo5tX8Cu0upUsGKvKbmg==}
@@ -7326,7 +7352,6 @@ packages:
       rollup: 4.10.0
     optionalDependencies:
       fsevents: 2.3.3
-    dev: true
 
   /vite@5.1.1(@types/node@20.11.17):
     resolution: {integrity: sha512-wclpAgY3F1tR7t9LL5CcHC41YPkQIpKUGeIuT8MdNwNZr6OqOTLs7JX5vIHAtzqLWXts0T+GDrh9pN2arneKqg==}
@@ -7371,7 +7396,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 5.1.1(@types/node@20.11.17)
+      vite: 5.1.1(@types/node@20.11.16)
 
   /vitest@1.2.2(@types/node@20.11.16):
     resolution: {integrity: sha512-d5Ouvrnms3GD9USIK36KG8OZ5bEvKEkITFtnGv56HFaSlbItJuYr7hv2Lkn903+AvRAgSixiamozUVfORUekjw==}

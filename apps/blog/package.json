@@ -22,6 +22,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "astro": "^4.3.6",
+    "astro-reading-time": "workspace:^",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "date-fns": "^3.3.1",
@@ -30,7 +31,6 @@
     "react-icons": "^5.0.1",
     "rehype-mermaid": "^2.1.0",
     "remark-emoji": "^4.0.1",
-    "remark-reading-time": "workspace:^",
     "shikiji-transformers": "^0.9.18",
     "tailwind-merge": "^2.2.1"
   },
