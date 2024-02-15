@@ -47,9 +47,6 @@ importers:
       '@astrojs/check':
         specifier: ^0.5.3
         version: 0.5.3(prettier-plugin-astro@0.13.0)(prettier@3.2.5)(typescript@5.3.3)
-      '@astrojs/markdown-remark':
-        specifier: ^4.2.1
-        version: 4.2.1
       '@astrojs/mdx':
         specifier: ^2.1.1
         version: 2.1.1(astro@4.3.6)
