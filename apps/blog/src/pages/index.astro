@@ -4,8 +4,9 @@ import ArticleIndex from "@/components/article-index.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { getYear, getTime } from "date-fns";
 import { AiFillHeart } from "react-icons/ai";
+import { LuRss } from "react-icons/lu";
 
-const posts = (
+const blogs = (
   await getCollection("posts", ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;
   })
@@ -31,6 +32,12 @@ const posts = (
   >
     <h1 class="text-primary-foreground text-4xl">
       Hi! I'm <span class="text-primary">Mogeko</span>
+      <a
+        class="hover:text-primary text-accent inline-flex items-center justify-center"
+        href="/rss.xml"
+      >
+        <LuRss className="h-6 w-6" />
+      </a>
     </h1>
     <h2 class="text-secondary text-3xl">Open-source lover & Blogger</h2>
     <p class="pb-2 pt-4 text-base">
@@ -43,10 +50,10 @@ const posts = (
       consumerism.
     </p>
     <p class="inline-flex items-center gap-1">
-      I hope you like my blog!<AiFillHeart className="h-4 w-4 text-red-600" />
+      I hope you like my blog! <AiFillHeart className="h-4 w-4 text-red-600" />
     </p>
   </header>
   <main class="flex flex-1 flex-col justify-center gap-7 px-6">
-    {posts.map((group) => <ArticleIndex group={group} />)}
+    {blogs.map((group) => <ArticleIndex group={group} />)}
   </main>
 </Layout>

@@ -9,13 +9,14 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
   contents: write
-  packages: write
   pull-requests: write
 
 jobs:
   release:
-    name: Release to GitHub Package Registry
+    name: Release to NPM
     runs-on: ubuntu-latest
+    env:
+      TURBO_FORCE: true # Build without cache
     steps:
       - uses: actions/checkout@v4
       - name: Set up pnpm
@@ -26,7 +27,7 @@ jobs:
           node-version-file: package.json
           cache: "pnpm"
       - run: pnpm install -rw --frozen-lockfile
-      - run: pnpm run build --force # Build without cache
+      - run: pnpm run build --filter="./packages/*"
       - name: Create Version PR or Publish to NPM
         id: changesets
         uses: changesets/action@v1.4.5
