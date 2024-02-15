@@ -1,23 +1,21 @@
 import { remarkReadingTime } from "@/lib/remark-reading-time";
 import { describe, it, expect } from "vitest";
-import remarkParse from "remark-parse";
-import remarkStringify from "remark-stringify";
-import { unified } from "unified";
+import { createMarkdownProcessor } from "@astrojs/markdown-remark";
 
 const md = `# Hello, world!\n\nThis is a test markdown content.`;
 
 describe("remarkReadingTime", () => {
   it("adds reading time to the frontmatter", async () => {
-    const processor = unified()
-      .use(remarkParse)
-      .use(remarkReadingTime)
-      .use(remarkStringify);
-
-    const result = await processor.process(md);
-
-    expect(result.data.astro).toEqual({
-      frontmatter: { minutesRead: "1 min read", wordCount: 7 },
+    const processor = await createMarkdownProcessor({
+      remarkPlugins: [remarkReadingTime],
     });
-    expect(result.data).toMatchSnapshot();
+
+    const result = await processor.render(md);
+
+    expect(result.metadata.frontmatter).toEqual({
+      minutesRead: "1 min read",
+      wordCount: 7,
+    });
+    expect(result).toMatchSnapshot();
   });
 });
