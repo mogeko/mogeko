@@ -20,9 +20,9 @@ type Props = {
   <h2 class="text-3xl font-bold">{year}</h2>
   {
     articles.map(({ data, slug }) => (
-      <p class="inline-flex flex-row items-center gap-1 text-xl">
+      <p class="inline-flex flex-row items-center gap-0.5 text-xl md:gap-1">
         {data.mark && (
-          <MdStar className="h-5 w-5 mr-1 ml-[-1.75rem] text-primary" />
+          <MdStar className="h-5 w-5 md:mr-1 md:ml-[-1.75rem] ml-[-1.375rem] text-primary" />
         )}
         <span>
           <Link
