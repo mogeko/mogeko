@@ -122,7 +122,7 @@
   }
 
   .prose pre {
-    @apply my-6 rounded-md bg-[var(--prose-code-bg-color)] font-normal leading-[1.7];
+    @apply mx-[-1.5rem] my-6 rounded-md bg-[var(--prose-code-bg-color)] font-normal leading-[1.7] sm:mx-0;
   }
 
   .prose pre > code {
