@@ -6,23 +6,25 @@ import { getYear, getTime } from "date-fns";
 import { AiFillHeart } from "react-icons/ai";
 import { LuRss } from "react-icons/lu";
 
-const blogs = (
+export const blogs = (
   await getCollection("posts", ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;
   })
-)
-  .sort(({ data: a }, { data: b }) => getTime(b.date) - getTime(a.date))
-  .reduce(
-    (acc, post) => {
-      const year = getYear(post.data.date);
-      const index = acc.findIndex(([y]) => y === year);
+).sort(({ data: a }, { data: b }) => {
+  return getTime(b.date) - getTime(a.date);
+});
+export const recentPosts = blogs.slice(0, 10);
+const groupByYear = blogs.reduce(
+  (acc, post) => {
+    const year = getYear(post.data.date);
+    const index = acc.findIndex(([y]) => y === year);
 
-      return index > -1
-        ? (acc[index][1].push(post), acc)
-        : acc.concat([[year, [post]]]);
-    },
-    [] as [number, CollectionEntry<"posts">[]][],
-  );
+    return index > -1
+      ? (acc[index][1].push(post), acc)
+      : acc.concat([[year, [post]]]);
+  },
+  [] as [number, CollectionEntry<"posts">[]][],
+);
 ---
 
 <Layout>
@@ -51,6 +53,6 @@ const blogs = (
     </p>
   </header>
   <main class="flex flex-1 flex-col justify-center gap-7">
-    {blogs.map((group) => <ArticleIndex group={group} />)}
+    {groupByYear.map((group) => <ArticleIndex group={group} />)}
   </main>
 </Layout>

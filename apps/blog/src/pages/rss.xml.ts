@@ -1,18 +1,10 @@
 import rss from "@astrojs/rss";
-import { siteConfig } from "@/config";
-import { getCollection } from "astro:content";
-import { getTime } from "date-fns";
 import type { APIContext } from "astro";
+import { siteConfig } from "@/config";
+import { blogs } from "@/pages/index.astro";
 
 export async function GET(context: APIContext) {
   const { author, title, description } = siteConfig;
-  const blogs = (
-    await getCollection("posts", ({ data }) => {
-      return import.meta.env.PROD ? data.draft !== true : true;
-    })
-  ).sort(({ data: a }, { data: b }) => {
-    return getTime(b.date) - getTime(a.date);
-  });
 
   return rss({
     title: title,
