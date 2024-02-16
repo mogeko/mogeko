@@ -14,6 +14,7 @@ export const blogs = (
   return getTime(b.date) - getTime(a.date);
 });
 export const recentPosts = blogs.slice(0, 10);
+
 const groupByYear = blogs.reduce(
   (acc, post) => {
     const year = getYear(post.data.date);
