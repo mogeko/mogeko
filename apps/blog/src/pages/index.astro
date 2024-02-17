@@ -51,6 +51,10 @@ const blogs = (
     </p>
   </header>
   <main class="flex flex-1 flex-col justify-center gap-7">
-    {blogs.map((group) => <ArticleIndex group={group} />)}
+    {
+      blogs.map(([year, articles]) => (
+        <ArticleIndex heading={year.toString()} articles={articles} />
+      ))
+    }
   </main>
 </Layout>

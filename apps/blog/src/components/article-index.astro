@@ -6,19 +6,16 @@ import { cn } from "@/utils";
 import type { CollectionEntry } from "astro:content";
 import type { HTMLAttributes } from "astro/types";
 
-const {
-  class: className,
-  group: [year, articles],
-} = Astro.props;
+const { class: className, heading, articles } = Astro.props;
 
-type Entry = CollectionEntry<"posts">;
 type Props = {
-  group: [number, Pick<Entry, "slug" | "data">[]];
+  articles: Pick<CollectionEntry<"posts">, "slug" | "data">[];
+  heading: string;
 } & HTMLAttributes<"div">;
 ---
 
 <div class={cn("flex flex-col gap-2", className)}>
-  <h2 class="text-3xl font-bold">{year}</h2>
+  <h2 class="text-3xl font-bold">{heading}</h2>
   {
     articles.map(({ data, slug }) => (
       <p class="inline-flex flex-row items-center gap-0.5 text-xl md:gap-1">
