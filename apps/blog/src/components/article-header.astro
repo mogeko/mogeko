@@ -2,6 +2,7 @@
 import Link from "@/components/ui/link.astro";
 import { format } from "date-fns";
 import { LuCalendarDays, LuTags, LuDot, LuCoffee } from "react-icons/lu";
+import { cn } from "@/utils";
 import type { CollectionEntry } from "astro:content";
 import type { HTMLAttributes } from "astro/types";
 
@@ -12,12 +13,12 @@ type Props = {
 } & HTMLAttributes<"header">;
 ---
 
-<header class:list={["flex flex-col items-start", className]} {...props}>
+<header class={cn("flex flex-col items-start", className)} {...props}>
   <h1
-    class:list={[
+    class={cn(
       "flex-1 scroll-m-20 break-words text-4xl font-[900] leading-[3rem]",
       data.subtitle ? "mb-2" : "mb-7",
-    ]}
+    )}
   >
     {data.title}
   </h1>

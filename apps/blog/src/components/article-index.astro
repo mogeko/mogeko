@@ -2,6 +2,7 @@
 import Link from "@/components/ui/link.astro";
 import { format } from "date-fns";
 import { MdStar } from "react-icons/md";
+import { cn } from "@/utils";
 import type { CollectionEntry } from "astro:content";
 import type { HTMLAttributes } from "astro/types";
 
@@ -16,7 +17,7 @@ type Props = {
 } & HTMLAttributes<"div">;
 ---
 
-<div class:list={["flex flex-col gap-2", className]}>
+<div class={cn("flex flex-col gap-2", className)}>
   <h2 class="text-3xl font-bold">{year}</h2>
   {
     articles.map(({ data, slug }) => (

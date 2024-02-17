@@ -1,5 +1,6 @@
 ---
 import Link from "@/components/ui/link.astro";
+import { cn } from "@/utils";
 import type { HTMLAttributes } from "astro/types";
 
 const { class: className, ...props } = Astro.props;
@@ -9,10 +10,10 @@ type Props = HTMLAttributes<"nav">;
 
 <header class="sticky top-0 z-10 px-6 py-4 backdrop-blur-sm">
   <nav
-    class:list={[
+    class={cn(
       "mx-auto flex w-full flex-row items-center justify-end",
       className,
-    ]}
+    )}
     {...props}
   >
     <Link
