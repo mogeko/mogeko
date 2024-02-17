@@ -4,6 +4,7 @@ import SiteHeader from "@/components/post-header.astro";
 import Header from "@/components/article-header.astro";
 import Horizontal from "@/components/mdx/hr.astro";
 import Image from "@/components/mdx/img.astro";
+import Preformatted from "@/components/mdx/pre.astro";
 import { getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
 
@@ -26,6 +27,6 @@ const {
   <SiteHeader class="max-w-2xl" slot="before-header" />
   <Header class="pt-8" slot="header" data={{ minutesRead, ...entry.data }} />
   <main class="prose m-auto flex-1">
-    <Content components={{ hr: Horizontal, img: Image }} />
+    <Content components={{ hr: Horizontal, img: Image, pre: Preformatted }} />
   </main>
 </Layout>

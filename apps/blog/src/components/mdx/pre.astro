@@ -1,0 +1,33 @@
+---
+import { Button } from "@/components/ui/button";
+import type { HTMLAttributes } from "astro/types";
+
+const props = Astro.props;
+
+type Props = HTMLAttributes<"pre">;
+---
+
+<div class="relative mx-[-1.5rem] sm:mx-0">
+  <pre {...props}><slot /></pre>
+  <Button
+    className="copy-code absolute -top-3 right-3"
+    variant="secondary"
+    size="xs">Copy</Button
+  >
+</div>
+
+<script>
+  document.querySelectorAll(".copy-code").forEach((copyButton) => {
+    copyButton.addEventListener("click", async () => {
+      const code = copyButton.previousElementSibling?.textContent;
+      const copyButtonLabel = copyButton.textContent;
+
+      await navigator.clipboard.writeText(code || "");
+
+      copyButton.textContent = "Copied!";
+      setTimeout(() => {
+        copyButton.textContent = copyButtonLabel;
+      }, 700);
+    });
+  });
+</script>
