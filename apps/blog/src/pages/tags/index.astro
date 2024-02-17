@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/base-layout.astro";
-import Tag from "@/components/ui/tag.astro";
+import Button from "@/components/ui/button.astro";
+import { Icon } from "@/components/ui/icon";
 import { getCollection } from "astro:content";
 import { slug } from "github-slugger";
 import { LuTags } from "react-icons/lu";
@@ -31,11 +32,15 @@ const tagsWithCount = (
       Object.entries(tagsWithCount)
         .sort(([_tagA, a], [_tagB, b]) => b - a)
         .map(([tag, _count]) => (
-          <Tag
+          <Button
             href={`/tags/${slug(tag)}`}
-            class="bg-background text-primary hover:bg-background/80"
-            tag={tag}
-          />
+            class="bg-background text-primary hover:bg-background/80 select-none font-semibold hover:cursor-pointer"
+            size="sm"
+            as="a"
+          >
+            <Icon className="mr-1 h-4 w-4" icon={tag} />
+            {tag}
+          </Button>
         ))
     }
   </main>
