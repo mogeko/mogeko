@@ -12,17 +12,14 @@ const blogs = (
   })
 )
   .sort(({ data: a }, { data: b }) => getTime(b.date) - getTime(a.date))
-  .reduce(
-    (acc, post) => {
-      const year = getYear(post.data.date);
-      const index = acc.findIndex(([y]) => y === year);
+  .reduce<[number, CollectionEntry<"posts">[]][]>((acc, post) => {
+    const year = getYear(post.data.date);
+    const index = acc.findIndex(([y]) => y === year);
 
-      return index > -1
-        ? (acc[index][1].push(post), acc)
-        : acc.concat([[year, [post]]]);
-    },
-    [] as [number, CollectionEntry<"posts">[]][],
-  );
+    return index > -1
+      ? (acc[index][1].push(post), acc)
+      : acc.concat([[year, [post]]]);
+  }, []);
 ---
 
 <Layout>
