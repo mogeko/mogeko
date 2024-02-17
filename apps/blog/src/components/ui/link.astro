@@ -1,5 +1,7 @@
 ---
 import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/utils";
+import type { HTMLAttributes } from "astro/types";
 
 const { class: className, variant, ...props } = Astro.props;
 export const linkVariants = cva("relative", {
@@ -17,10 +19,7 @@ export const linkVariants = cva("relative", {
   },
 });
 
-type Props = astroHTML.JSX.AnchorHTMLAttributes &
-  VariantProps<typeof linkVariants>;
+type Props = HTMLAttributes<"a"> & VariantProps<typeof linkVariants>;
 ---
 
-<a class:list={[linkVariants({ variant }), className]} {...props}>
-  <slot />
-</a>
+<a class={cn(linkVariants({ variant }), className)} {...props}><slot /></a>
