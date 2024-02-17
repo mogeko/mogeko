@@ -1,5 +1,5 @@
 import * as React from "react";
-import GithubSlugger from "github-slugger";
+import { slug } from "github-slugger";
 
 import { LuHash } from "react-icons/lu";
 import * as si from "react-icons/si";
@@ -9,8 +9,6 @@ import { MdLocalMovies } from "react-icons/md";
 import { IoGameController } from "react-icons/io5";
 
 import type { IconType } from "react-icons";
-
-const slugger = new GithubSlugger();
 
 const iconMap: Record<string, IconType> = {
   default: LuHash,
@@ -67,8 +65,7 @@ const iconMap: Record<string, IconType> = {
 export const TagsIcon: React.FC<
   { tag: string } & React.ComponentPropsWithoutRef<IconType>
 > = ({ tag, className, ...props }) => {
-  const Icon = iconMap[slugger.slug(tag)] || iconMap.default;
-  slugger.reset();
+  const Icon = iconMap[slug(tag)] || iconMap.default;
 
   return <Icon className={className} {...props} />;
 };
