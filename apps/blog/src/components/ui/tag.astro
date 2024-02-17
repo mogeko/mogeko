@@ -1,0 +1,20 @@
+---
+import { Icon } from "@/components/ui/icon";
+import { cn } from "@/utils";
+
+import type { HTMLAttributes } from "astro/types";
+
+const { tag, class: className, ...props } = Astro.props;
+
+type Props = { tag: string } & HTMLAttributes<"a">;
+---
+
+<a
+  class={cn(
+    "bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 select-none flex-row items-center rounded px-4 text-sm font-semibold hover:cursor-pointer",
+    className,
+  )}
+  {...props}
+>
+  <Icon className="mr-1 h-4 w-4" icon={tag} />{tag}
+</a>

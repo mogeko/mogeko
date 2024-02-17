@@ -179,7 +179,7 @@
 
   pre.astro-code > code .line.diff,
   pre.astro-code > code .line.highlighted {
-    @apply mx-[-1.5rem] inline-block w-[calc(100%_+_3rem)] px-6
+    @apply -mx-6 inline-block w-[calc(100%_+_3rem)] px-6
     transition-[background-color] duration-500;
   }
 
