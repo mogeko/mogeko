@@ -6,10 +6,10 @@ import { cn } from "@/utils";
 import type { CollectionEntry } from "astro:content";
 import type { HTMLAttributes } from "astro/types";
 
-const { class: className, heading, articles } = Astro.props;
+const { class: className, heading, posts: articles } = Astro.props;
 
 type Props = {
-  articles: Pick<CollectionEntry<"posts">, "slug" | "data">[];
+  posts: Pick<CollectionEntry<"posts">, "slug" | "data">[];
   heading: string;
 } & HTMLAttributes<"div">;
 ---

@@ -1,9 +1,9 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
-import { getYear, getTime } from "date-fns";
 import Layout from "@/layouts/base-layout.astro";
-import ArticleIndex from "@/components/article-index.astro";
+import PostIndex from "@/components/post-index.astro";
 import { TagsIcon } from "@/components/tags-icon";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { getTime } from "date-fns";
 import { slug } from "github-slugger";
 import type { GetStaticPaths } from "astro";
 
@@ -23,25 +23,12 @@ export const getStaticPaths = (async () => {
     }, {});
 
   return Object.entries(tagsWithPosts).map(([tag, posts]) => ({
-    props: {
-      entries: posts.reduce<[number, CollectionEntry<"posts">[]][]>(
-        (acc, post) => {
-          const year = getYear(post.data.date);
-          const index = acc.findIndex(([y]) => y === year);
-
-          return index > -1
-            ? (acc[index][1].push(post), acc)
-            : acc.concat([[year, [post]]]);
-        },
-        [],
-      ),
-      tag,
-    },
+    props: { posts, tag },
     params: { tag: slug(tag) },
   }));
 }) satisfies GetStaticPaths;
 
-const { entries, tag } = Astro.props;
+const { posts, tag } = Astro.props;
 ---
 
 <Layout>
@@ -50,11 +37,7 @@ const { entries, tag } = Astro.props;
       <TagsIcon tag={tag} className="mr-2 h-9 w-9" /><span>{tag}</span>
     </h1>
   </header>
-  <main class="flex flex-1 flex-col justify-center gap-7">
-    {
-      entries.map(([year, articles]) => (
-        <ArticleIndex heading={year.toString()} articles={articles} />
-      ))
-    }
+  <main class="flex-1">
+    <PostIndex posts={posts} />
   </main>
 </Layout>
