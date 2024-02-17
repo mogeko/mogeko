@@ -62,10 +62,10 @@ const iconMap: Record<string, IconType> = {
   编程之髓: FaCode,
 };
 
-export const TagsIcon: React.FC<
-  { tag: string } & React.ComponentPropsWithoutRef<IconType>
-> = ({ tag, className, ...props }) => {
-  const Icon = iconMap[slug(tag)] || iconMap.default;
+export const Icon: React.FC<
+  { icon: string } & React.ComponentPropsWithoutRef<IconType>
+> = ({ icon, className, ...props }) => {
+  const Tag = iconMap[slug(icon)] || iconMap.default;
 
-  return <Icon className={className} {...props} />;
+  return <Tag className={className} {...props} />;
 };

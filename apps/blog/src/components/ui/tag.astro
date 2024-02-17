@@ -1,5 +1,5 @@
 ---
-import { TagsIcon } from "@/components/tags-icon";
+import { Icon } from "@/components/ui/icon";
 import { cn } from "@/utils";
 
 import type { HTMLAttributes } from "astro/types";
@@ -16,5 +16,5 @@ type Props = { tag: string } & HTMLAttributes<"a">;
   )}
   {...props}
 >
-  <TagsIcon className="mr-1 h-4 w-4" tag={tag} />{tag}
+  <Icon className="mr-1 h-4 w-4" icon={tag} />{tag}
 </a>
