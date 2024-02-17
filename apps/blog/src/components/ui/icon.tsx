@@ -1,5 +1,6 @@
 import * as React from "react";
 import { slug } from "github-slugger";
+import { cn } from "@/utils";
 
 import { LuHash } from "react-icons/lu";
 import * as si from "react-icons/si";
@@ -67,5 +68,5 @@ export const Icon: React.FC<
 > = ({ icon, className, ...props }) => {
   const Tag = iconMap[slug(icon)] || iconMap.default;
 
-  return <Tag className={className} {...props} />;
+  return <Tag className={cn("h-4 w-4", className)} {...props} />;
 };
