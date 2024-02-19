@@ -1,5 +1,11 @@
 # @mogeko/typography
 
+## 0.1.4
+
+### Patch Changes
+
+- [#38](https://github.com/mogeko/mogeko/pull/38) [`2e9b07e`](https://github.com/mogeko/mogeko/commit/2e9b07e6f108613db99eb2e19fe029feb726edc1) Thanks [@mogeko](https://github.com/mogeko)! - Remove `font-family` for `pre > code` and `border-top-width` for `table tr`.
+
 ## 0.1.3
 
 ### Patch Changes
