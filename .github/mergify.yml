@@ -1,9 +1,12 @@
 pull_request_rules:
   - name: Automatic merge when release new versions
     conditions:
-      - "commits='chore(release): version packages'"
+      - "title=chore(release): version packages"
+      - "commits=chore(release): version packages"
+      - "author=github-actions[bot]"
       - "files~=CHANGELOG.md"
       - "head~=changeset-release"
-      - "check-success='Vercel Preview Comments'"
+      - "check-success=Vercel"
+      - "check-success=Vercel Preview Comments"
     actions:
       merge:
