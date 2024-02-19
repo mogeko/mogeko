@@ -1,6 +1,8 @@
 ---
 import Layout from "@/layouts/base-layout.astro";
-import Tag from "@/components/ui/tag.astro";
+import Button from "@/components/ui/button.astro";
+import Card from "@/components/ui/card.astro";
+import { Icon } from "@/components/ui/icon";
 import { getCollection } from "astro:content";
 import { slug } from "github-slugger";
 import { LuTags } from "react-icons/lu";
@@ -24,19 +26,24 @@ const tagsWithCount = (
       <LuTags className="text-accent mr-2 h-10 w-10" />Tags
     </h1>
   </header>
-  <main
-    class="bg-primary -mx-6 mb-4 flex flex-1 flex-row flex-wrap items-start gap-4 px-6 py-12"
-  >
-    {
-      Object.entries(tagsWithCount)
-        .sort(([_tagA, a], [_tagB, b]) => b - a)
-        .map(([tag, _count]) => (
-          <Tag
-            href={`/tags/${slug(tag)}`}
-            class="bg-background text-primary hover:bg-background/80"
-            tag={tag}
-          />
-        ))
-    }
+  <main class="flex-1">
+    <Card class="flex-row flex-wrap" variant="primary">
+      {
+        Object.entries(tagsWithCount)
+          .sort(([_tagA, a], [_tagB, b]) => b - a)
+          .map(([tag, _count]) => (
+            <Button
+              href={`/tags/${slug(tag)}`}
+              class="select-none font-semibold hover:cursor-pointer"
+              size="sm"
+              variant="onPrimary"
+              as="a"
+            >
+              <Icon className="mr-1 h-4 w-4" icon={tag} />
+              {tag}
+            </Button>
+          ))
+      }
+    </Card>
   </main>
 </Layout>

@@ -106,7 +106,6 @@ exports[`typography styles > default styles 1`] = `
       "borderRadius": 0,
       "borderWidth": 0,
       "color": "inherit",
-      "fontFamily": "inherit",
       "fontSize": "inherit",
       "fontWeight": "inherit",
       "lineHeight": "inherit",
@@ -125,7 +124,6 @@ exports[`typography styles > default styles 1`] = `
     "margin": "1.5rem 0",
     "overflowY": "auto",
     "tr": {
-      "borderTopWidth": "2px",
       "margin": 0,
       "padding": 0,
       "td": {

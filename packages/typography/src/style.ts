@@ -122,7 +122,6 @@ export const styles: Styles = {
         fontWeight: "inherit",
         color: "inherit",
         fontSize: "inherit",
-        fontFamily: "inherit",
         lineHeight: "inherit",
         backgroundColor: "transparent",
         borderWidth: 0,
@@ -137,7 +136,6 @@ export const styles: Styles = {
       overflowY: "auto",
       width: "100%",
       tr: {
-        borderTopWidth: "2px",
         margin: 0,
         padding: 0,
         "td, th": {

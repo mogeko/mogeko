@@ -13,6 +13,9 @@
     "lint": "prettier --check .",
     "fmt": "prettier --write ."
   },
+  "dependencies": {
+    "@tsconfig/strictest": "^2.0.3"
+  },
   "devDependencies": {
     "prettier": "^3.2.5",
     "typescript": "^5.3.3"
