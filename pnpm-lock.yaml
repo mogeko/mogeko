@@ -205,6 +205,10 @@ importers:
         version: 1.2.2(@types/node@20.11.19)
 
   packages/tsconfig:
+    dependencies:
+      '@tsconfig/strictest':
+        specifier: ^2.0.3
+        version: 2.0.3
     devDependencies:
       prettier:
         specifier: ^3.2.5
@@ -1500,6 +1504,10 @@ packages:
   /@sindresorhus/is@4.6.0:
     resolution: {integrity: sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==}
     engines: {node: '>=10'}
+    dev: false
+
+  /@tsconfig/strictest@2.0.3:
+    resolution: {integrity: sha512-MroLvRhMbqtXI5WBSwoomro6OQS4xnCoudUrMb20JO0vLKUs0bAaCEcvM/immEBSJjFAK1l6jW1oAO8q3Ancrg==}
     dev: false
 
   /@types/acorn@4.0.6:
