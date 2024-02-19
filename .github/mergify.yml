@@ -1,0 +1,9 @@
+pull_request_rules:
+  - name: Automatic merge when release new versions
+    conditions:
+      - "commits='chore(release): version packages'"
+      - "files~=CHANGELOG.md"
+      - "head~=changeset-release"
+      - "check-success='Vercel Preview Comments'"
+    actions:
+      merge:
