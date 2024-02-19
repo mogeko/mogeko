@@ -1,5 +1,12 @@
 # blog
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`4092d98`](https://github.com/mogeko/mogeko/commit/4092d9836b24c4a77b4e4b23eafd0a7a86a1eebd)]:
+  - astro-reading-time@0.1.1
+
 ## 0.0.2
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # astro-reading-time
 
+## 0.1.1
+
+### Patch Changes
+
+- [#46](https://github.com/mogeko/mogeko/pull/46) [`4092d98`](https://github.com/mogeko/mogeko/commit/4092d9836b24c4a77b4e4b23eafd0a7a86a1eebd) Thanks [@mogeko](https://github.com/mogeko)! - Refactor `assocPath` function and add tests.
+
 ## 0.1.0
 
 ### Minor Changes
