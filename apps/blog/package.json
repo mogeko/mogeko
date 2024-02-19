@@ -14,7 +14,7 @@
     "fmt": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.3",
+    "@astrojs/check": "^0.5.4",
     "@astrojs/mdx": "^2.1.1",
     "@astrojs/react": "^3.0.10",
     "@astrojs/rss": "^4.0.5",
