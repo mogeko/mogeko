@@ -211,7 +211,6 @@ exports[`typography plugin > default styles 1`] = `
     font-weight: inherit;
     color: inherit;
     font-size: inherit;
-    font-family: inherit;
     line-height: inherit;
     background-color: transparent;
     border-width: 0;
@@ -226,7 +225,6 @@ exports[`typography plugin > default styles 1`] = `
     width: 100%;
 }
 .prose table tr {
-    border-top-width: 2px;
     margin: 0;
     padding: 0;
 }
