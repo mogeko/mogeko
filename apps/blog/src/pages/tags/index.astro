@@ -1,5 +1,5 @@
 ---
-import Layout from "@/layouts/base-layout.astro";
+import Layout from "@/layouts/common-layout.astro";
 import Button from "@/components/ui/button.astro";
 import Card from "@/components/ui/card.astro";
 import { Icon } from "@/components/ui/icon";
@@ -21,7 +21,7 @@ const tagsWithCount = (
 ---
 
 <Layout>
-  <header class="mt-8 flex items-center justify-center py-16" slot="header">
+  <header class="mt-8 flex items-center justify-center py-16">
     <h1 class="inline-flex flex-row items-center text-4xl font-bold">
       <LuTags className="text-accent mr-2 h-10 w-10" />Tags
     </h1>

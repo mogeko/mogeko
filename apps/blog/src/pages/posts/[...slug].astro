@@ -1,6 +1,5 @@
 ---
-import Layout from "@/layouts/base-layout.astro";
-import SiteHeader from "@/components/site-header.astro";
+import Layout from "@/layouts/common-layout.astro";
 import Header from "@/components/article-header.astro";
 import Horizontal from "@/components/mdx/hr.astro";
 import Image from "@/components/mdx/img.astro";
@@ -24,8 +23,7 @@ const {
 ---
 
 <Layout title={entry.data.title} keywords={entry.data.tags}>
-  <SiteHeader class="max-w-2xl" slot="before-header" />
-  <Header class="pt-8" slot="header" data={{ minutesRead, ...entry.data }} />
+  <Header class="pt-8" data={{ minutesRead, ...entry.data }} />
   <main class="prose m-auto flex-1">
     <Content components={{ hr: Horizontal, img: Image, pre: Preformatted }} />
   </main>
