@@ -1,0 +1,19 @@
+---
+import { linkVariants } from "@/components/ui/link.astro";
+import { cn } from "@/utils";
+import type { HTMLAttributes } from "astro/types";
+
+const { class: className, ...props } = Astro.props;
+
+type Props = HTMLAttributes<"a">;
+---
+
+<a
+  class={cn(
+    "relative text-lg font-bold",
+    linkVariants({ variant: "underline" }),
+    className,
+  )}
+  data-astro-prefetch
+  {...props}><slot /></a
+>
