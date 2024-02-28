@@ -23,12 +23,12 @@
     "fmt": "prettier --write ."
   },
   "dependencies": {
-    "shikiji": "^0.9.18"
+    "shikiji": "^0.10.2"
   },
   "devDependencies": {
     "@types/node": "^20.11.19",
     "@vitest/coverage-v8": "^1.2.2",
-    "astro": "^4.4.0",
+    "astro": "^4.4.6",
     "prettier": "^3.2.5",
     "tsconfig": "workspace:^",
     "tsup": "^8.0.2",
