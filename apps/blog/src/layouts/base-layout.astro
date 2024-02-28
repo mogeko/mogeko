@@ -1,18 +1,24 @@
 ---
 import "@/styles/globals.css";
 
-import Footer from "@/components/site-footer.astro";
 import { siteConfig } from "@/config";
+import { cn } from "@/utils";
+import type { HTMLAttributes } from "astro/types";
 
-const { title, keywords, description } = Astro.props;
+const { head, class: className, ...props } = Astro.props;
 const meta = {
-  title: (title ? `${title} - ` : "") + siteConfig.title,
-  description: description ?? siteConfig.description,
-  keywords: [siteConfig.keywords, ...(keywords ?? [])].join(", "),
+  title: (head?.title ? `${head?.title} - ` : "") + siteConfig.title,
+  description: head?.description ?? siteConfig.description,
+  keywords: [siteConfig.keywords, ...(head?.keywords ?? [])].join(", "),
   author: siteConfig.author,
 };
 
-type Props = { title?: string; keywords?: string[]; description?: string };
+export type HeadProps = {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+};
+type Props = { head?: HeadProps } & HTMLAttributes<"body">;
 ---
 
 <html lang="en">
@@ -34,21 +40,21 @@ type Props = { title?: string; keywords?: string[]; description?: string };
     <meta property="og:description" content={meta.description} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteConfig.title} />
+    <meta name="msapplication-config" content="browserconfig.xml" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <meta name="msapplication-TileColor" content="#000000" />
     <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
-    <link rel="mask-icon" href="/images/safari-tab.svg?v=2" color="#4c4c4c" />
+    <link rel="mask-icon" href="/images/safari-tab.svg" color="#4c4c4c" />
     <link rel="manifest" href="/site.webmanifest" />
   </head>
   <body
-    class="bg-background selection:bg-primary selection:text-primary-foreground min-h-screen font-sans antialiased"
+    class={cn(
+      "bg-background selection:bg-primary selection:text-primary-foreground min-h-screen font-sans antialiased",
+      className,
+    )}
+    {...props}
   >
-    <slot name="before-header" />
-    <article class="container relative m-auto flex min-h-screen flex-col">
-      <slot name="header" />
-      <slot />
-      <slot name="footer"><Footer /></slot>
-    </article>
-    <slot name="after-footer" />
+    <slot />
   </body>
 </html>

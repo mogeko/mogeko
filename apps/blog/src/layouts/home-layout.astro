@@ -1,0 +1,11 @@
+---
+import Layout from "@/layouts/base-layout.astro";
+import SiteFooter from "@/components/site-footer.astro";
+---
+
+<Layout>
+  <article class="container relative m-auto flex min-h-screen flex-col">
+    <slot />
+  </article>
+  <SiteFooter class="container" />
+</Layout>

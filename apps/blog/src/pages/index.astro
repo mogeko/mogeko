@@ -1,5 +1,5 @@
 ---
-import Layout from "@/layouts/base-layout.astro";
+import Layout from "@/layouts/home-layout.astro";
 import PostIndex from "@/components/post-index.astro";
 import { getCollection } from "astro:content";
 import { getTime } from "date-fns";
@@ -14,7 +14,7 @@ const blogs = (
 ---
 
 <Layout>
-  <header class="mt-8 flex flex-col justify-center gap-1 py-16" slot="header">
+  <header class="mt-8 flex flex-col justify-center gap-1 py-16">
     <h1 class="text-primary-foreground text-4xl">
       Hi! I'm <span class="text-primary">Mogeko</span>
       <a

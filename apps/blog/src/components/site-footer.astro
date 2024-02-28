@@ -1,9 +1,18 @@
 ---
 import Link from "@/components/ui/link.astro";
+import { cn } from "@/utils";
+import type { HTMLAttributes } from "astro/types";
+
+const { class: className } = Astro.props;
+
+type Props = HTMLAttributes<"footer">;
 ---
 
 <footer
-  class="text-muted flex flex-col items-center justify-stretch py-20 text-sm"
+  class={cn(
+    "text-muted flex flex-col items-center justify-stretch py-20 text-sm",
+    className,
+  )}
 >
   <p>
     Copyright &copy; 2017 - {new Date().getFullYear()}
