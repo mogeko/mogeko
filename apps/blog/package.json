@@ -34,7 +34,9 @@
     "rehype-mermaid": "^2.1.0",
     "remark-emoji": "^4.0.1",
     "shikiji-transformers": "^0.9.18",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",
@@ -42,8 +44,6 @@
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.5.11",
-    "tailwindcss": "^3.4.1",
-    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.3.3"
   }
 }

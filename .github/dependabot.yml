@@ -14,10 +14,7 @@ updates:
     schedule:
       interval: "weekly"
     groups:
-      dependencies:
-        dependency-type: "production"
-        patterns:
-          - "@types/react*"
-          - "tailwindcss*"
       devDependencies:
         dependency-type: "development"
+      dependencies:
+        dependency-type: "production"
