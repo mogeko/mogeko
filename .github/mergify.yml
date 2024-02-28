@@ -6,7 +6,7 @@ queue_rules:
       - "check-success=Vercel"
       - "check-success=Vercel Preview Comments"
     batch_size: 10
-    batch_max_wait_time: 10min
+    batch_max_wait_time: 5min
 
 pull_request_rules:
   - name: Automatic merge when release new versions
