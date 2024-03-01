@@ -11,6 +11,7 @@ const meta = {
   description: head?.description ?? siteConfig.description,
   keywords: [siteConfig.keywords, ...(head?.keywords ?? [])].join(", "),
   author: siteConfig.author,
+  url: new URL(Astro.url.pathname, import.meta.env.SITE),
 };
 
 export type HeadProps = {
@@ -58,8 +59,14 @@ type Props = { head?: HeadProps } & HTMLAttributes<"body">;
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={meta.title} />
     <meta property="og:description" content={meta.description} />
-    <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteConfig.title} />
+    <meta property="og:url" content={meta.url} />
+    <meta property="og:type" content="website" />
+    <!-- Twitter -->
+    <meta property="twitter:title" content={meta.title} />
+    <meta property="twitter:description" content={meta.description} />
+    <meta property="twitter:url" content={meta.url} />
+    <meta property="twitter:card" content="summary_large_image" />
     <!-- Favicons -->
     <meta name="msapplication-config" content="browserconfig.xml" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
