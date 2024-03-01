@@ -5,6 +5,7 @@ import tailwind from "@astrojs/tailwind";
 import readingTime from "astro-reading-time";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import partytown from "@astrojs/partytown";
 
 import emoji from "remark-emoji";
 import mermaid from "rehype-mermaid";
@@ -39,6 +40,7 @@ export default defineConfig({
     readingTime(),
     mdx(),
     sitemap(),
+    partytown(),
   ],
   prefetch: true,
 });
