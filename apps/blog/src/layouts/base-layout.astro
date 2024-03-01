@@ -26,20 +26,41 @@ type Props = { head?: HeadProps } & HTMLAttributes<"body">;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{meta.title}</title>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
       rel="stylesheet"
     />
+    <!-- Vercel Web Analytics & Speed Insights -->
+    {
+      import.meta.env.PROD ? (
+        <>
+          <script
+            src="/_vercel/speed-insights/script.js"
+            type="text/partytown"
+          />
+          <script src="/_vercel/insights/script.js" type="text/partytown" />
+        </>
+      ) : (
+        <script
+          src="https://cdn.vercel-insights.com/v1/script.debug.js"
+          type="text/partytown"
+        />
+      )
+    }
+    <!-- Website Metadata -->
     <meta name="theme-color" content="#e76e50" />
     <meta name="description" content={meta.description} />
     <meta name="author" content={siteConfig.author} />
     <meta name="keywords" content={meta.keywords} />
+    <!-- Open Graph / Facebook -->
     <meta property="og:title" content={meta.title} />
     <meta property="og:description" content={meta.description} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteConfig.title} />
+    <!-- Favicons -->
     <meta name="msapplication-config" content="browserconfig.xml" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <meta name="msapplication-TileColor" content="#000000" />

@@ -36,11 +36,17 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    tailwind({ applyBaseStyles: false }),
+    tailwind({
+      applyBaseStyles: false,
+    }),
     readingTime(),
     mdx(),
+    partytown({
+      config: {
+        forward: ["si", "siq.push", "va", "vaq.push"],
+      },
+    }),
     sitemap(),
-    partytown(),
   ],
   prefetch: true,
 });
