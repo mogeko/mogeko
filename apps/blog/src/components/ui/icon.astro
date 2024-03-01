@@ -1,4 +1,4 @@
-import * as React from "react";
+---
 import { slug } from "github-slugger";
 import { cn } from "@/utils";
 
@@ -9,7 +9,10 @@ import { PiSigmaBold } from "react-icons/pi";
 import { MdLocalMovies } from "react-icons/md";
 import { IoGameController } from "react-icons/io5";
 
+import type { ComponentProps, HTMLAttributes } from "astro/types";
 import type { IconType } from "react-icons";
+
+const { icon, class: className, ...props } = Astro.props;
 
 const iconMap: Record<string, IconType> = {
   default: LuHash,
@@ -62,11 +65,12 @@ const iconMap: Record<string, IconType> = {
   算法: PiSigmaBold,
   编程之髓: FaCode,
 };
+const Tag = iconMap[slug(icon)] || iconMap.default;
 
-export const Icon: React.FC<
-  { icon: string } & React.ComponentPropsWithoutRef<IconType>
-> = ({ icon, className, ...props }) => {
-  const Tag = iconMap[slug(icon)] || iconMap.default;
+type Props = {
+  icon: string;
+} & Omit<ComponentProps<IconType>, "className"> &
+  Pick<HTMLAttributes<"svg">, "class">;
+---
 
-  return <Tag className={cn("h-4 w-4", className)} {...props} />;
-};
+<Tag className={cn("h-4 w-4", className)} {...props} />

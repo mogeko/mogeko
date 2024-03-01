@@ -51,6 +51,14 @@ type Props = { head?: HeadProps } & HTMLAttributes<"body">;
         />
       )
     }
+    <!-- Favicons -->
+    <meta name="msapplication-config" content="browserconfig.xml" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/images/safari-tab.svg" color="#4c4c4c" />
+    <link rel="manifest" href="/site.webmanifest" />
     <!-- Website Metadata -->
     <meta name="theme-color" content="#e76e50" />
     <meta name="description" content={meta.description} />
@@ -67,14 +75,6 @@ type Props = { head?: HeadProps } & HTMLAttributes<"body">;
     <meta property="twitter:description" content={meta.description} />
     <meta property="twitter:url" content={meta.url} />
     <meta property="twitter:card" content="summary_large_image" />
-    <!-- Favicons -->
-    <meta name="msapplication-config" content="browserconfig.xml" />
-    <link rel="icon" href="/favicon.ico" sizes="48x48" />
-    <meta name="msapplication-TileColor" content="#000000" />
-    <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
-    <link rel="mask-icon" href="/images/safari-tab.svg" color="#4c4c4c" />
-    <link rel="manifest" href="/site.webmanifest" />
     <!-- Astro Bundler -->
   </head>
   <body

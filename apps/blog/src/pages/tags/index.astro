@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/common-layout.astro";
 import Button from "@/components/ui/button.astro";
-import { Icon } from "@/components/ui/icon";
+import Icon from "@/components/ui/icon.astro";
 import { getCollection } from "astro:content";
 import { slug } from "github-slugger";
 import { LuTags } from "react-icons/lu";
@@ -40,7 +40,7 @@ const tagsWithCount = (
               size="sm"
               as="a"
             >
-              <Icon className="mr-1 h-4 w-4" icon={tag} />
+              <Icon class="mr-1 h-4 w-4" icon={tag} />
               {tag}
             </Button>
           ))
