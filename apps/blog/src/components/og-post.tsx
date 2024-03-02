@@ -16,10 +16,10 @@ export const OgTemplate: React.FC<{
         backgroundColor: "hsl(195 36% 11%)",
         color: "hsl(180 8% 97%)",
         border: "1em solid hsl(12 76% 61%)",
-        padding: "3em",
+        padding: "6rem",
         height: "100%",
         width: "100%",
-        fontSize: "32px",
+        fontSize: "2rem",
       }}
     >
       <h1
@@ -28,9 +28,9 @@ export const OgTemplate: React.FC<{
           display: "-webkit-box",
           WebkitBoxOrient: "vertical",
           WebkitLineClamp: 2,
-          paddingBottom: "2em",
+          paddingBottom: "4rem",
           margin: "auto 0",
-          fontSize: "1.875em",
+          fontSize: "3.75rem",
           lineHeight: 1.2,
           fontWeight: 800,
         }}
@@ -40,16 +40,16 @@ export const OgTemplate: React.FC<{
       <div
         style={{
           display: "flex",
-          alignItems: "center",
           justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <div
           style={{
             display: "flex",
-            alignItems: "center",
             justifyContent: "center",
-            gap: "0.25em",
+            alignItems: "center",
+            gap: "0.5rem",
           }}
         >
           <span>by</span>
@@ -58,12 +58,12 @@ export const OgTemplate: React.FC<{
         <div
           style={{
             display: "flex",
-            alignItems: "center",
             justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <img
-            style={{ marginRight: "0.25em", height: "1em", width: "1em" }}
+            style={{ marginRight: "0.5rem", height: "2rem", width: "2rem" }}
             src={`${import.meta.env.SITE}/favicon.svg`}
           />
           {siteConfig.title}

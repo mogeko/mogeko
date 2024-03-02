@@ -12,12 +12,14 @@ const meta = {
   keywords: [siteConfig.keywords, ...(head?.keywords ?? [])].join(", "),
   author: siteConfig.author,
   url: new URL(Astro.url.pathname, import.meta.env.SITE),
+  ogImage: new URL(head?.ogImage ?? "/og.png", import.meta.env.SITE),
 };
 
 export type HeadProps = {
   title?: string;
   description?: string;
   keywords?: string[];
+  ogImage?: string;
 };
 type Props = { head?: HeadProps } & HTMLAttributes<"body">;
 ---
@@ -69,11 +71,15 @@ type Props = { head?: HeadProps } & HTMLAttributes<"body">;
     <meta property="og:description" content={meta.description} />
     <meta property="og:site_name" content={siteConfig.title} />
     <meta property="og:url" content={meta.url} />
+    <meta property="og:image" content={meta.ogImage} />
+    <meta property="og:image:alt" content={meta.title} />
     <meta property="og:type" content="website" />
     <!-- Twitter -->
     <meta property="twitter:title" content={meta.title} />
     <meta property="twitter:description" content={meta.description} />
     <meta property="twitter:url" content={meta.url} />
+    <meta property="twitter:image" content={meta.ogImage} />
+    <meta property="twitter:image:alt" content={meta.title} />
     <meta property="twitter:card" content="summary_large_image" />
     <!-- Astro Bundler -->
   </head>

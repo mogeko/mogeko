@@ -3,12 +3,10 @@ import Layout, { type HeadProps } from "@/layouts/base-layout.astro";
 import SiteFooter from "@/components/site-footer.astro";
 import Link from "@/components/site-nav-item.astro";
 
-const { title, keywords, description } = Astro.props;
-
 type Props = HeadProps;
 ---
 
-<Layout head={{ title, keywords, description }}>
+<Layout head={Astro.props}>
   <main class="container m-auto">
     <header class="sticky top-0 z-10 px-6 py-4 backdrop-blur-sm">
       <nav class="mx-auto flex w-full flex-row items-center justify-end gap-4">

@@ -21,9 +21,10 @@ const {
   Content,
   remarkPluginFrontmatter: { minutesRead },
 } = await entry.render();
+const ogImage = Astro.url.pathname + "/og.png";
 ---
 
-<Layout title={entry.data.title} keywords={entry.data.tags}>
+<Layout title={entry.data.title} keywords={entry.data.tags} ogImage={ogImage}>
   <Link href="/tags" slot="site-header-item">Tags</Link>
   <Header class="pt-8" data={{ minutesRead, ...entry.data }} />
   <main class="prose m-auto flex-1">
