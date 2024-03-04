@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/common-layout.astro";
 import PostIndex from "@/components/post-index.astro";
-import { Icon } from "@/components/ui/icon";
+import Icon from "@/components/ui/icon.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { getTime } from "date-fns";
 import { slug } from "github-slugger";
@@ -34,7 +34,7 @@ const { posts, tag } = Astro.props;
 <Layout title={`#${tag}`} keywords={[tag]}>
   <header class="mt-8 flex items-center justify-center py-16">
     <h1 class="inline-flex flex-row items-center text-4xl font-bold">
-      <Icon icon={tag} className="mr-2 h-9 w-9" /><span>{tag}</span>
+      <Icon icon={tag} class="mr-2 h-9 w-9" /><span>{tag}</span>
     </h1>
   </header>
   <main class="flex-1">

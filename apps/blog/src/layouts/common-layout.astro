@@ -1,18 +1,19 @@
 ---
 import Layout, { type HeadProps } from "@/layouts/base-layout.astro";
-import SiteHeader from "@/components/site-header.astro";
 import SiteFooter from "@/components/site-footer.astro";
-
-const { title, keywords, description } = Astro.props;
+import Link from "@/components/site-nav-item.astro";
 
 type Props = HeadProps;
 ---
 
-<Layout head={{ title, keywords, description }}>
+<Layout head={Astro.props}>
   <main class="container m-auto">
-    <SiteHeader>
-      <slot name="site-header-item" />
-    </SiteHeader>
+    <header class="sticky top-0 z-10 px-6 py-4 backdrop-blur-sm">
+      <nav class="mx-auto flex w-full flex-row items-center justify-end gap-4">
+        <slot name="site-header-item" />
+        <Link href="/">Home</Link>
+      </nav>
+    </header>
     <article class="relative flex min-h-screen flex-col">
       <slot />
     </article>
