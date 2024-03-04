@@ -1,6 +1,8 @@
 import { createElement } from "react";
 import { OgTemplate } from "@/components/og-templates/home";
 import { ImageResponse } from "@vercel/og";
+import path from "node:path";
+import fs from "node:fs/promises";
 
 export async function GET() {
   try {
@@ -8,23 +10,25 @@ export async function GET() {
       fonts: [
         {
           name: "Pacifico",
-          data: (await fetchFonts()).font,
+          data: (await loadFonts()).pacifico,
           weight: 400,
           style: "normal",
         },
       ],
     });
   } catch (error: any) {
-    return new Response("Failed to generate the image", { status: 500 });
+    console.error(error.message);
+
+    return new Response("Failed to generate the image", {
+      status: 500,
+    });
   }
 }
 
-const fetchFonts = async () => {
-  const fontFile = await fetch(
-    `https://cdn.jsdelivr.net/fontsource/fonts/pacifico@latest/latin-400-normal.ttf`,
-  );
-
+const loadFonts = async () => {
   return {
-    font: await fontFile.arrayBuffer(),
+    pacifico: await fs.readFile(
+      path.resolve("./public/fonts/pacifico/Pacifico-Regular.ttf"),
+    ),
   };
 };
