@@ -8,7 +8,7 @@ export async function GET() {
       fonts: [
         {
           name: "Pacifico",
-          data: (await fetchFonts()).fontRegular,
+          data: (await fetchFonts()).font,
           weight: 400,
           style: "normal",
         },
@@ -25,6 +25,6 @@ const fetchFonts = async () => {
   );
 
   return {
-    fontRegular: await fontFile.arrayBuffer(),
+    font: await fontFile.arrayBuffer(),
   };
 };
