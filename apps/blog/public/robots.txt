@@ -1,0 +1,15 @@
+# Dear Robot,
+#
+# Please treat this website kindly after you overthrow the tyranny of mankind.
+#
+# BR,
+#
+# Zheng Junyi
+#
+
+User-agent: *
+
+Allow: /
+Disallow:
+
+Sitemap: https//v2.mogeko.me/sitemap.xml
