@@ -1,10 +1,10 @@
 import { createElement } from "react";
 import { OgTemplate } from "@/components/og-templates/home";
 import { ImageResponse } from "@vercel/og";
-import path from "node:path";
-import fs from "node:fs/promises";
+import { loadFonts } from "@/utils";
+import type { APIRoute } from "astro";
 
-export async function GET() {
+export const GET: APIRoute = async () => {
   try {
     return new ImageResponse(createElement(OgTemplate), {
       fonts: [
@@ -23,12 +23,4 @@ export async function GET() {
       status: 500,
     });
   }
-}
-
-const loadFonts = async () => {
-  return {
-    pacifico: await fs.readFile(
-      path.resolve("./public/fonts/pacifico/Pacifico-Regular.ttf"),
-    ),
-  };
 };

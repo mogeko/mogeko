@@ -1,14 +1,17 @@
 import { createElement } from "react";
 import { OgTemplate } from "@/components/og-templates/post";
 import { ImageResponse } from "@vercel/og";
-import { getCollection } from "astro:content";
-import path from "node:path";
-import fs from "node:fs/promises";
-import type { GetStaticPaths } from "astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { loadFonts } from "@/utils";
+import type { GetStaticPaths, APIRoute } from "astro";
 
-export async function GET({ props: { entry } }: Props) {
+export const GET: APIRoute<{
+  entry: CollectionEntry<"posts">;
+}> = async ({ props: { entry } }) => {
+  const html = createElement(OgTemplate, { data: entry.data });
+
   try {
-    return new ImageResponse(createElement(OgTemplate, { data: entry.data }), {
+    return new ImageResponse(html, {
       fonts: [
         {
           name: "SmileySans",
@@ -25,14 +28,6 @@ export async function GET({ props: { entry } }: Props) {
       status: 500,
     });
   }
-}
-
-const loadFonts = async () => {
-  return {
-    smileySans: await fs.readFile(
-      path.resolve("./public/fonts/smiley-sans/SmileySans-Oblique.ttf"),
-    ),
-  };
 };
 
 export const getStaticPaths = (async () => {
@@ -42,5 +37,3 @@ export const getStaticPaths = (async () => {
     props: { entry },
   }));
 }) satisfies GetStaticPaths;
-
-type Props = Awaited<ReturnType<typeof getStaticPaths>>[number];

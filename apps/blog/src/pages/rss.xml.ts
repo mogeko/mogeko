@@ -2,9 +2,9 @@ import rss from "@astrojs/rss";
 import { siteConfig } from "@/config";
 import { getCollection } from "astro:content";
 import { getTime } from "date-fns";
-import type { APIContext } from "astro";
+import type { APIRoute } from "astro";
 
-export async function GET(context: APIContext) {
+export const GET: APIRoute = async (context) => {
   const { author, title, description } = siteConfig;
   const blogs = (
     await getCollection("posts", ({ data }) => {
@@ -27,4 +27,4 @@ export async function GET(context: APIContext) {
     })),
     stylesheet: "/rss/pretty-feed-v3.xsl",
   });
-}
+};
