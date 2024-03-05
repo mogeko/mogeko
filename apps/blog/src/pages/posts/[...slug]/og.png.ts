@@ -1,13 +1,17 @@
 import { createElement } from "react";
 import { OgTemplate } from "@/components/og-templates/post";
 import { ImageResponse } from "@vercel/og";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import { loadFonts } from "@/utils";
-import type { GetStaticPaths } from "astro";
+import type { GetStaticPaths, APIRoute } from "astro";
 
-export async function GET({ props: { entry } }: Props) {
+export const GET: APIRoute<{
+  entry: CollectionEntry<"posts">;
+}> = async ({ props: { entry } }) => {
+  const html = createElement(OgTemplate, { data: entry.data });
+
   try {
-    return new ImageResponse(createElement(OgTemplate, { data: entry.data }), {
+    return new ImageResponse(html, {
       fonts: [
         {
           name: "SmileySans",
@@ -24,7 +28,7 @@ export async function GET({ props: { entry } }: Props) {
       status: 500,
     });
   }
-}
+};
 
 export const getStaticPaths = (async () => {
   const entries = await getCollection("posts");
@@ -33,5 +37,3 @@ export const getStaticPaths = (async () => {
     props: { entry },
   }));
 }) satisfies GetStaticPaths;
-
-type Props = Awaited<ReturnType<typeof getStaticPaths>>[number];

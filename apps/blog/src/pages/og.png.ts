@@ -2,8 +2,9 @@ import { createElement } from "react";
 import { OgTemplate } from "@/components/og-templates/home";
 import { ImageResponse } from "@vercel/og";
 import { loadFonts } from "@/utils";
+import type { APIRoute } from "astro";
 
-export async function GET() {
+export const GET: APIRoute = async () => {
   try {
     return new ImageResponse(createElement(OgTemplate), {
       fonts: [
@@ -22,4 +23,4 @@ export async function GET() {
       status: 500,
     });
   }
-}
+};
