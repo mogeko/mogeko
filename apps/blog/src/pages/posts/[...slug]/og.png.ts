@@ -2,8 +2,7 @@ import { createElement } from "react";
 import { OgTemplate } from "@/components/og-templates/post";
 import { ImageResponse } from "@vercel/og";
 import { getCollection } from "astro:content";
-import path from "node:path";
-import fs from "node:fs/promises";
+import { loadFonts } from "@/utils";
 import type { GetStaticPaths } from "astro";
 
 export async function GET({ props: { entry } }: Props) {
@@ -26,14 +25,6 @@ export async function GET({ props: { entry } }: Props) {
     });
   }
 }
-
-const loadFonts = async () => {
-  return {
-    smileySans: await fs.readFile(
-      path.resolve("./public/fonts/smiley-sans/SmileySans-Oblique.ttf"),
-    ),
-  };
-};
 
 export const getStaticPaths = (async () => {
   const entries = await getCollection("posts");

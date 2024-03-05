@@ -1,8 +1,7 @@
 import { createElement } from "react";
 import { OgTemplate } from "@/components/og-templates/home";
 import { ImageResponse } from "@vercel/og";
-import path from "node:path";
-import fs from "node:fs/promises";
+import { loadFonts } from "@/utils";
 
 export async function GET() {
   try {
@@ -24,11 +23,3 @@ export async function GET() {
     });
   }
 }
-
-const loadFonts = async () => {
-  return {
-    pacifico: await fs.readFile(
-      path.resolve("./public/fonts/pacifico/Pacifico-Regular.ttf"),
-    ),
-  };
-};
