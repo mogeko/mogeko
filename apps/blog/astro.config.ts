@@ -15,7 +15,7 @@ import {
   transformerNotationErrorLevel,
   transformerNotationFocus,
   transformerNotationHighlight,
-} from "shikiji-transformers";
+} from "@shikijs/transformers";
 
 // https://astro.build/config
 export default defineConfig({
