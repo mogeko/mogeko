@@ -13,6 +13,7 @@ import mermaid from "rehype-mermaid";
 import {
   transformerNotationDiff,
   transformerNotationErrorLevel,
+  transformerNotationWordHighlight,
   transformerNotationFocus,
   transformerNotationHighlight,
 } from "@shikijs/transformers";
@@ -26,6 +27,7 @@ export default defineConfig({
       transformers: [
         transformerNotationDiff(),
         transformerNotationErrorLevel(),
+        transformerNotationWordHighlight(),
         transformerNotationFocus(),
         transformerNotationHighlight(),
       ],

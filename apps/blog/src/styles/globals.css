@@ -183,6 +183,7 @@
     --shiki-highlight-color: rgba(101, 117, 133, 0.16);
     --shiki-error-color: rgba(244, 63, 94, 0.16);
     --shiki-warning-color: rgba(234, 179, 8, 0.16);
+    --shiki-word-highlight-color: hsl(var(--muted));
   }
 
   pre,
@@ -192,8 +193,7 @@
 
   pre.astro-code > code .line.diff,
   pre.astro-code > code .line.highlighted {
-    @apply -mx-6 inline-block w-[calc(100%_+_3rem)] px-6
-    transition-[background-color] duration-500;
+    @apply -mx-6 inline-block w-[calc(100%_+_3rem)] px-6 transition-[background-color] duration-500;
   }
 
   /* transformerNotationDiff */
@@ -234,11 +234,16 @@
     @apply bg-[var(--shiki-warning-color)];
   }
 
+  /* transformerNotationWordHighlight */
+
+  pre.astro-code > code .line .highlighted-word {
+    @apply -mx-[3px] -my-[1px] rounded bg-[var(--shiki-word-highlight-color)] px-[3px] py-[1px];
+  }
+
   /* transformerNotationFocus */
 
   pre.has-focused .line:not(.focused) {
-    @apply opacity-70 blur-[0.095rem]
-    transition-[filter,opacity] duration-300;
+    @apply opacity-70 blur-[0.095rem] transition-[filter,opacity] duration-300;
   }
 
   pre.has-focused:hover .line:not(.focused) {
