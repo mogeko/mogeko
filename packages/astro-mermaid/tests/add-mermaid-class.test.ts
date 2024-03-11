@@ -1,5 +1,5 @@
 import { addMermaidClass } from "@/src/shiki-transformer";
-import { codeToHtml } from "shikiji";
+import { codeToHtml } from "shiki";
 import { expect, describe, it } from "vitest";
 
 const mermaidCode = `

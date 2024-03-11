@@ -23,7 +23,7 @@
     "fmt": "prettier --write ."
   },
   "dependencies": {
-    "shikiji": "^0.9.18"
+    "shiki": "^1.1.7"
   },
   "devDependencies": {
     "@types/node": "^20.11.25",

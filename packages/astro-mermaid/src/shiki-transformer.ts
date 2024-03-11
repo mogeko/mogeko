@@ -1,11 +1,11 @@
-import { addClassToHast, type ShikijiTransformer } from "shikiji";
+import type { ShikiTransformer } from "shiki";
 
-export function addMermaidClass(): ShikijiTransformer {
+export function addMermaidClass(): ShikiTransformer {
   return {
     name: "add-mermaid-class",
     pre(this, hast) {
       if (this.options.lang === "mermaid") {
-        addClassToHast(hast, "mermaid");
+        this.addClassToHast(hast, "mermaid");
       }
 
       return hast;

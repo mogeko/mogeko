@@ -103,6 +103,21 @@ export function foo() {
 }
 ```
 
+```ts
+export function foo() {
+  // [!code word:Hello]
+  const msg = "Hello World";
+  console.log(msg); // prints Hello World
+}
+```
+
+```ts
+// [!code word:options:2]
+const options = { foo: "bar" };
+options.foo = "baz";
+console.log(options.foo); // this one will not be highlighted
+```
+
 ## List Types
 
 #### Ordered List
