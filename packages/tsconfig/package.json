@@ -14,7 +14,7 @@
     "fmt": "prettier --write ."
   },
   "dependencies": {
-    "@tsconfig/strictest": "^2.0.3"
+    "@tsconfig/strictest": "^2.0.4"
   },
   "devDependencies": {
     "prettier": "^3.2.5",

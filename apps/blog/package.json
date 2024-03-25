@@ -14,8 +14,8 @@
     "fmt": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.9",
-    "@astrojs/mdx": "^2.2.0",
+    "@astrojs/check": "^0.5.10",
+    "@astrojs/mdx": "^2.2.1",
     "@astrojs/partytown": "^2.0.4",
     "@astrojs/react": "^3.1.0",
     "@astrojs/rss": "^4.0.5",
@@ -25,7 +25,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@shikijs/transformers": "^1.2.0",
     "@vercel/og": "^0.6.2",
-    "astro": "^4.5.6",
+    "astro": "^4.5.9",
     "astro-reading-time": "workspace:^",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
