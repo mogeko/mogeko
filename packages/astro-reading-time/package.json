@@ -44,13 +44,13 @@
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^5.1.0",
-    "@vitest/coverage-v8": "^1.5.2",
+    "@vitest/coverage-v8": "^1.6.0",
     "astro": "^4.5.9",
     "prettier": "^3.2.5",
     "tsconfig": "workspace:^",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5",
     "vite-tsconfig-paths": "^4.3.2",
-    "vitest": "^1.5.2"
+    "vitest": "^1.6.0"
   }
 }
