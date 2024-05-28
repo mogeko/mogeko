@@ -49,6 +49,10 @@ exports[`typography plugin > default styles 1`] = `
     --tw-backdrop-opacity:  ;
     --tw-backdrop-saturate:  ;
     --tw-backdrop-sepia:  ;
+    --tw-contain-size:  ;
+    --tw-contain-layout:  ;
+    --tw-contain-paint:  ;
+    --tw-contain-style:  ;
 }
 ::backdrop {
     --tw-border-spacing-x: 0;
@@ -98,6 +102,10 @@ exports[`typography plugin > default styles 1`] = `
     --tw-backdrop-opacity:  ;
     --tw-backdrop-saturate:  ;
     --tw-backdrop-sepia:  ;
+    --tw-contain-size:  ;
+    --tw-contain-layout:  ;
+    --tw-contain-paint:  ;
+    --tw-contain-style:  ;
 }
 .prose {
     --tw-prose-primary: #0f172a;
