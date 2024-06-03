@@ -23,7 +23,7 @@
     "@astrojs/tailwind": "^5.1.0",
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
-    "@shikijs/transformers": "^1.6.0",
+    "@shikijs/transformers": "^1.6.2",
     "@vercel/og": "^0.6.2",
     "astro": "^4.9.2",
     "astro-reading-time": "workspace:^",
