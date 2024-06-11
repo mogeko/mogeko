@@ -4,18 +4,24 @@ import Header from "@/components/article-header.astro";
 import Horizontal from "@/components/mdx/hr.astro";
 import Image from "@/components/mdx/img.astro";
 import Preformatted from "@/components/mdx/pre.astro";
+import ArrowLink from "@/components/arrow-link.astro";
 import { getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (async () => {
   const entries = await getCollection("posts");
-  return entries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+  return entries.map((entry, i, arr) => {
+    const prev = arr[i - 1] ?? null;
+    const next = arr[i + 1] ?? null;
+
+    return {
+      params: { slug: entry.slug },
+      props: { entry, prev, next },
+    };
+  });
 }) satisfies GetStaticPaths;
 
-const { entry } = Astro.props;
+const { entry, prev, next } = Astro.props;
 const {
   Content,
   remarkPluginFrontmatter: { minutesRead },
@@ -28,4 +34,21 @@ const ogImage = Astro.url.pathname + "/og.png";
   <main class="prose m-auto flex-1">
     <Content components={{ hr: Horizontal, img: Image, pre: Preformatted }} />
   </main>
+  <Horizontal className="text-primary my-4" />
+  <div class="flex flex-col items-center justify-stretch">
+    {
+      prev && (
+        <ArrowLink href={`/posts/${prev.slug}`} label="prev">
+          {prev.data.title}
+        </ArrowLink>
+      )
+    }
+    {
+      next && (
+        <ArrowLink href={`/posts/${next.slug}`} label="next">
+          {next.data.title}
+        </ArrowLink>
+      )
+    }
+  </div>
 </Layout>
