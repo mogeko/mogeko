@@ -1,7 +1,7 @@
 ---
 import Layout, { type HeadProps } from "@/layouts/base-layout.astro";
 import SiteFooter from "@/components/site-footer.astro";
-import Link from "@/components/site-nav-item.astro";
+import NavLink from "@/components/site-nav-item.astro";
 
 type Props = HeadProps;
 ---
@@ -10,8 +10,8 @@ type Props = HeadProps;
   <main class="container m-auto">
     <header class="sticky top-0 z-10 px-6 py-4 backdrop-blur-sm">
       <nav class="mx-auto flex w-full flex-row items-center justify-end gap-4">
-        <slot name="site-header-item" />
-        <Link href="/">Home</Link>
+        <NavLink href="/tags">Tags</NavLink>
+        <NavLink href="/">Posts</NavLink>
       </nav>
     </header>
     <article class="relative flex min-h-screen flex-col">
