@@ -69,9 +69,7 @@
   }
 
   .prose a {
-    @apply relative shadow-[inset_0_-1px_0_0]
-    hover:shadow-[inset_0_-.5em_0_0_var(--tw-shadow-color)]
-    hover:shadow-[var(--prose-primary-color)];
+    @apply relative shadow-[inset_0_-1px_0_0] hover:shadow-[inset_0_-.5em_0_0_var(--tw-shadow-color)] hover:shadow-[var(--prose-primary-color)];
   }
 
   .prose blockquote {
@@ -92,23 +90,19 @@
   }
 
   .prose h1 {
-    @apply text-4xl font-[900] lg:text-5xl
-    [&:not(:first-child)]:mb-7 [&:not(:first-child)]:mt-14;
+    @apply text-4xl font-[900] lg:text-5xl [&:not(:first-child)]:mb-7 [&:not(:first-child)]:mt-14;
   }
 
   .prose h2 {
-    @apply pb-2 text-3xl font-extrabold lg:text-4xl
-    [&:not(:first-child)]:mb-6 [&:not(:first-child)]:mt-12;
+    @apply pb-2 text-3xl font-extrabold lg:text-4xl [&:not(:first-child)]:mb-6 [&:not(:first-child)]:mt-12;
   }
 
   .prose h3 {
-    @apply text-2xl font-bold lg:text-3xl
-    [&:not(:first-child)]:mb-5 [&:not(:first-child)]:mt-10;
+    @apply text-2xl font-bold lg:text-3xl [&:not(:first-child)]:mb-5 [&:not(:first-child)]:mt-10;
   }
 
   .prose h4 {
-    @apply text-xl font-semibold
-    [&:not(:first-child)]:mb-4 [&:not(:first-child)]:mt-8;
+    @apply text-xl font-semibold [&:not(:first-child)]:mb-4 [&:not(:first-child)]:mt-8;
   }
 
   .prose img {
@@ -130,8 +124,7 @@
   }
 
   .prose p {
-    @apply leading-7 -tracking-[0.01em]
-    [&:not(:first-child)]:mt-6;
+    @apply leading-7 -tracking-[0.01em] [&:not(:first-child)]:mt-6;
   }
 
   .prose pre {
