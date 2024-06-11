@@ -1,10 +1,10 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "pipeline": {
+  "tasks": {
     "dev": { "dependsOn": ["^build"], "cache": false, "persistent": true },
     "build": {
       "dependsOn": ["^build"],
-      "dotEnv": [".env.local", ".env.production"],
+      "inputs": ["$TURBO_DEFAULT$", ".env.local", ".env.production"],
       "env": ["SITE_*"],
       "outputs": ["dist/**", ".astro/**"]
     },
@@ -13,11 +13,10 @@
     "cov": { "inputs": ["tests/**/*", "src/**/*"], "outputs": [] },
     "sync": {
       "dependsOn": ["^build"],
-      "dotEnv": [".env.local", ".env.production"],
+      "inputs": ["$TURBO_DEFAULT$", ".env.local", ".env.production"],
       "outputs": [".astro/**"]
     },
     "lint": { "outputs": [] },
     "fmt": { "cache": false, "outputs": [] }
-  },
-  "globalDotEnv": [".env"]
+  }
 }
