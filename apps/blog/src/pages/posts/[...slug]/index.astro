@@ -1,7 +1,6 @@
 ---
 import Layout from "@/layouts/common-layout.astro";
 import Header from "@/components/article-header.astro";
-import Link from "@/components/site-nav-item.astro";
 import Horizontal from "@/components/mdx/hr.astro";
 import Image from "@/components/mdx/img.astro";
 import Preformatted from "@/components/mdx/pre.astro";
@@ -25,7 +24,6 @@ const ogImage = Astro.url.pathname + "/og.png";
 ---
 
 <Layout title={entry.data.title} keywords={entry.data.tags} ogImage={ogImage}>
-  <Link href="/tags" slot="site-header-item">Tags</Link>
   <Header class="pt-8" data={{ minutesRead, ...entry.data }} />
   <main class="prose m-auto flex-1">
     <Content components={{ hr: Horizontal, img: Image, pre: Preformatted }} />
