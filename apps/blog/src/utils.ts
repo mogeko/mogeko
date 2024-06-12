@@ -1,8 +1,8 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { getCollection, type CollectionEntry } from "astro:content";
 import path from "node:path";
 import fs from "node:fs/promises";
-import { getCollection } from "astro:content";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -45,8 +45,10 @@ export const loadFonts = memoize(
   () => "fonts",
 );
 
-export async function getEntries() {
+export async function getEntries(): Promise<Entry[]> {
   return await getCollection("posts", ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;
   });
 }
+
+export type Entry = CollectionEntry<"posts">;

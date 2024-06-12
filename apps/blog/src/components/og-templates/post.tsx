@@ -1,9 +1,7 @@
 import { siteConfig } from "@/config";
-import type { CollectionEntry } from "astro:content";
+import type { Entry } from "@/utils";
 
-export const OgTemplate: React.FC<{
-  data: CollectionEntry<"posts">["data"];
-}> = ({ data }) => {
+export const OgTemplate: React.FC<{ data: Entry["data"] }> = ({ data }) => {
   const author = data.author ?? siteConfig.author;
 
   return (
