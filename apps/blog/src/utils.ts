@@ -32,6 +32,21 @@ export const memoize: {
 };
 memoize.Cache = Map;
 
+export const getEntries = memoize(
+  async () => {
+    return (
+      await getCollection("posts", ({ data }) => {
+        return import.meta.env.PROD ? data.draft !== true : true;
+      })
+    ).sort((a, b) => {
+      return getTime(b.data.date) - getTime(a.data.date);
+    });
+  },
+  () => "posts",
+);
+
+export type Entry = CollectionEntry<"posts">;
+
 export const loadFonts = memoize(
   async () => {
     return {
@@ -45,15 +60,3 @@ export const loadFonts = memoize(
   },
   () => "fonts",
 );
-
-export async function getEntries(): Promise<Entry[]> {
-  return (
-    await getCollection("posts", ({ data }) => {
-      return import.meta.env.PROD ? data.draft !== true : true;
-    })
-  ).sort((a, b) => {
-    return getTime(b.data.date) - getTime(a.data.date);
-  });
-}
-
-export type Entry = CollectionEntry<"posts">;
