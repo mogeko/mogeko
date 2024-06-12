@@ -1,8 +1,8 @@
 import { createElement } from "react";
 import { OgTemplate } from "@/components/og-templates/post";
 import { ImageResponse } from "@vercel/og";
-import { getCollection, type CollectionEntry } from "astro:content";
-import { loadFonts } from "@/utils";
+import { loadFonts, getEntries } from "@/utils";
+import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths, APIRoute } from "astro";
 
 export const GET: APIRoute<{
@@ -31,8 +31,7 @@ export const GET: APIRoute<{
 };
 
 export const getStaticPaths = (async () => {
-  const entries = await getCollection("posts");
-  return entries.map((entry) => ({
+  return (await getEntries()).map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));

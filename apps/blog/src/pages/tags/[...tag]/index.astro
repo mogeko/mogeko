@@ -2,17 +2,14 @@
 import Layout from "@/layouts/common-layout.astro";
 import PostIndex from "@/components/post-index.astro";
 import Icon from "@/components/ui/icon.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
 import { getTime } from "date-fns";
 import { slug } from "github-slugger";
+import { getEntries } from "@/utils";
+import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (async () => {
-  const tagsWithPosts = (
-    await getCollection("posts", ({ data }) => {
-      return import.meta.env.PROD ? data.draft !== true : true;
-    })
-  )
+  const tagsWithPosts = (await getEntries())
     .sort(({ data: a }, { data: b }) => getTime(b.date) - getTime(a.date))
     .reduce<Record<string, CollectionEntry<"posts">[]>>((acc, entry) => {
       entry.data.tags?.forEach((tag) => {

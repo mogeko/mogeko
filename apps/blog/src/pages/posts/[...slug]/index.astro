@@ -5,20 +5,18 @@ import Horizontal from "@/components/mdx/hr.astro";
 import Image from "@/components/mdx/img.astro";
 import Preformatted from "@/components/mdx/pre.astro";
 import ArrowLink from "@/components/arrow-link.astro";
-import { getCollection } from "astro:content";
+import { getEntries } from "@/utils";
 import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (async () => {
-  const entries = await getCollection("posts");
-  return entries.map((entry, i, arr) => {
-    const prev = arr[i - 1] ?? null;
-    const next = arr[i + 1] ?? null;
-
-    return {
-      params: { slug: entry.slug },
-      props: { entry, prev, next },
-    };
-  });
+  return (await getEntries()).map((entry, i, entries) => ({
+    params: { slug: entry.slug },
+    props: {
+      prev: entries[i - 1] ?? null,
+      next: entries[i + 1] ?? null,
+      entry,
+    },
+  }));
 }) satisfies GetStaticPaths;
 
 const { entry, prev, next } = Astro.props;

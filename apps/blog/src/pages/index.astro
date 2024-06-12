@@ -1,16 +1,14 @@
 ---
 import Layout from "@/layouts/home-layout.astro";
 import PostIndex from "@/components/post-index.astro";
-import { getCollection } from "astro:content";
+import { getEntries } from "@/utils";
 import { getTime } from "date-fns";
 import { AiFillHeart } from "react-icons/ai";
 import { LuRss } from "react-icons/lu";
 
-const blogs = (
-  await getCollection("posts", ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true;
-  })
-).sort(({ data: a }, { data: b }) => getTime(b.date) - getTime(a.date));
+const blogs = (await getEntries()).sort(
+  ({ data: a }, { data: b }) => getTime(b.date) - getTime(a.date),
+);
 ---
 
 <Layout>
