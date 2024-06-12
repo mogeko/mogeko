@@ -12,8 +12,8 @@ export const getStaticPaths = (async () => {
   return (await getEntries()).map((entry, i, arr) => ({
     params: { slug: entry.slug },
     props: {
-      prev: i > 0 ? arr[i - 1] : null,
-      next: i < arr.length - 1 ? arr[i + 1] : null,
+      prev: i < arr.length - 1 ? arr[i + 1] : null,
+      next: i > 0 ? arr[i - 1] : null,
       entry,
     },
   }));
