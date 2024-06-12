@@ -1,6 +1,7 @@
 ---
 import Link from "@/components/site-nav-item.astro";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { cn } from "@/utils";
 import type { ComponentProps } from "astro/types";
 
 const { label, ...props } = Astro.props;
@@ -12,10 +13,18 @@ type Props = {
 ---
 
 <div
-  class="flex w-full flex-col justify-between py-1 md:flex-row md:items-center"
+  class={cn(
+    "flex w-full flex-col justify-between py-1 md:flex-row md:items-center",
+    label === "prev" ? "items-start" : "items-end",
+  )}
 >
   <span>{label === "prev" ? "Previous article" : "Next article"}</span>
-  <div class="flex flex-row items-center justify-start gap-2">
+  <div
+    class={cn(
+      "flex items-center gap-2 justify-start md:flex-row",
+      label === "prev" ? "flex-row-reverse" : "flex-row",
+    )}
+  >
     <Link class="flex-1" {...props}><slot /></Link>
     <Icon className="h-4 w-4 animate-pulse" />
   </div>

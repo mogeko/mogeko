@@ -1,6 +1,7 @@
 ---
 import "@/styles/globals.css";
 
+import VercelInsights from "@/components/vercel-insights.astro";
 import { siteConfig } from "@/config";
 import { cn } from "@/utils";
 import type { HTMLAttributes } from "astro/types";
@@ -30,22 +31,7 @@ type Props = { head?: HeadProps } & HTMLAttributes<"body">;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{meta.title}</title>
     <!-- Vercel Web Analytics & Speed Insights -->
-    {
-      import.meta.env.PROD ? (
-        <>
-          <script
-            src="/_vercel/speed-insights/script.js"
-            type="text/partytown"
-          />
-          <script src="/_vercel/insights/script.js" type="text/partytown" />
-        </>
-      ) : (
-        <script
-          src="https://cdn.vercel-insights.com/v1/script.debug.js"
-          type="text/partytown"
-        />
-      )
-    }
+    {import.meta.env.PROD && <VercelInsights />}
     <!-- Favicons -->
     <meta name="msapplication-config" content="browserconfig.xml" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
