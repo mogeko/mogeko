@@ -1,24 +1,20 @@
 ---
 import PostGroup from "@/components/post-group.astro";
 import { getYear } from "date-fns";
-import { cn } from "@/utils";
-import type { CollectionEntry } from "astro:content";
+import { cn, type Entry } from "@/utils";
 import type { HTMLAttributes } from "astro/types";
 
 const { class: className, posts, ...props } = Astro.props;
-const blogsGroupByYear = posts.reduce<[number, CollectionEntry<"posts">[]][]>(
-  (acc, post) => {
-    const year = getYear(post.data.date);
-    const index = acc.findIndex(([y]) => y === year);
+const blogsGroupByYear = posts.reduce<[number, Entry[]][]>((acc, post) => {
+  const year = getYear(post.data.date);
+  const index = acc.findIndex(([y]) => y === year);
 
-    return index > -1
-      ? (acc[index][1].push(post), acc)
-      : acc.concat([[year, [post]]]);
-  },
-  [],
-);
+  return index > -1
+    ? (acc[index][1].push(post), acc)
+    : acc.concat([[year, [post]]]);
+}, []);
 
-type Props = { posts: CollectionEntry<"posts">[] } & HTMLAttributes<"div">;
+type Props = { posts: Entry[] } & HTMLAttributes<"div">;
 ---
 
 <div class={cn("flex flex-col justify-center gap-7", className)} {...props}>

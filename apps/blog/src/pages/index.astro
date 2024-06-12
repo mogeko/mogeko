@@ -2,13 +2,10 @@
 import Layout from "@/layouts/home-layout.astro";
 import PostIndex from "@/components/post-index.astro";
 import { getEntries } from "@/utils";
-import { getTime } from "date-fns";
 import { AiFillHeart } from "react-icons/ai";
 import { LuRss } from "react-icons/lu";
 
-const blogs = (await getEntries()).sort(
-  ({ data: a }, { data: b }) => getTime(b.date) - getTime(a.date),
-);
+const entries = await getEntries();
 ---
 
 <Layout>
@@ -37,6 +34,6 @@ const blogs = (await getEntries()).sort(
     </p>
   </header>
   <main class="flex-1">
-    <PostIndex posts={blogs} />
+    <PostIndex posts={entries} />
   </main>
 </Layout>

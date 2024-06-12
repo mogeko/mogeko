@@ -1,8 +1,9 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { getTime } from "date-fns";
 import path from "node:path";
 import fs from "node:fs/promises";
-import { getCollection } from "astro:content";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -31,6 +32,21 @@ export const memoize: {
 };
 memoize.Cache = Map;
 
+export const getEntries = memoize(
+  async () => {
+    return (
+      await getCollection("posts", ({ data }) => {
+        return import.meta.env.PROD ? data.draft !== true : true;
+      })
+    ).sort((a, b) => {
+      return getTime(b.data.date) - getTime(a.data.date);
+    });
+  },
+  () => "posts",
+);
+
+export type Entry = CollectionEntry<"posts">;
+
 export const loadFonts = memoize(
   async () => {
     return {
@@ -44,9 +60,3 @@ export const loadFonts = memoize(
   },
   () => "fonts",
 );
-
-export async function getEntries() {
-  return await getCollection("posts", ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true;
-  });
-}
