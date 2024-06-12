@@ -2,7 +2,8 @@
 import Layout from "@/layouts/common-layout.astro";
 import Button from "@/components/ui/button.astro";
 import Icon from "@/components/ui/icon.astro";
-import { getEntries, slug } from "@/utils";
+import { slug } from "@/lib/utils";
+import { getEntries } from "@/lib/content";
 import { LuTags } from "react-icons/lu";
 
 const tagsWithCount = (await getEntries()).reduce<Record<string, number>>(

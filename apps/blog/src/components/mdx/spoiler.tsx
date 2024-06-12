@@ -1,4 +1,4 @@
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 
 export const Spoiler: React.FC<
   {} & {} & React.HTMLAttributes<HTMLSpanElement>
