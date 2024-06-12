@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { getCollection, type CollectionEntry } from "astro:content";
+import { getTime } from "date-fns";
 import path from "node:path";
 import fs from "node:fs/promises";
 
@@ -46,8 +47,12 @@ export const loadFonts = memoize(
 );
 
 export async function getEntries(): Promise<Entry[]> {
-  return await getCollection("posts", ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true;
+  return (
+    await getCollection("posts", ({ data }) => {
+      return import.meta.env.PROD ? data.draft !== true : true;
+    })
+  ).sort((a, b) => {
+    return getTime(b.data.date) - getTime(a.data.date);
   });
 }
 
