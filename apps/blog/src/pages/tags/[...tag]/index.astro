@@ -2,8 +2,7 @@
 import Layout from "@/layouts/common-layout.astro";
 import PostIndex from "@/components/post-index.astro";
 import Icon from "@/components/ui/icon.astro";
-import { slug } from "github-slugger";
-import { getEntries, type Entry } from "@/utils";
+import { getEntries, slug, type Entry } from "@/utils";
 import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (async () => {

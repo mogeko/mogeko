@@ -9,6 +9,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export { slug } from "github-slugger";
+
 export const memoize: {
   <T, F extends (...args: any[]) => T>(
     fn: F,
