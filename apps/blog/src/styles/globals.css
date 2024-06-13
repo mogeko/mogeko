@@ -58,8 +58,8 @@
       U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
   }
 
-  code {
-    font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco,
+  :root {
+    --font-family-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco,
       Consolas, "Liberation Mono", "Courier New", monospace;
   }
 }
