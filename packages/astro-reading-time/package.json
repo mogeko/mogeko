@@ -45,7 +45,7 @@
   "devDependencies": {
     "@astrojs/markdown-remark": "^5.1.0",
     "@vitest/coverage-v8": "^1.6.0",
-    "astro": "^4.10.3",
+    "astro": "^4.11.1",
     "prettier": "^3.3.2",
     "tsconfig": "workspace:^",
     "tsup": "^8.1.0",
