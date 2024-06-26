@@ -33,8 +33,8 @@ export default defineConfig({
       ],
       wrap: true,
     },
-    remarkPlugins: [[emoji, { accessible: true }]],
-    rehypePlugins: [mermaid],
+    remarkPlugins: [[emoji as any, { accessible: true }]],
+    rehypePlugins: [mermaid as any],
   },
   integrations: [
     react(),
