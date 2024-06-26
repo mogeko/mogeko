@@ -5,11 +5,6 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "1.5rem",
-      screens: { sm: "680px" },
-    },
     extend: {
       colors: {
         border: "var(--color-border)",
