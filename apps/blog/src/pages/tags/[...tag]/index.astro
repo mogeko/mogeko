@@ -2,9 +2,10 @@
 import Layout from "@/layouts/common-layout.astro";
 import PostIndex from "@/components/post-index.astro";
 import Icon from "@/components/ui/icon.astro";
-import { slug } from "github-slugger";
-import { getEntries, type Entry } from "@/utils";
+import { slug } from "@/lib/utils";
+import { getEntries } from "@/lib/content";
 import type { GetStaticPaths } from "astro";
+import type { Entry } from "@/lib/content";
 
 export const getStaticPaths = (async () => {
   const tagsWithPosts = (await getEntries()).reduce<Record<string, Entry[]>>(

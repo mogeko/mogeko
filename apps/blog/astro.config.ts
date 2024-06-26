@@ -51,7 +51,4 @@ export default defineConfig({
     sitemap(),
   ],
   prefetch: true,
-  experimental: {
-    contentCollectionCache: true,
-  },
 });

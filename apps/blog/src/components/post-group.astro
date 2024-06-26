@@ -2,8 +2,9 @@
 import Link from "@/components/ui/link.astro";
 import { format } from "date-fns";
 import { MdStar } from "react-icons/md";
-import { cn, type Entry } from "@/utils";
+import { cn } from "@/lib/utils";
 import type { HTMLAttributes } from "astro/types";
+import type { Entry } from "@/lib/content";
 
 const { class: className, heading, posts: articles } = Astro.props;
 

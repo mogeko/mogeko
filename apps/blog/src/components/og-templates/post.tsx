@@ -1,5 +1,5 @@
 import { siteConfig } from "@/config";
-import type { Entry } from "@/utils";
+import type { Entry } from "@/lib/content";
 
 export const OgTemplate: React.FC<{ data: Entry["data"] }> = ({ data }) => {
   const author = data.author ?? siteConfig.author;

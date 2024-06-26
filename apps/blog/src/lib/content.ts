@@ -1,36 +1,8 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { getTime } from "date-fns";
+import { memoize } from "@/lib/utils";
 import path from "node:path";
 import fs from "node:fs/promises";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-export const memoize: {
-  <T, F extends (...args: any[]) => T>(
-    fn: F,
-    hasher?: (...args: Parameters<F>) => any,
-  ): F & { cache: Map<any, T> };
-  Cache: MapConstructor;
-} = function (fn, hasher) {
-  const memoized = function (this: any, ...args: any) {
-    const keys = hasher ? hasher.apply(this, args) : args[0];
-    const cache = memoized.cache;
-
-    if (!cache.has(keys)) {
-      memoized.cache = cache.set(keys, fn.apply(this, args));
-    }
-
-    return cache.get(keys);
-  };
-  memoized.cache = new (memoize.Cache || Map)();
-
-  return memoized as any;
-};
-memoize.Cache = Map;
 
 export const getEntries = memoize(
   async () => {
