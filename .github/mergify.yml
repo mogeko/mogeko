@@ -1,6 +1,6 @@
 queue_rules:
   - name: dependabot
-    conditions:
+    queue_conditions:
       - "check-success=Build Monorepo Packages"
       - "check-success=Test Monorepo Packages"
       - "check-success=Vercel"
