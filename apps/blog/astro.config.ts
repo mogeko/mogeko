@@ -8,7 +8,6 @@ import sitemap from "@astrojs/sitemap";
 import partytown from "@astrojs/partytown";
 
 import emoji from "remark-emoji";
-import mermaid from "rehype-mermaid";
 
 import {
   transformerNotationDiff,
@@ -33,8 +32,7 @@ export default defineConfig({
       ],
       wrap: true,
     },
-    remarkPlugins: [[emoji, { accessible: true }]],
-    rehypePlugins: [mermaid],
+    remarkPlugins: [[emoji as any, { accessible: true }]],
   },
   integrations: [
     react(),
