@@ -3,7 +3,7 @@
   "extends": "tsconfig/default.tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "@/*": ["./*"] }
+    "paths": { "@/*": ["./src/*"] }
   },
   "include": ["src/**/*", "tests/**/*", "*.config.ts", "index.ts"],
   "exclude": ["node_modules", "dist"]

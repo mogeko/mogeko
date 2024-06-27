@@ -1,5 +1,5 @@
 import { expect, describe, it } from "vitest";
-import { rehypeWrapper } from "@/src/rehype-wrapper";
+import { rehypeWrapper } from "@/rehype-wrapper";
 import { h } from "hastscript";
 import { unified } from "unified";
 

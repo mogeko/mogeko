@@ -1,5 +1,5 @@
-import { addMermaidClass } from "@/src/shiki-transformer";
-import { rehypeWrapper } from "@/src/rehype-wrapper";
+import { addMermaidClass } from "@/shiki-transformer";
+import { rehypeWrapper } from "@/rehype-wrapper";
 import rehypeMermaid, { type RehypeMermaidOptions } from "rehype-mermaid";
 import type { AstroIntegration } from "astro";
 
