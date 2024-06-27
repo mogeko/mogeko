@@ -1,7 +1,7 @@
 {
   "name": "remark-anchor-link",
   "version": "0.0.1",
-  "description": "",
+  "description": "Add anchor links to headings in markdown files",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -15,6 +15,11 @@
     "build": "tsup",
     "lint": "prettier --check .",
     "fmt": "prettier --write ."
+  },
+  "dependencies": {
+    "github-slugger": "^2.0.0",
+    "unist-builder": "^4.0.0",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@types/mdast": "^4.0.4",
