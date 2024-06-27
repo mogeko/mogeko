@@ -23,6 +23,7 @@
     "fmt": "prettier --write ."
   },
   "dependencies": {
+    "rehype-mermaid": "^2.1.0",
     "shiki": "^1.9.1"
   },
   "devDependencies": {

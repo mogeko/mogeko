@@ -83,6 +83,9 @@ importers:
       astro:
         specifier: ^4.11.3
         version: 4.11.3(@types/node@20.14.8)(typescript@5.5.2)
+      astro-mermaid:
+        specifier: workspace:^
+        version: link:../../packages/astro-mermaid
       astro-reading-time:
         specifier: workspace:^
         version: link:../../packages/astro-reading-time
@@ -107,9 +110,6 @@ importers:
       react-icons:
         specifier: ^5.2.1
         version: 5.2.1(react@18.3.1)
-      rehype-mermaid:
-        specifier: ^2.1.0
-        version: 2.1.0
       remark-emoji:
         specifier: ^5.0.0
         version: 5.0.0
@@ -144,6 +144,9 @@ importers:
 
   packages/astro-mermaid:
     dependencies:
+      rehype-mermaid:
+        specifier: ^2.1.0
+        version: 2.1.0
       shiki:
         specifier: ^1.9.1
         version: 1.9.1
