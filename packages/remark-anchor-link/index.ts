@@ -1,11 +1,14 @@
 import { visit } from "unist-util-visit";
 import { u } from "unist-builder";
-import Slugger from "github-slugger";
+import GitHubSlugger from "github-slugger";
 import type { Plugin } from "unified";
 import type { Root } from "mdast";
 
-export const remarkAnchorLink: Plugin<[], Root> = () => {
-  const slugger = new Slugger();
+export const remarkAnchorLink: Plugin<[RemarkAnchorLinkOptions?], Root> = (
+  // prettier-ignore
+  {location, marker = "#", className = "anchor"} = {},
+) => {
+  const slugger = new GitHubSlugger();
 
   return (tree) => {
     visit(tree, "heading", (node) => {
@@ -13,18 +16,24 @@ export const remarkAnchorLink: Plugin<[], Root> = () => {
 
       if (!text || text.type !== "text") return;
 
-      node.children.push(
-        u("link", { url: `#${slugger.slug(text.value)}` }, [u("text", "#")]),
+      node.children[location === "suffix" ? "push" : "unshift"](
+        u("link", { className, url: `#${slugger.slug(text.value)}` }, [
+          u("text", marker),
+        ]),
       );
     });
   };
 };
 
+type RemarkAnchorLinkOptions = {
+  location?: "prefix" | "suffix";
+  marker?: string;
+  className?: string;
+};
+
 if (import.meta.vitest) {
   const { it, expect } = import.meta.vitest;
   const { unified } = await import("unified");
-
-  const processor = unified().use(remarkAnchorLink);
 
   it("should add anchor link to headings", async () => {
     const input = u("root", [
@@ -32,13 +41,36 @@ if (import.meta.vitest) {
     ]) as Root;
     const output = u("root", [
       u("heading", { depth: 1 }, [
+        u("link", { className: "anchor", url: "#hello-world" }, [
+          u("text", "#"),
+        ]),
         u("text", "Hello, World!"),
-        u("link", { url: "#hello-world" }, [u("text", "#")]),
       ]),
     ]);
 
-    const result = await processor.run(input);
+    const processor = unified().use(remarkAnchorLink);
 
-    expect(result).toEqual(output);
+    expect(await processor.run(input)).toEqual(output);
+  });
+
+  it("should add anchor link to headings with custom options", async () => {
+    const input = u("root", [
+      u("heading", { depth: 1 }, [u("text", "Hello, World!")]),
+    ]) as Root;
+    const output = u("root", [
+      u("heading", { depth: 1 }, [
+        u("text", "Hello, World!"),
+        u("link", { className: "custom", url: "#hello-world" }, [
+          u("text", "#"),
+        ]),
+      ]),
+    ]);
+
+    const processor = unified().use(remarkAnchorLink, {
+      location: "suffix",
+      className: "custom",
+    });
+
+    expect(await processor.run(input)).toEqual(output);
   });
 }
