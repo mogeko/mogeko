@@ -9,6 +9,7 @@ import sitemap from "@astrojs/sitemap";
 import partytown from "@astrojs/partytown";
 
 import emoji from "remark-emoji";
+import { remarkAnchorLink } from "remark-anchor-link";
 
 import {
   transformerNotationDiff,
@@ -33,7 +34,10 @@ export default defineConfig({
       ],
       wrap: true,
     },
-    remarkPlugins: [[emoji as any, { accessible: true }]],
+    remarkPlugins: [
+      [remarkAnchorLink, { location: "suffix", marker: "🔗" }],
+      [emoji, { accessible: true }],
+    ],
   },
   integrations: [
     react(),

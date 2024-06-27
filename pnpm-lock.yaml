@@ -110,6 +110,9 @@ importers:
       react-icons:
         specifier: ^5.2.1
         version: 5.2.1(react@18.3.1)
+      remark-anchor-link:
+        specifier: workspace:^
+        version: link:../../packages/remark-anchor-link
       remark-emoji:
         specifier: ^5.0.0
         version: 5.0.0

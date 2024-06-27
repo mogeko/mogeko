@@ -4,31 +4,31 @@ import GitHubSlugger from "github-slugger";
 import type { Plugin } from "unified";
 import type { Root } from "mdast";
 
-export const remarkAnchorLink: Plugin<[RemarkAnchorLinkOptions?], Root> = (
-  // prettier-ignore
-  {location, marker = "#", className = "anchor"} = {},
-) => {
+export const remarkAnchorLink: Plugin<[Options?], Root> = (options) => {
   const slugger = new GitHubSlugger();
 
   return (tree) => {
     visit(tree, "heading", (node) => {
-      const text = node.children[0];
-
-      if (!text || text.type !== "text") return;
-
-      node.children[location === "suffix" ? "push" : "unshift"](
-        u("link", { className, url: `#${slugger.slug(text.value)}` }, [
-          u("text", marker),
-        ]),
-      );
+      if (
+        node.children[0]?.type === "text" &&
+        (options?.levels ?? [1, 2, 3, 4]).includes(node.depth)
+      ) {
+        node.children[options?.location === "suffix" ? "push" : "unshift"](
+          u("link", { url: `#${slugger.slug(node.children[0].value)}` }, [
+            u("text", options?.marker ?? "#"),
+          ]),
+        );
+      }
     });
   };
 };
 
-type RemarkAnchorLinkOptions = {
+export default remarkAnchorLink;
+
+type Options = {
   location?: "prefix" | "suffix";
   marker?: string;
-  className?: string;
+  levels?: (1 | 2 | 3 | 4 | 5 | 6)[];
 };
 
 if (import.meta.vitest) {
@@ -68,7 +68,6 @@ if (import.meta.vitest) {
 
     const processor = unified().use(remarkAnchorLink, {
       location: "suffix",
-      className: "custom",
     });
 
     expect(await processor.run(input)).toEqual(output);
