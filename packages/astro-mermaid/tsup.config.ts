@@ -3,8 +3,9 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   entryPoints: {
-    "shiki-transformer": path.resolve(__dirname, "src/shiki-transformer.ts"),
     "astro-mermaid": path.resolve(__dirname, "index.ts"),
+    "shiki-transformer": path.resolve(__dirname, "src/shiki-transformer.ts"),
+    "rehype-wrapper": path.resolve(__dirname, "src/rehype-wrapper.ts"),
   },
   format: ["esm"],
   clean: true,

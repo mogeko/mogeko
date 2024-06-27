@@ -2,13 +2,13 @@ import { defineConfig } from "astro/config";
 
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
+import mermaid from "astro-mermaid";
 import readingTime from "astro-reading-time";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import partytown from "@astrojs/partytown";
 
 import emoji from "remark-emoji";
-import mermaid from "rehype-mermaid";
 
 import {
   transformerNotationDiff,
@@ -34,7 +34,6 @@ export default defineConfig({
       wrap: true,
     },
     remarkPlugins: [[emoji as any, { accessible: true }]],
-    rehypePlugins: [mermaid as any],
   },
   integrations: [
     react(),
@@ -43,6 +42,7 @@ export default defineConfig({
     }),
     readingTime(),
     mdx(),
+    mermaid(),
     partytown({
       config: {
         forward: ["si", "siq.push", "va", "vaq.push"],

@@ -83,6 +83,9 @@ importers:
       astro:
         specifier: ^4.11.3
         version: 4.11.3(@types/node@20.14.8)(typescript@5.5.2)
+      astro-mermaid:
+        specifier: workspace:^
+        version: link:../../packages/astro-mermaid
       astro-reading-time:
         specifier: workspace:^
         version: link:../../packages/astro-reading-time
@@ -107,9 +110,6 @@ importers:
       react-icons:
         specifier: ^5.2.1
         version: 5.2.1(react@18.3.1)
-      rehype-mermaid:
-        specifier: ^2.1.0
-        version: 2.1.0
       remark-emoji:
         specifier: ^5.0.0
         version: 5.0.0
@@ -144,10 +144,25 @@ importers:
 
   packages/astro-mermaid:
     dependencies:
+      hast-util-class-list:
+        specifier: ^2.0.0
+        version: 2.0.0
+      hastscript:
+        specifier: ^9.0.0
+        version: 9.0.0
+      rehype-mermaid:
+        specifier: ^2.1.0
+        version: 2.1.0
       shiki:
         specifier: ^1.9.1
         version: 1.9.1
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
     devDependencies:
+      '@types/hast':
+        specifier: ^3.0.4
+        version: 3.0.4
       '@types/node':
         specifier: ^20.14.8
         version: 20.14.8
@@ -169,6 +184,9 @@ importers:
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
+      unified:
+        specifier: ^11.0.5
+        version: 11.0.5
       vite-tsconfig-paths:
         specifier: ^4.3.2
         version: 4.3.2(typescript@5.5.2)(vite@5.3.1(@types/node@20.14.8))
@@ -1371,9 +1389,6 @@ packages:
   '@types/mdast@3.0.15':
     resolution: {integrity: sha512-LnwD+mUEfxWMa1QpDraczIn6k0Ee3SMicuYSSzS6ZYl2gKS09EClnJYGd8Du6rfc5r/GZEk5o1mRb8TaTj03sQ==}
 
-  '@types/mdast@4.0.3':
-    resolution: {integrity: sha512-LsjtqsyF+d2/yFOYaN22dHZI1Cpwkrj+g06G8+qtUKlhovPW89YhqSnfKtMbkgmEtYpH2gydRNULd6y8mciAFg==}
-
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
 
@@ -2298,6 +2313,10 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
+  hast-util-class-list@2.0.0:
+    resolution: {integrity: sha512-svactUmMyePo/WXkWPMwN36XueADDT6wwOMEyte62dkDPszltn92rkWZVxleFxoUIYJ+n89qZXl9nJtQwOeAcg==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+
   hast-util-from-dom@5.0.0:
     resolution: {integrity: sha512-d6235voAp/XR3Hh5uy7aGLbM3S4KamdW0WEgOaU1YoewnuYw4HXb5eRtv9g65m/RFGEfUY1Mw4UqCc5Y8L4Stg==}
 
@@ -2342,6 +2361,9 @@ packages:
 
   hastscript@8.0.0:
     resolution: {integrity: sha512-dMOtzCEd3ABUeSIISmrETiKuyydk1w0pa+gE/uormcTpSYuaNJPbX1NU3JLyscSLjwAQM8bWMhhIlnCqnRvDTw==}
+
+  hastscript@9.0.0:
+    resolution: {integrity: sha512-jzaLBGavEDKHrc5EfFImKN7nZKKBdSLIdGvCwDZ9TfzbF2ffXiov8CKE445L2Z1Ek2t/m4SKQ2j6Ipv7NyUolw==}
 
   heap@0.2.7:
     resolution: {integrity: sha512-2bsegYkkHO+h/9MGbn6KWcE45cHZgPANo5LXF7EvWdT0yT2EguSVO1nDgU5c8+ZOPwp2vMNa7YFsJhVcDR9Sdg==}
@@ -3822,9 +3844,6 @@ packages:
   unicode-trie@2.0.0:
     resolution: {integrity: sha512-x7bc76x0bm4prf1VLg79uhAzKw8DVboClSN5VxJuQ+LKDOVEW9CdH+VY7SP+vX7xCYQqzzgQpFqz15zeLvAtZQ==}
 
-  unified@11.0.4:
-    resolution: {integrity: sha512-apMPnyLjAX+ty4OrNap7yumyVAMlKx5IWU2wlzzUdYJO9A8f1p9m/gywF/GM2ZDFcjQPrx59Mc90KwmxsoklxQ==}
-
   unified@11.0.5:
     resolution: {integrity: sha512-xKvGhPWw3k84Qjh8bI3ZeJjqnyadK+GEFtazSfZv/rKeTkTjOJho6mFqh2SM96iIcZokxiOpg78GazTSg8+KHA==}
 
@@ -5260,10 +5279,6 @@ snapshots:
     dependencies:
       '@types/unist': 2.0.10
 
-  '@types/mdast@4.0.3':
-    dependencies:
-      '@types/unist': 3.0.2
-
   '@types/mdast@4.0.4':
     dependencies:
       '@types/unist': 3.0.2
@@ -6370,6 +6385,8 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
+  hast-util-class-list@2.0.0: {}
+
   hast-util-from-dom@5.0.0:
     dependencies:
       '@types/hast': 3.0.4
@@ -6512,6 +6529,14 @@ snapshots:
       '@types/hast': 3.0.4
 
   hastscript@8.0.0:
+    dependencies:
+      '@types/hast': 3.0.4
+      comma-separated-tokens: 2.0.3
+      hast-util-parse-selector: 4.0.0
+      property-information: 6.4.1
+      space-separated-tokens: 2.0.2
+
+  hastscript@9.0.0:
     dependencies:
       '@types/hast': 3.0.4
       comma-separated-tokens: 2.0.3
@@ -6974,7 +6999,7 @@ snapshots:
 
   mdast-util-to-string@4.0.0:
     dependencies:
-      '@types/mdast': 4.0.3
+      '@types/mdast': 4.0.4
 
   merge-stream@2.0.0: {}
 
@@ -7770,7 +7795,7 @@ snapshots:
       mermaid-isomorphic: 2.1.1
       mini-svg-data-uri: 1.4.4
       space-separated-tokens: 2.0.2
-      unified: 11.0.4
+      unified: 11.0.5
       unist-util-visit-parents: 6.0.1
       vfile: 6.0.1
     transitivePeerDependencies:
@@ -7807,7 +7832,7 @@ snapshots:
       emoticon: 4.0.1
       mdast-util-find-and-replace: 3.0.1
       node-emoji: 2.1.3
-      unified: 11.0.4
+      unified: 11.0.5
 
   remark-gfm@4.0.0:
     dependencies:
@@ -8322,16 +8347,6 @@ snapshots:
     dependencies:
       pako: 0.2.9
       tiny-inflate: 1.0.3
-
-  unified@11.0.4:
-    dependencies:
-      '@types/unist': 3.0.2
-      bail: 2.0.2
-      devlop: 1.1.0
-      extend: 3.0.2
-      is-plain-obj: 4.1.0
-      trough: 2.1.0
-      vfile: 6.0.1
 
   unified@11.0.5:
     dependencies:
