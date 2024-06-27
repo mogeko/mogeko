@@ -13,7 +13,7 @@ export default function mermaid(): AstroIntegration {
             shikiConfig: {
               transformers: [addMermaidClass()],
             },
-            rehypePlugins: [wrapper, rehypeMermaid],
+            rehypePlugins: [wrapper, [rehypeMermaid, { strategy: "img-svg" }]],
           },
         });
       },
