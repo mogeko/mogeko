@@ -1,5 +1,12 @@
 # astro-reading-time
 
+## 0.1.5
+
+### Patch Changes
+
+- Updated dependencies [[`3ff29a3`](https://github.com/mogeko/mogeko/commit/3ff29a381b5c2c4050ba5b8cacdbef7a41ec02a2), [`4e2b8f0`](https://github.com/mogeko/mogeko/commit/4e2b8f038ffe32e0858750ec2459756690f7e13e), [`2a96d55`](https://github.com/mogeko/mogeko/commit/2a96d55e010c5bd9239af369a8e1b31179476104)]:
+  - @mogeko/utils@0.2.1
+
 ## 0.1.4
 
 ### Patch Changes
