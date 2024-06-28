@@ -1,0 +1,30 @@
+{
+  "name": "@mogeko/utils",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "private": true,
+  "keywords": [],
+  "author": "Mogeko <zhengjunyi@live.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest run",
+    "cov": "vitest run --coverage",
+    "build": "tsup",
+    "lint": "prettier --check .",
+    "fmt": "prettier --write ."
+  },
+  "devDependencies": {
+    "@types/mdast": "^4.0.4",
+    "@types/node": "^20.14.8",
+    "@vitest/coverage-v8": "^1.6.0",
+    "prettier": "^3.3.2",
+    "tsconfig": "workspace:^",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.2",
+    "unified": "^11.0.5",
+    "vitest": "^1.6.0"
+  }
+}

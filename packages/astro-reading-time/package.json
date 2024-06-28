@@ -39,6 +39,7 @@
     "fmt": "prettier --write ."
   },
   "dependencies": {
+    "@mogeko/utils": "workspace:^",
     "mdast-util-to-string": "^4.0.0",
     "reading-time": "^1.5.0"
   },
