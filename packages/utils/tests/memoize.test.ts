@@ -16,8 +16,6 @@ describe("memoize", () => {
       (a, b) => a + b,
     );
 
-    console.log(fn.cache);
-
     expect(fn(1, 2)).toBe(3);
     expect(fn.cache instanceof Map).toBe(true);
     expect(fn.cache).toEqual(new Map([[3, 3]]));

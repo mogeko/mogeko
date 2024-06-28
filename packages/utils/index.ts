@@ -1,5 +1,9 @@
 export { assocPath } from "@/assoc-path";
 export { cn } from "@/cn";
 export { slug } from "github-slugger";
-export { isObject } from "@/is-object";
+export { isEmpty } from "@/is-empty";
+export { isNil } from "@/is-nil";
+export { is } from "@/is";
 export { memoize } from "@/memoize";
+export { range } from "@/range";
+export { tap } from "@/tap";
