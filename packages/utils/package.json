@@ -33,6 +33,11 @@
     "lint": "prettier --check .",
     "fmt": "prettier --write ."
   },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "github-slugger": "^2.0.0",
+    "tailwind-merge": "^2.3.0"
+  },
   "devDependencies": {
     "@mogeko/tsconfig": "workspace:^",
     "@types/node": "^20.14.8",
@@ -41,9 +46,5 @@
     "tsup": "^8.1.0",
     "typescript": "^5.5.2",
     "vitest": "^1.6.0"
-  },
-  "dependencies": {
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^2.3.0"
   }
 }
