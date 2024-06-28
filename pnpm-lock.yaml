@@ -325,6 +325,13 @@ importers:
         version: 1.6.0(@types/node@20.14.8)
 
   packages/utils:
+    dependencies:
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      tailwind-merge:
+        specifier: ^2.3.0
+        version: 2.3.0
     devDependencies:
       '@mogeko/tsconfig':
         specifier: workspace:^
