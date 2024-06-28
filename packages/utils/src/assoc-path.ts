@@ -1,4 +1,4 @@
-export const isObject = (val: any): boolean => !!val && typeof val === "object";
+import { isObject } from "@/is-object";
 
 export function assocPath(path: Path, val: any, obj: Obj): Obj {
   if (path.length === 0) return val;

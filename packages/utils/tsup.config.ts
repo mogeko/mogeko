@@ -3,7 +3,7 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   entryPoints: {
-    index: path.resolve(__dirname, "./src/index.ts"),
+    index: path.resolve(__dirname, "./index.ts"),
   },
   format: ["esm"],
   clean: true,
