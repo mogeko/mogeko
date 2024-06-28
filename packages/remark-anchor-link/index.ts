@@ -13,8 +13,11 @@ export const remarkAnchorLink: Plugin<[Options?], Root> = (options) => {
         node.children[0]?.type === "text" &&
         (options?.levels ?? [1, 2, 3, 4]).includes(node.depth)
       ) {
+        const hProperties = { class: options?.className ?? "anchor" };
+        const slug = slugger.slug(node.children[0].value);
+
         node.children[options?.location === "suffix" ? "push" : "unshift"](
-          u("link", { url: `#${slugger.slug(node.children[0].value)}` }, [
+          u("link", { data: { hProperties }, url: `#${slug}` }, [
             u("text", options?.marker ?? "#"),
           ]),
         );
@@ -27,8 +30,9 @@ export default remarkAnchorLink;
 
 type Options = {
   location?: "prefix" | "suffix";
-  marker?: string;
+  className?: string;
   levels?: (1 | 2 | 3 | 4 | 5 | 6)[];
+  marker?: string;
 };
 
 if (import.meta.vitest) {
@@ -41,9 +45,11 @@ if (import.meta.vitest) {
     ]) as Root;
     const output = u("root", [
       u("heading", { depth: 1 }, [
-        u("link", { className: "anchor", url: "#hello-world" }, [
-          u("text", "#"),
-        ]),
+        u(
+          "link",
+          { data: { hProperties: { class: "anchor" } }, url: "#hello-world" },
+          [u("text", "#")],
+        ),
         u("text", "Hello, World!"),
       ]),
     ]);
@@ -60,14 +66,17 @@ if (import.meta.vitest) {
     const output = u("root", [
       u("heading", { depth: 1 }, [
         u("text", "Hello, World!"),
-        u("link", { className: "custom", url: "#hello-world" }, [
-          u("text", "#"),
-        ]),
+        u(
+          "link",
+          { data: { hProperties: { class: "custom" } }, url: "#hello-world" },
+          [u("text", "#")],
+        ),
       ]),
     ]);
 
     const processor = unified().use(remarkAnchorLink, {
       location: "suffix",
+      className: "custom",
     });
 
     expect(await processor.run(input)).toEqual(output);
