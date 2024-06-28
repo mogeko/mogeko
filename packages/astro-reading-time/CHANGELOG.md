@@ -1,5 +1,16 @@
 # astro-reading-time
 
+## 0.1.2
+
+### Patch Changes
+
+- [#111](https://github.com/mogeko/mogeko/pull/111) [`5f61053`](https://github.com/mogeko/mogeko/commit/5f610536e25386f4ec8257f94186032f6cebf08f) Thanks [@mogeko](https://github.com/mogeko)! - Migrate `assocPath` to a separate module.
+
+- [#111](https://github.com/mogeko/mogeko/pull/111) [`1b45226`](https://github.com/mogeko/mogeko/commit/1b45226dcce64ddb91c64d8ef8d36205f06e1bf7) Thanks [@mogeko](https://github.com/mogeko)! - Remove `vite-tsconfig-paths`.
+
+- Updated dependencies [[`5f61053`](https://github.com/mogeko/mogeko/commit/5f610536e25386f4ec8257f94186032f6cebf08f)]:
+  - @mogeko/utils@0.0.2
+
 ## 0.1.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @mogeko/typography
 
+## 0.1.5
+
+### Patch Changes
+
+- [#111](https://github.com/mogeko/mogeko/pull/111) [`1b45226`](https://github.com/mogeko/mogeko/commit/1b45226dcce64ddb91c64d8ef8d36205f06e1bf7) Thanks [@mogeko](https://github.com/mogeko)! - Remove `vite-tsconfig-paths`.
+
 ## 0.1.4
 
 ### Patch Changes
