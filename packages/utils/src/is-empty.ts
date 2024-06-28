@@ -1,5 +1,5 @@
+import { is } from "@/is";
+
 export function isEmpty(value: unknown): boolean {
-  return (
-    typeof value !== "number" && value != null && !Object.keys(value).length
-  );
+  return !is(Number, value) && value != null && !Object.keys(value).length;
 }
