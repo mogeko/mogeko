@@ -44,8 +44,8 @@
     "reading-time": "^1.5.0"
   },
   "devDependencies": {
-    "@mogeko/tsconfig": "workspace:^",
     "@astrojs/markdown-remark": "^5.1.1",
+    "@mogeko/tsconfig": "workspace:^",
     "@vitest/coverage-v8": "^1.6.0",
     "astro": "^4.11.3",
     "prettier": "^3.3.2",
