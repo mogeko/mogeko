@@ -1,3 +1,3 @@
-export function isObject(val: any): boolean {
-  return !!val && typeof val === "object";
+export function isObject(value: unknown): boolean {
+  return !!value && typeof value === "object";
 }
