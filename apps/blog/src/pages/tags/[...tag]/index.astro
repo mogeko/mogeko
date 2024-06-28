@@ -2,10 +2,10 @@
 import Layout from "@/layouts/common-layout.astro";
 import PostIndex from "@/components/post-index.astro";
 import Icon from "@/components/ui/icon.astro";
-import { slug } from "@/lib/utils";
-import { getEntries } from "@/lib/content";
+import { slug } from "@mogeko/utils";
+import { getEntries } from "@/data";
 import type { GetStaticPaths } from "astro";
-import type { Entry } from "@/lib/content";
+import type { Entry } from "@/data";
 
 export const getStaticPaths = (async () => {
   const tagsWithPosts = (await getEntries()).reduce<Record<string, Entry[]>>(

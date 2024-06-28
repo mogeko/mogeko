@@ -1,6 +1,6 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import { getTime } from "date-fns";
-import { memoize } from "@/lib/utils";
+import { memoize } from "@mogeko/utils";
 import path from "node:path";
 import fs from "node:fs/promises";
 
