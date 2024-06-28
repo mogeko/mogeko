@@ -1,5 +1,5 @@
 ---
-"remark-anchor-link": patch
+"remark-anchor-link": minor
 ---
 
 Realize core functions.

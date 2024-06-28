@@ -1,14 +1,30 @@
 {
   "name": "remark-anchor-link",
   "version": "0.0.1",
-  "description": "Add anchor links to headings in markdown files",
+  "description": "Add anchor links to Headings",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
-  "private": true,
-  "keywords": [],
+  "keywords": [
+    "remark",
+    "plugin"
+  ],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mogeko/mogeko.git",
+    "directory": "packages/remark-anchor-link"
+  },
+  "homepage": "https://github.com/mogeko/mogeko/tree/master/packages/remark-anchor-link#readme",
+  "bugs": {
+    "url": "https://github.com/mogeko/mogeko/issues",
+    "email": "zhengjunyi@live.com"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "test": "vitest run",
     "cov": "vitest run --coverage",

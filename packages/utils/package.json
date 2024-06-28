@@ -1,14 +1,31 @@
 {
   "name": "@mogeko/utils",
   "version": "0.0.1",
-  "description": "",
+  "description": "Useful function snippets for Node.js",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
-  "private": true,
-  "keywords": [],
+  "keywords": [
+    "snippets",
+    "utils",
+    "functional"
+  ],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mogeko/mogeko.git",
+    "directory": "packages/utils"
+  },
+  "homepage": "https://github.com/mogeko/mogeko/tree/master/packages/utils#readme",
+  "bugs": {
+    "url": "https://github.com/mogeko/mogeko/issues",
+    "email": "zhengjunyi@live.com"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "test": "vitest run",
     "cov": "vitest run --coverage",
