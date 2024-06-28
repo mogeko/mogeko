@@ -4,23 +4,32 @@ import GitHubSlugger from "github-slugger";
 import type { Plugin } from "unified";
 import type { Root } from "mdast";
 
-export const remarkAnchorLink: Plugin<[Options?], Root> = (options) => {
+export const remarkAnchorLink: Plugin<[Options?], Root> = ({
+  levels = [1, 2, 3, 4],
+  location,
+  className = "anchor",
+  marker = "#",
+} = {}) => {
   const slugger = new GitHubSlugger();
 
   return (tree) => {
     visit(tree, "heading", (node) => {
-      if (
-        node.children[0]?.type === "text" &&
-        (options?.levels ?? [1, 2, 3, 4]).includes(node.depth)
-      ) {
-        const hProperties = { class: options?.className ?? "anchor" };
-        const slug = slugger.slug(node.children[0].value);
+      const text = node.children[0];
 
-        node.children[options?.location === "suffix" ? "push" : "unshift"](
-          u("link", { data: { hProperties }, url: `#${slug}` }, [
-            u("text", options?.marker ?? "#"),
-          ]),
+      if (text?.type === "text" && levels.includes(node.depth)) {
+        const slug = slugger.slug(text.value);
+
+        node.children[location === "suffix" ? "push" : "unshift"](
+          u(
+            "link",
+            {
+              data: { hProperties: { class: className } },
+              url: `#${slug}`,
+            },
+            [u("text", marker)],
+          ),
         );
+        node.data = { hProperties: { id: slug } };
       }
     });
   };
@@ -44,7 +53,7 @@ if (import.meta.vitest) {
       u("heading", { depth: 1 }, [u("text", "Hello, World!")]),
     ]) as Root;
     const output = u("root", [
-      u("heading", { depth: 1 }, [
+      u("heading", { data: { hProperties: { id: "hello-world" } }, depth: 1 }, [
         u(
           "link",
           { data: { hProperties: { class: "anchor" } }, url: "#hello-world" },
@@ -64,7 +73,7 @@ if (import.meta.vitest) {
       u("heading", { depth: 1 }, [u("text", "Hello, World!")]),
     ]) as Root;
     const output = u("root", [
-      u("heading", { depth: 1 }, [
+      u("heading", { data: { hProperties: { id: "hello-world" } }, depth: 1 }, [
         u("text", "Hello, World!"),
         u(
           "link",
