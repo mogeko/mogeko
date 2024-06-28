@@ -31,7 +31,7 @@ export const remarkAnchorLink: Plugin<[Options?], Root> = ({
         const slug = slugger.slug(text.value);
 
         node.children[location === "suffix" ? "push" : "unshift"](
-          updateProperties({ class: className })(
+          updateProperties({ class: className, ariaHidden: "true" })(
             u("link", { url: `#${slug}` }, [u("text", marker)]),
           ),
         );
@@ -62,7 +62,10 @@ if (import.meta.vitest) {
       u("heading", { data: { hProperties: { id: "hello-world" } }, depth: 1 }, [
         u(
           "link",
-          { data: { hProperties: { class: "anchor" } }, url: "#hello-world" },
+          {
+            data: { hProperties: { class: "anchor", ariaHidden: "true" } },
+            url: "#hello-world",
+          },
           [u("text", "#")],
         ),
         u("text", "Hello, World!"),
@@ -83,7 +86,10 @@ if (import.meta.vitest) {
         u("text", "Hello, World!"),
         u(
           "link",
-          { data: { hProperties: { class: "custom" } }, url: "#hello-world" },
+          {
+            data: { hProperties: { class: "custom", ariaHidden: "true" } },
+            url: "#hello-world",
+          },
           [u("text", "#")],
         ),
       ]),
