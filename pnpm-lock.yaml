@@ -83,9 +83,6 @@ importers:
       astro:
         specifier: ^4.11.3
         version: 4.11.3(@types/node@20.14.8)(typescript@5.5.2)
-      astro-mermaid:
-        specifier: workspace:^
-        version: link:../../packages/astro-mermaid
       astro-reading-time:
         specifier: workspace:^
         version: link:../../packages/astro-reading-time
@@ -233,6 +230,9 @@ importers:
 
   packages/remark-anchor-link:
     dependencies:
+      '@mogeko/utils':
+        specifier: workspace:^
+        version: link:../utils
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
@@ -326,9 +326,6 @@ importers:
 
   packages/utils:
     devDependencies:
-      '@types/mdast':
-        specifier: ^4.0.4
-        version: 4.0.4
       '@types/node':
         specifier: ^20.14.8
         version: 20.14.8
@@ -347,9 +344,6 @@ importers:
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
-      unified:
-        specifier: ^11.0.5
-        version: 11.0.5
       vitest:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.14.8)

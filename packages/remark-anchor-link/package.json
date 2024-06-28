@@ -17,6 +17,7 @@
     "fmt": "prettier --write ."
   },
   "dependencies": {
+    "@mogeko/utils": "workspace:^",
     "github-slugger": "^2.0.0",
     "unist-builder": "^4.0.0",
     "unist-util-visit": "^5.0.0"

@@ -1,8 +1,9 @@
 import { visit } from "unist-util-visit";
 import { u } from "unist-builder";
+import { assocPath } from "@mogeko/utils";
 import GitHubSlugger from "github-slugger";
 import type { Plugin } from "unified";
-import type { Root } from "mdast";
+import type { Root, Node } from "mdast";
 
 export const remarkAnchorLink: Plugin<[Options?], Root> = ({
   levels = [1, 2, 3, 4],
@@ -10,6 +11,16 @@ export const remarkAnchorLink: Plugin<[Options?], Root> = ({
   className = "anchor",
   marker = "#",
 } = {}) => {
+  const updateProperties = <T>(data: Record<string, T>) => {
+    return <N extends Node>(node: N): N => {
+      Object.entries(data).forEach(([key, value]) => {
+        assocPath(["data", "hProperties", key], value, node);
+      });
+
+      return node;
+    };
+  };
+
   const slugger = new GitHubSlugger();
 
   return (tree) => {
@@ -20,16 +31,11 @@ export const remarkAnchorLink: Plugin<[Options?], Root> = ({
         const slug = slugger.slug(text.value);
 
         node.children[location === "suffix" ? "push" : "unshift"](
-          u(
-            "link",
-            {
-              data: { hProperties: { class: className } },
-              url: `#${slug}`,
-            },
-            [u("text", marker)],
+          updateProperties({ class: className })(
+            u("link", { url: `#${slug}` }, [u("text", marker)]),
           ),
         );
-        node.data = { hProperties: { id: slug } };
+        updateProperties({ id: slug })(node);
       }
     });
   };
