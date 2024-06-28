@@ -1,5 +1,15 @@
 # @mogeko/utils
 
+## 0.2.1
+
+### Patch Changes
+
+- [#117](https://github.com/mogeko/mogeko/pull/117) [`3ff29a3`](https://github.com/mogeko/mogeko/commit/3ff29a381b5c2c4050ba5b8cacdbef7a41ec02a2) Thanks [@mogeko](https://github.com/mogeko)! - Improve the type signature of the function `isNil`.
+
+- [#117](https://github.com/mogeko/mogeko/pull/117) [`4e2b8f0`](https://github.com/mogeko/mogeko/commit/4e2b8f038ffe32e0858750ec2459756690f7e13e) Thanks [@mogeko](https://github.com/mogeko)! - Move `is.test.ts` to the correct folder.
+
+- [#117](https://github.com/mogeko/mogeko/pull/117) [`2a96d55`](https://github.com/mogeko/mogeko/commit/2a96d55e010c5bd9239af369a8e1b31179476104) Thanks [@mogeko](https://github.com/mogeko)! - Optimize `isEmpty` function for improved performance.
+
 ## 0.2.0
 
 ### Minor Changes
