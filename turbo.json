@@ -6,11 +6,11 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env.local", ".env.production"],
       "env": ["SITE_*"],
-      "outputs": ["dist/**", ".astro/**"]
+      "outputs": ["dist", ".astro"]
     },
     "start": { "dependsOn": ["build"], "cache": false, "persistent": true },
-    "test": { "inputs": ["tests/**/*", "src/**/*"], "outputs": [] },
-    "cov": { "inputs": ["tests/**/*", "src/**/*"], "outputs": [] },
+    "test": { "dependsOn": ["^build"], "inputs": ["$TURBO_DEFAULT$", "tests"] },
+    "cov": { "dependsOn": ["^build"], "inputs": ["$TURBO_DEFAULT$", "tests"] },
     "sync": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env.local", ".env.production"],

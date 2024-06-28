@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isObject } from "@/index";
+import { isObject } from "@/is-object";
 
 describe("isObject", () => {
   it("returns true for objects", () => {

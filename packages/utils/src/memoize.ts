@@ -1,10 +1,3 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
 export const memoize: {
   <T, F extends (...args: any[]) => T>(
     fn: F,
@@ -27,5 +20,3 @@ export const memoize: {
   return memoized as any;
 };
 memoize.Cache = Map;
-
-export { slug } from "github-slugger";

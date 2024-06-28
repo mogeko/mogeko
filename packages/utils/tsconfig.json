@@ -6,6 +6,6 @@
     "baseUrl": ".",
     "paths": { "@/*": ["./src/*"] }
   },
-  "include": ["src", "tests", "*.config.ts"],
+  "include": ["src", "tests", "*.ts"],
   "exclude": ["node_modules", "dist"]
 }

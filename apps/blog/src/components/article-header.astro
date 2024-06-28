@@ -2,9 +2,9 @@
 import Link from "@/components/ui/link.astro";
 import { format } from "date-fns";
 import { LuCalendarDays, LuTags, LuDot, LuCoffee } from "react-icons/lu";
-import { cn, slug } from "@/lib/utils";
+import { cn, slug } from "@mogeko/utils";
 import type { HTMLAttributes } from "astro/types";
-import type { Entry } from "@/lib/content";
+import type { Entry } from "@/data";
 
 const { class: className, data, ...props } = Astro.props;
 
