@@ -70,6 +70,10 @@
     --prose-code-bg-color: var(--color-muted);
   }
 
+  .prose a.anchor {
+    @apply ml-2;
+  }
+
   .prose a {
     @apply relative shadow-[inset_0_-1px_0_0] hover:shadow-[inset_0_-.5em_0_0_var(--tw-shadow-color)] hover:shadow-[var(--prose-primary-color)];
   }

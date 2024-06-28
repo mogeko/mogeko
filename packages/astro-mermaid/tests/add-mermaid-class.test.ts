@@ -1,4 +1,4 @@
-import { addMermaidClass } from "@/src/shiki-transformer";
+import { addMermaidClass } from "@/shiki-transformer";
 import { codeToHtml } from "shiki";
 import { expect, describe, it } from "vitest";
 

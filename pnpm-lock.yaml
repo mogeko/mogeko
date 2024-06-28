@@ -83,9 +83,6 @@ importers:
       astro:
         specifier: ^4.11.3
         version: 4.11.3(@types/node@20.14.8)(typescript@5.5.2)
-      astro-mermaid:
-        specifier: workspace:^
-        version: link:../../packages/astro-mermaid
       astro-reading-time:
         specifier: workspace:^
         version: link:../../packages/astro-reading-time
@@ -110,6 +107,9 @@ importers:
       react-icons:
         specifier: ^5.2.1
         version: 5.2.1(react@18.3.1)
+      remark-anchor-link:
+        specifier: workspace:^
+        version: link:../../packages/remark-anchor-link
       remark-emoji:
         specifier: ^5.0.0
         version: 5.0.0
@@ -160,6 +160,9 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
     devDependencies:
+      '@mogeko/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       '@types/hast':
         specifier: ^3.0.4
         version: 3.0.4
@@ -175,9 +178,6 @@ importers:
       prettier:
         specifier: ^3.3.2
         version: 3.3.2
-      tsconfig:
-        specifier: workspace:^
-        version: link:../tsconfig
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(postcss@8.4.38)(typescript@5.5.2)
@@ -187,15 +187,15 @@ importers:
       unified:
         specifier: ^11.0.5
         version: 11.0.5
-      vite-tsconfig-paths:
-        specifier: ^4.3.2
-        version: 4.3.2(typescript@5.5.2)(vite@5.3.1(@types/node@20.14.8))
       vitest:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.14.8)
 
   packages/astro-reading-time:
     dependencies:
+      '@mogeko/utils':
+        specifier: workspace:^
+        version: link:../utils
       mdast-util-to-string:
         specifier: ^4.0.0
         version: 4.0.0
@@ -206,6 +206,9 @@ importers:
       '@astrojs/markdown-remark':
         specifier: ^5.1.1
         version: 5.1.1
+      '@mogeko/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       '@vitest/coverage-v8':
         specifier: ^1.6.0
         version: 1.6.0(vitest@1.6.0(@types/node@20.14.8))
@@ -215,18 +218,55 @@ importers:
       prettier:
         specifier: ^3.3.2
         version: 3.3.2
-      tsconfig:
-        specifier: workspace:^
-        version: link:../tsconfig
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(postcss@8.4.38)(typescript@5.5.2)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
-      vite-tsconfig-paths:
-        specifier: ^4.3.2
-        version: 4.3.2(typescript@5.5.2)(vite@5.3.1(@types/node@20.14.8))
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.0(@types/node@20.14.8)
+
+  packages/remark-anchor-link:
+    dependencies:
+      '@mogeko/utils':
+        specifier: workspace:^
+        version: link:../utils
+      github-slugger:
+        specifier: ^2.0.0
+        version: 2.0.0
+      unist-builder:
+        specifier: ^4.0.0
+        version: 4.0.0
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
+    devDependencies:
+      '@mogeko/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
+      '@types/mdast':
+        specifier: ^4.0.4
+        version: 4.0.4
+      '@types/node':
+        specifier: ^20.14.8
+        version: 20.14.8
+      '@vitest/coverage-v8':
+        specifier: ^1.6.0
+        version: 1.6.0(vitest@1.6.0(@types/node@20.14.8))
+      prettier:
+        specifier: ^3.3.2
+        version: 3.3.2
+      tsup:
+        specifier: ^8.1.0
+        version: 8.1.0(postcss@8.4.38)(typescript@5.5.2)
+      typescript:
+        specifier: ^5.5.2
+        version: 5.5.2
+      unified:
+        specifier: ^11.0.5
+        version: 11.0.5
       vitest:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.14.8)
@@ -259,6 +299,9 @@ importers:
         specifier: ^3.4.4
         version: 3.4.4
     devDependencies:
+      '@mogeko/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       '@types/node':
         specifier: ^20.14.8
         version: 20.14.8
@@ -271,18 +314,36 @@ importers:
       prettier:
         specifier: ^3.3.2
         version: 3.3.2
-      tsconfig:
-        specifier: workspace:^
-        version: link:../tsconfig
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(postcss@8.4.38)(typescript@5.5.2)
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
-      vite-tsconfig-paths:
-        specifier: ^4.3.2
-        version: 4.3.2(typescript@5.5.2)(vite@5.3.1(@types/node@20.14.8))
+      vitest:
+        specifier: ^1.6.0
+        version: 1.6.0(@types/node@20.14.8)
+
+  packages/utils:
+    devDependencies:
+      '@mogeko/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
+      '@types/node':
+        specifier: ^20.14.8
+        version: 20.14.8
+      '@vitest/coverage-v8':
+        specifier: ^1.6.0
+        version: 1.6.0(vitest@1.6.0(@types/node@20.14.8))
+      prettier:
+        specifier: ^3.3.2
+        version: 3.3.2
+      tsup:
+        specifier: ^8.1.0
+        version: 8.1.0(postcss@8.4.38)(typescript@5.5.2)
+      typescript:
+        specifier: ^5.5.2
+        version: 5.5.2
       vitest:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.14.8)
@@ -2291,9 +2352,6 @@ packages:
     resolution: {integrity: sha512-jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==}
     engines: {node: '>=10'}
 
-  globrex@0.1.2:
-    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
-
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
@@ -3730,16 +3788,6 @@ packages:
   ts-toolbelt@9.6.0:
     resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
 
-  tsconfck@3.0.3:
-    resolution: {integrity: sha512-4t0noZX9t6GcPTfBAbIbbIU4pfpCwh0ueq3S4O/5qXI1VwK1outmxhe9dOiEWqMz3MW2LKgDTpqWV+37IWuVbA==}
-    engines: {node: ^18 || >=20}
-    hasBin: true
-    peerDependencies:
-      typescript: ^5.0.0
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-
   tsconfck@3.1.0:
     resolution: {integrity: sha512-CMjc5zMnyAjcS9sPLytrbFmj89st2g+JYtY/c02ug4Q+CZaAtCgbyviI0n1YvjZE/pzoc6FbNsINS13DOL1B9w==}
     engines: {node: ^18 || >=20}
@@ -3847,6 +3895,9 @@ packages:
   unified@11.0.5:
     resolution: {integrity: sha512-xKvGhPWw3k84Qjh8bI3ZeJjqnyadK+GEFtazSfZv/rKeTkTjOJho6mFqh2SM96iIcZokxiOpg78GazTSg8+KHA==}
 
+  unist-builder@4.0.0:
+    resolution: {integrity: sha512-wmRFnH+BLpZnTKpc5L7O67Kac89s9HMrtELpnNaE6TAobq5DTZZs5YaTQfAZBA9bFPECx2uVAPO31c+GVug8mg==}
+
   unist-util-find-after@5.0.0:
     resolution: {integrity: sha512-amQa0Ep2m6hE2g72AugUItjbuM8X8cGQnFoHk0pGfrFeT9GZhzN5SW8nRsiGKK7Aif4CrACPENkA6P/Lw6fHGQ==}
 
@@ -3915,14 +3966,6 @@ packages:
     resolution: {integrity: sha512-de6HJgzC+TFzOu0NTC4RAIsyf/DY/ibWDYQUcuEA84EMHhcefTUGkjFHKKEJhQN4A+6I0u++kr3l36ZF2d7XRw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
-
-  vite-tsconfig-paths@4.3.2:
-    resolution: {integrity: sha512-0Vd/a6po6Q+86rPlntHye7F31zA2URZMbH8M3saAZ/xR9QoGN/L21bxEGfXdWmFdNkqPpRdxFT7nmNe12e9/uA==}
-    peerDependencies:
-      vite: '*'
-    peerDependenciesMeta:
-      vite:
-        optional: true
 
   vite@5.2.11:
     resolution: {integrity: sha512-HndV31LWW05i1BLPMUCE1B9E9GFbOu1MbenhS58FuK6owSO5qHm7GiCotrNY1YE5rMeQSFBGmT5ZaLEjFizgiQ==}
@@ -6366,8 +6409,6 @@ snapshots:
       merge2: 1.4.1
       slash: 3.0.0
 
-  globrex@0.1.2: {}
-
   graceful-fs@4.2.11: {}
 
   gray-matter@4.0.3:
@@ -8258,10 +8299,6 @@ snapshots:
 
   ts-toolbelt@9.6.0: {}
 
-  tsconfck@3.0.3(typescript@5.5.2):
-    optionalDependencies:
-      typescript: 5.5.2
-
   tsconfck@3.1.0(typescript@5.5.2):
     optionalDependencies:
       typescript: 5.5.2
@@ -8357,6 +8394,10 @@ snapshots:
       is-plain-obj: 4.1.0
       trough: 2.1.0
       vfile: 6.0.1
+
+  unist-builder@4.0.0:
+    dependencies:
+      '@types/unist': 3.0.2
 
   unist-util-find-after@5.0.0:
     dependencies:
@@ -8465,17 +8506,6 @@ snapshots:
       - sugarss
       - supports-color
       - terser
-
-  vite-tsconfig-paths@4.3.2(typescript@5.5.2)(vite@5.3.1(@types/node@20.14.8)):
-    dependencies:
-      debug: 4.3.4
-      globrex: 0.1.2
-      tsconfck: 3.0.3(typescript@5.5.2)
-    optionalDependencies:
-      vite: 5.3.1(@types/node@20.14.8)
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
 
   vite@5.2.11(@types/node@20.14.8):
     dependencies:

@@ -1,28 +1,23 @@
 {
-  "name": "astro-reading-time",
-  "version": "0.1.1",
-  "private": false,
-  "description": "An Astro integration for calculate reading time of Markdown/MDX files",
+  "name": "@mogeko/utils",
+  "version": "0.0.1",
+  "description": "Useful function snippets for Node.js",
   "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js"
-    }
-  },
   "types": "dist/index.d.ts",
+  "main": "dist/index.js",
   "keywords": [
-    "remark",
-    "astro-integration",
-    "reading-time"
+    "snippets",
+    "utils",
+    "functional"
   ],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/mogeko/mogeko.git",
-    "directory": "packages/astro-reading-time"
+    "directory": "packages/utils"
   },
-  "homepage": "https://github.com/mogeko/mogeko/tree/master/packages/astro-reading-time#readme",
+  "homepage": "https://github.com/mogeko/mogeko/tree/master/packages/utils#readme",
   "bugs": {
     "url": "https://github.com/mogeko/mogeko/issues",
     "email": "zhengjunyi@live.com"
@@ -38,16 +33,10 @@
     "lint": "prettier --check .",
     "fmt": "prettier --write ."
   },
-  "dependencies": {
-    "@mogeko/utils": "workspace:^",
-    "mdast-util-to-string": "^4.0.0",
-    "reading-time": "^1.5.0"
-  },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^5.1.1",
     "@mogeko/tsconfig": "workspace:^",
+    "@types/node": "^20.14.8",
     "@vitest/coverage-v8": "^1.6.0",
-    "astro": "^4.11.3",
     "prettier": "^3.3.2",
     "tsup": "^8.1.0",
     "typescript": "^5.5.2",

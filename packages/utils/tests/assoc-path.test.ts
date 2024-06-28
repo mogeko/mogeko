@@ -1,5 +1,5 @@
-import { assocPath } from "@/lib/utils";
 import { describe, it, expect } from "vitest";
+import { assocPath } from "@/index";
 
 describe("assocPath", () => {
   it("sets a value at a path", () => {

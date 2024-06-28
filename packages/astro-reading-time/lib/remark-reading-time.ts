@@ -1,6 +1,6 @@
 import getReadingTime from "reading-time";
 import { toString } from "mdast-util-to-string";
-import { assocPath } from "@/lib/utils";
+import { assocPath } from "@mogeko/utils";
 import type { RemarkPlugin } from "@astrojs/markdown-remark";
 
 export const remarkReadingTime: RemarkPlugin<[]> = () => {
