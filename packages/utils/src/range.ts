@@ -1,9 +1,9 @@
-export function range(to: number): number[];
-export function range(from: number, to: number): number[];
-export function range(from: number, to?: number, step?: number): number[];
-export function range(from: number, to?: number, step = 1) {
+export function range(length: number): number[];
+export function range(start: number, stop: number): number[];
+export function range(start: number, stop?: number, step?: number): number[];
+export function range(start: number, stop?: number, step = 1) {
   return Array.from(
-    { length: Math.ceil((to ? to - from : from) / step) },
-    (_, i) => (to ? from + i : i) * step,
+    { length: Math.ceil((stop ? stop - start : start) / step) },
+    (_, i) => (stop ? start + i : i) * step,
   );
 }
