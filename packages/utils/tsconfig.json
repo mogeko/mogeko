@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "tsconfig/default.tsconfig.json",
+  "extends": "@mogeko/tsconfig/default.tsconfig.json",
   "compilerOptions": {
     "types": ["vitest/importMeta"],
     "baseUrl": ".",

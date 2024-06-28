@@ -1,4 +1,4 @@
-# tsconfig
+# @mogeko/tsconfig
 
 ## 0.0.2
 

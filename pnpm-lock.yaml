@@ -160,6 +160,9 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
     devDependencies:
+      '@mogeko/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       '@types/hast':
         specifier: ^3.0.4
         version: 3.0.4
@@ -175,9 +178,6 @@ importers:
       prettier:
         specifier: ^3.3.2
         version: 3.3.2
-      tsconfig:
-        specifier: workspace:^
-        version: link:../tsconfig
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(postcss@8.4.38)(typescript@5.5.2)
@@ -206,6 +206,9 @@ importers:
       '@astrojs/markdown-remark':
         specifier: ^5.1.1
         version: 5.1.1
+      '@mogeko/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       '@vitest/coverage-v8':
         specifier: ^1.6.0
         version: 1.6.0(vitest@1.6.0(@types/node@20.14.8))
@@ -215,9 +218,6 @@ importers:
       prettier:
         specifier: ^3.3.2
         version: 3.3.2
-      tsconfig:
-        specifier: workspace:^
-        version: link:../tsconfig
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(postcss@8.4.38)(typescript@5.5.2)
@@ -243,6 +243,9 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
     devDependencies:
+      '@mogeko/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       '@types/mdast':
         specifier: ^4.0.4
         version: 4.0.4
@@ -255,9 +258,6 @@ importers:
       prettier:
         specifier: ^3.3.2
         version: 3.3.2
-      tsconfig:
-        specifier: workspace:^
-        version: link:../tsconfig
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(postcss@8.4.38)(typescript@5.5.2)
@@ -299,6 +299,9 @@ importers:
         specifier: ^3.4.4
         version: 3.4.4
     devDependencies:
+      '@mogeko/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       '@types/node':
         specifier: ^20.14.8
         version: 20.14.8
@@ -311,9 +314,6 @@ importers:
       prettier:
         specifier: ^3.3.2
         version: 3.3.2
-      tsconfig:
-        specifier: workspace:^
-        version: link:../tsconfig
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(postcss@8.4.38)(typescript@5.5.2)
@@ -326,6 +326,9 @@ importers:
 
   packages/utils:
     devDependencies:
+      '@mogeko/tsconfig':
+        specifier: workspace:^
+        version: link:../tsconfig
       '@types/node':
         specifier: ^20.14.8
         version: 20.14.8
@@ -335,9 +338,6 @@ importers:
       prettier:
         specifier: ^3.3.2
         version: 3.3.2
-      tsconfig:
-        specifier: workspace:^
-        version: link:../tsconfig
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(postcss@8.4.38)(typescript@5.5.2)
