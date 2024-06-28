@@ -1,5 +1,11 @@
 # @mogeko/tsconfig
 
+## 0.0.3
+
+### Patch Changes
+
+- [#111](https://github.com/mogeko/mogeko/pull/111) [`08df678`](https://github.com/mogeko/mogeko/commit/08df678b853e35780994d35045f4941343f5d460) Thanks [@mogeko](https://github.com/mogeko)! - Rename to `@mogeko/tsconfig`.
+
 ## 0.0.2
 
 ### Patch Changes
