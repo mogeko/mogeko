@@ -1,5 +1,14 @@
 # blog
 
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies [[`de51fac`](https://github.com/mogeko/mogeko/commit/de51fac1fe35581b235f2ccf077ee59ec34fcf24), [`b91c79f`](https://github.com/mogeko/mogeko/commit/b91c79f375abe0e5c1dcd71bd2be7a2c6585918c), [`e4b8ef8`](https://github.com/mogeko/mogeko/commit/e4b8ef8ec1861f68ca766c6343796005f111ebc6), [`68facae`](https://github.com/mogeko/mogeko/commit/68facae494239a29a1410236a764c6e8fddccb16), [`1b6dcea`](https://github.com/mogeko/mogeko/commit/1b6dceaeda531ae92c3c5200cdbb60044ba8dbda)]:
+  - @mogeko/utils@0.3.0
+  - astro-reading-time@0.1.6
+  - remark-anchor-link@0.1.4
+
 ## 0.0.8
 
 ### Patch Changes
