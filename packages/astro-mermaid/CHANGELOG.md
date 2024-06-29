@@ -1,5 +1,11 @@
 # astro-mermaid
 
+## 0.1.2
+
+### Patch Changes
+
+- [#126](https://github.com/mogeko/mogeko/pull/126) [`3506015`](https://github.com/mogeko/mogeko/commit/350601576ed2f96a67df259303996b0ae92ac424) Thanks [@mogeko](https://github.com/mogeko)! - Add `playwright-core` as peer dependency.
+
 ## 0.1.1
 
 ### Patch Changes
