@@ -8,15 +8,15 @@ import { is } from "@/is";
  *
  * @example
  * ```typescript
- * isEmpty(""); // true
- * isEmpty([]); // true
- * isEmpty({}); // true
- * isEmpty(undefined); // false
- * isEmpty(null); // false
- * isEmpty(fasle); // false
- * isEmpty(true); // false
- * isEmpty("foo"); // false
- * isEmpty(() => {}); // false
+ * isEmpty("");        //=> true
+ * isEmpty([]);        //=> true
+ * isEmpty({});        //=> true
+ * isEmpty(undefined); //=> false
+ * isEmpty(null);      //=> false
+ * isEmpty(fasle);     //=> false
+ * isEmpty(true);      //=> false
+ * isEmpty("foo");     //=> false
+ * isEmpty(() => {});  //=> false
  * ```
  */
 export function isEmpty(value: unknown): boolean {
