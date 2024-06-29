@@ -1,5 +1,21 @@
 # @mogeko/utils
 
+## 0.3.0
+
+### Minor Changes
+
+- [#119](https://github.com/mogeko/mogeko/pull/119) [`68facae`](https://github.com/mogeko/mogeko/commit/68facae494239a29a1410236a764c6e8fddccb16) Thanks [@mogeko](https://github.com/mogeko)! - Add `deepMerge` and `deepMergeWith` utility functions.
+
+- [#119](https://github.com/mogeko/mogeko/pull/119) [`1b6dcea`](https://github.com/mogeko/mogeko/commit/1b6dceaeda531ae92c3c5200cdbb60044ba8dbda) Thanks [@mogeko](https://github.com/mogeko)! - Add `tryCatch` utility function for error handling.
+
+### Patch Changes
+
+- [#119](https://github.com/mogeko/mogeko/pull/119) [`de51fac`](https://github.com/mogeko/mogeko/commit/de51fac1fe35581b235f2ccf077ee59ec34fcf24) Thanks [@mogeko](https://github.com/mogeko)! - Write documents and examples for the `isEmpty` function.
+
+- [#119](https://github.com/mogeko/mogeko/pull/119) [`b91c79f`](https://github.com/mogeko/mogeko/commit/b91c79f375abe0e5c1dcd71bd2be7a2c6585918c) Thanks [@mogeko](https://github.com/mogeko)! - Redesign the function signature of `range` to make its meaning more accurate.
+
+- [#119](https://github.com/mogeko/mogeko/pull/119) [`e4b8ef8`](https://github.com/mogeko/mogeko/commit/e4b8ef8ec1861f68ca766c6343796005f111ebc6) Thanks [@mogeko](https://github.com/mogeko)! - Write documents and examples for the `range` function.
+
 ## 0.2.1
 
 ### Patch Changes
