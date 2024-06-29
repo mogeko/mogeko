@@ -1,5 +1,19 @@
 # @mogeko/utils
 
+## 0.4.0
+
+### Minor Changes
+
+- [#123](https://github.com/mogeko/mogeko/pull/123) [`496cf16`](https://github.com/mogeko/mogeko/commit/496cf166ed6dab049311b9f325e82ab2509725c0) Thanks [@mogeko](https://github.com/mogeko)! - Add `has` utility function for checking object properties.
+
+### Patch Changes
+
+- [#123](https://github.com/mogeko/mogeko/pull/123) [`b421401`](https://github.com/mogeko/mogeko/commit/b421401d5035e32fb249cf279e79d9ffee54e3d7) Thanks [@mogeko](https://github.com/mogeko)! - Add documents and use cases to functions.
+
+- [#123](https://github.com/mogeko/mogeko/pull/123) [`6803313`](https://github.com/mogeko/mogeko/commit/68033137f3947c1b4c73733abf5868e47df98211) Thanks [@mogeko](https://github.com/mogeko)! - Optimize `deepMergeWith` utility function.
+
+- [#123](https://github.com/mogeko/mogeko/pull/123) [`6b4dc35`](https://github.com/mogeko/mogeko/commit/6b4dc351b029cfc340d4c70682cbd09178ded7b1) Thanks [@mogeko](https://github.com/mogeko)! - Optimize `deepMergeWith` utility function and remove unused import.
+
 ## 0.3.1
 
 ### Patch Changes
