@@ -7,3 +7,4 @@ export { is } from "@/is";
 export { memoize } from "@/memoize";
 export { range } from "@/range";
 export { tap } from "@/tap";
+export { tryCatch } from "@/try-catch";

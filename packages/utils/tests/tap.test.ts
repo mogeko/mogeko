@@ -1,7 +1,11 @@
-import { describe, it, expect, vi } from "vitest";
+import { afterAll, describe, it, expect, vi } from "vitest";
 import { tap } from "@/tap";
 
 describe("tap", () => {
+  afterAll(() => {
+    vi.resetAllMocks();
+  });
+
   it("calls the function with the value", () => {
     const fn = vi.fn();
     const result = tap(fn)(1);
