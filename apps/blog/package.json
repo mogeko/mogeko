@@ -1,17 +1,21 @@
 {
   "name": "blog",
   "type": "module",
-  "version": "0.0.11",
+  "version": "0.0.10",
   "private": true,
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "postinstall": "pnpm exec playwright-core install --with-deps chromium",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "sync": "astro sync",
     "lint": "prettier --check .",
     "fmt": "prettier --write ."
+  },
+  "peerDependencies": {
+    "playwright-core": "^1.0.0"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
@@ -28,6 +32,7 @@
     "@shikijs/transformers": "^1.9.1",
     "@vercel/og": "^0.6.2",
     "astro": "^4.11.3",
+    "astro-mermaid": "workspace:^",
     "astro-reading-time": "workspace:^",
     "class-variance-authority": "^0.7.0",
     "date-fns": "^3.6.0",

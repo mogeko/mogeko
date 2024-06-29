@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 import readingTime from "astro-reading-time";
+import mermaid from "astro-mermaid";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import partytown from "@astrojs/partytown";
@@ -45,6 +46,7 @@ export default defineConfig({
     }),
     readingTime(),
     mdx(),
+    mermaid(),
     partytown({
       config: {
         forward: ["si", "siq.push", "va", "vaq.push"],
