@@ -6,8 +6,8 @@
  *
  * @example
  * ```typescript
- * range(0); // []
- * range(5); // [0, 1, 2, 3, 4]
+ * range(0); //=> []
+ * range(5); //=> [0, 1, 2, 3, 4]
  * ```
  */
 export function range(length: number): number[];
@@ -21,7 +21,7 @@ export function range(length: number): number[];
  *
  * @example
  * ```typescript
- * range(1, 5); // [1, 2, 3, 4]
+ * range(1, 5); //=> [1, 2, 3, 4]
  * ```
  */
 export function range(start: number, stop: number): number[];
@@ -36,7 +36,7 @@ export function range(start: number, stop: number): number[];
  *
  * @example
  * ```typescript
- * range(1, 6, 2); // [1, 3, 5]
+ * range(1, 6, 2); //=> [1, 3, 5]
  * ```
  */
 export function range(start: number, stop: number, step: number): number[];
