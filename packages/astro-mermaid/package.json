@@ -23,6 +23,9 @@
     "lint": "prettier --check .",
     "fmt": "prettier --write ."
   },
+  "peerDependencies": {
+    "playwright-core": "^1.0.0"
+  },
   "dependencies": {
     "hast-util-class-list": "^2.0.0",
     "hastscript": "^9.0.0",
