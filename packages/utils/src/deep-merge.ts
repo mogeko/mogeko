@@ -12,11 +12,10 @@ import { deepMergeWith } from "@/deep-merge-with";
  *
  * @example
  * ```typescript
- * deepMerge({ a: 1, b: 2 }, { b: 3, c: 4 });   //=> { a: 1, b: 3, c: 4 }
- * deepMerge({ a: { b: 1 } }, { a: { c: 2 } }); //=> { a: { b: 1, c: 2 } }
- * deepMerge([1, 2], [3, 4]);                   //=> [3, 4]
- * deepMerge({ a: 1, b: 2 }, null);             //=> { a: 1, b: 2 }
- * deepMerge(null, { a: 1, b: 2 });             //=> { a: 1, b: 2 }
+ * deepMerge(
+ *   { name: "fred", age: 10, contact: { email: "moo@example.com" } },
+ *   { age: 40, contact: { email: "baa@example.com" } },
+ * ); // { name: "fred", age: 40, contact: { email: "baa@example.com" } }
  * ```
  */
 export const deepMerge = deepMergeWith((_a, b) => b);

@@ -1,5 +1,4 @@
 import { isNil } from "@/is-nil";
-import { is } from "@/is";
 
 /**
  * Creates a new object with the own properties of the two provided objects.
@@ -20,23 +19,21 @@ import { is } from "@/is";
  *
  * @example
  * ```typescript
- * const merge = deepMergeWith((a, b) => a + b);
- * merge({ a: 1, b: 2 }, { b: 3, c: 4 });   //=> { a: 1, b: 5, c: 4 }
- * merge({ a: { b: 1 } }, { a: { c: 2 } }); //=> { a: { b: 1, c: 2 } }
- * merge([1, 2], [3, 4]);                   //=> [4, 6]
- * merge({ a: 1, b: 2 }, null);             //=> { a: 1, b: 2 }
- * merge(null, { a: 1, b: 2 });             //=> { a: 1, b: 2 }
+ * deepMergeWith((a, b) => a.concat(b))(
+ *               { a: true, c: { value: [1, 2] } },
+ *               { b: true, c: { value: [3, 4] } }
+ * ); // { a: true, b: true, c: { value: [1, 2, 3, 4] } }
  * ```
  */
 export function deepMergeWith(fn: (a: any, b: any) => any) {
+  const _isObject = (x: any) => x.toString() === "[object Object]";
   const deepMerge = (...objs: any[]) => {
     return objs.reduce((acc, obj) => {
-      if (isNil(acc) || !is(Object, acc)) return obj;
-      if (isNil(obj) || !is(Object, obj)) return acc;
+      if (isNil(acc) || isNil(obj)) return fn(acc, obj);
 
       Object.keys(obj).forEach((key) => {
         acc[key] = !isNil(acc[key])
-          ? is(Object, acc[key]) || is(Object, obj[key])
+          ? _isObject(obj[key]) && _isObject(acc[key])
             ? deepMerge(acc[key], obj[key])
             : fn(acc[key], obj[key])
           : obj[key];

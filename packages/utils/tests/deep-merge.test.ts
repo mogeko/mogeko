@@ -14,10 +14,10 @@ describe("deepMerge", () => {
   it("merges nested objects", () => {
     expect(
       deepMerge(
-        { a: 1, b: { c: 2 }, d: { c: 3 } },
-        { a: { c: 4 }, b: { c: 5 }, d: 6 },
+        { name: "fred", age: 10, contact: { email: "moo@example.com" } },
+        { age: 40, contact: { email: "baa@example.com" } },
       ),
-    ).toEqual({ a: { c: 4 }, b: { c: 5 }, d: { c: 3 } });
+    ).toEqual({ name: "fred", age: 40, contact: { email: "baa@example.com" } });
   });
 
   it("merges nested arrays", () => {
@@ -25,7 +25,7 @@ describe("deepMerge", () => {
   });
 
   it("merges nested objects and null", () => {
-    expect(deepMerge({ a: 1, b: [2] }, null)).toEqual({ a: 1, b: [2] });
     expect(deepMerge(null, { a: 1, b: [2] })).toEqual({ a: 1, b: [2] });
+    expect(deepMerge({ a: 1, b: [2] }, null)).toEqual(null);
   });
 });
