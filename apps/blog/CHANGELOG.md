@@ -1,5 +1,12 @@
 # blog
 
+## 0.0.12
+
+### Patch Changes
+
+- Updated dependencies [[`3506015`](https://github.com/mogeko/mogeko/commit/350601576ed2f96a67df259303996b0ae92ac424)]:
+  - astro-mermaid@0.1.2
+
 ## 0.0.11
 
 ### Patch Changes
