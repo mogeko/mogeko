@@ -3,6 +3,7 @@ export { cn } from "@/cn";
 export { deepMergeWith } from "@/deep-merge-with";
 export { deepMerge } from "@/deep-merge";
 export { slug } from "github-slugger";
+export { has } from "@/has";
 export { isEmpty } from "@/is-empty";
 export { isNil } from "@/is-nil";
 export { is } from "@/is";

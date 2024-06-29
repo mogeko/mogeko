@@ -1,0 +1,26 @@
+import { isNil } from "@/is-nil";
+
+/**
+ * Returns whether or not an object has an own property with the specified name
+ *
+ * @param {String} key The name of the property to check for.
+ * @param {Object} obj The object to query.
+ * @return {Boolean} Whether the property exists.
+ *
+ * @example
+ * ```typescript
+ * has("a", { a: 1 }); // true
+ * has("a", { b: 1 }); // false
+ * has("a", null);     // false
+ * ```
+ */
+export function has<K extends PropertyKey>(
+  key: K,
+  obj: unknown,
+): obj is ObjectHavingSome<K> {
+  return !isNil(obj) && Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+type ObjectHavingSome<Key extends PropertyKey> = {
+  [K in Key]: { [P in K]: unknown };
+}[Key];
