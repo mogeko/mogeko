@@ -4,6 +4,7 @@ import { is } from "@/is";
 describe("is", () => {
   it("should return true", () => {
     expect(is(Object, {})).toBe(true);
+    expect(is(Object, [])).toBe(true);
     expect(is(String, "")).toBe(true);
     expect(is(String, new String(""))).toBe(true);
     expect(is(Array, [])).toBe(true);
