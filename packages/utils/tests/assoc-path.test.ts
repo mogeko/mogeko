@@ -37,11 +37,10 @@ describe("assocPath", () => {
     expect(result).toEqual({ a: [1, { b: 4 }, 3] });
   });
 
-  // It is not currect, but it is never hanppen in this project.
   it("if a path ends with a number", () => {
     const obj = { a: { b: 1 } };
     const result = assocPath(["a", "b", 1], 2, obj);
 
-    expect(result).toEqual({ a: { b: { "1": 2 } } });
+    expect(result).toEqual({ a: { b: [undefined, 2] } });
   });
 });
