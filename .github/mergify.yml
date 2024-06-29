@@ -1,10 +1,8 @@
 queue_rules:
   - name: dependabot
     queue_conditions:
-      - "check-success=Build Monorepo Packages"
+      - "check-success=Build and Deploy to Vercel Preview"
       - "check-success=Test Monorepo Packages"
-      - "check-success=Vercel"
-      - "check-success=Vercel Preview Comments"
     batch_size: 10
     batch_max_wait_time: 5min
 
@@ -16,18 +14,14 @@ pull_request_rules:
       - "author=github-actions[bot]"
       - "files~=CHANGELOG.md"
       - "head~=changeset-release"
-      - "check-success=Vercel"
-      - "check-success=Vercel Preview Comments"
     actions:
       merge:
   - name: Automatic merge from dependabot
     conditions:
       - "author=dependabot[bot]"
       - "label=dependencies"
-      - "check-success=Build Monorepo Packages"
+      - "check-success=Build and Deploy to Vercel Preview"
       - "check-success=Test Monorepo Packages"
-      - "check-success=Vercel"
-      - "check-success=Vercel Preview Comments"
     actions:
       queue:
         name: dependabot

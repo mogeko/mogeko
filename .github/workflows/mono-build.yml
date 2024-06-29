@@ -8,20 +8,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    name: Build Monorepo Packages
+  preview:
+    name: Build and Deploy to Vercel Preview
     runs-on: ubuntu-latest
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ github.actor }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.7
       - name: Set up pnpm
         uses: pnpm/action-setup@v4.0.0
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.0.2
         with:
           node-version-file: package.json
           cache: "pnpm"
-      - run: pnpm install -rw --frozen-lockfile
-      - run: pnpm run build
+      - uses: actions/cache@v4.0.2
+        with:
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-ms-playwright-
+          path: /home/runner/.cache/ms-playwright
+      - run: pnpm install --global vercel@latest
+      - run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
