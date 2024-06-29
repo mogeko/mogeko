@@ -1,6 +1,6 @@
 {
   "name": "remark-anchor-link",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Add anchor links to Headings",
   "type": "module",
   "types": "dist/index.d.ts",
