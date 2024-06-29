@@ -1,5 +1,11 @@
 # @mogeko/utils
 
+## 0.3.1
+
+### Patch Changes
+
+- [#121](https://github.com/mogeko/mogeko/pull/121) [`37af8b4`](https://github.com/mogeko/mogeko/commit/37af8b4eec9ea28e5624ca241424263c6a4f4e6a) Thanks [@mogeko](https://github.com/mogeko)! - Improve the performance of the `ascocPath` function for Array.
+
 ## 0.3.0
 
 ### Minor Changes
