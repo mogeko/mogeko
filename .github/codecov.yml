@@ -1,3 +1,25 @@
+coverage:
+  status:
+    project:
+      default:
+        target: 80
+        threshold: 10
+    patch:
+      default:
+        target: 80
+        threshold: 10
+
+flag_management:
+  default_rules:
+    carryforward: true
+    statuses:
+      - type: project
+        target: 80
+        threshold: 10
+      - type: patch
+        target: 80
+        threshold: 10
+
 flags:
   astro-mermaid:
     paths:
