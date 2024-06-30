@@ -1,17 +1,17 @@
 ---
 import "@/styles/globals.css";
 
+import * as siteConfig from "astro:env/server";
 import VercelInsights from "@/components/vercel-insights.astro";
-import { siteConfig } from "@/config";
 import { cn } from "@mogeko/utils";
 import type { HTMLAttributes } from "astro/types";
 
 const { head, class: className, ...props } = Astro.props;
 const meta = {
-  title: (head?.title ? `${head?.title} - ` : "") + siteConfig.title,
-  description: head?.description ?? siteConfig.description,
-  keywords: [siteConfig.keywords, ...(head?.keywords ?? [])].join(", "),
-  author: siteConfig.author,
+  title: (head?.title ? `${head?.title} - ` : "") + siteConfig.SITE_TITLE,
+  description: head?.description ?? siteConfig.SITE_DESCRIPTION,
+  keywords: [siteConfig.SITE_KEYWORDS, ...(head?.keywords ?? [])].join(", "),
+  author: siteConfig.SITE_KEYWORDS,
   url: new URL(Astro.url.pathname, import.meta.env.SITE),
   ogImage: new URL(head?.ogImage ?? "/og.png", import.meta.env.SITE),
 };
@@ -43,12 +43,12 @@ type Props = { head?: HeadProps } & HTMLAttributes<"body">;
     <!-- Website Metadata -->
     <meta name="theme-color" content="#e76e50" />
     <meta name="description" content={meta.description} />
-    <meta name="author" content={siteConfig.author} />
+    <meta name="author" content={siteConfig.SITE_AUTHOR} />
     <meta name="keywords" content={meta.keywords} />
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={meta.title} />
     <meta property="og:description" content={meta.description} />
-    <meta property="og:site_name" content={siteConfig.title} />
+    <meta property="og:site_name" content={siteConfig.SITE_TITLE} />
     <meta property="og:url" content={meta.url} />
     <meta property="og:image" content={meta.ogImage} />
     <meta property="og:image:alt" content={meta.title} />

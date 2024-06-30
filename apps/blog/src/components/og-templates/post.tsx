@@ -1,8 +1,8 @@
-import { siteConfig } from "@/config";
+import { SITE_TITLE, SITE_AUTHOR } from "astro:env/server";
 import type { Entry } from "@/data";
 
 export const OgTemplate: React.FC<{ data: Entry["data"] }> = ({ data }) => {
-  const author = data.author ?? siteConfig.author;
+  const author = data.author ?? SITE_AUTHOR;
 
   return (
     <div
@@ -65,7 +65,7 @@ export const OgTemplate: React.FC<{ data: Entry["data"] }> = ({ data }) => {
             style={{ marginRight: "0.5rem", height: "2rem", width: "2rem" }}
             src={`${import.meta.env.SITE}/favicon.svg`}
           />
-          {siteConfig.title}
+          {SITE_TITLE}
         </div>
       </div>
     </div>

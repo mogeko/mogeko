@@ -1,4 +1,4 @@
-import { siteConfig } from "@/config";
+import { SITE_TITLE } from "astro:env/server";
 
 export const OgTemplate: React.FC = () => {
   return (
@@ -26,7 +26,7 @@ export const OgTemplate: React.FC = () => {
           margin: "auto",
         }}
       >
-        {siteConfig.title}
+        {SITE_TITLE}
       </div>
     </div>
   );
