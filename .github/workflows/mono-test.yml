@@ -30,7 +30,8 @@ jobs:
       - run: pnpm install -rw --frozen-lockfile
       - run: pnpm run lint
       - run: pnpm run test
-      - run: pnpm run cov
+      - name: Generate Coverage Reports
+        run: pnpm run cov
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
