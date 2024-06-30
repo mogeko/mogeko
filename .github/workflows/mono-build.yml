@@ -11,6 +11,9 @@ jobs:
   preview:
     name: Build and Deploy to Vercel Preview
     runs-on: ubuntu-latest
+    environment:
+      name: preview
+      url: ${{ steps.deployment.outputs.DEPLOYMENT_URL }}
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ github.actor }}
@@ -33,4 +36,6 @@ jobs:
       - run: pnpm install --global vercel@latest
       - run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
       - run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-      - run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+      - run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
+      - run: echo "DEPLOYMENT_URL=$(cat deployment-url.txt)" >> "$GITHUB_OUTPUT"
+        id: deployment
