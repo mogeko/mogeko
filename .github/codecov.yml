@@ -1,0 +1,21 @@
+flags:
+  astro-mermaid:
+    paths:
+      - "./packages/astro-mermaid/**/*"
+    carryforward: true
+  astro-reading-time:
+    paths:
+      - "./packages/astro-reading-time/**/*"
+    carryforward: true
+  remark-anchor-link:
+    paths:
+      - "./packages/remark-anchor-link/**/*"
+    carryforward: true
+  mogeko-typography:
+    paths:
+      - "./packages/typography/**/*"
+    carryforward: true
+  mogeko-utils:
+    paths:
+      - "./packages/utils/**/*"
+    carryforward: true

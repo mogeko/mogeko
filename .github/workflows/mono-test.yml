@@ -12,8 +12,7 @@ jobs:
     name: Test Monorepo Packages
     runs-on: ubuntu-latest
     env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-      TURBO_TEAM: ${{ github.actor }}
+      TURBO_FORCE: true
     steps:
       - uses: actions/checkout@v4.1.7
       - name: Set up pnpm
@@ -32,3 +31,9 @@ jobs:
       - run: pnpm run lint
       - run: pnpm run test
       - run: pnpm run cov
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: mogeko/mogeko
+          fail_ci_if_error: false
