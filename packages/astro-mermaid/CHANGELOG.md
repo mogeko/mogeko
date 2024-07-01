@@ -1,5 +1,11 @@
 # astro-mermaid
 
+## 0.1.3
+
+### Patch Changes
+
+- [#132](https://github.com/mogeko/mogeko/pull/132) [`36690ba`](https://github.com/mogeko/mogeko/commit/36690bae69cb9f2054dac6a7217a18dd303f7cc2) Thanks [@mogeko](https://github.com/mogeko)! - update package `README.md` files with badges and links.
+
 ## 0.1.2
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # blog
 
+## 0.0.13
+
+### Patch Changes
+
+- Updated dependencies [[`36690ba`](https://github.com/mogeko/mogeko/commit/36690bae69cb9f2054dac6a7217a18dd303f7cc2)]:
+  - astro-reading-time@0.1.9
+  - remark-anchor-link@0.1.7
+  - astro-mermaid@0.1.3
+  - @mogeko/utils@0.4.1
+
 ## 0.0.12
 
 ### Patch Changes
