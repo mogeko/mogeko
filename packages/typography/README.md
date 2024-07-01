@@ -1,5 +1,9 @@
 # @mogeko/typography
 
+[![Monorepo Build](https://github.com/mogeko/mogeko/actions/workflows/mono-build.yml/badge.svg)](https://github.com/mogeko/mogeko/actions/workflows/mono-build.yml)
+[![CodeQL](https://github.com/mogeko/mogeko/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/mogeko/mogeko/actions/workflows/github-code-scanning/codeql)
+[![codecov](https://codecov.io/gh/mogeko/mogeko/graph/badge.svg?token=WU7ZGP8Y3F)](https://codecov.io/gh/mogeko/mogeko)
+
 A typography plugin for [Tailwind CSS](https://tailwindcss.com).
 
 It is a group of beautiful typographic that can be used to style any vanilla HTML you don’t control (like Markdown, or a CMS). Its usage is similar to the official [typography plug-in](https://tailwindcss.com/docs/typography-plugin) of Tailwind CSS (Use the `prose` class), but it is simpler. **This means that it is easier for you to develop your own plug-ins according to your project.**

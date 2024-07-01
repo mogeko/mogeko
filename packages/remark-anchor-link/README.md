@@ -1,5 +1,9 @@
 # remark-anchor-link
 
+[![Monorepo Build](https://github.com/mogeko/mogeko/actions/workflows/mono-build.yml/badge.svg)](https://github.com/mogeko/mogeko/actions/workflows/mono-build.yml)
+[![CodeQL](https://github.com/mogeko/mogeko/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/mogeko/mogeko/actions/workflows/github-code-scanning/codeql)
+[![codecov](https://codecov.io/gh/mogeko/mogeko/graph/badge.svg?token=WU7ZGP8Y3F)](https://codecov.io/gh/mogeko/mogeko)
+
 A Remark plugin to add anchor links to headings.
 
 This plugin processes headings in the markdown and adds anchor links to them so that they can be linked to directly. The anchor links are added as an `a` tag with a `href` attribute pointing to the heading's `id`. The anchor links are also given a class of `"anchor"` for styling purposes and an `aria-hidden="true"` attribute to hide them from screen readers.

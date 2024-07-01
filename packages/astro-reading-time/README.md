@@ -1,7 +1,8 @@
 # astro-reading-time
 
 [![Monorepo Build](https://github.com/mogeko/mogeko/actions/workflows/mono-build.yml/badge.svg)](https://github.com/mogeko/mogeko/actions/workflows/mono-build.yml)
-[![Monorepo Test](https://github.com/mogeko/mogeko/actions/workflows/mono-test.yml/badge.svg)](https://github.com/mogeko/mogeko/actions/workflows/mono-test.yml)
+[![CodeQL](https://github.com/mogeko/mogeko/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/mogeko/mogeko/actions/workflows/github-code-scanning/codeql)
+[![codecov](https://codecov.io/gh/mogeko/mogeko/graph/badge.svg?token=WU7ZGP8Y3F)](https://codecov.io/gh/mogeko/mogeko)
 
 An Astro integration for calculate reading time of Markdown/MDX files.
 
