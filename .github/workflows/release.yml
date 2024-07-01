@@ -40,8 +40,9 @@ jobs:
       - run: pnpm install --global vercel@latest
       - run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - run: vercel --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
-      - run: echo "DEPLOYMENT_URL=$(cat deployment-url.txt)" >> "$GITHUB_OUTPUT"
+      - run: |
+          vercel --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} > deployment-url.txt
+          echo "DEPLOYMENT_URL=$(cat deployment-url.txt)" >> "$GITHUB_OUTPUT"
         id: deployment
       - name: Create Version PR or Publish to NPM
         id: changesets
