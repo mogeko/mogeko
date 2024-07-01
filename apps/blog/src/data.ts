@@ -1,8 +1,17 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import { getTime } from "date-fns";
 import { memoize } from "@mogeko/utils";
-import path from "node:path";
-import fs from "node:fs/promises";
+
+export const loadFonts = memoize(
+  async () => {
+    return {
+      pacifico: await fetch(
+        "https://github.com/google/fonts/raw/main/ofl/pacifico/Pacifico-Regular.ttf",
+      ).then((res) => res.arrayBuffer()),
+    };
+  },
+  () => "fonts",
+);
 
 export const getEntries = memoize(
   async () => {
@@ -18,17 +27,3 @@ export const getEntries = memoize(
 );
 
 export type Entry = CollectionEntry<"posts">;
-
-export const loadFonts = memoize(
-  async () => {
-    return {
-      pacifico: await fs.readFile(
-        path.resolve("./public/fonts/pacifico/Pacifico-Regular.ttf"),
-      ),
-      smileySans: await fs.readFile(
-        path.resolve("./public/fonts/smiley-sans/SmileySans-Oblique.ttf"),
-      ),
-    };
-  },
-  () => "fonts",
-);
