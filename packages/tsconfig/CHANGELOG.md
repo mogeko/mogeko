@@ -1,5 +1,11 @@
 # @mogeko/tsconfig
 
+## 0.0.4
+
+### Patch Changes
+
+- [#138](https://github.com/mogeko/mogeko/pull/138) [`e214114`](https://github.com/mogeko/mogeko/commit/e214114f7b92d14c8897d3f7a39f0e8264b59c4f) Thanks [@mogeko](https://github.com/mogeko)! - Update TypeScript configuration to use define for class fields and resolve JSON module.
+
 ## 0.0.3
 
 ### Patch Changes
