@@ -3,10 +3,14 @@
   "extends": "@tsconfig/strictest/tsconfig.json",
   "compilerOptions": {
     "target": "ESNext",
+    "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "allowJs": true,
     "verbatimModuleSyntax": true,
-    "noEmit": true
-  }
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "allowJs": true
+  },
+  "name": "Default TypeScript Configuration",
+  "exclude": ["node_modules"]
 }
