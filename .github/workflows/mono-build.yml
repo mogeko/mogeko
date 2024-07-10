@@ -38,5 +38,5 @@ jobs:
       - run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - run: |
           vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} | \
-          xargs -I {} echo "DEPLOYMENT_URL={}" >> "${GITHUB_ENV}"
+          xargs -I {} echo "DEPLOYMENT_URL={}" >> "${GITHUB_OUTPUT}"
         id: deployment
