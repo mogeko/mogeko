@@ -38,13 +38,11 @@ jobs:
           restore-keys: ${{ runner.os }}-ms-playwright-
           path: /home/runner/.cache/ms-playwright
       - run: pnpm install --global vercel@latest
-      - run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - run: |
-          DEPLOYMENT_URL=$(mktemp --suffix ".deployment-url.txt")
-          vercel --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} > "${DEPLOYMENT_URL}"
-          echo "DEPLOYMENT_URL=$(cat ${DEPLOYMENT_URL})" >> "${GITHUB_OUTPUT}"
+      - run: vercel login --token=${{ secrets.VERCEL_TOKEN }}
+      - run: vercel pull --yes --environment=production
+      - run: vercel --prod | xargs -I {} echo "DEPLOYMENT_URL={}" >> "${GITHUB_ENV}"
         id: deployment
+      - run: vercel logout
       - name: Create Version PR or Publish to NPM
         id: changesets
         uses: changesets/action@v1.4.7
