@@ -41,9 +41,8 @@ jobs:
       - run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - run: |
-          DEPLOYMENT_URL=$(mktemp --suffix ".deployment-url.txt")
-          vercel --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} > "${DEPLOYMENT_URL}"
-          echo "DEPLOYMENT_URL=$(cat ${DEPLOYMENT_URL})" >> "${GITHUB_OUTPUT}"
+          vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} | \
+          xargs -I {} echo "DEPLOYMENT_URL={}" >> "${GITHUB_OUTPUT}"
         id: deployment
       - name: Create Version PR or Publish to NPM
         id: changesets
