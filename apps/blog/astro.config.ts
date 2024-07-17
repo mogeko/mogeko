@@ -7,6 +7,7 @@ import mermaid from "astro-mermaid";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import partytown from "@astrojs/partytown";
+import vercel from "@astrojs/vercel/serverless";
 
 import emoji from "remark-emoji";
 import anchorLink from "remark-anchor-link";
@@ -39,6 +40,8 @@ export default defineConfig({
       [emoji, { accessible: true }],
     ],
   },
+  output: "hybrid",
+  adapter: vercel(),
   integrations: [
     react(),
     tailwind({ applyBaseStyles: false }),
