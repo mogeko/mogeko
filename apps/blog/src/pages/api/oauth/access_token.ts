@@ -5,66 +5,55 @@ import type { APIRoute } from "astro";
 const TOKEN_VALIDITY_PERIOD = 1000 * 60 * 60 * 24 * 365; // 1 year;
 
 export const GET: APIRoute = async ({ request, redirect, cookies }) => {
-  const requestURL = new URL(request.url);
-
-  const code = requestURL.searchParams.get("code");
-  const state = requestURL.searchParams.get("state");
-  const error = requestURL.searchParams.get("error");
-
-  if (!code || !state) {
-    return new Response(
-      JSON.stringify({ error: "`code` and `state` are required." }),
-      { status: 400 },
-    );
-  }
-
+  const query = new URL(request.url).searchParams;
+  const [code, state, error] = ["code", "state", "error"].map(query.get);
   const client_id = getSecret("OAUTH_CLIENT_ID");
   const client_secret = getSecret("OAUTH_CLIENT_SECRET");
   const passwd = getSecret("ENCRYPTION_PASSWD");
 
   if (!client_id || !client_secret || !passwd) {
-    return new Response(JSON.stringify({ error: "Internal server error." }), {
-      status: 500,
-    });
+    const ctx = JSON.stringify({ error: "Internal server error." });
+    return new Response(ctx, { status: 500 });
+  } else if (!state) {
+    const ctx = JSON.stringify({ error: "`state` are required." });
+    return new Response(ctx, { status: 400 });
   }
 
   let appReturnUrl: string;
   try {
     appReturnUrl = JSON.parse(await decrypt(state, passwd)).value;
   } catch (_) {
-    return new Response(JSON.stringify({ error: "Invalid state." }), {
-      status: 400,
-    });
+    const ctx = JSON.stringify({ error: "Invalid state." });
+    return new Response(ctx, { status: 400 });
   }
 
   const returnUrl = new URL(appReturnUrl);
 
   if (error && error === "access_denied") {
     return redirect(returnUrl.toString(), 302);
+  } else if (!code) {
+    const ctx = JSON.stringify({ error: "`code` are required." });
+    return new Response(ctx, { status: 400 });
   }
 
   let accessToken: string;
   try {
-    const response = await fetch(
-      "https://github.com/login/oauth/access_token",
-      {
-        method: "POST",
-        body: new URLSearchParams({ client_id, client_secret, code, state }),
-        headers: {
-          Accept: "application/json",
-        },
+    const resp = await fetch("https://github.com/login/oauth/access_token", {
+      method: "POST",
+      body: new URLSearchParams({ client_id, client_secret, code, state }),
+      headers: {
+        Accept: "application/json",
       },
-    );
+    });
 
-    if (!response.ok) {
-      accessToken = (await response.json()).access_token;
+    if (resp.ok) {
+      accessToken = (await resp.json()).access_token;
     } else {
-      throw new Error(`Failed to get access token: ${response.statusText}`);
+      throw new Error(`Failed to get access token: ${resp.statusText}`);
     }
   } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message }), {
-      status: 500,
-    });
+    const ctx = JSON.stringify({ error: err.message });
+    return new Response(ctx, { status: 500 });
   }
 
   const oauthToken = await encrypt(

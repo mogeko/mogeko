@@ -9,19 +9,16 @@ export const GET: APIRoute = async ({ request, redirect }) => {
   const appReturnURL = requestURL.searchParams.get("redirect_uri");
 
   if (!appReturnURL) {
-    return new Response(
-      JSON.stringify({ error: "`redirect_uri` is required." }),
-      { status: 400 },
-    );
+    const ctx = JSON.stringify({ error: "`redirect_uri` is required." });
+    return new Response(ctx, { status: 400 });
   }
 
   const client_id = getSecret("OAUTH_CLIENT_ID");
   const passwd = getSecret("ENCRYPTION_PASSWD");
 
   if (!client_id || !passwd) {
-    return new Response(JSON.stringify({ error: "Internal server error." }), {
-      status: 500,
-    });
+    const ctx = JSON.stringify({ error: "Internal server error." });
+    return new Response(ctx, { status: 500 });
   }
 
   const proto = request.headers.get("x-forwarded-proto") || "https";
