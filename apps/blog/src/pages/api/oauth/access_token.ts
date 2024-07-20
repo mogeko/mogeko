@@ -5,8 +5,16 @@ import type { APIRoute } from "astro";
 const TOKEN_VALIDITY_PERIOD = 1000 * 60 * 60 * 24 * 365; // 1 year;
 
 export const GET: APIRoute = async ({ request, redirect, cookies }) => {
-  const query = new URL(request.url).searchParams;
-  const [code, state, error] = ["code", "state", "error"].map(query.get);
+  const requestURL = new URL(request.url);
+  const code = requestURL.searchParams.get("code");
+  const state = requestURL.searchParams.get("state");
+  const error = requestURL.searchParams.get("error");
+
+  if (!state) {
+    const ctx = JSON.stringify({ error: "`state` are required." });
+    return new Response(ctx, { status: 400 });
+  }
+
   const client_id = getSecret("OAUTH_CLIENT_ID");
   const client_secret = getSecret("OAUTH_CLIENT_SECRET");
   const passwd = getSecret("ENCRYPTION_PASSWD");
@@ -14,9 +22,6 @@ export const GET: APIRoute = async ({ request, redirect, cookies }) => {
   if (!client_id || !client_secret || !passwd) {
     const ctx = JSON.stringify({ error: "Internal server error." });
     return new Response(ctx, { status: 500 });
-  } else if (!state) {
-    const ctx = JSON.stringify({ error: "`state` are required." });
-    return new Response(ctx, { status: 400 });
   }
 
   let redirect_uri: string;
