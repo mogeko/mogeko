@@ -3,7 +3,7 @@ import Layout from "@/layouts/common-layout.astro";
 import Button from "@/components/ui/button.astro";
 import Icon from "@/components/ui/icon.astro";
 import { slug } from "@mogeko/utils";
-import { getEntries } from "@/data";
+import { getEntries } from "@/utils";
 import { LuTags } from "react-icons/lu";
 
 const tagsWithCount = (await getEntries()).reduce<Record<string, number>>(

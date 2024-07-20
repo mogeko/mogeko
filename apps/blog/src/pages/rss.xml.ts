@@ -1,6 +1,6 @@
 import rss from "@astrojs/rss";
 import { SITE_AUTHOR, SITE_TITLE, SITE_DESCRIPTION } from "astro:env/server";
-import { getEntries } from "@/data";
+import { getEntries } from "@/utils";
 import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async (context) => {
