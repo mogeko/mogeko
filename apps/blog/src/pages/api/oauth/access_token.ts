@@ -56,7 +56,7 @@ export const GET: APIRoute = async ({ request, redirect, cookies }) => {
       },
     );
 
-    if (!response.ok) {
+    if (response.ok) {
       accessToken = (await response.json()).access_token;
     } else {
       throw new Error(`Failed to get access token: ${response.statusText}`);
