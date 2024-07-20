@@ -4,7 +4,14 @@
   "description": "Useful function snippets for Node.js",
   "type": "module",
   "types": "dist/index.d.ts",
-  "main": "dist/index.js",
+  "exports": {
+    "./ase-gcm": {
+      "import": "./dist/ase-gcm.js"
+    },
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
   "keywords": [
     "snippets",
     "utils",

@@ -3,6 +3,7 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   entryPoints: {
+    "ase-gcm": path.resolve(__dirname, "./src/ase-gcm.ts"),
     index: path.resolve(__dirname, "./index.ts"),
   },
   format: ["esm"],

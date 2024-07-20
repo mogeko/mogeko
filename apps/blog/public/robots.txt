@@ -10,6 +10,6 @@
 User-agent: *
 
 Allow: /
-Disallow:
+Disallow: /api/
 
 Sitemap: https//v2.mogeko.me/sitemap.xml
