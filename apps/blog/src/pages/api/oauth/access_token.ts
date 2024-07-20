@@ -4,11 +4,8 @@ import type { APIRoute } from "astro";
 
 const TOKEN_VALIDITY_PERIOD = 1000 * 60 * 60 * 24 * 365; // 1 year;
 
-export const GET: APIRoute = async ({ request, redirect, cookies }) => {
-  const requestURL = new URL(request.url);
-  const code = requestURL.searchParams.get("code");
-  const state = requestURL.searchParams.get("state");
-  const error = requestURL.searchParams.get("error");
+export const GET: APIRoute = async ({ url, redirect, cookies }) => {
+  const state = url.searchParams.get("state");
 
   if (!state) {
     const ctx = JSON.stringify({ error: "`state` are required." });
@@ -32,10 +29,12 @@ export const GET: APIRoute = async ({ request, redirect, cookies }) => {
     return new Response(ctx, { status: 400 });
   }
 
-  const appReturnURL = new URL(redirect_uri);
+  const callbackURL = new URL(redirect_uri);
+
+  const [error, code] = ["error", "code"].map((k) => url.searchParams.get(k));
 
   if (error && error === "access_denied") {
-    return redirect(appReturnURL.toString(), 302);
+    return redirect(callbackURL.toString(), 302);
   } else if (!code) {
     const ctx = JSON.stringify({ error: "`code` are required." });
     return new Response(ctx, { status: 400 });
@@ -71,12 +70,14 @@ export const GET: APIRoute = async ({ request, redirect, cookies }) => {
   );
 
   cookies.set("oauth_token", oauthToken, {
-    domain: appReturnURL.hostname,
+    domain: callbackURL.hostname,
+    path: "/", // Required for Safari
     expires: new Date(Date.now() + TOKEN_VALIDITY_PERIOD),
     secure: true,
+    httpOnly: true,
   });
 
-  return redirect(appReturnURL.toString(), 302);
+  return redirect(callbackURL.toString(), 302);
 };
 
 export const prerender = false;
