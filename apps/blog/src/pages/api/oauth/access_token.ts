@@ -5,8 +5,16 @@ import type { APIRoute } from "astro";
 const TOKEN_VALIDITY_PERIOD = 1000 * 60 * 60 * 24 * 365; // 1 year;
 
 export const GET: APIRoute = async ({ request, redirect, cookies }) => {
-  const query = new URL(request.url).searchParams;
-  const [code, state, error] = ["code", "state", "error"].map(query.get);
+  const requestURL = new URL(request.url);
+  const code = requestURL.searchParams.get("code");
+  const state = requestURL.searchParams.get("state");
+  const error = requestURL.searchParams.get("error");
+
+  if (!state) {
+    const ctx = JSON.stringify({ error: "`state` are required." });
+    return new Response(ctx, { status: 400 });
+  }
+
   const client_id = getSecret("OAUTH_CLIENT_ID");
   const client_secret = getSecret("OAUTH_CLIENT_SECRET");
   const passwd = getSecret("ENCRYPTION_PASSWD");
@@ -14,23 +22,20 @@ export const GET: APIRoute = async ({ request, redirect, cookies }) => {
   if (!client_id || !client_secret || !passwd) {
     const ctx = JSON.stringify({ error: "Internal server error." });
     return new Response(ctx, { status: 500 });
-  } else if (!state) {
-    const ctx = JSON.stringify({ error: "`state` are required." });
-    return new Response(ctx, { status: 400 });
   }
 
-  let appReturnUrl: string;
+  let redirect_uri: string;
   try {
-    appReturnUrl = JSON.parse(await decrypt(state, passwd)).value;
+    redirect_uri = JSON.parse(await decrypt(state, passwd)).value;
   } catch (_) {
     const ctx = JSON.stringify({ error: "Invalid state." });
     return new Response(ctx, { status: 400 });
   }
 
-  const returnUrl = new URL(appReturnUrl);
+  const appReturnURL = new URL(redirect_uri);
 
   if (error && error === "access_denied") {
-    return redirect(returnUrl.toString(), 302);
+    return redirect(appReturnURL.toString(), 302);
   } else if (!code) {
     const ctx = JSON.stringify({ error: "`code` are required." });
     return new Response(ctx, { status: 400 });
@@ -40,7 +45,8 @@ export const GET: APIRoute = async ({ request, redirect, cookies }) => {
   try {
     const resp = await fetch("https://github.com/login/oauth/access_token", {
       method: "POST",
-      body: new URLSearchParams({ client_id, client_secret, code, state }),
+      // prettier-ignore
+      body: new URLSearchParams({ client_id, client_secret, code, redirect_uri }),
       headers: {
         Accept: "application/json",
       },
@@ -65,12 +71,12 @@ export const GET: APIRoute = async ({ request, redirect, cookies }) => {
   );
 
   cookies.set("oauth_token", oauthToken, {
-    domain: returnUrl.hostname,
+    domain: appReturnURL.hostname,
     expires: new Date(Date.now() + TOKEN_VALIDITY_PERIOD),
     secure: true,
   });
 
-  return redirect(returnUrl.toString(), 302);
+  return redirect(appReturnURL.toString(), 302);
 };
 
 export const prerender = false;
