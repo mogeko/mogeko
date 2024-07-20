@@ -1,6 +1,6 @@
 {
   "name": "@mogeko/utils",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Useful function snippets for Node.js",
   "type": "module",
   "types": "dist/index.d.ts",
