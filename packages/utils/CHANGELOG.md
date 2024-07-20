@@ -1,5 +1,17 @@
 # @mogeko/utils
 
+## 0.5.0
+
+### Minor Changes
+
+- [#147](https://github.com/mogeko/mogeko/pull/147) [`85efca9`](https://github.com/mogeko/mogeko/commit/85efca9e27957cdfd1b002097b0d628f7363de99) Thanks [@mogeko](https://github.com/mogeko)! - Add AES-GCM encryption and decryption functions.
+
+  The `encrypt` and `decrypt` functions will not export in `index.js`. They are only available in the `aes-gcm` module.
+
+  ```typescript
+  import { encrypt, decrypt } from "@mogeko/utils/aes-gcm";
+  ```
+
 ## 0.4.1
 
 ### Patch Changes
