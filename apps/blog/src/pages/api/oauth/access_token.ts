@@ -19,18 +19,18 @@ export const GET: APIRoute = async ({ request, redirect, cookies }) => {
     return new Response(ctx, { status: 400 });
   }
 
-  let appReturnUrl: string;
+  let redirect_uri: string;
   try {
-    appReturnUrl = JSON.parse(await decrypt(state, passwd)).value;
+    redirect_uri = JSON.parse(await decrypt(state, passwd)).value;
   } catch (_) {
     const ctx = JSON.stringify({ error: "Invalid state." });
     return new Response(ctx, { status: 400 });
   }
 
-  const returnUrl = new URL(appReturnUrl);
+  const appReturnURL = new URL(redirect_uri);
 
   if (error && error === "access_denied") {
-    return redirect(returnUrl.toString(), 302);
+    return redirect(appReturnURL.toString(), 302);
   } else if (!code) {
     const ctx = JSON.stringify({ error: "`code` are required." });
     return new Response(ctx, { status: 400 });
@@ -40,7 +40,8 @@ export const GET: APIRoute = async ({ request, redirect, cookies }) => {
   try {
     const resp = await fetch("https://github.com/login/oauth/access_token", {
       method: "POST",
-      body: new URLSearchParams({ client_id, client_secret, code, state }),
+      // prettier-ignore
+      body: new URLSearchParams({ client_id, client_secret, code, redirect_uri }),
       headers: {
         Accept: "application/json",
       },
@@ -65,12 +66,12 @@ export const GET: APIRoute = async ({ request, redirect, cookies }) => {
   );
 
   cookies.set("oauth_token", oauthToken, {
-    domain: returnUrl.hostname,
+    domain: appReturnURL.hostname,
     expires: new Date(Date.now() + TOKEN_VALIDITY_PERIOD),
     secure: true,
   });
 
-  return redirect(returnUrl.toString(), 302);
+  return redirect(appReturnURL.toString(), 302);
 };
 
 export const prerender = false;
