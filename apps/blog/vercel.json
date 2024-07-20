@@ -6,6 +6,7 @@
   "buildCommand": "pnpm -C ../.. run build",
   "devCommand": "pnpm -C ../.. run dev -- --port $PORT",
   "ignoreCommand": "exit 1",
+  "outputDirectory": "dist",
   "git": { "deploymentEnabled": false },
   "github": { "enabled": false }
 }

@@ -25,7 +25,7 @@ export const GET: APIRoute = async ({ request, redirect }) => {
   }
 
   const proto = request.headers.get("x-forwarded-proto") || "https";
-  const redirect_uri = `${proto}://${requestURL.host}/api/oauth/authorized`;
+  const redirect_uri = `${proto}://${requestURL.host}/api/oauth/access_token`;
   const state = await encrypt(
     JSON.stringify({
       value: appReturnURL,
