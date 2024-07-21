@@ -1,5 +1,11 @@
 # @mogeko/utils
 
+## 0.6.0
+
+### Minor Changes
+
+- [#152](https://github.com/mogeko/mogeko/pull/152) [`d337619`](https://github.com/mogeko/mogeko/commit/d337619b163fd68a1e14a378319d02f823507867) Thanks [@mogeko](https://github.com/mogeko)! - Remove `cn` utility function and its tests.
+
 ## 0.5.0
 
 ### Minor Changes
