@@ -1,4 +1,4 @@
-import { cn } from "@mogeko/utils";
+import { cn } from "@/utils";
 
 export const Spoiler: React.FC<
   {} & {} & React.HTMLAttributes<HTMLSpanElement>
