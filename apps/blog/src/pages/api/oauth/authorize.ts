@@ -4,11 +4,10 @@ import type { APIRoute } from "astro";
 
 const DEFAULT_VALIDITY_PERIOD = 5 * 60 * 1000; // 5 minutes
 
-export const GET: APIRoute = async ({ request, redirect }) => {
-  const requestURL = new URL(request.url);
-  const appReturnURL = requestURL.searchParams.get("redirect_uri");
+export const GET: APIRoute = async ({ request, url, redirect }) => {
+  const callbackURL = url.searchParams.get("redirect_uri");
 
-  if (!appReturnURL) {
+  if (!callbackURL) {
     const ctx = JSON.stringify({ error: "`redirect_uri` is required." });
     return new Response(ctx, { status: 400 });
   }
@@ -22,10 +21,10 @@ export const GET: APIRoute = async ({ request, redirect }) => {
   }
 
   const proto = request.headers.get("x-forwarded-proto") || "https";
-  const redirect_uri = `${proto}://${requestURL.host}/api/oauth/access_token`;
+  const redirect_uri = `${proto}://${url.host}/api/oauth/access_token`;
   const state = await encrypt(
     JSON.stringify({
-      value: appReturnURL,
+      value: callbackURL,
       expires: Date.now() + DEFAULT_VALIDITY_PERIOD,
     }),
     passwd,
