@@ -2,21 +2,25 @@ import { decrypt } from "@mogeko/utils/ase-gcm";
 import { getSecret } from "astro:env/server";
 import { defineMiddleware } from "astro:middleware";
 
-// It will log a 'WARN' message for static pages. It's a known issue.
-// See: https://github.com/withastro/docs/issues/7215
-export const onRequest = defineMiddleware(async (context, next) => {
-  try {
-    if (context.cookies.has("oauth_token")) {
-      const cookie = context.cookies.get("oauth_token");
-      const passwd = getSecret("ENCRYPTION_PASSWD");
+export const onRequest = defineMiddleware(
+  async ({ url, cookies, locals }, next) => {
+    try {
+      // It will print a 'WARN' message when generating static pages. It's a known issue.
+      // In order to alleviate this issue, we only decrypt the cookie when the URL pathname
+      // matches `/posts/*`.
+      // See: https://github.com/withastro/docs/issues/7215
+      if (/^\/posts\/.+/.test(url.pathname) && cookies.has("oauth_token")) {
+        const cookie = cookies.get("oauth_token")?.value;
+        const passwd = getSecret("ENCRYPTION_PASSWD");
 
-      if (passwd && cookie) {
-        const { value } = JSON.parse(await decrypt(cookie.value, passwd));
+        if (passwd && cookie) {
+          const { value } = JSON.parse(await decrypt(cookie, passwd));
 
-        context.locals.user = { token: value };
+          locals.user = { token: value };
+        }
       }
+    } finally {
+      return next();
     }
-  } finally {
-    return next();
-  }
-});
+  },
+);
