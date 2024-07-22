@@ -131,6 +131,9 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.4.5)
+      universal-github-app-jwt:
+        specifier: ^2.2.0
+        version: 2.2.0
     devDependencies:
       '@types/react':
         specifier: ^18.3.3
@@ -3823,6 +3826,9 @@ packages:
 
   unist-util-visit@5.0.0:
     resolution: {integrity: sha512-MR04uvD+07cwl/yhVuVWAtw+3GOR/knlL55Nd/wAdblk27GCVt3lqpTivy/tkJcZoNPzTwS1Y+KMojlLDhoTzg==}
+
+  universal-github-app-jwt@2.2.0:
+    resolution: {integrity: sha512-G5o6f95b5BggDGuUfKDApKaCgNYy2x7OdHY0zSMF081O0EJobw+1130VONhrA7ezGSV2FNOGyM+KQpQZAr9bIQ==}
 
   universalify@0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
@@ -8335,6 +8341,8 @@ snapshots:
       '@types/unist': 3.0.2
       unist-util-is: 6.0.0
       unist-util-visit-parents: 6.0.1
+
+  universal-github-app-jwt@2.2.0: {}
 
   universalify@0.1.2: {}
 
