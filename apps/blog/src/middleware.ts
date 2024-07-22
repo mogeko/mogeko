@@ -5,22 +5,17 @@ import { defineMiddleware, sequence } from "astro:middleware";
 
 export const onRequest = sequence(
   defineMiddleware(async ({ locals }, next) => {
-    const privateKey = getSecret("APP_PRIVATE_KEY");
-    const clientID = getSecret("OAUTH_CLIENT_ID");
+    locals.getAppJWT = ((cache?: Result<string>) => {
+      const [pkcs8, id] = ["APP_PRIVATE_KEY", "OAUTH_CLIENT_ID"].map(getSecret);
 
-    if (clientID && privateKey) {
-      locals.getAppJWT = ((cache?: Result<string>) => {
-        return async () => {
-          if (!cache || cache.expiration < Date.now()) {
-            cache = await githubAppJwt({ id: clientID, privateKey });
-          }
-          return cache.token;
-        };
-      })(void 0);
-    } else {
-      const ctx = JSON.stringify({ error: "Internal server error." });
-      return new Response(ctx, { status: 500 });
-    }
+      return async () => {
+        if (!pkcs8 || !id) throw new Error("Internal server error.");
+        if (!cache || cache.expiration < Date.now()) {
+          cache = await githubAppJwt({ id, privateKey: pkcs8 });
+        }
+        return cache.token;
+      };
+    })(void 0);
 
     return next();
   }),
