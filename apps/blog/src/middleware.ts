@@ -1,26 +1,36 @@
 import { decrypt } from "@mogeko/utils/ase-gcm";
 import { getSecret } from "astro:env/server";
-import { defineMiddleware } from "astro:middleware";
+import { defineMiddleware, sequence } from "astro:middleware";
+import { createAppAuth } from "@/utils";
 
-export const onRequest = defineMiddleware(
-  async ({ url, cookies, locals }, next) => {
-    try {
-      // It will print a 'WARN' message when generating static pages. It's a known issue.
-      // In order to alleviate this issue, we only decrypt the cookie when the URL pathname
-      // matches `/posts/*`.
-      // See: https://github.com/withastro/docs/issues/7215
-      if (/^\/posts\/.+/.test(url.pathname) && cookies.has("oauth_token")) {
-        const cookie = cookies.get("oauth_token")?.value;
-        const passwd = getSecret("ENCRYPTION_PASSWD");
+export const onRequest = sequence(
+  defineMiddleware(async ({ locals }, next) => {
+    const pkcs8 = getSecret("APP_PRIVATE_KEY");
+    const iid = getSecret("APP_INSTALLATIONS_ID");
+    const cid = getSecret("OAUTH_CLIENT_ID");
 
-        if (passwd && cookie) {
-          const { value } = JSON.parse(await decrypt(cookie, passwd));
+    locals.getAppToken = createAppAuth(pkcs8, iid, cid);
 
-          locals.user = { token: value };
-        }
+    return next();
+  }),
+  defineMiddleware(async ({ url, cookies, locals }, next) => {
+    // It will print a 'WARN' message when generating static pages. It's a known issue.
+    // In order to alleviate this issue, we only decrypt the cookie when the URL pathname
+    // matches `/posts/*`.
+    // See: https://github.com/withastro/docs/issues/7215
+    if (/^\/posts\/.+/.test(url.pathname) && cookies.has("oauth_token")) {
+      const cookie = cookies.get("oauth_token")?.value;
+      const passwd = getSecret("ENCRYPTION_PASSWD");
+
+      if (cookie && passwd) {
+        const oauthToken = JSON.parse(
+          await decrypt(cookie, passwd).catch((_) => "{}"),
+        ).value;
+
+        locals.user = { token: oauthToken };
       }
-    } finally {
-      return next();
     }
-  },
+
+    return next();
+  }),
 );

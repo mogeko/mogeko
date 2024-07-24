@@ -16,7 +16,8 @@ interface ImportMeta {
 declare namespace App {
   interface Locals {
     user?: {
-      token: string;
+      token?: string;
     };
+    getAppToken: () => Promise<string>;
   }
 }
