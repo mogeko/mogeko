@@ -9,9 +9,7 @@ export const onRequest = sequence(
     const iid = getSecret("APP_INSTALLATIONS_ID");
     const cid = getSecret("OAUTH_CLIENT_ID");
 
-    if (!pkcs8 || !cid || !iid) throw new Error("Internal server error.");
-
-    locals.getAppToken = createAppAuth({ pkcs8, cid, iid });
+    locals.getAppToken = createAppAuth(pkcs8, iid, cid);
 
     return next();
   }),

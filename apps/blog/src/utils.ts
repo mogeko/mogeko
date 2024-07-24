@@ -37,10 +37,11 @@ export const getEntries = memoize(
 export type Entry = CollectionEntry<"posts">;
 
 export const createAppAuth: {
-  (arg: { pkcs8: string; cid: string; iid: string }): App.Locals["getAppToken"];
+  (pkcs8?: string, cid?: string, iid?: string): App.Locals["getAppToken"];
   cache?: { token: string; expiresAt: string };
-} = ({ pkcs8, cid, iid }) => {
+} = (pkcs8, iid, cid) => {
   return async () => {
+    if (!pkcs8 || !cid || !iid) throw new Error("Internal server error.");
     if (!createAppAuth.cache || isPast(createAppAuth.cache.expiresAt)) {
       const jwt = await githubAppJwt({ id: cid, privateKey: pkcs8 });
       const { token, expires_at } = await fetch(
