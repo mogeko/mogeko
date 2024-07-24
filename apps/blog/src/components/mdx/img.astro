@@ -1,18 +1,19 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import { Image } from "astro:assets";
+import type { ComponentProps } from "astro/types";
 
-const props = Astro.props;
+const { title, ...props } = Astro.props;
 
-type Props = HTMLAttributes<"img">;
+type Props = ComponentProps<typeof Image>;
 ---
 
 {
-  props.title ? (
+  title ? (
     <figure class="flex flex-col items-center gap-2">
-      <img {...props} />
-      <figcaption class="text-sm italic">{props.title}</figcaption>
+      <Image {...props} title={title} inferSize />
+      <figcaption class="text-sm italic">{title}</figcaption>
     </figure>
   ) : (
-    <img {...props} />
+    <Image {...props} title={title} inferSize />
   )
 }
