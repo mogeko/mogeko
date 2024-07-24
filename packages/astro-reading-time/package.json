@@ -44,13 +44,13 @@
     "reading-time": "^1.5.0"
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^5.1.1",
+    "@astrojs/markdown-remark": "^5.2.0",
     "@mogeko/tsconfig": "workspace:^",
-    "@vitest/coverage-v8": "^2.0.3",
-    "astro": "^4.11.5",
+    "@vitest/coverage-v8": "^2.0.4",
+    "astro": "^4.12.2",
     "prettier": "^3.3.3",
-    "tsup": "^8.1.0",
+    "tsup": "^8.2.2",
     "typescript": "^5.5.3",
-    "vitest": "^2.0.3"
+    "vitest": "^2.0.4"
   }
 }
