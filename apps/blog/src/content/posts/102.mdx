@@ -7,12 +7,6 @@ categories: ["随便写点什么"]
 image:
 ---
 
-<!--
-![](https://mogeko.github.io/blog-images/r/102/)
-{{< spoiler >}}{{< /spoiler >}}
-&emsp;&emsp;
- -->
-
 近期，我开发的开源项目 [Yet another BitTorrent Tracker](https://github.com/mogeko/yabtt) 迎来了 Minimum Viable Product 🎉。
 
 经过对 [BitTorrent Enhancement Proposals](http://www.bittorrent.org/beps/bep_0000.html) 将近一个月的研究，我只能说：
@@ -40,14 +34,13 @@ image:
 curl 'http://example.com/announce?info_hash=%124Vx%9A%BC%DE%F1%23Eg%89%AB%CD%EF%124Vx%9A&peer_id=00000000000000000001...'
 ```
 
-{{< notice info "Notice" >}}
-`info_hash` 是一段 20-byte 长的二进制 SHA-1，为了传输安全，它需要被编码为 [RFC1738](http://www.faqs.org/rfcs/rfc1738.html)。
+{/* TODO: Notice */}
 
-例如，对于这个 SHA-1: `\x12\x34\x56\x78\x9a\xbc\xde\xf1\x23\x45\x67\x89\xab\xcd\xef\x12\x34\x56\x78\x9a`
-
-它将会被编码为：`%124Vx%9A%BC%DE%F1%23Eg%89%AB%CD%EF%124Vx%9A`
-
-{{< /notice >}}
+> `info_hash` 是一段 20-byte 长的二进制 SHA-1，为了传输安全，它需要被编码为 [RFC1738](http://www.faqs.org/rfcs/rfc1738.html)。
+>
+> 例如，对于这个 SHA-1: `\x12\x34\x56\x78\x9a\xbc\xde\xf1\x23\x45\x67\x89\xab\xcd\xef\x12\x34\x56\x78\x9a`
+>
+> 它将会被编码为：`%124Vx%9A%BC%DE%F1%23Eg%89%AB%CD%EF%124Vx%9A`
 
 Tracker 会将其记录下来，并返回它记录的与「文件 A」相关的 Peer 组成的列表 (大约 50 个)。
 
