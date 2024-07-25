@@ -40,6 +40,10 @@ export default defineConfig({
       [emoji, { accessible: true }],
     ],
   },
+  prefetch: true,
+  security: {
+    checkOrigin: true,
+  },
   output: "hybrid",
   adapter: vercel(),
   integrations: [
@@ -55,7 +59,6 @@ export default defineConfig({
     }),
     sitemap(),
   ],
-  prefetch: true,
   experimental: {
     env: {
       schema: {
