@@ -46,11 +46,11 @@
   "devDependencies": {
     "@astrojs/markdown-remark": "^5.2.0",
     "@mogeko/tsconfig": "workspace:^",
-    "@vitest/coverage-v8": "^2.0.4",
+    "@vitest/coverage-v8": "^2.0.5",
     "astro": "^4.12.2",
     "prettier": "^3.3.3",
-    "tsup": "^8.2.3",
+    "tsup": "^8.2.4",
     "typescript": "^5.5.4",
-    "vitest": "^2.0.4"
+    "vitest": "^2.0.5"
   }
 }
