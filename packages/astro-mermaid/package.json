@@ -38,7 +38,7 @@
     "@types/hast": "^3.0.4",
     "@types/node": "^22.5.0",
     "@vitest/coverage-v8": "^2.0.5",
-    "astro": "^4.14.2",
+    "astro": "^4.14.5",
     "prettier": "^3.3.3",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
