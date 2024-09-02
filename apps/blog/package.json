@@ -49,7 +49,7 @@
     "universal-github-app-jwt": "^2.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.4",
+    "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
