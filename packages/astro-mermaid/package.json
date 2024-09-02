@@ -36,7 +36,7 @@
   "devDependencies": {
     "@mogeko/tsconfig": "workspace:^",
     "@types/hast": "^3.0.4",
-    "@types/node": "^22.5.0",
+    "@types/node": "^22.5.2",
     "@vitest/coverage-v8": "^2.0.5",
     "astro": "^4.14.5",
     "prettier": "^3.3.3",
