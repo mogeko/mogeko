@@ -1,6 +1,6 @@
 {
   "name": "astro-mermaid",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Astro Integration for Mermaid",
   "type": "module",
   "types": "dist/astro-mermaid.d.ts",
