@@ -35,7 +35,6 @@
     "@types/mdast": "^4.0.4",
     "@types/node": "^22.5.2",
     "@vitest/coverage-v8": "^2.0.5",
-    "prettier": "^3.3.3",
     "tsup": "^8.2.4",
     "typescript": "^5.5.4",
     "unified": "^11.0.5",
