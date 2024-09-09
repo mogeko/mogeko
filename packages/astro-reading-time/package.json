@@ -1,6 +1,6 @@
 {
   "name": "astro-reading-time",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "private": false,
   "description": "An Astro integration for calculate reading time of Markdown/MDX files",
   "type": "module",

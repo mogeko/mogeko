@@ -1,5 +1,11 @@
 # astro-mermaid
 
+## 0.1.5
+
+### Patch Changes
+
+- [#175](https://github.com/mogeko/mogeko/pull/175) [`c1ded6a`](https://github.com/mogeko/mogeko/commit/c1ded6a0a032b308c651699e7f9167a13eb8e90e) Thanks [@mogeko](https://github.com/mogeko)! - Completely move out of the [`prettier`](https://prettier.io).
+
 ## 0.1.4
 
 ### Patch Changes

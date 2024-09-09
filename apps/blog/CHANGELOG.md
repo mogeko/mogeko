@@ -1,5 +1,17 @@
 # blog
 
+## 0.0.17
+
+### Patch Changes
+
+- [#175](https://github.com/mogeko/mogeko/pull/175) [`c1ded6a`](https://github.com/mogeko/mogeko/commit/c1ded6a0a032b308c651699e7f9167a13eb8e90e) Thanks [@mogeko](https://github.com/mogeko)! - Completely move out of the [`prettier`](https://prettier.io).
+
+- Updated dependencies [[`c1ded6a`](https://github.com/mogeko/mogeko/commit/c1ded6a0a032b308c651699e7f9167a13eb8e90e)]:
+  - astro-reading-time@0.1.13
+  - remark-anchor-link@0.1.11
+  - astro-mermaid@0.1.5
+  - @mogeko/utils@0.6.2
+
 ## 0.0.16
 
 ### Patch Changes
