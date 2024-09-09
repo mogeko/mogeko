@@ -5,10 +5,7 @@
   "type": "module",
   "types": "dist/astro-mermaid.d.ts",
   "private": true,
-  "keywords": [
-    "astro-integration",
-    "mermaid"
-  ],
+  "keywords": ["astro-integration", "mermaid"],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
   "exports": {
@@ -19,9 +16,7 @@
   "scripts": {
     "test": "vitest run",
     "cov": "vitest run --coverage",
-    "build": "tsup",
-    "lint": "prettier --check .",
-    "fmt": "prettier --write ."
+    "build": "tsup"
   },
   "peerDependencies": {
     "playwright-core": "^1.0.0"

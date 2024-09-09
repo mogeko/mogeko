@@ -61,6 +61,15 @@ type Props = { head?: HeadProps } & HTMLAttributes<"body">;
     <meta property="twitter:image:alt" content={meta.title} />
     <meta property="twitter:card" content="summary_large_image" />
     <!-- Astro Bundler -->
+    <style>
+      /*
+        Astro now supports zero-JavaScript view transitions!
+        See: https://astro.build/blog/future-of-astro-zero-js-view-transitions
+       */
+      @view-transition {
+        navigation: auto; /* enabled! */
+      }
+    </style>
   </head>
   <body
     class={cn(

@@ -12,12 +12,6 @@ libraries:
   - mermaid
 ---
 
-<!--
-![](https://mogeko.github.io/blog-images/r/103/)
-{{< spoiler >}}{{< /spoiler >}}
-&emsp;&emsp;
- -->
-
 最近淘汰下来一个 NUC，本着不浪费的原则，决定搞一台 NAS 玩玩。
 
 既然要玩就玩个大的！黑群晖因为精神洁癖首先排除。至于什么 TrueNAS、OMV... 归根结底，他们大多都是方案的整合商 (TrueNAS 团队确实对 OpenZFS 项目做了不少的贡献)，就像 Ubuntu 之于 Debian；踩在巨人的肩膀上，降低了上手的难度；并不是 Ubuntu 模式有什么不好，但相比于 Arch Linux 或 Gentoo Linux 始终觉得它少了一分纯粹，让人喜欢不起来...
@@ -132,9 +126,7 @@ python -m http.server
 
 ### 制作 Live CD
 
-{{< notice info "Notice" >}}
-需要提前准备一个容量 >= 4GB 的**空** U 盘 (建议至少 8GB 以上)。
-{{< /notice >}}
+> 需要提前准备一个容量 >= 4GB 的**空** U 盘 (建议至少 8GB 以上)。{/* TODO: Notice */}
 
 对于裸机安装，我们有 Live CD 和 PXE/iPXE 两种方案。这里我只介绍更加基础和通用的通过 Live CD 安装 Fedora CoreOS 的方法，对于 PXE/iPXE 有需求的同学可以看看[这里](https://docs.fedoraproject.org/en-US/fedora-coreos/bare-metal/#_installing_from_the_network)。
 

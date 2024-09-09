@@ -1,7 +1,7 @@
-import { expect, describe, it } from "vitest";
 import { rehypeWrapper } from "@/rehype-wrapper";
 import { h } from "hastscript";
 import { unified } from "unified";
+import { describe, expect, it } from "vitest";
 
 describe("wrapper", () => {
   it("Wrap mermaid code block with p tag", async () => {

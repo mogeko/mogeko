@@ -1,6 +1,6 @@
-import plugin from "tailwindcss/plugin";
 import { styles } from "@/style";
 import { mergeDeepRight } from "ramda";
+import plugin from "tailwindcss/plugin";
 
 export default plugin.withOptions<{
   className?: string;

@@ -10,9 +10,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "sync": "astro sync",
-    "lint": "prettier --check .",
-    "fmt": "prettier --write ."
+    "sync": "astro sync"
   },
   "peerDependencies": {
     "playwright-core": "^1.0.0"

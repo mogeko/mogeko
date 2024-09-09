@@ -1,8 +1,8 @@
-import { createElement } from "react";
 import { OgTemplate } from "@/components/og-templates/home";
-import { ImageResponse } from "@vercel/og";
 import { loadFonts } from "@/utils";
+import { ImageResponse } from "@vercel/og";
 import type { APIRoute } from "astro";
+import { createElement } from "react";
 
 export const GET: APIRoute = async () => {
   try {

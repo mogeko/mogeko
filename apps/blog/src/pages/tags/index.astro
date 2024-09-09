@@ -1,16 +1,16 @@
 ---
-import Layout from "@/layouts/common-layout.astro";
 import Button from "@/components/ui/button.astro";
 import Icon from "@/components/ui/icon.astro";
-import { slug } from "@mogeko/utils";
+import Layout from "@/layouts/common-layout.astro";
 import { getEntries } from "@/utils";
+import { slug } from "@mogeko/utils";
 import { LuTags } from "react-icons/lu";
 
 const tagsWithCount = (await getEntries()).reduce<Record<string, number>>(
   (acc, { data: { tags } }) => {
-    tags?.forEach((tag) => {
+    for (const tag of tags ?? []) {
       acc[tag] = (acc[tag] ?? 0) + 1;
-    });
+    }
 
     return acc;
   },

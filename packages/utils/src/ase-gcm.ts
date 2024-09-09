@@ -20,7 +20,7 @@ export async function encrypt(plaintext: string, password: string) {
   const ctBase64 = Buffer.from(ctStr, "binary").toString("base64");
 
   const ivHex = Array.from(iv)
-    .map((b: number) => ("00" + b.toString(16)).slice(-2))
+    .map((b: number) => `00${b.toString(16)}`.slice(-2))
     .join("");
 
   return ivHex + ctBase64;

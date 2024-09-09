@@ -1,23 +1,23 @@
 import { defineConfig, envField } from "astro/config";
 
-import react from "@astrojs/react";
-import tailwind from "@astrojs/tailwind";
-import readingTime from "astro-reading-time";
-import mermaid from "astro-mermaid";
 import mdx from "@astrojs/mdx";
-import sitemap from "@astrojs/sitemap";
 import partytown from "@astrojs/partytown";
+import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
+import tailwind from "@astrojs/tailwind";
 import vercel from "@astrojs/vercel/serverless";
+import mermaid from "astro-mermaid";
+import readingTime from "astro-reading-time";
 
-import emoji from "remark-emoji";
 import anchorLink from "remark-anchor-link";
+import emoji from "remark-emoji";
 
 import {
   transformerNotationDiff,
   transformerNotationErrorLevel,
-  transformerNotationWordHighlight,
   transformerNotationFocus,
   transformerNotationHighlight,
+  transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 
 // https://astro.build/config
@@ -40,6 +40,10 @@ export default defineConfig({
       [emoji, { accessible: true }],
     ],
   },
+  prefetch: true,
+  security: {
+    checkOrigin: true,
+  },
   output: "hybrid",
   adapter: vercel(),
   integrations: [
@@ -55,7 +59,6 @@ export default defineConfig({
     }),
     sitemap(),
   ],
-  prefetch: true,
   experimental: {
     env: {
       schema: {

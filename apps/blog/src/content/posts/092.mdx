@@ -9,12 +9,6 @@ image:
 description: "基于 Elixir + Plug + Ecto(PostgreSQL) 实现短链接服务"
 ---
 
-<!--
-![](https://mogeko.github.io/blog-images/r/092/)
-{{< spoiler >}}{{< /spoiler >}}
-&emsp;&emsp;
- -->
-
 前几周，在我的软磨硬泡下，终于与导师一起敲定了论文的 Work Plan。
 
 其中后端服务器的技术路线我选择了 Elixir。选择 Elixir 并不因为我 Elixir 有多牛；相反，我也是因为这篇论文才开始真正开始接触 Elixir 的 (纯新手)。在啃完[官方指南](https://elixir-lang.org/getting-started/introduction.html) 和 [Elixir School](https://elixirschool.com/zh-hans) 中感兴趣的部分后，决定趁热打铁，上一些真正的项目来练练手。
@@ -41,8 +35,8 @@ description: "基于 Elixir + Plug + Ecto(PostgreSQL) 实现短链接服务"
 
 首先是准备工作，你需要先在你的电脑上准备好：
 
-- Elixir, website: <https://elixir-lang.org>
-- PostgreSQL, website: <https://www.postgresql.org>
+- Elixir, website: https://elixir-lang.org
+- PostgreSQL, website: https://www.postgresql.org
 
 安装 Elixir 可以参考[这篇文章](https://elixir-lang.org/install.html), PostgreSQL 的安装包可以在[这里找到](https://www.postgresql.org/download)。
 
@@ -498,7 +492,7 @@ defmodule ShortenApi.Router do
 end
 ```
 
-现在重启我们的服务器，打开浏览器访问链接 `http://localhost:8080/D9mP2G8N`，它将会自动跳转到 <https://mogeko.me/posts/zh-cn/092>。
+现在重启我们的服务器，打开浏览器访问链接 `http://localhost:8080/D9mP2G8N`，它将会自动跳转到 https://mogeko.me/posts/zh-cn/092。
 
 ## 结束？仅仅是开始
 

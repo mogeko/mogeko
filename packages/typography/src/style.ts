@@ -1,5 +1,5 @@
-import colors from "tailwindcss/colors";
 import type { CSSObject } from "@emotion/serialize";
+import colors from "tailwindcss/colors";
 
 const round = (num: number) => {
   return num

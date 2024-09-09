@@ -15,8 +15,6 @@ categories: ["折腾博客的二三事"]
 **因为涉及到对 NexT 代码的修改，搞不好，可能引起 Hexo 无法工作。所以强烈建议使用 Git 对 NexT 进行备份。**
 具体使用方法请自行 Google。
 
-<!-- more -->
-
 ## 准备工作
 
 1. 一颗能折腾的心。
@@ -112,7 +110,8 @@ hexo new page "about"
   width: 0;
   height: 0;
 }
-::-webkit-scrollbar-button:start:increment,::-webkit-scrollbar-button:end:decrement {
+::-webkit-scrollbar-button:start:increment,
+::-webkit-scrollbar-button:end:decrement {
   display: none;
 }
 ::-webkit-scrollbar-corner {
@@ -120,40 +119,41 @@ hexo new page "about"
 }
 ::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: rgba(0,0,0,.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 ::-webkit-scrollbar-thumb:hover {
   border-radius: 8px;
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
-::-webkit-scrollbar-track,::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
   border-right: 1px solid transparent;
   border-left: 1px solid transparent;
 }
 ::-webkit-scrollbar-track:hover {
-  background-color: rgba(0,0,0,.15);
+  background-color: rgba(0, 0, 0, 0.15);
 }
 ::-webkit-scrollbar-button:start {
   width: 10px;
   height: 10px;
-  background: url(../images/scrollbar_arrow.png"> no-repeat 0 0;
+  background: url(../images/scrollbar_arrow.png) no-repeat 0 0;
 }
 ::-webkit-scrollbar-button:start:hover {
-  background: url(../images/scrollbar_arrow.png"> no-repeat -15px 0;
+  background: url(../images/scrollbar_arrow.png) no-repeat -15px 0;
 }
 ::-webkit-scrollbar-button:start:active {
-  background: url(../images/scrollbar_arrow.png"> no-repeat -30px 0;
+  background: url(../images/scrollbar_arrow.png) no-repeat -30px 0;
 }
 ::-webkit-scrollbar-button:end {
   width: 10px;
   height: 10px;
-  background: url(../images/scrollbar_arrow.png"> no-repeat 0 -18px;
+  background: url(../images/scrollbar_arrow.png) no-repeat 0 -18px;
 }
 ::-webkit-scrollbar-button:end:hover {
-  background: url(../images/scrollbar_arrow.png"> no-repeat -15px -18px;
+  background: url(../images/scrollbar_arrow.png) no-repeat -15px -18px;
 }
 ::-webkit-scrollbar-button:end:active {
-  background: url(../images/scrollbar_arrow.png"> no-repeat -30px -18px;
+  background: url(../images/scrollbar_arrow.png) no-repeat -30px -18px;
 }
 ```
 
@@ -189,8 +189,8 @@ hexo new page "about"
 再然后，新建一个 js脚本 文件 `/source/js/src/custom/custom.js`，来控制我们的进度条。
 
 ```js
-$(document).ready(function () {
-  $(window).scroll(function () {
+$(document).ready(() => {
+  $(window).scroll(() => {
     $(".top-scroll-bar").attr(
       "style",
       "width: " +
@@ -215,8 +215,8 @@ $(document).ready(function () {
 
 ## 相关文章
 
-- [**使用 Hexo + GitHub Pages 建立自己的博客**](https://mogeko.github.io/2017/002/)
-- [**使用 Hexo Hey 管理你的博客**](https://mogeko.github.io/2017/004/)
-- [**在你的文章中添加 B站的视频**](https://mogeko.github.io/2017/005/)
-- [**为博客添加独立域名**](https://mogeko.github.io/2019/048/)
-- [**为博客添加免费的 CDN (Cloudflare)**](https://mogeko.github.io/2019/056/)
+- [**使用 Hexo + GitHub Pages 建立自己的博客**](/posts/002)
+- [**使用 Hexo Hey 管理你的博客**](/posts/004)
+- [**在你的文章中添加 B站的视频**](/posts/005)
+- [**为博客添加独立域名**](/posts/048)
+- [**为博客添加免费的 CDN (Cloudflare)**](/posts/056)

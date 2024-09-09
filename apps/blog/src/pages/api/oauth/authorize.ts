@@ -1,5 +1,5 @@
-import { encrypt } from "@mogeko/utils/ase-gcm";
 import { getSecret } from "astro:env/server";
+import { encrypt } from "@mogeko/utils/ase-gcm";
 import type { APIRoute } from "astro";
 
 const DEFAULT_VALIDITY_PERIOD = 5 * 60 * 1000; // 5 minutes

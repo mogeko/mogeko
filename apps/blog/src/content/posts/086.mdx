@@ -9,12 +9,6 @@ categories: ["生命不息 折腾不止"]
 image: https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png
 ---
 
-<!--
-![](https://mogeko.github.io/blog-images/r/086/)
-{{< spoiler >}}{{< /spoiler >}}
-&emsp;&emsp;
- -->
-
 每次提交代码时，都需要编写 Commit Message。
 
 ```shell
@@ -88,11 +82,9 @@ docs(changelog): update CHANGELOG.md
 
 `description` 就正如其名，是对此次提交的一句**简单**的描述，使用祈使句，现在时 (例如：使用 "change"，而不是 "changed" 或 "changes")，一般不超过 50 个字符。不要以大写开头，并且结尾不写标点符号。
 
-{{< notice warning >}}
+{/* TODO: Notice */}
 
-**`description` 不要以大写开头！！**
-
-{{< /notice >}}
+> **`description` 不要以大写开头！！**
 
 ### Body
 
@@ -114,11 +106,9 @@ BREAKING CHANGE: <breaking change summary>
 Fixes #<issue number>
 ```
 
-{{< notice warning >}}
+{/* TODO: Notice */}
 
-**不兼容的更改必须以 `BREAKING CHANGE:` 开头，其后为对不兼容更改的简短的描述，(空一行后的) 详细的描述，以及迁移指南等。**
-
-{{< /notice >}}
+> **不兼容的更改必须以 `BREAKING CHANGE:` 开头，其后为对不兼容更改的简短的描述，(空一行后的) 详细的描述，以及迁移指南等。**
 
 ### Revert
 

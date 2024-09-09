@@ -2,10 +2,7 @@
   "name": "@mogeko/tsconfig",
   "version": "0.0.4",
   "description": "`tsconfig.json` files for sharing",
-  "keywords": [
-    "typescript",
-    "tsconfig"
-  ],
+  "keywords": ["typescript", "tsconfig"],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
   "repository": {
@@ -18,14 +15,7 @@
     "url": "https://github.com/mogeko/mogeko/issues",
     "email": "zhengjunyi@live.com"
   },
-  "files": [
-    "CHANGELOG.md",
-    "default.tsconfig.json"
-  ],
-  "scripts": {
-    "lint": "prettier --check .",
-    "fmt": "prettier --write ."
-  },
+  "files": ["CHANGELOG.md", "default.tsconfig.json"],
   "dependencies": {
     "@tsconfig/strictest": "^2.0.5"
   },

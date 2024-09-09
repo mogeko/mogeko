@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { is } from "@/is";
+import { describe, expect, it } from "vitest";
 
 describe("is", () => {
   it("should return true", () => {
