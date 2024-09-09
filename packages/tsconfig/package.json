@@ -1,6 +1,6 @@
 {
   "name": "@mogeko/tsconfig",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "`tsconfig.json` files for sharing",
   "keywords": ["typescript", "tsconfig"],
   "author": "Mogeko <zhengjunyi@live.com>",

@@ -1,5 +1,14 @@
 # astro-reading-time
 
+## 0.1.12
+
+### Patch Changes
+
+- [#173](https://github.com/mogeko/mogeko/pull/173) [`6dd0ef9`](https://github.com/mogeko/mogeko/commit/6dd0ef90c26e9e7584f9d13d0752e4665d5eeda7) Thanks [@mogeko](https://github.com/mogeko)! - Use [`biome`](https://biomejs.dev) instead of [`prettier`](https://prettier.io) to format the code.
+
+- Updated dependencies [[`6dd0ef9`](https://github.com/mogeko/mogeko/commit/6dd0ef90c26e9e7584f9d13d0752e4665d5eeda7)]:
+  - @mogeko/utils@0.6.1
+
 ## 0.1.11
 
 ### Patch Changes
