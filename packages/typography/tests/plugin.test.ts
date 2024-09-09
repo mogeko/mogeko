@@ -1,8 +1,8 @@
-import { describe, it, expect } from "vitest";
+import path from "node:path";
 import plugin from "@/index";
-import tailwindcss from "tailwindcss";
 import postcss from "postcss";
-import path from "path";
+import tailwindcss from "tailwindcss";
+import { describe, expect, it } from "vitest";
 
 describe("typography plugin", () => {
   it("default styles", async () => {

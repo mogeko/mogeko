@@ -28,7 +28,7 @@ jobs:
           restore-keys: ${{ runner.os }}-ms-playwright-
           path: /home/runner/.cache/ms-playwright
       - run: pnpm install -rw --frozen-lockfile
-      - run: pnpm run lint
+      - run: pnpm biome ci --reporter=github
       - run: pnpm run test
       - name: Generate Coverage Reports
         run: pnpm run cov

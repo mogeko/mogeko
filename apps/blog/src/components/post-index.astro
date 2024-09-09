@@ -1,9 +1,9 @@
 ---
 import PostGroup from "@/components/post-group.astro";
-import { getYear } from "date-fns";
 import { cn } from "@/utils";
-import type { HTMLAttributes } from "astro/types";
 import type { Entry } from "@/utils";
+import type { HTMLAttributes } from "astro/types";
+import { getYear } from "date-fns";
 
 const { class: className, posts, ...props } = Astro.props;
 const blogsGroupByYear = posts.reduce<[number, Entry[]][]>((acc, post) => {

@@ -1,10 +1,10 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { getCollection, type CollectionEntry } from "astro:content";
-import { getTime } from "date-fns";
+import { type CollectionEntry, getCollection } from "astro:content";
 import { memoize } from "@mogeko/utils";
-import githubAppJwt from "universal-github-app-jwt";
+import { type ClassValue, clsx } from "clsx";
+import { getTime } from "date-fns";
 import { isPast } from "date-fns";
+import { twMerge } from "tailwind-merge";
+import githubAppJwt from "universal-github-app-jwt";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

@@ -1,7 +1,7 @@
-import { decrypt } from "@mogeko/utils/ase-gcm";
 import { getSecret } from "astro:env/server";
 import { defineMiddleware, sequence } from "astro:middleware";
 import { createAppAuth } from "@/utils";
+import { decrypt } from "@mogeko/utils/ase-gcm";
 
 export const onRequest = sequence(
   defineMiddleware(async ({ locals }, next) => {

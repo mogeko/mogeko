@@ -1,9 +1,9 @@
-import { visit } from "unist-util-visit";
-import { u } from "unist-builder";
 import { assocPath } from "@mogeko/utils";
 import GitHubSlugger from "github-slugger";
+import type { Node, Root } from "mdast";
 import type { Plugin } from "unified";
-import type { Root, Node } from "mdast";
+import { u } from "unist-builder";
+import { visit } from "unist-util-visit";
 
 export const remarkAnchorLink: Plugin<[Options?], Root> = ({
   levels = [1, 2, 3, 4],
@@ -13,9 +13,9 @@ export const remarkAnchorLink: Plugin<[Options?], Root> = ({
 } = {}) => {
   const updateProperties = <T>(data: Record<string, T>) => {
     return <N extends Node>(node: N): N => {
-      Object.entries(data).forEach(([key, value]) => {
+      for (const [key, value] of Object.entries(data)) {
         assocPath(["data", "hProperties", key], value, node);
-      });
+      }
 
       return node;
     };

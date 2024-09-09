@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { deepMerge } from "@/deep-merge";
+import { describe, expect, it } from "vitest";
 
 describe("deepMerge", () => {
   it("merges objects", () => {

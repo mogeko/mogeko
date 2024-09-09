@@ -10,11 +10,7 @@
     }
   },
   "types": "dist/index.d.ts",
-  "keywords": [
-    "remark",
-    "astro-integration",
-    "reading-time"
-  ],
+  "keywords": ["remark", "astro-integration", "reading-time"],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
   "repository": {
@@ -27,16 +23,11 @@
     "url": "https://github.com/mogeko/mogeko/issues",
     "email": "zhengjunyi@live.com"
   },
-  "files": [
-    "dist",
-    "CHANGELOG.md"
-  ],
+  "files": ["dist", "CHANGELOG.md"],
   "scripts": {
     "test": "vitest run",
     "cov": "vitest run --coverage",
-    "build": "tsup",
-    "lint": "prettier --check .",
-    "fmt": "prettier --write ."
+    "build": "tsup"
   },
   "dependencies": {
     "@mogeko/utils": "workspace:^",

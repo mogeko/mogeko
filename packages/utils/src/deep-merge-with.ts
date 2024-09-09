@@ -31,13 +31,13 @@ export function deepMergeWith(fn: (a: any, b: any) => any) {
     return objs.reduce((acc, obj) => {
       if (isNil(acc) || isNil(obj)) return fn(acc, obj);
 
-      Object.keys(obj).forEach((key) => {
+      for (const key in obj) {
         acc[key] = !isNil(acc[key])
           ? _isObject(obj[key]) && _isObject(acc[key])
             ? deepMerge(acc[key], obj[key])
             : fn(acc[key], obj[key])
           : obj[key];
-      });
+      }
 
       return acc;
     });

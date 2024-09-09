@@ -1,5 +1,5 @@
 import { styles } from "@/style";
-import { expect, it, describe } from "vitest";
+import { describe, expect, it } from "vitest";
 
 describe("typography styles", () => {
   it("default styles", () => {

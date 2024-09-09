@@ -15,8 +15,6 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env.local", ".env.production"],
       "outputs": [".astro/**"]
-    },
-    "lint": { "outputs": [] },
-    "fmt": { "cache": false, "outputs": [] }
+    }
   }
 }

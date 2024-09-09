@@ -4,7 +4,7 @@ export const memoize: {
     hasher?: (...args: Parameters<F>) => any,
   ): F & { cache: Map<any, T> };
   Cache: MapConstructor;
-} = function (fn, hasher) {
+} = (fn, hasher) => {
   const memoized = function (this: any, ...args: any) {
     const keys = hasher ? hasher.apply(this, args) : args[0];
     const cache = memoized.cache;

@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { isEmpty } from "@/is-empty";
+import { describe, expect, it } from "vitest";
 
 describe("isEmpty", () => {
   it("should return true", () => {
@@ -15,6 +15,6 @@ describe("isEmpty", () => {
     expect(isEmpty(0)).toBe(false);
     expect(isEmpty(null)).toBe(false);
     expect(isEmpty(undefined)).toBe(false);
-    expect(isEmpty(NaN)).toBe(false);
+    expect(isEmpty(Number.NaN)).toBe(false);
   });
 });

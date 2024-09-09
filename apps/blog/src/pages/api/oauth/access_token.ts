@@ -1,5 +1,5 @@
-import { encrypt, decrypt } from "@mogeko/utils/ase-gcm";
 import { getSecret } from "astro:env/server";
+import { decrypt, encrypt } from "@mogeko/utils/ase-gcm";
 import type { APIRoute } from "astro";
 
 const TOKEN_VALIDITY_PERIOD = 1000 * 60 * 60 * 24 * 365; // 1 year;
@@ -35,7 +35,8 @@ export const GET: APIRoute = async ({ url, redirect, cookies }) => {
 
   if (error && error === "access_denied") {
     return redirect(callbackURL.toString(), 302);
-  } else if (!code) {
+  }
+  if (!code) {
     const ctx = JSON.stringify({ error: "`code` are required." });
     return new Response(ctx, { status: 400 });
   }
@@ -44,8 +45,12 @@ export const GET: APIRoute = async ({ url, redirect, cookies }) => {
   try {
     const resp = await fetch("https://github.com/login/oauth/access_token", {
       method: "POST",
-      // prettier-ignore
-      body: new URLSearchParams({ client_id, client_secret, code, redirect_uri }),
+      body: new URLSearchParams({
+        client_id,
+        client_secret,
+        code,
+        redirect_uri,
+      }),
       headers: {
         Accept: "application/json",
       },

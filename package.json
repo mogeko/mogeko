@@ -10,23 +10,17 @@
     "start": "turbo run start",
     "build": "turbo run build",
     "sync": "turbo run sync",
-    "lint": "turbo run lint",
-    "fmt": "turbo run fmt",
+    "lint": "biome check",
+    "fmt": "biome check --write",
     "changeset": "changeset"
   },
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.27.7",
     "@types/node": "^22.5.2",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
-    "prettier": "^3.3.3",
-    "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.6",
     "turbo": "^2.1.1",
     "typescript": "^5.5.4",
     "vite-node": "^2.0.5"

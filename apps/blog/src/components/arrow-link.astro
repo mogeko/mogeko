@@ -1,8 +1,8 @@
 ---
-import Link from "@/components/site-nav-item.astro";
-import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import type Link from "@/components/site-nav-item.astro";
 import { cn } from "@/utils";
 import type { ComponentProps } from "astro/types";
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
 const { label, ...props } = Astro.props;
 const Icon = label === "prev" ? FaArrowLeftLong : FaArrowRightLong;

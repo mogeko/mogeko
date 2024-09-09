@@ -16,6 +16,8 @@ try {
     await execPromise("pnpm changeset version"),
     // Run `pnpm install` to update the pnpm-lock.yaml file.
     await execPromise("pnpm install --lockfile-only"),
+    // Run `pnpm run fmt` to format the code.
+    await execPromise("pnpm run fmt"),
   ];
 
   console.log(results.map(({ stdout, stderr }) => stdout || stderr).join("\n"));

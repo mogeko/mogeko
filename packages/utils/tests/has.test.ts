@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { has } from "@/has";
+import { describe, expect, it } from "vitest";
 
 describe("has", () => {
   it("returns true if the object has the key", () => {

@@ -1,5 +1,5 @@
 import readingTime from "@/index";
-import { describe, it, expect, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 const updateConfig = vi.fn(<T>(config: T): T => config);
 

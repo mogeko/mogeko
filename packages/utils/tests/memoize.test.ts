@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
 import { memoize } from "@/memoize";
+import { describe, expect, it } from "vitest";
 
 describe("memoize", () => {
   it("memoizes a function", () => {
