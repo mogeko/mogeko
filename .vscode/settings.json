@@ -1,3 +1,8 @@
 {
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "files.readonlyInclude": {
+    "**/node_modules/**/*": true,
+    "**/LICENSE*": true,
+    "**/pnpm-lock.yaml": true
+  }
 }
