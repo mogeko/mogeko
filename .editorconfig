@@ -1,0 +1,28 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{js,jsx,ts,tsx,astro,vue}]
+quote_type = double
+indent_size = 2
+
+[*.{css,scss,sass,less}]
+css_media_query_style = same_line
+css_selector_style = same_line
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+indent_size = 2
+
+[*.{json,toml,yaml,yml}]
+indent_size = 2
