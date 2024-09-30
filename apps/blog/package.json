@@ -28,7 +28,7 @@
     "@mogeko/utils": "workspace:^",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
-    "@shikijs/transformers": "^1.18.0",
+    "@shikijs/transformers": "^1.21.0",
     "@vercel/og": "^0.6.3",
     "astro": "^4.15.9",
     "astro-mermaid": "workspace:^",
