@@ -33,7 +33,7 @@
     "@types/hast": "^3.0.4",
     "@types/node": "^22.7.4",
     "@vitest/coverage-v8": "^2.1.2",
-    "astro": "^4.15.12",
+    "astro": "^4.16.1",
     "tsup": "^8.3.0",
     "typescript": "^5.6.2",
     "unified": "^11.0.5",
