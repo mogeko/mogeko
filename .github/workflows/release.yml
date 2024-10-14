@@ -32,7 +32,7 @@ jobs:
         with:
           node-version-file: package.json
           cache: "pnpm"
-      - uses: actions/cache@v4.1.0
+      - uses: actions/cache@v4.1.1
         with:
           key: ${{ runner.os }}-ms-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: ${{ runner.os }}-ms-playwright-
@@ -46,7 +46,7 @@ jobs:
         id: deployment
       - name: Create Version PR or Publish to NPM
         id: changesets
-        uses: changesets/action@v1.4.8
+        uses: changesets/action@v1.4.9
         with:
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
