@@ -20,15 +20,15 @@ jobs:
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
     steps:
-      - uses: actions/checkout@v4.2.1
+      - uses: actions/checkout@v4.2.2
       - name: Set up pnpm
         uses: pnpm/action-setup@v4.0.0
       - name: Set up Node.js
-        uses: actions/setup-node@v4.0.4
+        uses: actions/setup-node@v4.1.0
         with:
           node-version-file: package.json
           cache: "pnpm"
-      - uses: actions/cache@v4.1.1
+      - uses: actions/cache@v4.1.2
         with:
           key: ${{ runner.os }}-ms-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: ${{ runner.os }}-ms-playwright-
