@@ -38,9 +38,9 @@
     "@mogeko/tsconfig": "workspace:^",
     "@types/node": "^22.9.0",
     "@types/ramda": "^0.30.2",
-    "@vitest/coverage-v8": "^2.1.4",
+    "@vitest/coverage-v8": "^2.1.5",
     "tsup": "^8.3.5",
     "typescript": "^5.6.3",
-    "vitest": "^2.1.4"
+    "vitest": "^2.1.5"
   }
 }
