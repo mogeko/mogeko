@@ -38,7 +38,7 @@
     "@astrojs/markdown-remark": "^5.3.0",
     "@mogeko/tsconfig": "workspace:^",
     "@vitest/coverage-v8": "^2.1.5",
-    "astro": "^4.16.1",
+    "astro": "^4.16.13",
     "tsup": "^8.3.5",
     "typescript": "^5.6.3",
     "vitest": "^2.1.5"
