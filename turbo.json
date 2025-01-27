@@ -10,11 +10,6 @@
     },
     "start": { "dependsOn": ["build"], "cache": false, "persistent": true },
     "test": { "dependsOn": ["^build"], "inputs": ["$TURBO_DEFAULT$", "tests"] },
-    "cov": { "dependsOn": ["^build"], "inputs": ["$TURBO_DEFAULT$", "tests"] },
-    "sync": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env.local", ".env.production"],
-      "outputs": [".astro/**"]
-    }
+    "cov": { "dependsOn": ["^build"], "inputs": ["$TURBO_DEFAULT$", "tests"] }
   }
 }
