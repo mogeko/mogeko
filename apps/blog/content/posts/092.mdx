@@ -1,0 +1,515 @@
+---
+title: "Elixir 练手 + 实战：短链接服务"
+subtitle: "基于 Elixir + Plug + Ecto(PostgreSQL) 实现短链接服务"
+date: 2022-04-22T20:51:10+02:00
+draft: false
+tags: ["Elixir", "编程之髓"]
+categories: ["从入门 到入坟"]
+image:
+description: "基于 Elixir + Plug + Ecto(PostgreSQL) 实现短链接服务"
+---
+
+前几周，在我的软磨硬泡下，终于与导师一起敲定了论文的 Work Plan。
+
+其中后端服务器的技术路线我选择了 Elixir。选择 Elixir 并不因为我 Elixir 有多牛；相反，我也是因为这篇论文才开始真正开始接触 Elixir 的 (纯新手)。在啃完[官方指南](https://elixir-lang.org/getting-started/introduction.html) 和 [Elixir School](https://elixirschool.com/zh-hans) 中感兴趣的部分后，决定趁热打铁，上一些真正的项目来练练手。
+
+然后就找到了这篇博客：[How to write a super fast link shortener with Elixir, Phoenix, and Mnesia](https://medium.com/free-code-camp/how-to-write-a-super-fast-link-shortener-with-elixir-phoenix-and-mnesia-70ffa1564b3c)，这是一篇非常优秀的文章，非常详尽的介绍了如何通过 Elixir, Phoenix 和 Mnesia 来实现一个短链接服务。
+
+“非常好！就用它练手吧～～”，我心中默念道，“不过要按照我的方法来”。
+
+于是，便有了这篇文章。同样的主题：短链接服务；不过我的技术路线是 **Elixir** + **Plug** + **Ecto(PostgreSQL)**。选择 Plug 而不用 Phoenix 的原因并非 Phoenix 不好用，而是因为 Phoenix 实在是太好用了！Phoenix 都帮你实现完了，你还学什么？再者，Phoenix 就是基于 Plug 实现的，**新手就是应该造轮子！！**
+
+为什么选 PostgreSQL？👀 单纯是因为以前用过，比较熟悉。说来惭愧，作为一名非 Erlang 出生的 Elixirer，我是第一次听说 Mnesia 这个数据库。并且，~~Ecto 和 PostgreSQL 才是原配好吗？！CP锁死 (雾~~
+
+说了半天还没进入正题，但我还想再多啰嗦两句；总的来说，**这并不是一篇教程！！**我只是希望给大家提供一些思路，而不是试图教会你些什么 (我一个大三狗，有什么资格教你嘛 \_(:°з」∠)\_)；如果你在做的时候，有更好的想法，**按照你的想法实现它！！**如果你愿意的话，通过 [Issues](https://github.com/mogeko/link-shortener-api/issues) 告诉我；同样的，有不懂的也可以在 Issues 里面提，我有空尽量帮你，我也帮不了你的大家一起讨论解决✌️。虽然我也是个几周前才开始入门 Elixir 的新手，但有一说一，熟悉 LISP 后再上手 Elixir 是真的很爽！！ (感谢 _**Functional Programming**_ 这门噩梦般的课程对我的蹂躏 \_(:°з」∠)\_)
+
+## 正片开始
+
+本项目的完整代码可以在 GitHub 中获取：[mogeko/link-shortener-api](https://github.com/mogeko/link-shortener-api)
+
+具体实现可能有些微差别；本文为了简便，已经略去了所有的文档和测试部分的代码。
+
+如果你是 Elixir 新手的话，十分推荐你花 10 分钟读一下逼乎上 [绅士喵](https://www.zhihu.com/people/Hentioe) 的这篇回答：[如何系统地学习 Elixir？](https://www.zhihu.com/question/331635817/answer/842108558)，会对你的 Elixir 学习生活有很大帮助的！
+
+### 准备工作
+
+首先是准备工作，你需要先在你的电脑上准备好：
+
+- Elixir, website: https://elixir-lang.org
+- PostgreSQL, website: https://www.postgresql.org
+
+安装 Elixir 可以参考[这篇文章](https://elixir-lang.org/install.html), PostgreSQL 的安装包可以在[这里找到](https://www.postgresql.org/download)。
+
+我们假设你会 [Elixir](https://hexdocs.pm/elixir/Kernel.html) 的语法，并对 [Plug](https://hexdocs.pm/plug/readme.html) 和 [Ecto](https://hexdocs.pm/ecto/Ecto.html) 有一定了解；并且拥有对 PostgreSQL 进行基本安装配置的知识。
+
+如果你不会 Elixir 或者不知道 Plug 和 Ecto 是什么，你可能需要先去 [Elixir 官方指南 (基础)](https://elixir-lang.org/getting-started/introduction.html) 和 [Elixir School](https://elixirschool.com/zh-hans) 学习一下。
+
+关于 PostgreSQL 我手上目前没有什么好的材料，但像 PostgreSQL 这么流行的数据库的安装配置教程网上肯定一搜一大把。
+
+### 创建 Elixir 项目
+
+装好 Elixir 后，在你的工作目录中新建一个项目：
+
+```bash
+mix new shorten_api --sup
+```
+
+然后进入 `shorten_api` (从现在开始默认你的工作目录为 `shorten_api`)，在 `exs` 中添加依赖项：
+
+```elixir
+defp deps do
+  [
+    {:plug_cowboy, "~> 2.0"},
+    {:ecto_sql, "~> 3.2"},
+    {:postgrex, "~> 0.15"},
+    {:jason, "~> 1.3"}
+  ]
+end
+```
+
+从 [Hex](https://hex.pm) 获取依赖项：
+
+```bash
+mix deps.get
+```
+
+### 分析问题
+
+我们先分析问题，我们的需求是一个短链接服务，**它的核心是将接收到的链接 Hash 化**。
+
+其创建短链接的主要工作流程为：
+
+1. API 通过 GET 或 POST 方法获取需要处理的链接
+2. 将链接 Hash 化 **(核心)**
+3. 将 Hash 和链接存入数据库
+4. 将生成的短链接 (即 `http(s)://:host_url/:hash`) 返回给用户
+
+与之相应的，其查询逻辑的主要工作流程为：
+
+1. 用户 `GET /:hash`
+2. 在数据库中查询 `:hash` 对应的链接
+3. 重定向 (302) 到指定链接
+
+## 创建短链接
+
+### 将链接Hash化
+
+我们先来实现核心功能：将链接Hash化 **(2)**。
+
+让我们创建文件 `./lib/shorten_api/hash_id.ex`
+
+```elixir
+defmodule ShortenApi.HashId do
+
+  @hash_id_length 8
+
+  @spec generate(String.t() | any()) :: :error | {:ok, String.t()}
+  def generate(text) when is_binary(text) do
+    hash_id = text
+    |> (&:crypto.hash(:sha, &1)).()
+    |> Base.encode64
+    |> binary_part(0, @hash_id_length)
+    {:ok, hash_id}
+  end
+
+  def generate(_any), do: :error
+end
+```
+
+`ShortenApi.HashId.generate/1` 将所有传入的 String Hash 化，然后截取其前 8 位 (比原链接还长叫什么短链接？)。
+
+说实话，将 Hash 截取前 8 位使用会有概率发生 Hash 碰撞，但考虑到实际情况，这种概率比被雷劈还低！作为练手项目来说已经足够了。
+
+这个函数返回的类型为 `:error | {:ok, String.t()}`，`:error` 对应传入参数不是 String 的情况，`{:ok, String.t()}` 这是正常情况；目前先这样实现，后面会对其进行重构。
+
+### 搞定服务器
+
+然后我的思路是先搞定服务器 (即先实现 **(1)** **(4)**)，再去管数据库。
+
+我们创建一个 Router，来管理所有的入站流量：
+
+```elixir
+defmodule ShortenApi.Router do
+  use Plug.Router
+  import Plug.Conn
+
+  plug Plug.Logger
+  plug Plug.Parsers, parsers: [:urlencoded, :json], json_decoder: Jason
+  plug :match
+  plug :dispatch
+
+  get "/" do
+    [host_url | _tail] = get_req_header(conn, "host")
+    res = Jason.encode!(%{message: "#{conn.scheme}://#{host_url}/api/v1"})
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(200, res)
+  end
+
+  forward "/api/v1", to: ShortenApi.Plug.REST
+
+  match _ do
+    res = Jason.encode!(%{message: "Not Found"})
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(404, res)
+  end
+end
+```
+
+非常简单的路由，匹配 `GET /` 展示欢迎信息，处理 `404 Not Found`。
+
+重点在第 18 行：
+
+```elixir
+forward "/api/v1", to: ShortenApi.Plug.REST
+```
+
+它将所有的 `/api/v1/*` 的流量转发给了 `ShortenApi.Plug.REST`；这也就是我们将要实现的 Plug，它负责处理服务器生成短链接的主要逻辑 **(1)** **(4)**。
+
+```elixir
+defmodule ShortenApi.Plug.REST do
+  @behaviour Plug
+  import Plug.Conn
+
+  @spec init(Plug.opts()) :: Plug.opts()
+  def init(opts), do: opts
+
+  @spec call(Plug.Conn.t(), Plug.opts()) :: Plug.Conn.t()
+  def call(conn, _opts) do
+    resp_msg = with {:ok, url} <- Map.fetch(conn.params, "url") do
+      hortenApi.HashId.generate(url)
+    end
+
+    conn
+    |> put_resp_content_type("application/json")
+    |> put_resp_msg(resp_msg)
+    |> send_resp()
+  end
+
+  @spec put_resp_msg(Plug.Conn.t(), :error | {:ok, String.t()}) :: Plug.Conn.t()
+  def put_resp_msg(conn, {:ok, hash_id}) do
+    [host_url | _tail] = get_req_header(conn, "host")
+    res = Jason.encode!(%{ok: true, short_link: "#{conn.scheme}://#{host_url}/#{hash_id}"})
+    resp(conn, 201, res)
+  end
+
+  def put_resp_msg(conn, :error) do
+    res = Jason.encode!(%{ok: false, message: "Parameter error"})
+    resp(conn, 404, res)
+  end
+end
+```
+
+这个 Plug 首先从 `conn.params` 中读取链接，然后调用函数 `ShortenApi.HashId.generate/1` 处理链接，再调用 `put_resp_msg/2` 将处理好的 Hash 与主机地址拼接在一起，附加到 `conn` 中，最后返回给用户。
+
+顺便一提，`conn.params` 的处理是在 `Plug.Parsers` 这个 Plug 中完成的。其的调用在 `./lib/shorten_api/router.ex` 的第 6 行。
+
+别忘了将 `ShortenApi.Router` 丢给监管者 (Supervisor) 启动：
+
+```elixir
+def start(_type, _args) do
+  children = [
+    {Plug.Cowboy, scheme: :http, plug: ShortenApi.Router, options: [port: 8080]}
+  ]
+
+  opts = [strategy: :one_for_one, name: ShortenApi.Supervisor]
+
+  Logger.info("Starting application...")
+
+  Supervisor.start_link(children, opts)
+end
+```
+
+### 处理数据库
+
+接着我们来处理数据库。
+
+首先我们需要一个数据库 (Ecto.Repo) 和一张表 (Ecto.Migration)：
+
+```elixir
+defmodule ShortenApi.Repo do
+  use Ecto.Repo,
+    otp_app: :shorten_api,
+    adapter: Ecto.Adapters.Postgres
+end
+```
+
+```elixir
+defmodule ShortenApi.Repo.Migrations.CreateLinks do
+  use Ecto.Migration
+
+  def change do
+    create table(:links, primary_key: false) do
+      add :hash, :string, primary_key: true, null: false
+      add :url, :string, null: false
+
+      timestamps()
+    end
+
+    create unique_index(:links, [:url])
+  end
+end
+```
+
+然后根据表编写 Schema：
+
+```elixir
+defmodule ShortenApi.DB.Link do
+  use Ecto.Schema
+
+  @primary_key {:hash, :string, [autogenerate: false]}
+  schema "links" do
+    field(:url, :string)
+    timestamps()
+  end
+end
+```
+
+编写 `changeset/2` 用于校验写入数据库的数据是否合法，对外暴露一个 `write/2` 函数用于将数据写入数据库。
+
+```elixir
+defmodule ShortenApi.DB.Link do
+  import Ecto.Changeset
+
+  @spec changeset(Ecto.Schema.t() | map, map) :: Ecto.Changeset.t()
+  def changeset(struct, params) do
+    struct
+    |> cast(params, [:hash, :url])
+    |> validate_required([:hash, :url])
+    |> validate_format(:url, ~r/htt(p|ps):\/\/(\w+.)+/)
+    |> validate_hash_matched(:hash, :url)
+    |> unique_constraint(:url)
+  end
+
+  @spec validate_hash_matched(Ecto.Changeset.t(), atom, atom) :: Ecto.Changeset.t()
+  def validate_hash_matched(changeset, hash, text) do
+    import ShortenApi.HashId, only: [generate!: 1]
+    target_hash = get_field(changeset, hash)
+    target_text = get_field(changeset, text)
+
+    if generate!(target_text) != target_hash do
+      add_error(changeset, :hash, "does not match target link")
+    else
+      changeset
+    end
+  end
+
+  @spec write(String.t(), String.t()) :: {:ok, Ecto.Schema.t()} | {:error, Ecto.Changeset.t()}
+  def write(hash, url) do
+    %ShortenApi.DB.Link{}
+    |> changeset(%{hash: hash, url: url})
+    |> ShortenApi.Repo.insert()
+  end
+end
+```
+
+值得一提的是我们通过 `validate_hash_matched/3` 实现了对链接是否匹配其生成的 Hash 的校验；其中需要直接拿到生成的 Hash 值，因此我们用 `ShortenApi.HashId.generate!/1` 将 `ShortenApi.HashId.generate/1` 中生成 Hash 值的部分逻辑抽离出来，并对 `ShortenApi.HashId.generate/1` 进行重构，但 `ShortenApi.HashId.generate/1` 原本的接口是不变的。
+
+```elixir
+defmodule ShortenApi.HashId do
+
+  @hash_id_length 8
+
+  @spec generate(String.t() | any()) :: :error | {:ok, String.t()}
+  def generate(text) when is_binary(text), do: {:ok, generate!(text)}
+  def generate(_any), do: :error
+
+  @spec generate!(String.t() | any()) :: :error | String.t()
+  def generate!(text) when is_binary(text) do
+    text
+    |> (&:crypto.hash(:sha, &1)).()
+    |> Base.encode64()
+    |> binary_part(0, @hash_id_length)
+  end
+
+  def generate!(_any), do: :error
+end
+```
+
+正常情况下，`generate!/1` 的返回类型应该为 `String.t()`，如果其中发生错误，应当直接抛出错误，Crash 掉整个程序。这里为了简便没有实现相关的逻辑。
+
+同样的，不要忘了在 `ShortenApi.Application` 中启动 `ShortenApi.Repo`：
+
+```elixir
+def start(_type, _args) do
+  children = [
+    {Plug.Cowboy, scheme: :http, plug: ShortenApi.Router, options: [port: 8080]},
+    ShortenApi.Repo
+  ]
+
+  opts = [strategy: :one_for_one, name: ShortenApi.Supervisor]
+
+  Logger.info("Starting application...")
+
+  Supervisor.start_link(children, opts)
+end
+```
+
+至此，为了实现将 Hash 和链接存入数据库 **(3)** 这一功能的准备工作就完成了。
+
+### 将服务器与数据库连接起来
+
+现在我们已经拥有了校验和写入数据库的能力了。我们需要在我们的 `ShortenApi.Plug.REST` 中调用相应的函数，实现功能。
+
+首先需要重构 `ShortenApi.Plug.REST.call/2`：
+
+```elixir
+defmodule ShortenApi.Plug.REST do
+  @behaviour Plug
+  import Plug.Conn
+
+  @spec init(Plug.opts()) :: Plug.opts()
+  def init(opts), do: opts
+
+  @spec call(Plug.Conn.t(), Plug.opts()) :: Plug.Conn.t()
+  def call(conn, _opts) do
+    resp_msg =
+      with {:ok, url} <- Map.fetch(conn.params, "url"),
+           {:ok, hash} <- ShortenApi.HashId.generate(url) do
+        ShortenApi.DB.Link.write(hash, url)
+      end
+
+    conn
+    |> put_resp_content_type("application/json")
+    |> put_resp_msg(resp_msg)
+    |> send_resp()
+  end
+end
+```
+
+然后我们就会发现，`put_resp_msg/2` 接收到的参数类型从 `Plug.Conn.t(), :error | {:ok, String.t()}` 变成了 `Plug.Conn.t(), :error | {:error, Ecto.Changeset.t()} | {:ok, Ecto.Schema.t()}`；因此，我们还需要对 `put_resp_msg/2` 进行重构：
+
+```elixir
+defmodule ShortenApi.Plug.REST.Resp do
+  @derive Jason.Encoder
+  defstruct ok: true, short_link: ""
+  @type t :: %__MODULE__{ok: boolean, short_link: String.t()}
+end
+
+defmodule ShortenApi.Plug.REST.ErrResp do
+  @derive Jason.Encoder
+  defstruct ok: false, message: ""
+  @type t :: %__MODULE__{ok: boolean, message: String.t()}
+end
+
+defmodule ShortenApi.Plug.REST do
+  import Plug.Conn
+
+  @spec put_resp_msg(
+          Plug.Conn.t(),
+          :error | {:error, Ecto.Changeset.t()} | {:ok, Ecto.Schema.t()}
+        ) :: Plug.Conn.t()
+  def put_resp_msg(conn, {:ok, struct}) do
+    alias ShortenApi.Plug.REST.Resp
+    [host_url | _tail] = get_req_header(conn, "host")
+    short_link = "#{conn.scheme}://#{host_url}/#{struct.hash}"
+    resp_json = Jason.encode!(%Resp{short_link: short_link})
+    resp(conn, 201, resp_json)
+  end
+
+  def put_resp_msg(conn, {:error, _changeset}) do
+    alias ShortenApi.Plug.REST.ErrResp
+    resp_json = Jason.encode!(%ErrResp{message: "Wrong format"})
+    resp(conn, 403, resp_json)
+  end
+
+  def put_resp_msg(conn, :error) do
+    alias ShortenApi.Plug.REST.ErrResp
+    resp_json = Jason.encode!(%ErrResp{message: "Parameter error"})
+    resp(conn, 404, resp_json)
+  end
+end
+```
+
+这里我们不仅重构了 `put_resp_msg/2`，还使用了两个结构体 `ShortenApi.Plug.REST.ErrResp` 和 `ShortenApi.Plug.REST.Resp` 来帮助我们处理返回给用户的数据。
+
+这里对 `put_resp_msg/2` 处理错误信息的方式非常的简单粗暴；事实上，Changeset 为我们提供了非常完善的错误信息，以方便我们可以更好的将错误信息返回给用户。
+
+至此，创建短链接的主要工作流程 **(1)** **(2)** **(3)** **(4)** 都已经完成了。
+
+### 测试创建短链接
+
+我们先启动我们的服务器：
+
+```bash
+mix run --no-halt
+```
+
+然后另外打开一个终端，使用 GET 或 POST 方法向我们的服务器发消息：
+
+```bash
+curl --request POST \
+  --url http://localhost:8080/api/v1 \
+  --header 'content-type: application/json' \
+  --data '{
+    "url": "https://mogeko.me/posts/zh-cn/092"
+  }'
+```
+
+不出意外的话，你可以看见返回值：
+
+```json
+{
+  "ok": true,
+  "short_link": "http://localhost:8080/D9mP2G8N"
+}
+```
+
+`http://localhost:8080/i0sm8Q+T` 就是你的短链接了，但你现在还不能使用它。
+
+## 查询短链接
+
+我们即将实现查询短链接的逻辑。
+
+很简单，在 `ShortenApi.Router` 处增加一个路由规则即可：
+
+```elixir
+defmodule ShortenApi.Router do
+  use Plug.Router
+  import Plug.Conn
+
+  plug(Plug.Logger)
+  plug(Plug.Parsers, parsers: [:urlencoded, :json], json_decoder: Jason)
+  plug(:match)
+  plug(:dispatch)
+
+  get "/:hash" do
+    import Ecto.Query, only: [from: 2]
+    query = from l in ShortenApi.DB.Link, where: l.hash == ^hash, select: l.url
+    url = ShortenApi.Repo.one(query)
+
+    if is_nil(url) do
+      conn
+      |> put_resp_content_type("application/json")
+      |> send_resp(404, Jason.encode!(%{message: "Not Found"}))
+    else
+      conn
+      |> put_resp_header("location", url)
+      |> send_resp(302, "Redirect to #{url}")
+    end
+  end
+end
+```
+
+现在重启我们的服务器，打开浏览器访问链接 `http://localhost:8080/D9mP2G8N`，它将会自动跳转到 https://mogeko.me/posts/zh-cn/092。
+
+## 结束？仅仅是开始
+
+我们已经实现了一个可以用的短链接服务了！！👏
+
+但是它还不够完善：
+
+- 单元测试；我组织代码的方式不仅仅是区分功能，更是为了便于单元测试！如果你感兴趣的话，可以试着做一下，感受一下。
+- 代码中有非常多不完善的地方，你可以试着完善它们。
+- 到目前为止我们只使用了 GET 和 POST 方法，但 [HTTP 请求方法](https://developer.mozilla.org/zh-CN/docs/web/http/methods) 可不只它俩，试着实现一下 PUT 和 DELETE？
+
+在我开发过程中，对我帮助最大的当属 [HexDocs](https://hexdocs.pm)，他们不仅提供了我需要的 API 文档，还提供了很多的实现参考；需要时多翻翻，真的开卷有益！！
+
+## 参考列表
+
+- [How to write a super fast link shortener with Elixir, Phoenix, and Mnesia](https://medium.com/free-code-camp/how-to-write-a-super-fast-link-shortener-with-elixir-phoenix-and-mnesia-70ffa1564b3c)
+- [如何系统地学习 Elixir？ - 绅士喵的回答](https://www.zhihu.com/question/331635817/answer/842108558)
+- [HexDocs - Plug :: Compose web applications with functions](https://hexdocs.pm/plug/readme.html)
+- [HexDocs - Ecto :: A toolkit for data mapping and language integrated query](https://hexdocs.pm/ecto/Ecto.html)
+- [HexDocs - Jason :: A blazing fast JSON parser and generator in pure Elixir](https://hexdocs.pm/jason/readme.html)
