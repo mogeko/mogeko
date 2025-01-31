@@ -1,0 +1,18 @@
+.spoiler {
+  background-color: #000;
+  color: #000;
+  padding: 0 0.5rem;
+  &:hover {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .dark & {
+    background-color: #fff;
+    color: #fff;
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  }
+}

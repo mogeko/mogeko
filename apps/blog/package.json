@@ -1,6 +1,6 @@
 {
   "name": "mogeko-blog",
-  "version": "0.1.0",
+  "version": "0.0.17",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -8,13 +8,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "@blog/content": "workspace:^",
     "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@content-collections/core": "^0.8.0",
-    "@content-collections/next": "^0.2.4",
     "@types/node": "^22.10.10",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
