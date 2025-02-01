@@ -3,6 +3,8 @@ import { useMDXComponent } from "@blog/content/runtime";
 import type { NextPage } from "next";
 import { notFound } from "next/navigation";
 
+import "@blog/content/typography.css";
+
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
     params: { slug: post._meta.path },

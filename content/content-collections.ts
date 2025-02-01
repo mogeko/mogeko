@@ -2,6 +2,14 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
+import rehypeShiki, { type RehypeShikiOptions } from "@shikijs/rehype";
+import {
+  transformerNotationDiff,
+  transformerNotationErrorLevel,
+  transformerNotationFocus,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+} from "@shikijs/transformers";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -28,7 +36,20 @@ const posts = defineCollection({
       }),
     });
 
-    const mdx = await compileMDX(context, document);
+    const shikiConfig: RehypeShikiOptions = {
+      theme: "andromeeda",
+      transformers: [
+        transformerNotationDiff({ matchAlgorithm: "v3" }),
+        transformerNotationErrorLevel({ matchAlgorithm: "v3" }),
+        transformerNotationWordHighlight({ matchAlgorithm: "v3" }),
+        transformerNotationFocus({ matchAlgorithm: "v3" }),
+        transformerNotationHighlight({ matchAlgorithm: "v3" }),
+      ],
+    };
+
+    const mdx = await compileMDX(context, document, {
+      rehypePlugins: [[rehypeShiki, shikiConfig]],
+    });
     return Object.assign({}, document, { mdx });
   },
 });

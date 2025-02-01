@@ -9,7 +9,7 @@
       "types": "./.content-collections/generated/index.d.ts"
     },
     "./runtime": "./runtime.ts",
-    "./typography": "./dist/typography.css"
+    "./typography.css": "./dist/typography.css"
   },
   "scripts": {
     "build": "vite build"
@@ -18,14 +18,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^2.6.0"
+    "@content-collections/mdx": "^0.2.0"
   },
   "devDependencies": {
     "@content-collections/core": "^0.8.0",
-    "@content-collections/mdx": "^0.2.0",
     "@content-collections/vite": "^0.2.4",
     "@mogeko/tsconfig": "workspace:^",
+    "@shikijs/rehype": "^2.2.0",
+    "@shikijs/transformers": "^2.2.0",
     "lightningcss": "^1.29.1",
     "vite": "^5.4.14"
   }

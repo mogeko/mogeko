@@ -1,18 +1,20 @@
-.spoiler {
-  background-color: #000;
-  color: #000;
-  padding: 0 0.5rem;
-  &:hover {
-    background-color: #000;
-    color: #fff;
-  }
+:root {
+  --spoiler-background-color: #000;
+  --spoiler-text-color: #000;
+  --spoiler-hover-text-color: #fff;
 
   .dark & {
-    background-color: #fff;
-    color: #fff;
-    &:hover {
-      background-color: #fff;
-      color: #000;
-    }
+    --spoiler-background-color: #fff;
+    --spoiler-text-color: #fff;
+    --spoiler-hover-text-color: #000;
+  }
+}
+
+.spoiler {
+  background-color: var(--spoiler-background-color);
+  color: var(--spoiler-text-color);
+  padding: 0 0.5rem;
+  &:hover {
+    color: var(--spoiler-hover-text-color);
   }
 }
