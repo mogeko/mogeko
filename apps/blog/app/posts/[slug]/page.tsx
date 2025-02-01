@@ -1,9 +1,9 @@
-import { allPosts } from "@blog/content";
-import { useMDXComponent } from "@blog/content/runtime";
+import { allPosts } from "@mogeko-blog/content";
+import { useMDXComponent } from "@mogeko-blog/content/runtime";
 import type { NextPage } from "next";
 import { notFound } from "next/navigation";
 
-import "@blog/content/typography.css";
+import "@/styles/typography.css";
 
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
