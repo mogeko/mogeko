@@ -1,0 +1,99 @@
+:root {
+  --shiki-diff-add-color: rgba(16, 185, 129, 0.16);
+  --shiki-diff-add-symbol-color: hsl(151, 65%, 54%);
+  --shiki-diff-remove-color: rgba(244, 63, 94, 0.16);
+  --shiki-diff-remove-symbol-color: hsl(0, 45%, 63%);
+  --shiki-highlight-color: rgba(101, 117, 133, 0.16);
+  --shiki-error-color: rgba(244, 63, 94, 0.16);
+  --shiki-warning-color: rgba(234, 179, 8, 0.16);
+  --shiki-word-highlight-color: hsl(192, 40%, 25%);
+}
+
+.shiki {
+  code {
+    transition: color 500ms;
+    display: block;
+    padding: 0 1.5rem /* 24px */;
+    width: fit-content;
+    min-width: 100%;
+  }
+
+  /* transformerNotationDiff */
+
+  &.has-diff .line.diff {
+    transition: background-color 500ms;
+    display: inline-block;
+    margin: 0 -1.5rem /* -24px */;
+    padding: 0 1.5rem /* 24px */;
+    width: calc(100% + 3rem /* 48px */);
+
+    &::before {
+      position: absolute;
+      left: 0.625rem /* 10px */;
+    }
+
+    &.add {
+      background-color: var(--shiki-diff-add-color);
+
+      &::before {
+        content: "+";
+        color: var(--shiki-diff-add-symbol-color);
+      }
+    }
+
+    &.remove {
+      background-color: var(--shiki-diff-remove-color);
+      opacity: 0.7;
+
+      &::before {
+        content: "-";
+        color: var(--shiki-diff-remove-symbol-color);
+      }
+    }
+  }
+
+  /* transformerNotationHighlight */
+
+  &.has-highlight .line.highlighted {
+    background-color: var(--shiki-highlight-color);
+    transition: background-color 500ms;
+    display: inline-block;
+    margin: 0 -1.5rem /* -24px */;
+    padding: 0 1.5rem /* 24px */;
+    width: calc(100% + 3rem /* 48px */);
+
+    /* transformerNotationErrorLevel */
+
+    &.warning {
+      background-color: var(--shiki-warning-color);
+    }
+
+    &.error {
+      background-color: var(--shiki-error-color);
+    }
+  }
+
+  /* transformerNotationWordHighlight */
+
+  .line .highlighted-word {
+    background-color: var(--shiki-word-highlight-color);
+    padding: 1px 3px;
+    margin: -1px -3px;
+    border-radius: 0.25rem /* 4px */;
+  }
+
+  /* transformerNotationFocus */
+
+  &.has-focused {
+    .line:not(.focused) {
+      filter: blur(0.095rem /* 1.52px */);
+      opacity: 0.7;
+      transition: filter 350ms, opacity 350ms;
+    }
+
+    &:hover .line:not(.focused) {
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+}

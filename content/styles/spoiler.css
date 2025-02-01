@@ -13,7 +13,8 @@
 .spoiler {
   background-color: var(--spoiler-background-color);
   color: var(--spoiler-text-color);
-  padding: 0 0.5rem;
+  padding: 0 0.5rem /* 8px */;
+
   &:hover {
     color: var(--spoiler-hover-text-color);
   }
