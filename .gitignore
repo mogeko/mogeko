@@ -1,8 +1,7 @@
 # build output
+.next/
+.content-collections/
 dist/
-
-# generated types
-.astro/
 
 # dependencies
 node_modules/
