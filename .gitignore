@@ -2,6 +2,8 @@
 .next/
 .content-collections/
 dist/
+out/
+next-env.d.ts
 
 # dependencies
 node_modules/

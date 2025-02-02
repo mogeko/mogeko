@@ -10,6 +10,8 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
+import rehypeKaTex from "rehype-katex";
+import remarkMath from "remark-math";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -19,7 +21,7 @@ const posts = defineCollection({
   include: ["**/*.md", "**/*.mdx"],
   schema: (z) => ({
     title: z.string(),
-    date: z.string(),
+    date: z.date({ coerce: true }),
     subtitle: z.string().optional(),
     description: z.string().optional(),
     author: z.string().optional(),
@@ -45,10 +47,12 @@ const posts = defineCollection({
         transformerNotationFocus({ matchAlgorithm: "v3" }),
         transformerNotationHighlight({ matchAlgorithm: "v3" }),
       ],
+      inline: "tailing-curly-colon",
     };
 
     const mdx = await compileMDX(context, document, {
-      rehypePlugins: [[rehypeShiki, shikiConfig]],
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [rehypeKaTex, [rehypeShiki, shikiConfig]],
     });
     return Object.assign({}, document, { mdx });
   },
