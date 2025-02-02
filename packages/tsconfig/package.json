@@ -15,7 +15,7 @@
     "url": "https://github.com/mogeko/mogeko/issues",
     "email": "zhengjunyi@live.com"
   },
-  "files": ["CHANGELOG.md", "default.tsconfig.json"],
+  "files": ["CHANGELOG.md", "*.tsconfig.json"],
   "dependencies": {
     "@tsconfig/strictest": "^2.0.5"
   },

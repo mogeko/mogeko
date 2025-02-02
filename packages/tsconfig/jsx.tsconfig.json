@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": ["./default.tsconfig.json"],
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "preserve"
+  },
+  "name": "JSX TypeScript Configuration",
+  "exclude": ["node_modules"]
+}
