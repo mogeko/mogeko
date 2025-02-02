@@ -20,7 +20,7 @@ css_media_query_style = same_line
 css_selector_style = same_line
 indent_size = 2
 
-[*.md]
+[*.{md,mdx}]
 trim_trailing_whitespace = false
 indent_size = 2
 
