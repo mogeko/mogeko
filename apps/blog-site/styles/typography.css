@@ -1,0 +1,21 @@
+@import "@mogeko-blog/content/typography.css" layer(utilities);
+@import "katex/dist/katex.css" layer(utilities);
+
+@reference "@/styles/globals.css";
+
+@layer utilities {
+  .shiki {
+    --shiki-word-highlight-color: var(--color-muted);
+  }
+
+  .spoiler {
+    --spoiler-background-color: var(--color-background);
+    --spoiler-text-color: var(--color-background);
+    --spoiler-hover-text-color: var(--color-foreground);
+  }
+}
+
+@theme {
+  --color-prose-primary: var(--color-primary);
+  --color-prose-muted: var(--color-muted);
+}

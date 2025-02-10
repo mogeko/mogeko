@@ -1,6 +1,7 @@
 # build output
-.next/
 .content-collections/
+.next/
+.sanity/
 dist/
 out/
 next-env.d.ts

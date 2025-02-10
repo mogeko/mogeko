@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--color-white) /* #ffffff */;
+  --color-foreground: var(--color-black) /* #000000 */;
+
+  --color-card: var(--color-white) /* #ffffff */;
+  --color-card-foreground: var(--color-black) /* #000000 */;
+  --color-popover: var(--color-gray-200) /*  #e5e7eb */;
+  --color-popover-foreground: var(--color-black) /* #000000 */;
+
+  --color-primary: var(--color-black) /* #000000 */;
+  --color-primary-foreground: var(--color-white) /* #ffffff */;
+  --color-secondary: var(--color-gray-200) /*  #e5e7eb */;
+  --color-secondary-foreground: var(--color-black) /* #000000 */;
+  --color-accent: var(--color-gray-200) /*  #e5e7eb */;
+  --color-accent-foreground: var(---color-black) /* #000000 */;
+  --color-muted: hsl(110, 100%, 62%) /* #5cff3b */;
+  --color-muted-foreground: var(--color-black) /* #000000 */;
+  --color-destructive: hsl(0, 100%, 50%) /* #ff0000 */;
+  --color-destructive-foreground: hsl(210, 40%, 98%) /* #f8fafc */;
+
+  --color-border: var(--color-gray-300) /* #d1d5dc */;
+  --color-input: var(--color-gary-100) /* #f3f4f6 */;
+  --color-ring: hsl(110, 100%, 62%) /* #5cff3b */;
+
+  @variant dark {
+    --color-background: var(--color-black) /* #000000 */;
+    --color-foreground: var(--color-white) /* #ffffff */;
+
+    --color-card: var(--color-black) /* #000000 */;
+    --color-card-foreground: var(--color-white) /* #ffffff */;
+    --color-popover: var(--color-gray-800) /* #1e2939 */;
+    --color-popover-foreground: var(--color-white) /* #ffffff */;
+
+    --color-primary: var(--color-white) /* #ffffff */;
+    --color-primary-foreground: var(--color-black) /* #000000 */;
+    --color-secondary: var(--color-gray-800) /* #1e2939 */;
+    --color-secondary-foreground: var(--color-white) /* #ffffff */;
+    --color-accent: var(--color-gray-800) /* #1e2939 */;
+    --color-accent-foreground: var(--color-white) /* #ffffff */;
+    --color-muted: hsl(25, 100%, 47%) /* #ef6300 */;
+    --color-muted-foreground: var(--color-white) /* #ffffff */;
+    --color-destructive: hsl(0, 100%, 50%) /* #ff0000 */;
+    --color-destructive-foreground: hsl(210, 40%, 98%) /* #f8fafc */;
+
+    --color-border: var(--color-gray-900) /* #101828 */;
+    --color-input: var(--color-gary-600) /* #4a5565 */;
+    --color-ring: hsl(110, 100%, 62%) /* #5cff3b */;
+  }
+
+  --radius-lg: 0.5rem;
+  --radius-md: calc(var(--radius-lg) - 2px);
+  --radius-sm: calc(var(--radius-lg) - 4px);
+
+  --font-sans: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply text-foreground bg-background font-sans;
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@mogeko/sanity-studio",
+  "private": true,
+  "version": "1.0.0",
+  "main": "package.json",
+  "license": "MIT",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy"
+  },
+  "keywords": ["sanity"],
+  "dependencies": {
+    "@sanity/vision": "^3.74.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sanity": "^3.74.1",
+    "styled-components": "^6.1.15"
+  },
+  "devDependencies": {
+    "@mogeko/tsconfig": "workspace:^",
+    "@types/react": "^19.0.8",
+    "typescript": "^5.7.3"
+  }
+}

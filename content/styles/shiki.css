@@ -1,4 +1,4 @@
-:root {
+.shiki {
   --shiki-diff-add-color: rgba(16, 185, 129, 0.16);
   --shiki-diff-add-symbol-color: hsl(151, 65%, 54%);
   --shiki-diff-remove-color: rgba(244, 63, 94, 0.16);
@@ -7,9 +7,7 @@
   --shiki-error-color: rgba(244, 63, 94, 0.16);
   --shiki-warning-color: rgba(234, 179, 8, 0.16);
   --shiki-word-highlight-color: hsl(192, 40%, 25%);
-}
 
-.shiki {
   code {
     transition: color 500ms;
     display: block;

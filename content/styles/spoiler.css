@@ -1,16 +1,8 @@
-:root {
+.spoiler {
   --spoiler-background-color: #000;
   --spoiler-text-color: #000;
   --spoiler-hover-text-color: #fff;
 
-  .dark & {
-    --spoiler-background-color: #fff;
-    --spoiler-text-color: #fff;
-    --spoiler-hover-text-color: #000;
-  }
-}
-
-.spoiler {
   background-color: var(--spoiler-background-color);
   color: var(--spoiler-text-color);
   padding: 0 0.5rem /* 8px */;
