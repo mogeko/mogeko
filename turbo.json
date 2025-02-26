@@ -6,7 +6,7 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env.local", ".env.production"],
       "env": ["SITE_*"],
-      "outputs": ["dist", ".vercel", ".astro"]
+      "outputs": ["dist", ".vercel", ".next"]
     },
     "start": { "dependsOn": ["build"], "cache": false, "persistent": true },
     "test": { "dependsOn": ["^build"], "inputs": ["$TURBO_DEFAULT$", "tests"] },
