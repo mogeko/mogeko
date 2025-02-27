@@ -3,5 +3,6 @@ packages:
   - packages/*
 onlyBuiltDependencies:
   - '@fortawesome/fontawesome-free'
+  - canvas
   - esbuild
   - sharp

@@ -1,8 +1,8 @@
 # build output
+.next/
 dist/
-
-# generated types
-.astro/
+out/
+next-env.d.ts
 
 # dependencies
 node_modules/
@@ -37,4 +37,3 @@ pnpm-debug.log*
 # vercel
 .vercel
 .env*.local
-

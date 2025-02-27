@@ -12,7 +12,7 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-      "suspicious": { "noExplicitAny": "off" },
+      "suspicious": { "noExplicitAny": "off", "noArrayIndexKey": "off" },
       "style": { "noCommaOperator": "off" }
     }
   },
