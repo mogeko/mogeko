@@ -5,8 +5,8 @@ import { cn as cx } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import Link from "next/link";
 
-export function plainText(richtext: RichTextItemResponse) {
-  return richtext.plain_text;
+export function plainText(richText: Array<RichTextItemResponse>) {
+  return richText.map(({ plain_text }) => plain_text).join();
 }
 
 const textVariants = cva([], {
@@ -19,29 +19,47 @@ const textVariants = cva([], {
   },
 });
 
-export const RichText: React.FC<
-  RichTextItemResponse & { className?: string }
-> = ({ annotations: { color, ...rest }, className, ...rich_text }) => {
-  const cn = cx(textVariants(rest), colorVariants({ color }), className);
-  if (rich_text.type === "text") {
-    const { link, content } = rich_text.text;
+export const RichText: React.FC<{
+  children: RichTextItemResponse | Array<RichTextItemResponse>;
+  className?: string;
+}> = ({ children, className }) => {
+  const RichTextRender: React.FC<{ richText: RichTextItemResponse }> = ({
+    richText,
+  }) => {
+    const { color, ...rest } = richText.annotations;
+    const cn = cx(textVariants(rest), colorVariants({ color }), className);
 
-    return link ? (
-      <Link className={cn.length ? cn : void 0} href={link.url}>
-        {content}
-      </Link>
-    ) : (
-      <span className={cn.length ? cn : void 0}>{content}</span>
-    );
-  }
+    if (richText.type === "text") {
+      const { link, content } = richText.text;
 
-  if (rich_text.type === "equation") {
-    const { expression } = rich_text.equation;
+      return link ? (
+        <Link className={cn.length ? cn : void 0} href={link.url}>
+          {content}
+        </Link>
+      ) : (
+        <span className={cn.length ? cn : void 0}>{content}</span>
+      );
+    }
 
-    return (
-      <Equation className={cn.length ? cn : void 0} inline>
-        {expression}
-      </Equation>
-    );
-  }
+    if (richText.type === "equation") {
+      const { expression } = richText.equation;
+
+      return (
+        <Equation className={cn.length ? cn : void 0} inline>
+          {expression}
+        </Equation>
+      );
+    }
+
+    if (richText.type === "mention") {
+    }
+  };
+
+  return Array.isArray(children) ? (
+    children.map((text, i) => {
+      return <RichTextRender key={`${text.plain_text}-${i}`} richText={text} />;
+    })
+  ) : (
+    <RichTextRender richText={children} />
+  );
 };

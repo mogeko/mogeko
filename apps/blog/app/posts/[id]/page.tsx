@@ -24,14 +24,12 @@ const Page: NextPage<{
         <header>
           {Name.type === "title" && (
             <h1>
-              {Name.title.map((text, i) => (
-                <RichText key={`title-richtext-${i}`} {...text} />
-              ))}
+              <RichText>{Name.title}</RichText>
             </h1>
           )}
         </header>
         <main>
-          <NotionRender {...block} />
+          <NotionRender block={block} />
         </main>
       </article>
     );
