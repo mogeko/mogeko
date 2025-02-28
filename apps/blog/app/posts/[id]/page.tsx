@@ -1,5 +1,5 @@
-import { NotionRender } from "@/components/notion-render";
-import { RichText } from "@/components/rich-text";
+import { NotionRender } from "@/components/render";
+import { RichText } from "@/components/text";
 import { notion } from "@/lib/notion";
 import type { NextPage } from "next";
 
@@ -25,13 +25,13 @@ const Page: NextPage<{
           {Name.type === "title" && (
             <h1>
               {Name.title.map((text, i) => (
-                <RichText key={`title-richtext-${i}`} richtext={text} />
+                <RichText key={`title-richtext-${i}`} {...text} />
               ))}
             </h1>
           )}
         </header>
         <main>
-          <NotionRender block={block} />
+          <NotionRender {...block} />
         </main>
       </article>
     );
