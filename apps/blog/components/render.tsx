@@ -1,10 +1,15 @@
-import { Equation } from "@/components/equation";
+// import { Equation } from "@/components/equation";
 import { RichText } from "@/components/text";
 import { Details } from "@/components/toggle";
 import type { GetBlockResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
 import { notion } from "@/lib/notion";
+import dynamic from "next/dynamic";
 import { twMerge } from "tailwind-merge";
+
+const Equation = dynamic(async () => {
+  return import("@/components/equation").then((m) => m.Equation);
+});
 
 export const NotionRender: React.FC<{
   block: GetBlockResponse;
