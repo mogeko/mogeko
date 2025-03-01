@@ -1,20 +1,23 @@
-// import { Equation } from "@/components/equation";
 import { RichText } from "@/components/text";
 import { Details } from "@/components/toggle";
 import type { GetBlockResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
 import { notion } from "@/lib/notion";
 import dynamic from "next/dynamic";
+import { cache } from "react";
 import { twMerge } from "tailwind-merge";
 
 const Equation = dynamic(async () => {
   return import("@/components/equation").then((m) => m.Equation);
 });
+const Code = dynamic(async () => {
+  return import("@/components/code").then((m) => m.Code);
+});
 
-export const NotionRender: React.FC<{
-  block: GetBlockResponse;
-}> = async ({ block }) => {
-  if ("type" in block) {
+export const NotionRender: React.FC<{ block: GetBlockResponse }> = cache(
+  async ({ block }) => {
+    if (!("type" in block)) return;
+
     switch (block.type) {
       case "heading_1": {
         const { color, rich_text, is_toggleable } = block.heading_1;
@@ -99,6 +102,10 @@ export const NotionRender: React.FC<{
         );
       }
 
+      case "code": {
+        return <Code code={block} />;
+      }
+
       case "equation": {
         const { expression } = block.equation;
 
@@ -114,22 +121,22 @@ export const NotionRender: React.FC<{
       }
 
       case "child_page": {
-        return <NotionBlockChildren>{block}</NotionBlockChildren>;
+        return <NotionBlockChildren block={block} />;
       }
     }
-  }
-};
+  },
+);
 
-export const NotionBlockChildren: React.FC<{
-  children: GetBlockResponse;
-}> = async ({ children: block }) => {
-  if ("type" in block && block.has_children) {
-    const { results } = await notion.blocks.children.list({
-      block_id: block.id,
-    });
+export const NotionBlockChildren: React.FC<{ block: GetBlockResponse }> = cache(
+  async ({ block }) => {
+    if ("type" in block && block.has_children) {
+      const { results } = await notion.blocks.children.list({
+        block_id: block.id,
+      });
 
-    return results.map((block) => {
-      return <NotionRender key={block.id} block={block} />;
-    });
-  }
-};
+      return results.map((block) => {
+        return <NotionRender key={block.id} block={block} />;
+      });
+    }
+  },
+);

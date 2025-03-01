@@ -14,7 +14,7 @@ export const Details = forwardRef<
   return (
     <details className={className} ref={ref} {...props}>
       <Summary block={children}>{summary}</Summary>
-      <NotionBlockChildren>{children}</NotionBlockChildren>
+      <NotionBlockChildren block={children} />
     </details>
   );
 });
