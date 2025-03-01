@@ -116,6 +116,19 @@ export const NotionRender: React.FC<{ block: GetBlockResponse }> = cache(
         );
       }
 
+      case "quote": {
+        const cn = colorVariants({ color: block.quote.color });
+
+        return (
+          <blockquote className={cn.length ? cn : void 0}>
+            <p>
+              <RichText>{block.quote.rich_text}</RichText>
+            </p>
+            <NotionBlockChildren block={block} />
+          </blockquote>
+        );
+      }
+
       case "toggle": {
         return <Details>{block}</Details>;
       }
