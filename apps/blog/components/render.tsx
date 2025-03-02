@@ -1,3 +1,5 @@
+import { Heading } from "@/components/heading";
+import { ListItem } from "@/components/list";
 import { RichText } from "@/components/text";
 import { Details } from "@/components/toggle";
 import type { GetBlockResponse } from "@/lib/api-endpoints";
@@ -20,74 +22,44 @@ export const NotionRender: React.FC<{ block: GetBlockResponse }> = cache(
 
     switch (block.type) {
       case "heading_1": {
-        const { color, rich_text, is_toggleable } = block.heading_1;
-        const InternalHeading: React.FC = () => {
-          return (
-            <h1
-              className={twMerge(
-                colorVariants({
-                  className: ["notion-h1"],
-                  color,
-                }),
-              )}
-            >
-              <RichText>{rich_text}</RichText>
-            </h1>
-          );
-        };
+        const heading = (
+          <Heading id={block.id} level={1}>
+            {block.heading_1}
+          </Heading>
+        );
 
-        return is_toggleable ? (
-          <Details summary={<InternalHeading />}>{block}</Details>
+        return block.heading_1.is_toggleable ? (
+          <Details summary={heading}>{block}</Details>
         ) : (
-          <InternalHeading />
+          heading
         );
       }
 
       case "heading_2": {
-        const { color, rich_text, is_toggleable } = block.heading_2;
-        const InternalHeading: React.FC = () => {
-          return (
-            <h2
-              className={twMerge(
-                colorVariants({
-                  className: ["notion-h2"],
-                  color,
-                }),
-              )}
-            >
-              <RichText>{rich_text}</RichText>
-            </h2>
-          );
-        };
+        const heading = (
+          <Heading id={block.id} level={2}>
+            {block.heading_2}
+          </Heading>
+        );
 
-        return is_toggleable ? (
-          <Details summary={<InternalHeading />}>{block}</Details>
+        return block.heading_2.is_toggleable ? (
+          <Details summary={heading}>{block}</Details>
         ) : (
-          <InternalHeading />
+          heading
         );
       }
 
       case "heading_3": {
-        const { color, rich_text, is_toggleable } = block.heading_3;
-        const InternalHeading: React.FC = () => {
-          return (
-            <h3
-              className={twMerge(
-                colorVariants({
-                  className: ["notion-h3"],
-                  color,
-                }),
-              )}
-            >
-              <RichText>{rich_text}</RichText>
-            </h3>
-          );
-        };
+        const heading = (
+          <Heading id={block.id} level={3}>
+            {block.heading_3}
+          </Heading>
+        );
 
-        return is_toggleable ? (
-          <Details summary={<InternalHeading />}>{block}</Details>
+        return block.heading_3.is_toggleable ? (
+          <Details summary={heading}>{block}</Details>
         ) : (
-          <InternalHeading />
+          heading
         );
       }
 
@@ -129,6 +101,10 @@ export const NotionRender: React.FC<{ block: GetBlockResponse }> = cache(
         );
       }
 
+      case "bulleted_list_item": {
+        return <ListItem>{block.bulleted_list_item}</ListItem>;
+      }
+
       case "toggle": {
         return <Details>{block}</Details>;
       }
@@ -146,8 +122,18 @@ export const NotionBlockChildren: React.FC<{ block: GetBlockResponse }> = cache(
       const { results } = await notion.blocks.children.list({
         block_id: block.id,
       });
+      let numberedListcounter = 0;
 
       return results.map((block) => {
+        if ("type" in block && block.type === "numbered_list_item") {
+          return (
+            <ListItem key={block.id} data-count={++numberedListcounter}>
+              {block.numbered_list_item}
+            </ListItem>
+          );
+        }
+        numberedListcounter = 0;
+
         return <NotionRender key={block.id} block={block} />;
       });
     }
