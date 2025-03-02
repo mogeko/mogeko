@@ -1,5 +1,6 @@
 import { Heading } from "@/components/heading";
 import { ListItem } from "@/components/list";
+import { Table } from "@/components/table";
 import { RichText } from "@/components/text";
 import { Details } from "@/components/toggle";
 import type { GetBlockResponse } from "@/lib/api-endpoints";
@@ -101,6 +102,10 @@ export const NotionRender: React.FC<{ block: GetBlockResponse }> = cache(
         );
       }
 
+      case "table": {
+        return <Table>{block}</Table>;
+      }
+
       case "bulleted_list_item": {
         return <ListItem>{block.bulleted_list_item}</ListItem>;
       }
@@ -109,6 +114,7 @@ export const NotionRender: React.FC<{ block: GetBlockResponse }> = cache(
         return <Details>{block}</Details>;
       }
 
+      case "child_database":
       case "child_page": {
         return <NotionBlockChildren block={block} />;
       }
