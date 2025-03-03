@@ -1,6 +1,6 @@
 import { Equation } from "@/components/equation";
 import type { RichTextItemResponse } from "@/lib/api-endpoints";
-import { colorVariants } from "@/lib/color-variants";
+import { type ColorVariantProps, colorVariants } from "@/lib/color-variants";
 import { cn as cx } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import Link from "next/link";
@@ -19,10 +19,12 @@ const textVariants = cva([], {
   },
 });
 
-export const RichText: React.FC<{
-  children: RichTextItemResponse | Array<RichTextItemResponse>;
-  className?: string;
-}> = ({ children, className }) => {
+export const RichText: React.FC<
+  ColorVariantProps & {
+    rich_text: RichTextItemResponse | Array<RichTextItemResponse>;
+    className?: string;
+  }
+> = ({ rich_text, color, className }) => {
   const RichTextRender: React.FC<{ richText: RichTextItemResponse }> = ({
     richText,
   }) => {
@@ -45,9 +47,11 @@ export const RichText: React.FC<{
       const { expression } = richText.equation;
 
       return (
-        <Equation className={cn.length ? cn : void 0} inline>
-          {expression}
-        </Equation>
+        <Equation
+          className={cn.length ? cn : void 0}
+          expression={expression}
+          inline
+        />
       );
     }
 
@@ -55,11 +59,11 @@ export const RichText: React.FC<{
     }
   };
 
-  return Array.isArray(children) ? (
-    children.map((text, i) => {
+  return Array.isArray(rich_text) ? (
+    rich_text.map((text, i) => {
       return <RichTextRender key={`${text.plain_text}-${i}`} richText={text} />;
     })
   ) : (
-    <RichTextRender richText={children} />
+    <RichTextRender richText={rich_text} />
   );
 };

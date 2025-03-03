@@ -1,14 +1,13 @@
-import { Heading } from "@/components/heading";
-import { ListItem } from "@/components/list";
 import { Table } from "@/components/table";
 import { RichText } from "@/components/text";
-import { Details } from "@/components/toggle";
+import { Details, Summary } from "@/components/toggle";
+import { Heading } from "@/components/ui/heading";
+import { ListItem } from "@/components/ui/list";
 import type { GetBlockResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
 import { notion } from "@/lib/notion";
 import dynamic from "next/dynamic";
 import { cache } from "react";
-import { twMerge } from "tailwind-merge";
 
 const Equation = dynamic(async () => {
   return import("@/components/equation").then((m) => m.Equation);
@@ -23,42 +22,54 @@ export const NotionRender: React.FC<{ block: GetBlockResponse }> = cache(
 
     switch (block.type) {
       case "heading_1": {
+        const { color, rich_text, is_toggleable } = block.heading_1;
         const heading = (
-          <Heading id={block.id} level={1}>
-            {block.heading_1}
+          <Heading id={block.id} color={color} level={1}>
+            <RichText rich_text={rich_text} />
           </Heading>
         );
 
-        return block.heading_1.is_toggleable ? (
-          <Details summary={heading}>{block}</Details>
+        return is_toggleable ? (
+          <Details>
+            <Summary>{heading}</Summary>
+            <NotionBlockChildren block={block} />
+          </Details>
         ) : (
           heading
         );
       }
 
       case "heading_2": {
+        const { color, rich_text, is_toggleable } = block.heading_2;
         const heading = (
-          <Heading id={block.id} level={2}>
-            {block.heading_2}
+          <Heading id={block.id} color={color} level={2}>
+            <RichText rich_text={rich_text} />
           </Heading>
         );
 
-        return block.heading_2.is_toggleable ? (
-          <Details summary={heading}>{block}</Details>
+        return is_toggleable ? (
+          <Details>
+            <Summary>{heading}</Summary>
+            <NotionBlockChildren block={block} />
+          </Details>
         ) : (
           heading
         );
       }
 
       case "heading_3": {
+        const { color, rich_text, is_toggleable } = block.heading_3;
         const heading = (
-          <Heading id={block.id} level={3}>
-            {block.heading_3}
+          <Heading id={block.id} color={color} level={3}>
+            <RichText rich_text={rich_text} />
           </Heading>
         );
 
-        return block.heading_3.is_toggleable ? (
-          <Details summary={heading}>{block}</Details>
+        return is_toggleable ? (
+          <Details>
+            <Summary>{heading}</Summary>
+            <NotionBlockChildren block={block} />
+          </Details>
         ) : (
           heading
         );
@@ -66,11 +77,11 @@ export const NotionRender: React.FC<{ block: GetBlockResponse }> = cache(
 
       case "paragraph": {
         const { color, rich_text } = block.paragraph;
-        const className = twMerge(colorVariants({ color }));
+        const className = colorVariants({ color });
 
         return (
           <p className={className.length ? className : void 0}>
-            <RichText>{rich_text}</RichText>
+            <RichText rich_text={rich_text} />
           </p>
         );
       }
@@ -83,19 +94,21 @@ export const NotionRender: React.FC<{ block: GetBlockResponse }> = cache(
         const { expression } = block.equation;
 
         return (
-          <Equation className="flex justify-center items-center">
-            {expression}
-          </Equation>
+          <Equation
+            className="flex justify-center items-center"
+            expression={expression}
+          />
         );
       }
 
       case "quote": {
-        const cn = colorVariants({ color: block.quote.color });
+        const { color, rich_text } = block.quote;
+        const className = colorVariants({ color });
 
         return (
-          <blockquote className={cn.length ? cn : void 0}>
+          <blockquote className={className.length ? className : void 0}>
             <p>
-              <RichText>{block.quote.rich_text}</RichText>
+              <RichText rich_text={rich_text} />
             </p>
             <NotionBlockChildren block={block} />
           </blockquote>
@@ -103,15 +116,31 @@ export const NotionRender: React.FC<{ block: GetBlockResponse }> = cache(
       }
 
       case "table": {
-        return <Table>{block}</Table>;
+        return <Table table={block} />;
       }
 
       case "bulleted_list_item": {
-        return <ListItem>{block.bulleted_list_item}</ListItem>;
+        const { color, rich_text } = block.bulleted_list_item;
+        const className = colorVariants({ color });
+
+        return (
+          <ListItem className={className}>
+            <RichText rich_text={rich_text} />
+          </ListItem>
+        );
       }
 
       case "toggle": {
-        return <Details>{block}</Details>;
+        const cn = colorVariants({ color: block.toggle.color });
+
+        return (
+          <Details className={cn.length ? cn : void 0}>
+            <Summary>
+              <RichText rich_text={block.toggle.rich_text} />
+            </Summary>
+            <NotionBlockChildren block={block} />
+          </Details>
+        );
       }
 
       case "child_database":
@@ -132,9 +161,16 @@ export const NotionBlockChildren: React.FC<{ block: GetBlockResponse }> = cache(
 
       return results.map((block) => {
         if ("type" in block && block.type === "numbered_list_item") {
+          const { color, rich_text } = block.numbered_list_item;
+          const className = colorVariants({ color });
+
           return (
-            <ListItem key={block.id} data-count={++numberedListcounter}>
-              {block.numbered_list_item}
+            <ListItem
+              className={className.length ? className : void 0}
+              key={block.id}
+              data-count={++numberedListcounter}
+            >
+              <RichText rich_text={rich_text} />
             </ListItem>
           );
         }

@@ -24,7 +24,7 @@ const Page: NextPage<{
         <header>
           {Name.type === "title" && (
             <h1>
-              <RichText>{Name.title}</RichText>
+              <RichText rich_text={Name.title} />
             </h1>
           )}
         </header>
