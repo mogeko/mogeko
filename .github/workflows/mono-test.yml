@@ -22,7 +22,7 @@ jobs:
         with:
           node-version-file: package.json
           cache: "pnpm"
-      - uses: actions/cache@v4.2.1
+      - uses: actions/cache@v4.2.2
         with:
           key: ${{ runner.os }}-ms-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: ${{ runner.os }}-ms-playwright-
@@ -33,7 +33,7 @@ jobs:
       - name: Generate Coverage Reports
         run: pnpm run cov
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5.3.1
+        uses: codecov/codecov-action@v5.4.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: mogeko/mogeko
