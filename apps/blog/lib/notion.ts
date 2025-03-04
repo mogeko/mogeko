@@ -11,3 +11,5 @@ export const notion = new Client({
     });
   },
 });
+
+export * from "@notionhq/client";

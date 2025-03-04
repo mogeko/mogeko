@@ -12,7 +12,11 @@
     "enabled": true,
     "rules": {
       "recommended": true,
-      "suspicious": { "noExplicitAny": "off", "noArrayIndexKey": "off" },
+      "suspicious": {
+        "noAssignInExpressions": "off",
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "off"
+      },
       "style": { "noCommaOperator": "off" }
     }
   },
