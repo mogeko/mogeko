@@ -1,8 +1,9 @@
-import { Table } from "@/components/table";
+import { TRow } from "@/components/table-row";
 import { RichText } from "@/components/text";
 import { Details, Summary } from "@/components/toggle";
 import { Heading } from "@/components/ui/heading";
 import { ListItem } from "@/components/ui/list";
+import { Table, TableBody, TableHeader } from "@/components/ui/table";
 import type { GetBlockResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
 import { iteratePaginatedAPI, notion } from "@/lib/notion";
@@ -117,7 +118,34 @@ export const NotionRender: React.FC<{ block: GetBlockResponse }> = cache(
       }
 
       case "table": {
-        return <Table table={block} />;
+        const { has_column_header, has_row_header } = block.table;
+        const [head, ...rest] = (
+          await notion.blocks.children.list({ block_id: block.id })
+        ).results;
+
+        return (
+          <Table>
+            {has_column_header && (
+              <TableHeader>
+                <TRow hasCH={has_column_header} block={head} />
+              </TableHeader>
+            )}
+            <TableBody>
+              {!has_column_header && (
+                <TRow hasRH={has_row_header} block={head} />
+              )}
+              {rest.map((cell) => {
+                return (
+                  <TRow
+                    key={`${block.id}-${cell.id}`}
+                    hasRH={has_row_header}
+                    block={cell}
+                  />
+                );
+              })}
+            </TableBody>
+          </Table>
+        );
       }
 
       case "bulleted_list_item": {
