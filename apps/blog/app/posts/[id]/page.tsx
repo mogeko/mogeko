@@ -1,6 +1,6 @@
 import { NotionRender } from "@/components/render";
 import { RichText } from "@/components/text";
-import { notion } from "@/lib/notion";
+import { notionBlockRetrieve, notionPagesRetrieve } from "@/lib/notion";
 import type { NextPage } from "next";
 
 const Page: NextPage<{
@@ -10,14 +10,14 @@ const Page: NextPage<{
 
   if (id === "installHook.js.map") return;
 
-  const page = await notion.pages.retrieve({ page_id: id });
+  const page = await notionPagesRetrieve({ page_id: id });
 
   if ("properties" in page) {
     const {
       properties: { Name, "Publish Date": _date, "Featured Image": _cover },
     } = page;
 
-    const block = await notion.blocks.retrieve({ block_id: page.id });
+    const block = await notionBlockRetrieve({ block_id: page.id });
 
     return (
       <article>
