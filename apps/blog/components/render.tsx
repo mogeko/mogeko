@@ -7,7 +7,7 @@ import { Table, TableBody, TableHeader } from "@/components/ui/table";
 import type { GetBlockResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
 import { iteratePaginatedAPI, notion } from "@/lib/notion";
-import { iterateHelper, withWraper } from "@/lib/utils";
+import { _type, iterateHelper, withWraper } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { cache } from "react";
 
@@ -194,24 +194,24 @@ export const NotionRender: React.FC<{ block: GetBlockResponse }> = cache(
 export const NotionBlockChildren: React.FC<{ block: GetBlockResponse }> = cache(
   async ({ block: { id, ...rest } }) => {
     if ("type" in rest && rest.has_children) {
-      const [OrderList, UnorderedList] = ["ol", "ul"].map(withWraper);
+      const [OList, UList] = ["ol", "ul"].map(withWraper);
 
       const acc: Array<React.ReactNode> = [];
 
       for await (const [block, next] of iterateHelper<GetBlockResponse>(
         iteratePaginatedAPI(notion.blocks.children.list, { block_id: id }),
       )) {
-        if ("type" in block && block.type === "bulleted_list_item") {
-          UnorderedList.push(<NotionRender key={block.id} block={block} />);
+        if (_type(block) === "bulleted_list_item") {
+          UList.push(<NotionRender key={block.id} block={block} />);
 
-          if (next && "type" in next && next.type !== "bulleted_list_item") {
-            acc.push(<UnorderedList key={`ul-${block.id}`} />);
+          if (next && _type(next) !== "bulleted_list_item") {
+            acc.push(<UList key={`ul-${block.id}`} />);
           }
-        } else if ("type" in block && block.type === "numbered_list_item") {
-          OrderList.push(<NotionRender key={block.id} block={block} />);
+        } else if (_type(block) === "numbered_list_item") {
+          OList.push(<NotionRender key={block.id} block={block} />);
 
-          if (next && "type" in next && next.type !== "numbered_list_item") {
-            acc.push(<OrderList key={`ol-${block.id}`} />);
+          if (next && _type(next) !== "numbered_list_item") {
+            acc.push(<OList key={`ol-${block.id}`} />);
           }
         } else {
           acc.push(<NotionRender key={block.id} block={block} />);

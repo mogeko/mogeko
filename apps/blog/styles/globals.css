@@ -4,7 +4,7 @@
   --color-background: #ffffff;
   --color-foreground: #171717;
 
-  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: "Noto Sans Mono CJK SC", "ui-monospace", "monospace";
 }
 
 @variant dark {
@@ -15,7 +15,15 @@
 }
 
 @layer base {
+  @font-face {
+    font-family: "Noto Sans Mono CJK SC";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 100 900;
+    src: url("/fonts/NotoSansMonoCJKsc-VF.woff2") format("woff2-variations");
+  }
+
   body {
-    @apply text-foreground bg-background font-sans;
+    @apply text-foreground bg-background font-mono;
   }
 }

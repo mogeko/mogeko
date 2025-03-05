@@ -1,3 +1,4 @@
+import type { GetBlockResponse } from "@/lib/api-endpoints";
 import { type ClassValue, clsx } from "clsx";
 import { createElement } from "react";
 import { twMerge } from "tailwind-merge";
@@ -30,4 +31,8 @@ export async function* iterateHelper<T>(
   }
 
   yield [initialize, void 0];
+}
+
+export function _type(block: GetBlockResponse) {
+  return "type" in block && block.type;
 }

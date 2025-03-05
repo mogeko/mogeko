@@ -1,11 +1,12 @@
 import type { CodeBlockObjectResponse } from "@/lib/api-endpoints";
+import { cache } from "react";
 import {
   createSingletonShorthands,
   createdBundledHighlighter,
 } from "shiki/core";
 import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 
-export const { codeToHast, codeToHtml } = createSingletonShorthands(
+const highlighter = createSingletonShorthands(
   createdBundledHighlighter({
     themes: {
       andromeeda: import("shiki/themes/andromeeda.mjs"),
@@ -52,6 +53,7 @@ export const { codeToHast, codeToHtml } = createSingletonShorthands(
       pascal: () => import("shiki/langs/pascal.mjs"),
       perl: () => import("shiki/langs/perl.mjs"),
       php: () => import("shiki/langs/php.mjs"),
+      shellsession: () => import("shiki/langs/shellsession.mjs"),
       powershell: () => import("shiki/langs/powershell.mjs"),
       prolog: () => import("shiki/langs/prolog.mjs"),
       protobuf: () => import("shiki/langs/protobuf.mjs"),
@@ -90,3 +92,6 @@ export function langAlias(lang: LanguageRequest) {
 
   return dict.includes(lang) ? "plaintext" : lang;
 }
+
+export const codeToHast = cache(highlighter.codeToHast);
+export const codeToHtml = cache(highlighter.codeToHtml);
