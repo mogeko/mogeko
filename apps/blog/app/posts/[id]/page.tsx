@@ -1,16 +1,26 @@
 import { NotionRender } from "@/components/render";
-import { RichText } from "@/components/text";
+import { RichText, plainText } from "@/components/text";
 import { notionBlockRetrieve, notionPagesRetrieve } from "@/lib/notion";
-import type { NextPage } from "next";
+import type { Metadata, NextPage } from "next";
 
-const Page: NextPage<{
+type Props = {
   params: Promise<{ id: string }>;
-}> = async ({ params }) => {
-  const { id } = await params;
+};
 
-  if (id === "installHook.js.map") return;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const page = await notionPagesRetrieve({ page_id: (await params).id });
 
-  const page = await notionPagesRetrieve({ page_id: id });
+  if ("properties" in page && page.properties.Name.type === "title") {
+    return {
+      title: plainText(page.properties.Name.title),
+    };
+  }
+
+  return {};
+}
+
+const Page: NextPage<Props> = async ({ params }) => {
+  const page = await notionPagesRetrieve({ page_id: (await params).id });
 
   if ("properties" in page) {
     const {
