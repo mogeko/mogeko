@@ -1,7 +1,19 @@
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import Head from "next/head";
+import { Inconsolata, Noto_Sans_SC } from "next/font/google";
 
 import "@/styles/globals.css";
+
+const notoSansSC = Noto_Sans_SC({
+  subsets: ["latin"],
+  variable: "--font-noto-sans-sc",
+});
+
+const inconsolata = Inconsolata({
+  subsets: ["latin"],
+  fallback: ["ui-monospace", "monospace"],
+  variable: "--font-inconsolata",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,18 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <Head>
-        <link
-          rel="preload"
-          href="/fonts/NotoSansMonoCJKsc-VF.woff2"
-          as="font"
-          type="font/woff2"
-        />
-      </Head>
-      <html lang="en">
-        <body>{children}</body>
-      </html>
-    </>
+    <html lang="en">
+      <body className={cn(notoSansSC.variable, inconsolata.variable)}>
+        {children}
+      </body>
+    </html>
   );
 }
