@@ -9,12 +9,13 @@ import "@/styles/globals.css";
 const notoSansSC = Noto_Sans_SC({
   subsets: ["latin"],
   variable: "--font-noto-sans-sc",
+  adjustFontFallback: false,
 });
 
 const inconsolata = Inconsolata({
   subsets: ["latin"],
-  fallback: ["ui-monospace", "monospace"],
   variable: "--font-inconsolata",
+  adjustFontFallback: false,
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -28,6 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
       return {
         title: { default: title, template: `%s | ${title}` },
+        description: plainText(database.description),
       };
     }
   }

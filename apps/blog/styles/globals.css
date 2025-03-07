@@ -1,12 +1,16 @@
 @import "tailwindcss";
 
+@theme inline {
+  --font-sans: var(--font-noto-sans-sc), ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: var(--font-inconsolata), var(--font-noto-sans-sc), ui-monospace,
+    SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+}
+
 @theme {
   --color-background: #ffffff;
   --color-foreground: #171717;
-
-  /* --font-mono: ui-monospace, monospace; */
-  --font-mono: Inconsolata, 'Noto Sans SC', ui-monospace, monospace;
-
 }
 
 @variant dark {
@@ -17,14 +21,6 @@
 }
 
 @layer base {
-  /* @font-face {
-    font-family: "Noto Sans Mono CJK SC";
-    font-style: normal;
-    font-display: swap;
-    font-weight: 100 900;
-    src: url("/fonts/NotoSansMonoCJKsc-VF.woff2") format("woff2-variations");
-  } */
-
   body {
     @apply text-foreground bg-background font-mono;
   }
