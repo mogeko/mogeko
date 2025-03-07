@@ -6,10 +6,11 @@ import dynamic from "next/dynamic";
 
 import { Icon } from "@/components/icon";
 import { TRow } from "@/components/table-row";
-import { RichText } from "@/components/text";
+import { RichText, plainText } from "@/components/text";
 import { Details, Summary } from "@/components/toggle";
 import { Callout } from "@/components/ui/callout";
 import { Heading } from "@/components/ui/heading";
+import { Image } from "@/components/ui/image";
 import { ListItem } from "@/components/ui/list";
 import { Table, TableBody, TableHeader } from "@/components/ui/table";
 
@@ -89,6 +90,17 @@ export const NotionRender: React.FC<{
           <RichText rich_text={rich_text} />
         </p>
       );
+    }
+
+    case "image": {
+      if (block.image.type === "file") {
+        const { file, caption } = block.image;
+        const alt = plainText(caption);
+
+        return <Image width={640} src={file.url} alt={alt} />;
+      }
+
+      return;
     }
 
     case "code": {
