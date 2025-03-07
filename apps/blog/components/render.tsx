@@ -1,14 +1,17 @@
-import { TRow } from "@/components/table-row";
-import { RichText } from "@/components/text";
-import { Details, Summary } from "@/components/toggle";
-import { Heading } from "@/components/ui/heading";
-import { ListItem } from "@/components/ui/list";
-import { Table, TableBody, TableHeader } from "@/components/ui/table";
 import type { GetBlockResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
 import { iteratePaginatedAPI, notionBlocksChildrenList } from "@/lib/notion";
 import { _type, iterateHelper, withWraper } from "@/lib/utils";
 import dynamic from "next/dynamic";
+
+import { Icon } from "@/components/icon";
+import { TRow } from "@/components/table-row";
+import { RichText } from "@/components/text";
+import { Details, Summary } from "@/components/toggle";
+import { Callout } from "@/components/ui/callout";
+import { Heading } from "@/components/ui/heading";
+import { ListItem } from "@/components/ui/list";
+import { Table, TableBody, TableHeader } from "@/components/ui/table";
 
 const Equation = dynamic(async () => {
   return import("@/components/equation").then((m) => m.Equation);
@@ -100,6 +103,19 @@ export const NotionRender: React.FC<{
           className="flex justify-center items-center"
           expression={expression}
         />
+      );
+    }
+
+    case "callout": {
+      const { icon, rich_text, color } = block.callout;
+
+      return (
+        <Callout color={color} icon={<Icon icon={icon} />}>
+          <p>
+            <RichText rich_text={rich_text} />
+          </p>
+          {block.has_children && <NotionBlockChildren block={block} />}
+        </Callout>
       );
     }
 
