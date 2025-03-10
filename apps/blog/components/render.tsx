@@ -1,7 +1,7 @@
 import type { GetBlockResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
 import { iteratePaginatedAPI, notion } from "@/lib/notion";
-import { _type, iterateHelper, withWraper } from "@/lib/utils";
+import { iterateHelper, withWraper } from "@/lib/utils";
 import dynamic from "next/dynamic";
 
 import { Icon } from "@/components/icon";
@@ -213,7 +213,6 @@ export const NotionRender: React.FC<{
       );
     }
 
-    case "child_database":
     case "child_page": {
       return <NotionBlockChildren block={block} />;
     }
@@ -231,16 +230,16 @@ export const NotionBlockChildren: React.FC<{
     for await (const [block, next] of iterateHelper<GetBlockResponse>(
       iteratePaginatedAPI(notion.blocks.children.list, { block_id: id }),
     )) {
-      if (_type(block) === "bulleted_list_item") {
+      if ("type" in block && block.type === "bulleted_list_item") {
         UList.push(<NotionRender key={block.id} block={block} />);
 
-        if (next && _type(next) !== "bulleted_list_item") {
+        if (next && "type" in next && next.type !== "bulleted_list_item") {
           acc.push(<UList key={`ul-${block.id}`} />);
         }
-      } else if (_type(block) === "numbered_list_item") {
+      } else if ("type" in block && block.type === "numbered_list_item") {
         OList.push(<NotionRender key={block.id} block={block} />);
 
-        if (next && _type(next) !== "numbered_list_item") {
+        if (next && "type" in next && next.type !== "numbered_list_item") {
           acc.push(<OList key={`ol-${block.id}`} />);
         }
       } else {

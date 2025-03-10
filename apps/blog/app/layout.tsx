@@ -39,12 +39,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en">
-      <body className={cn(notoSansSC.variable, inconsolata.variable)}>
+      <body
+        className={cn(notoSansSC.variable, inconsolata.variable, "absolute")}
+      >
         {children}
       </body>
     </html>

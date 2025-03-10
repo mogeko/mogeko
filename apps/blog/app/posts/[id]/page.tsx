@@ -1,5 +1,5 @@
 import { NotionRender } from "@/components/render";
-import { RichText, plainText } from "@/components/text";
+import { RichText } from "@/components/text";
 import { notion } from "@/lib/notion";
 import type { Metadata, NextPage } from "next";
 
@@ -7,27 +7,28 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const page = await notion.pages.retrieve({ page_id: (await params).id });
+export async function generateMetadata({ params }: Props) {
+  const { id } = await params;
 
-  if ("properties" in page && page.properties.Name.type === "title") {
+  const block = await notion.blocks.retrieve({ block_id: id });
+
+  if ("type" in block && block.type === "child_page") {
     return {
-      title: plainText(page.properties.Name.title),
-    };
+      title: block.child_page.title,
+    } satisfies Metadata;
   }
-
-  return {};
 }
 
 const Page: NextPage<Props> = async ({ params }) => {
-  const page = await notion.pages.retrieve({ page_id: (await params).id });
+  const { id } = await params;
+
+  const block = await notion.blocks.retrieve({ block_id: id });
+  const page = await notion.pages.retrieve({ page_id: id });
 
   if ("properties" in page) {
     const {
       properties: { Name, "Publish Date": _date, "Featured Image": _cover },
     } = page;
-
-    const block = await notion.blocks.retrieve({ block_id: page.id });
 
     return (
       <article>

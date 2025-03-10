@@ -32,7 +32,3 @@ export async function* iterateHelper<T>(
 
   yield [initialize, void 0];
 }
-
-export function _type(block: GetBlockResponse) {
-  return "type" in block && block.type;
-}
