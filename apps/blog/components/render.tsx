@@ -1,6 +1,6 @@
 import type { GetBlockResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
-import { iteratePaginatedAPI, notionBlocksChildrenList } from "@/lib/notion";
+import { iteratePaginatedAPI, notion } from "@/lib/notion";
 import { _type, iterateHelper, withWraper } from "@/lib/utils";
 import dynamic from "next/dynamic";
 
@@ -97,7 +97,11 @@ export const NotionRender: React.FC<{
         const { file, caption } = block.image;
         const alt = plainText(caption);
 
-        return <Image width={640} src={file.url} alt={alt} />;
+        return (
+          <div>
+            <Image width={640} src={file.url} alt={alt} />
+          </div>
+        );
       }
 
       return;
@@ -148,7 +152,7 @@ export const NotionRender: React.FC<{
     case "table": {
       const { has_column_header, has_row_header } = block.table;
       const [head, ...rest] = (
-        await notionBlocksChildrenList({ block_id: block.id })
+        await notion.blocks.children.list({ block_id: block.id })
       ).results;
 
       return (
@@ -225,7 +229,7 @@ export const NotionBlockChildren: React.FC<{
     const acc: Array<React.ReactNode> = [];
 
     for await (const [block, next] of iterateHelper<GetBlockResponse>(
-      iteratePaginatedAPI(notionBlocksChildrenList, { block_id: id }),
+      iteratePaginatedAPI(notion.blocks.children.list, { block_id: id }),
     )) {
       if (_type(block) === "bulleted_list_item") {
         UList.push(<NotionRender key={block.id} block={block} />);

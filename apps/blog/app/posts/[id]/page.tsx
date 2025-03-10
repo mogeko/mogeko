@@ -1,6 +1,6 @@
 import { NotionRender } from "@/components/render";
 import { RichText, plainText } from "@/components/text";
-import { notionBlockRetrieve, notionPagesRetrieve } from "@/lib/notion";
+import { notion } from "@/lib/notion";
 import type { Metadata, NextPage } from "next";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const page = await notionPagesRetrieve({ page_id: (await params).id });
+  const page = await notion.pages.retrieve({ page_id: (await params).id });
 
   if ("properties" in page && page.properties.Name.type === "title") {
     return {
@@ -20,14 +20,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const Page: NextPage<Props> = async ({ params }) => {
-  const page = await notionPagesRetrieve({ page_id: (await params).id });
+  const page = await notion.pages.retrieve({ page_id: (await params).id });
 
   if ("properties" in page) {
     const {
       properties: { Name, "Publish Date": _date, "Featured Image": _cover },
     } = page;
 
-    const block = await notionBlockRetrieve({ block_id: page.id });
+    const block = await notion.blocks.retrieve({ block_id: page.id });
 
     return (
       <article>

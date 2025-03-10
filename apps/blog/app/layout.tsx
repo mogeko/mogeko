@@ -1,5 +1,5 @@
 import { plainText } from "@/components/text";
-import { notionDatabasesRetrieve } from "@/lib/notion";
+import { notion } from "@/lib/notion";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inconsolata, Noto_Sans_SC } from "next/font/google";
@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const database_id = process.env.NOTION_DATABASE_ID;
 
   if (database_id) {
-    const database = await notionDatabasesRetrieve({ database_id });
+    const database = await notion.databases.retrieve({ database_id });
 
     if ("title" in database) {
       const title = plainText(database.title);

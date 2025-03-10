@@ -16,8 +16,8 @@ export const Callout: React.FC<
       )}
       {...props}
     >
-      {icon && <div>{icon}</div>}
-      {icon ? <div>{children}</div> : children}
+      <div>{icon ?? <span>💡</span>}</div>
+      <div>{children}</div>
     </div>
   );
 };
