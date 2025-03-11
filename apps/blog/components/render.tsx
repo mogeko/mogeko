@@ -3,6 +3,7 @@ import { colorVariants } from "@/lib/color-variants";
 import { iteratePaginatedAPI, notion } from "@/lib/notion";
 import { iterateHelper, withWraper } from "@/lib/utils";
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 import { Icon } from "@/components/icon";
 import { TRow } from "@/components/table-row";
@@ -12,6 +13,7 @@ import { Callout } from "@/components/ui/callout";
 import { Heading } from "@/components/ui/heading";
 import { Image } from "@/components/ui/image";
 import { ListItem } from "@/components/ui/list";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableHeader } from "@/components/ui/table";
 
 const Equation = dynamic(async () => {
@@ -38,7 +40,9 @@ export const NotionRender: React.FC<{
       return is_toggleable ? (
         <Details>
           <Summary>{heading}</Summary>
-          <NotionBlockChildren block={block} />
+          <Suspense fallback={<Skeleton />}>
+            <NotionBlockChildren block={block} />
+          </Suspense>
         </Details>
       ) : (
         heading
@@ -56,7 +60,9 @@ export const NotionRender: React.FC<{
       return is_toggleable ? (
         <Details>
           <Summary>{heading}</Summary>
-          <NotionBlockChildren block={block} />
+          <Suspense fallback={<Skeleton />}>
+            <NotionBlockChildren block={block} />
+          </Suspense>
         </Details>
       ) : (
         heading
@@ -74,7 +80,9 @@ export const NotionRender: React.FC<{
       return is_toggleable ? (
         <Details>
           <Summary>{heading}</Summary>
-          <NotionBlockChildren block={block} />
+          <Suspense fallback={<Skeleton />}>
+            <NotionBlockChildren block={block} />
+          </Suspense>
         </Details>
       ) : (
         heading
@@ -130,7 +138,11 @@ export const NotionRender: React.FC<{
           <p>
             <RichText rich_text={rich_text} />
           </p>
-          {block.has_children && <NotionBlockChildren block={block} />}
+          {block.has_children && (
+            <Suspense fallback={<Skeleton />}>
+              <NotionBlockChildren block={block} />
+            </Suspense>
+          )}
         </Callout>
       );
     }
@@ -144,7 +156,9 @@ export const NotionRender: React.FC<{
           <p>
             <RichText rich_text={rich_text} />
           </p>
-          <NotionBlockChildren block={block} />
+          <Suspense fallback={<Skeleton />}>
+            <NotionBlockChildren block={block} />
+          </Suspense>
         </blockquote>
       );
     }
@@ -208,13 +222,19 @@ export const NotionRender: React.FC<{
           <Summary>
             <RichText rich_text={block.toggle.rich_text} />
           </Summary>
-          <NotionBlockChildren block={block} />
+          <Suspense fallback={<Skeleton />}>
+            <NotionBlockChildren block={block} />
+          </Suspense>
         </Details>
       );
     }
 
     case "child_page": {
-      return <NotionBlockChildren block={block} />;
+      return (
+        <Suspense fallback={<Skeleton />}>
+          <NotionBlockChildren block={block} />
+        </Suspense>
+      );
     }
   }
 };
