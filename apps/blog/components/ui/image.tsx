@@ -10,22 +10,21 @@ export const Image: React.FC<
   const previewImage = await getPreviewImage(imgUrl);
 
   if (!previewImage) {
-    // setTimeout(() => revalidateTag(imgUrl.pathname), 3000);
-
-    // return <Image alt={alt} width={width} {...props} />;
-    return;
+    return <img src={props.src} alt={alt} width={width} />;
   }
 
   const { name } = parse(imgUrl.pathname);
-  const { originalHeight, originalWidth, dataURIBase64 } = previewImage;
-  const aspectRatio = originalHeight / originalWidth;
+  const { height: h, width: w, blur } = previewImage;
+  const aspectRatio = h / w;
 
   return (
     <NextImage
-      blurDataURL={dataURIBase64}
-      height={width ? aspectRatio * Number(width) : originalHeight}
-      width={width ? Number(width) : originalWidth}
+      height={width ? aspectRatio * Number(width) : h}
+      width={width ? Number(width) : w}
+      blurDataURL={blur}
+      placeholder="blur"
       alt={alt.length ? alt : name}
+      unoptimized
       {...props}
     />
   );
