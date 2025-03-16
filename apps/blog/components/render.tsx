@@ -13,7 +13,7 @@ import { Callout } from "@/components/ui/callout";
 import { Heading } from "@/components/ui/heading";
 import { Image } from "@/components/ui/image";
 import { ListItem } from "@/components/ui/list";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Loading } from "@/components/ui/loading";
 import { Table, TableBody, TableHeader } from "@/components/ui/table";
 
 const Equation = dynamic(async () => {
@@ -40,7 +40,7 @@ export const NotionRender: React.FC<{
       return is_toggleable ? (
         <Details>
           <Summary>{heading}</Summary>
-          <Suspense fallback={<Skeleton />}>
+          <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
           </Suspense>
         </Details>
@@ -60,7 +60,7 @@ export const NotionRender: React.FC<{
       return is_toggleable ? (
         <Details>
           <Summary>{heading}</Summary>
-          <Suspense fallback={<Skeleton />}>
+          <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
           </Suspense>
         </Details>
@@ -80,7 +80,7 @@ export const NotionRender: React.FC<{
       return is_toggleable ? (
         <Details>
           <Summary>{heading}</Summary>
-          <Suspense fallback={<Skeleton />}>
+          <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
           </Suspense>
         </Details>
@@ -139,7 +139,7 @@ export const NotionRender: React.FC<{
             <RichText rich_text={rich_text} />
           </p>
           {block.has_children && (
-            <Suspense fallback={<Skeleton />}>
+            <Suspense fallback={<Loading />}>
               <NotionBlockChildren block={block} />
             </Suspense>
           )}
@@ -156,7 +156,7 @@ export const NotionRender: React.FC<{
           <p>
             <RichText rich_text={rich_text} />
           </p>
-          <Suspense fallback={<Skeleton />}>
+          <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
           </Suspense>
         </blockquote>
@@ -222,7 +222,7 @@ export const NotionRender: React.FC<{
           <Summary>
             <RichText rich_text={block.toggle.rich_text} />
           </Summary>
-          <Suspense fallback={<Skeleton />}>
+          <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
           </Suspense>
         </Details>
@@ -231,7 +231,7 @@ export const NotionRender: React.FC<{
 
     case "child_page": {
       return (
-        <Suspense fallback={<Skeleton />}>
+        <Suspense fallback={<Loading />}>
           <NotionBlockChildren block={block} />
         </Suspense>
       );
