@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inconsolata, Noto_Sans_SC } from "next/font/google";
 
-import "@/styles/globals.css";
+import "@/app/globals.css";
 
 const notoSansSC = Noto_Sans_SC({
   subsets: ["latin"],

@@ -1,0 +1,41 @@
+@layer utilities {
+  .loading {
+    display: inline-block;
+    width: 1ch;
+    height: calc(var(--text-base) * var(--text-base--line-height));
+    color: inherit;
+    vertical-align: baseline;
+
+    &::after {
+      animation: loading 0.8s steps(1, end) infinite;
+      content: var(--tw-content);
+    }
+  }
+
+  @keyframes loading {
+    0% {
+      content: "⣾";
+    }
+    12.5% {
+      content: "⣽";
+    }
+    25% {
+      content: "⣻";
+    }
+    37.5% {
+      content: "⢿";
+    }
+    50% {
+      content: "⡿";
+    }
+    62.5% {
+      content: "⣟";
+    }
+    75% {
+      content: "⣯";
+    }
+    87.5% {
+      content: "⣷";
+    }
+  }
+}

@@ -14,35 +14,6 @@
 
   --text-base: 1rem;
   --text-base--line-height: calc(1.25 / 1);
-
-  --animate-loading: loading 0.8s steps(1, end) infinite;
-
-  @keyframes loading {
-    0% {
-      content: "⣾";
-    }
-    12.5% {
-      content: "⣽";
-    }
-    25% {
-      content: "⣻";
-    }
-    37.5% {
-      content: "⢿";
-    }
-    50% {
-      content: "⡿";
-    }
-    62.5% {
-      content: "⣟";
-    }
-    75% {
-      content: "⣯";
-    }
-    87.5% {
-      content: "⣷";
-    }
-  }
 }
 
 @variant dark {
