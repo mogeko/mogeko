@@ -8,7 +8,7 @@ import { Suspense } from "react";
 import { Icon } from "@/components/icon";
 import { TRow } from "@/components/table-row";
 import { RichText, plainText } from "@/components/text";
-import { Details, Summary } from "@/components/toggle";
+import { Details, Summary } from "@/components/ui/accordion";
 import { Callout } from "@/components/ui/callout";
 import { Heading } from "@/components/ui/heading";
 import { Image } from "@/components/ui/image";
