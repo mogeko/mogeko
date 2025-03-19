@@ -91,10 +91,9 @@ export const NotionRender: React.FC<{
 
     case "paragraph": {
       const { color, rich_text } = block.paragraph;
-      const className = colorVariants({ color });
 
       return (
-        <p className={className.length ? className : void 0}>
+        <p className={colorVariants({ color, className: "text-base" })}>
           <RichText rich_text={rich_text} />
         </p>
       );

@@ -1,14 +1,24 @@
 import { type ColorVariantProps, colorVariants } from "@/lib/color-variants";
+import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
-export const ListItem: React.FC<
+export const ListItem = forwardRef<
+  HTMLLIElement,
   React.LiHTMLAttributes<HTMLLIElement> & ColorVariantProps
-> = ({ className, children, color, ...props }) => {
-  const cn = twMerge(colorVariants({ color }));
+>(({ className, color, ...props }, ref) => {
+  // TODO: Handle KeyDown event
 
   return (
-    <li className={cn.length ? cn : void 0} {...props}>
-      {children}
-    </li>
+    <li
+      ref={ref}
+      className={twMerge(
+        colorVariants({
+          className:
+            "pl-[1ch] focus:outline-0 focus:bg-accent focus:text-accent-foreground",
+          color,
+        }),
+      )}
+      {...props}
+    />
   );
-};
+});
