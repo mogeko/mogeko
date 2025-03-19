@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@notionhq/client": "^2.2.16",
+    "@radix-ui/react-slot": "^1.1.2",
     "@radix-ui/react-toggle": "^1.1.2",
     "@shikijs/colorized-brackets": "^3.1.0",
     "@shikijs/transformers": "^3.1.0",
