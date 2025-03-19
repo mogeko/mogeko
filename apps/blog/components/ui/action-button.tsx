@@ -22,13 +22,13 @@ export const ActionButton = React.forwardRef<
       {...props}
     >
       {hotkey && (
-        <kbd className="bg-muted text-muted-foreground font-normal px-[1ch] py-0 select-none group-has-hover:bg-accent group-has-hover:text-accent-foreground group-has-focus:bg-accent group-has-focus:text-accent-foreground">
+        <kbd className="bg-border text-foreground font-normal px-[1ch] py-0 select-none group-has-hover:bg-accent group-has-hover:text-accent-foreground group-has-focus:bg-accent group-has-focus:text-accent-foreground">
           {hotkey}
         </kbd>
       )}
       <span
         className={cn(
-          "bg-secondary text-secondary-foreground shadow-muted shadow-[inset_0_0_0_2px] font-normal px-[1ch] py-0 uppercase select-none group-has-hover:shadow-accent group-has-focus:shadow-accent",
+          "bg-secondary text-secondary-foreground shadow-border shadow-[inset_0_0_0_2px] font-normal px-[1ch] py-0 uppercase select-none group-has-hover:shadow-accent group-has-focus:shadow-accent",
           open && "bg-accent",
         )}
       >

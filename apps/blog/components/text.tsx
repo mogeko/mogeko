@@ -1,6 +1,6 @@
 import { Equation } from "@/components/equation";
 import type { RichTextItemResponse } from "@/lib/api-endpoints";
-import { type ColorVariantProps, colorVariants } from "@/lib/color-variants";
+import { colorVariants } from "@/lib/color-variants";
 import { cn as cx } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 import Link from "next/link";
@@ -14,17 +14,15 @@ const textVariants = cva([], {
     bold: { true: ["font-bold"], false: null },
     italic: { true: ["italic"], false: null },
     strikethrough: { true: ["line-through"], false: null },
-    underline: { true: ["underline"], false: null },
-    code: { true: ["notion-code"], false: null },
+    underline: { true: ["underline underline-offset-4"], false: null },
+    code: { true: ["bg-muted text-muted-foreground"], false: null },
   },
 });
 
-export const RichText: React.FC<
-  ColorVariantProps & {
-    rich_text: RichTextItemResponse | Array<RichTextItemResponse>;
-    className?: string;
-  }
-> = ({ rich_text, color, className }) => {
+export const RichText: React.FC<{
+  rich_text: RichTextItemResponse | Array<RichTextItemResponse>;
+  className?: string;
+}> = ({ rich_text, className }) => {
   const RichTextRender: React.FC<{ richText: RichTextItemResponse }> = ({
     richText,
   }) => {
@@ -35,7 +33,13 @@ export const RichText: React.FC<
       const { link, content } = richText.text;
 
       return link ? (
-        <Link className={cn.length ? cn : void 0} href={link.url}>
+        <Link
+          className={cx(
+            "bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-0 underline underline-offset-4",
+            cn,
+          )}
+          href={link.url}
+        >
           {content}
         </Link>
       ) : (

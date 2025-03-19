@@ -15,7 +15,7 @@ export const ActionLink = forwardRef<
       )}
       {...props}
     >
-      <figure className="inline-flex items-center justify-center shrink w-[3ch] bg-muted text-muted-foreground select-none">
+      <figure className="inline-flex items-center justify-center shrink w-[3ch] bg-border text-foreground select-none">
         {icon ?? "⊹"}
       </figure>
       <span className="inline-flex items-center justify-start self-stretch bg-secondary text-secondary-foreground min-w-1/10 w-full px-[1ch] select-none">

@@ -12,23 +12,23 @@
   --color-background: var(--color-white);
   --color-foreground: var(--color-black);
 
-  /* --color-card: hsl(195, 36%, 11%);
-  --color-card-foreground: hsl(180, 8%, 97%);
-  --color-popover: hsl(195, 36%, 11%);
-  --color-popover-foreground: hsl(180, 8%, 97%); */
+  --color-card: var(--color-white);
+  --color-card-foreground: var(--color-black);
+  --color-popover: rgba(224, 224, 224, 1);
+  --color-popover-foreground: var(--color-white);
 
   --color-primary: var(--color-black);
   --color-primary-foreground: var(--color-white);
   --color-secondary: rgba(224, 224, 224, 1);
   --color-secondary-foreground: var(--color-black);
-  --color-muted: rgba(198, 198, 198, 1);
+  --color-muted: rgba(168, 168, 168, 0.2);
   --color-muted-foreground: var(--color-black);
   --color-accent: rgba(92, 255, 59, 1);
   --color-accent-foreground: var(--color-black);
   --color-destructive: hsl(0, 69%, 48%);
   --color-destructive-foreground: var(--color-black);
 
-  --color-border: rgba(224, 224, 224, 1);
+  --color-border: rgba(198, 198, 198, 1);
   --color-input: rgba(244, 244, 244, 1);
   --color-ring: var(--color-accent);
 
