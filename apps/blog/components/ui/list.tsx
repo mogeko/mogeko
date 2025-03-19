@@ -22,3 +22,4 @@ export const ListItem = forwardRef<
     />
   );
 });
+ListItem.displayName = "ListItem";

@@ -24,3 +24,4 @@ export const ActionLink = forwardRef<
     </NextLink>
   );
 });
+ActionLink.displayName = "ActionLink";
