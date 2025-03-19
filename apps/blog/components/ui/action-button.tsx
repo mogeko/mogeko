@@ -14,11 +14,11 @@ export const ActionButton = React.forwardRef<
 
   return (
     <Comp
+      ref={ref}
       className={cn(
         "group inline-flex items-center justify-center cursor-pointer outline-0 shrink-0",
         className,
       )}
-      ref={ref}
       {...props}
     >
       {hotkey && (

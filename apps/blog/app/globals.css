@@ -19,9 +19,9 @@
 
   --color-primary: var(--color-black);
   --color-primary-foreground: var(--color-white);
-  --color-secondary: rgba(198, 198, 198, 1);
+  --color-secondary: rgba(224, 224, 224, 1);
   --color-secondary-foreground: var(--color-black);
-  --color-muted: rgba(224, 224, 224, 1);
+  --color-muted: rgba(198, 198, 198, 1);
   --color-muted-foreground: var(--color-black);
   --color-accent: rgba(92, 255, 59, 1);
   --color-accent-foreground: var(--color-black);

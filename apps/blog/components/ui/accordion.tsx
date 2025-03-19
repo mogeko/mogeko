@@ -8,6 +8,7 @@ export const Summary = forwardRef<
 >(({ className, children, color, ...props }, ref) => {
   return (
     <summary
+      ref={ref}
       className={colorVariants({
         className: [
           "hover:bg-accent hover:text-accent-foreground marker:content-['▸'] group-open:marker:content-['▾']",
@@ -15,7 +16,6 @@ export const Summary = forwardRef<
         ],
         color,
       })}
-      ref={ref}
       {...props}
     >
       <span className="min-w-1/10 w-full select-none transition-[padding] duration-200 pl-0 group-open:pl-[1ch]">
@@ -30,6 +30,6 @@ export const Details = forwardRef<
   HTMLDetailsElement,
   React.DetailsHTMLAttributes<HTMLDetailsElement>
 >(({ className, ...props }, ref) => {
-  return <details className={cn("group", className)} ref={ref} {...props} />;
+  return <details ref={ref} className={cn("group", className)} {...props} />;
 });
 Details.displayName = "Details";
