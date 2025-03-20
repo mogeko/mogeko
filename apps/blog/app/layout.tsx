@@ -46,7 +46,8 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
       <body
         className={cn(notoSansSC.variable, inconsolata.variable, "absolute")}
       >
-        <GlobalHotkey>{children}</GlobalHotkey>
+        <GlobalHotkey />
+        {children}
       </body>
     </html>
   );

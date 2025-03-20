@@ -1,45 +1,48 @@
 "use client";
 
-import { useKeyPress } from "@/lib/use-keypress";
-import { createContext, useContext, useEffect, useState } from "react";
-import { useCallback } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 
 const FOCUSEABLE_SELECTORS = `
   button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]),
   textarea:not([disabled]), [tabindex]:not([tabindex="-1"])
 `;
-
-const FocusableElementsCtx = createContext<Array<HTMLElement>>([]);
-
 function isFocusableElement(element: EventTarget | null) {
   if (!element || !(element instanceof HTMLElement)) return false;
 
   return element.matches(FOCUSEABLE_SELECTORS);
 }
 
-export const GlobalHotkey: React.FC<{
-  children: React.ReactNode;
-}> = ({ children }) => {
-  const [elements, setElements] = useState<Array<HTMLElement>>([]);
+export const GlobalHotkey: React.FC = () => {
+  const [elements, setElements] = useState<ArrayLike<HTMLElement>>([]);
 
   useEffect(() => {
-    const focusableElements = Array.from(
-      document.querySelectorAll<HTMLElement>(FOCUSEABLE_SELECTORS),
-    );
-    setElements(focusableElements);
+    setElements(document.querySelectorAll<HTMLElement>(FOCUSEABLE_SELECTORS));
   }, []);
 
-  const onHandlePreviousFocus = useCallback(
+  const handleKeyPress = useCallback(
     (event: Event) => {
-      const target = event.target;
+      if (!("key" in event && elements.length)) return;
+      if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+        if (isFocusableElement(event.target)) {
+          event.preventDefault();
 
-      if (isFocusableElement(target)) {
-        event.preventDefault();
+          for (let i = 0; i < elements.length; i++) {
+            if (elements[i] === event.target) {
+              elements[(i - 1 + elements.length) % elements.length].focus();
+              break;
+            }
+          }
+        }
+      }
+      if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+        if (isFocusableElement(event.target)) {
+          event.preventDefault();
 
-        for (let i = 0; i < elements.length; i++) {
-          if (elements[i] === target) {
-            elements[(i - 1 + elements.length) % elements.length].focus();
-            break;
+          for (let i = 0; i < elements.length; i++) {
+            if (elements[i] === event.target) {
+              elements[(i + 1) % elements.length].focus();
+              break;
+            }
           }
         }
       }
@@ -47,32 +50,12 @@ export const GlobalHotkey: React.FC<{
     [elements],
   );
 
-  const onHandleNextFocus = useCallback(
-    (event: Event) => {
-      const target = event.target;
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleKeyPress]);
 
-      if (isFocusableElement(target)) {
-        event.preventDefault();
-
-        for (let i = 0; i < elements.length; i++) {
-          if (elements[i] === target) {
-            elements[(i + 1) % elements.length].focus();
-            break;
-          }
-        }
-      }
-    },
-    [elements],
-  );
-
-  useKeyPress("ArrowUp", onHandlePreviousFocus);
-  useKeyPress("ArrowDown", onHandleNextFocus);
-
-  return (
-    <FocusableElementsCtx.Provider value={elements}>
-      {children}
-    </FocusableElementsCtx.Provider>
-  );
+  return <Fragment />;
 };
-
-export const useFocusableDOMs = () => useContext(FocusableElementsCtx);
