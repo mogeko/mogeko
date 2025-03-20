@@ -1,40 +1,36 @@
 import { cn } from "@/lib/utils";
-import { Slot } from "@radix-ui/react-slot";
-import React from "react";
+import { forwardRef } from "react";
 
-export const ActionButton = React.forwardRef<
+export const ActionButton = forwardRef<
   HTMLButtonElement,
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
     hotkey?: React.ReactNode;
     open?: boolean;
-    asChild?: boolean;
   }
->(({ className, children, hotkey, open, asChild, ...props }, ref) => {
-  const Comp = asChild ? Slot : "button";
-
+>(({ className, children, hotkey, open, ...props }, ref) => {
   return (
-    <Comp
+    <button
       ref={ref}
       className={cn(
-        "group inline-flex items-center justify-center cursor-pointer outline-0 shrink-0",
+        "inline-flex items-center justify-center cursor-pointer outline-0 shrink-0 hover:[&>kbd]:bg-accent hover:[&>kbd]:text-accent-foreground hover:[&>span]:shadow-accent focus:[&>kbd]:bg-accent focus:[&>kbd]:text-accent-foreground focus:[&>span]:shadow-accent",
         className,
       )}
       {...props}
     >
       {hotkey && (
-        <kbd className="bg-border text-foreground font-normal px-[1ch] py-0 select-none group-has-hover:bg-accent group-has-hover:text-accent-foreground group-has-focus:bg-accent group-has-focus:text-accent-foreground">
+        <kbd className="bg-border text-foreground font-normal px-[1ch] py-0 select-none">
           {hotkey}
         </kbd>
       )}
       <span
         className={cn(
-          "bg-secondary text-secondary-foreground shadow-border shadow-[inset_0_0_0_2px] font-normal px-[1ch] py-0 uppercase select-none group-has-hover:shadow-accent group-has-focus:shadow-accent",
+          "bg-secondary text-secondary-foreground shadow-border shadow-[inset_0_0_0_2px] font-normal px-[1ch] py-0 uppercase select-none",
           open && "bg-accent",
         )}
       >
         {children}
       </span>
-    </Comp>
+    </button>
   );
 });
 ActionButton.displayName = "ActionButton";

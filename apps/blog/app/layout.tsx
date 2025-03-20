@@ -1,3 +1,4 @@
+import { GlobalHotkey } from "@/components/global-hotkey";
 import { plainText } from "@/components/text";
 import { notion } from "@/lib/notion";
 import { cn } from "@/lib/utils";
@@ -45,7 +46,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
       <body
         className={cn(notoSansSC.variable, inconsolata.variable, "absolute")}
       >
-        {children}
+        <GlobalHotkey>{children}</GlobalHotkey>
       </body>
     </html>
   );
