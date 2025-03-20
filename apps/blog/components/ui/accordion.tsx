@@ -11,7 +11,7 @@ export const Summary = forwardRef<
       ref={ref}
       className={colorVariants({
         className: [
-          "hover:bg-accent hover:text-accent-foreground marker:content-['▸'] group-open:marker:content-['▾']",
+          "marker:content-['▸'] group-open:marker:content-['▾'] hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
           className,
         ],
         color,
