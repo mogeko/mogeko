@@ -7,10 +7,10 @@ const FOCUSEABLE_SELECTORS = `
   textarea:not([disabled]), summary:not([disabled]), [tabindex]:not([tabindex="-1"])
 `;
 
-function isFocusableElement(element: EventTarget | null) {
-  if (!element || !(element instanceof HTMLElement)) return false;
+function isFocusableElement(e: EventTarget | null): e is HTMLElement {
+  if (!e || !(e instanceof HTMLElement)) return false;
 
-  return element.matches(FOCUSEABLE_SELECTORS);
+  return e.matches(FOCUSEABLE_SELECTORS);
 }
 
 export const GlobalHotkey: React.FC = () => {
@@ -22,8 +22,12 @@ export const GlobalHotkey: React.FC = () => {
 
   const handleKeyPress = useCallback(
     (event: Event) => {
-      if (!("key" in event && elements.length)) return;
-      if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+      if (!(event instanceof KeyboardEvent && elements.length)) return;
+      if (event.key === "Enter" || event.key === " ") {
+        if (isFocusableElement(event.target)) {
+          event.preventDefault(), event.target.click();
+        }
+      } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
         if (isFocusableElement(event.target)) {
           event.preventDefault();
 
@@ -34,8 +38,7 @@ export const GlobalHotkey: React.FC = () => {
             }
           }
         }
-      }
-      if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+      } else if (event.key === "ArrowDown" || event.key === "ArrowRight") {
         if (isFocusableElement(event.target)) {
           event.preventDefault();
 
