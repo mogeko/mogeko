@@ -12,7 +12,7 @@ import { Details, Summary } from "@/components/ui/accordion";
 import { Callout } from "@/components/ui/callout";
 import { Heading } from "@/components/ui/heading";
 import { Image } from "@/components/ui/image";
-import { ListItem } from "@/components/ui/list";
+import { ListItem, OrderedList, UnorderedList } from "@/components/ui/list";
 import { Loading } from "@/components/ui/loading";
 import { Table, TableBody, TableHeader } from "@/components/ui/table";
 
@@ -93,7 +93,7 @@ export const NotionRender: React.FC<{
       const { color, rich_text } = block.paragraph;
 
       return (
-        <p className={colorVariants({ color, className: "text-base" })}>
+        <p className={colorVariants({ color, className: "my-1" })}>
           <RichText rich_text={rich_text} />
         </p>
       );
@@ -242,7 +242,7 @@ export const NotionBlockChildren: React.FC<{
   block: GetBlockResponse;
 }> = async ({ block: { id, ...rest } }) => {
   if ("type" in rest && rest.has_children) {
-    const [OList, UList] = ["ol", "ul"].map(withWraper);
+    const [OList, UList] = [OrderedList, UnorderedList].map(withWraper);
 
     const acc: Array<React.ReactNode> = [];
 

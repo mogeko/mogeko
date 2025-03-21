@@ -1,11 +1,8 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-noto-sans-sc), ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-mono: var(--font-inconsolata), var(--font-noto-sans-sc), ui-monospace,
-    SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
-    monospace;
+  --font-mono: "Maple Mono NF CN", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 @theme {
@@ -32,8 +29,7 @@
   --color-input: rgba(244, 244, 244, 1);
   --color-ring: var(--color-accent);
 
-  --text-base: 1rem;
-  --text-base--line-height: calc(1.25 / 1);
+  --spacing: calc(21.5 / 16 * 1rem);
 }
 
 /* @variant dark {
@@ -43,8 +39,8 @@
   }
 } */
 
-@layer base {
+/* @layer base {
   body {
-    @apply text-foreground bg-background font-mono;
+    @apply absolute text-foreground bg-background font-mono text-base/1;
   }
-}
+} */

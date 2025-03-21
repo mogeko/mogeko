@@ -13,7 +13,7 @@ export const Heading: React.FC<
   return (
     <Comp id={id} className={cn.length ? cn : void 0} {...props}>
       {id ? (
-        <Link href={`#${id}`}>
+        <Link className="pr-[1ch]" href={`#${id}`}>
           {(["#", "##", "###"] as const)[level - 1] ?? "#"}
         </Link>
       ) : null}

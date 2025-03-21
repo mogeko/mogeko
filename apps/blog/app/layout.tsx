@@ -1,23 +1,9 @@
 import { GlobalHotkey } from "@/components/global-hotkey";
 import { plainText } from "@/components/text";
 import { notion } from "@/lib/notion";
-import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inconsolata, Noto_Sans_SC } from "next/font/google";
 
 import "@/app/globals.css";
-
-const notoSansSC = Noto_Sans_SC({
-  subsets: ["latin"],
-  variable: "--font-noto-sans-sc",
-  adjustFontFallback: false,
-});
-
-const inconsolata = Inconsolata({
-  subsets: ["latin"],
-  variable: "--font-inconsolata",
-  adjustFontFallback: false,
-});
 
 export async function generateMetadata(): Promise<Metadata> {
   const database_id = process.env.NOTION_DATABASE_ID;
@@ -43,11 +29,17 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en">
-      <body
-        className={cn(notoSansSC.variable, inconsolata.variable, "absolute")}
-      >
+      <head>
+        {/* biome-ignore format: <explanation> */}
+        <link rel="preconnect" href="https://static.zeoseven.com" crossOrigin="" />
+        <link
+          rel="stylesheet"
+          href="https://static.zeoseven.com/zsft/442/main/result.css"
+        />
+      </head>
+      <body className="min-h-svh text-foreground bg-background antialiased font-mono text-base/1">
+        <main className="min-h-svh relative flex flex-col">{children}</main>
         <GlobalHotkey />
-        {children}
       </body>
     </html>
   );

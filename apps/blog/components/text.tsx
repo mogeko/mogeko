@@ -15,7 +15,7 @@ const textVariants = cva([], {
     italic: { true: ["italic"], false: null },
     strikethrough: { true: ["line-through"], false: null },
     underline: { true: ["underline underline-offset-4"], false: null },
-    code: { true: ["bg-muted text-muted-foreground"], false: null },
+    code: { true: ["bg-muted text-destructive"], false: null },
   },
 });
 
@@ -35,7 +35,7 @@ export const RichText: React.FC<{
       return link ? (
         <Link
           className={cx(
-            "bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-0 underline underline-offset-4",
+            "bg-muted text-muted-foreground underline underline-offset-2 decoration-2 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-0",
             cn,
           )}
           href={link.url}
