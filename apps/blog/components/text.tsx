@@ -38,7 +38,7 @@ export const RichText: React.FC<{
       return link ? (
         <Link
           className={cx(
-            "bg-muted text-muted-foreground underline underline-offset-2 decoration-2 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-0",
+            "bg-muted text-muted-foreground underline underline-offset-2 decoration-2 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none",
             cn,
           )}
           href={link.url}

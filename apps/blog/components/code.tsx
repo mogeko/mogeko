@@ -26,6 +26,7 @@ export const Code: React.FC<{
       transformerNotationFocus(),
       transformerNotationHighlight(),
     ],
+    tabindex: -1,
   });
 
   return (

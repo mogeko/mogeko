@@ -40,7 +40,7 @@ export const NotionRender: React.FC<{
 
       return is_toggleable ? (
         <Details>
-          <Summary>{heading}</Summary>
+          <Summary asChild>{heading}</Summary>
           <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
           </Suspense>
@@ -60,7 +60,7 @@ export const NotionRender: React.FC<{
 
       return is_toggleable ? (
         <Details>
-          <Summary>{heading}</Summary>
+          <Summary asChild>{heading}</Summary>
           <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
           </Suspense>
@@ -80,7 +80,7 @@ export const NotionRender: React.FC<{
 
       return is_toggleable ? (
         <Details>
-          <Summary>{heading}</Summary>
+          <Summary asChild>{heading}</Summary>
           <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
           </Suspense>

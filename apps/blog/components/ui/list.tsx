@@ -15,10 +15,12 @@ export const ListItem = forwardRef<
       className={twMerge(
         colorVariants({
           className:
-            "pl-[1ch] focus:outline-0 focus:bg-accent focus:text-accent-foreground",
+            "pl-[1ch] focus:outline-none focus:bg-accent focus:text-accent-foreground",
           color,
         }),
       )}
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
+      tabIndex={0}
       {...props}
     />
   );

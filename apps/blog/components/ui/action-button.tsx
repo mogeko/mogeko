@@ -12,7 +12,7 @@ export const ActionButton = forwardRef<
     <button
       ref={ref}
       className={cn(
-        "inline-flex items-center justify-center cursor-pointer outline-0 shrink-0 hover:[&>kbd]:bg-accent hover:[&>kbd]:text-accent-foreground hover:[&>span]:shadow-accent focus:[&>kbd]:bg-accent focus:[&>kbd]:text-accent-foreground focus:[&>span]:shadow-accent",
+        "inline-flex items-center justify-center cursor-pointer outline-none shrink-0 hover:[&>kbd]:bg-accent hover:[&>kbd]:text-accent-foreground hover:[&>span]:shadow-accent focus:[&>kbd]:bg-accent focus:[&>kbd]:text-accent-foreground focus:[&>span]:shadow-accent",
         className,
       )}
       {...props}

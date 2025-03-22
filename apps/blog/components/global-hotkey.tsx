@@ -4,7 +4,7 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 
 const FOCUSEABLE_SELECTORS = `
   button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]),
-  textarea:not([disabled]), summary:not([disabled]), [tabindex]:not([tabindex="-1"])
+  textarea:not([disabled]), [tabindex]:not([tabindex="-1"])
 `;
 
 function isFocusableElement(e: EventTarget | null): e is HTMLElement {

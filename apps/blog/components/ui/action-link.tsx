@@ -10,7 +10,7 @@ export const ActionLink = forwardRef<
     <NextLink
       ref={ref}
       className={cn(
-        "flex items-start justify-between bg-transparent text-foreground hover:[&>figure]:bg-accent focus:[&>figure]:bg-accent",
+        "flex items-start justify-between bg-transparent text-foreground outline-none hover:[&>figure]:bg-accent focus:[&>figure]:bg-accent",
         className,
       )}
       {...props}
