@@ -30,9 +30,11 @@ export const Code: React.FC<{
 
   return (
     <div
+      className="my-1 font-mono"
       // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-      dangerouslySetInnerHTML={{ __html: html }}
-      className="font-mono"
+      dangerouslySetInnerHTML={{
+        __html: html,
+      }}
     />
   );
 };

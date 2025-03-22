@@ -15,7 +15,10 @@ const textVariants = cva([], {
     italic: { true: ["italic"], false: null },
     strikethrough: { true: ["line-through"], false: null },
     underline: { true: ["underline underline-offset-4"], false: null },
-    code: { true: ["bg-muted text-destructive"], false: null },
+    code: {
+      true: ["bg-muted text-destructive -mx-[3px] px-[3px]"],
+      false: null,
+    },
   },
 });
 

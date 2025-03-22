@@ -8,10 +8,18 @@ export const Heading: React.FC<
   } & ColorVariantProps
 > = ({ className, id, level = 1, children, color, ...props }) => {
   const Comp = (["h1", "h2", "h3"] as const)[level - 1] ?? "h1";
-  const cn = twMerge(colorVariants({ className, color }));
 
   return (
-    <Comp id={id} className={cn.length ? cn : void 0} {...props}>
+    <Comp
+      id={id}
+      className={twMerge(
+        colorVariants({
+          color,
+          className: ["scroll-m-3.5 font-extrabold my-1", className],
+        }),
+      )}
+      {...props}
+    >
       {id ? (
         <Link className="pr-[1ch]" href={`#${id}`}>
           {(["#", "##", "###"] as const)[level - 1] ?? "#"}

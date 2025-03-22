@@ -39,8 +39,85 @@
   }
 } */
 
-/* @layer base {
-  body {
-    @apply absolute text-foreground bg-background font-mono text-base/1;
+/* shiki */
+
+@theme {
+  --color-shiki-diff-add: rgba(16, 185, 129, 0.16);
+  --color-shiki-diff-add-symbol: hsl(151, 65%, 54%);
+  --color-shiki-diff-remove: rgba(244, 63, 94, 0.16);
+  --color-shiki-diff-remove-symbol: hsl(0, 45%, 63%);
+  --color-shiki-highlight: rgba(101, 117, 133, 0.16);
+  --color-shiki-error: rgba(244, 63, 94, 0.16);
+  --color-shiki-warning: rgba(234, 179, 8, 0.16);
+  --color-shiki-word-highlight: var(--color-muted);
+}
+
+@layer utilities {
+  .shiki {
+    @apply relative pl-[3ch] py-1 whitespace-pre-wrap;
+
+    & code .line {
+      @apply inline-block -mx-[3ch] pl-[3ch] pr-[1ch] w-[calc(100%+3ch)];
+
+      /* transformerNotationWordHighlight */
+
+      & .highlighted-word {
+        @apply -mx-[3px] px-[3px] bg-shiki-word-highlight;
+      }
+    }
+
+    /* transformerNotationDiff */
+
+    &.has-diff code .line.diff {
+      @apply transition-[background-color] duration-500;
+
+      &::before {
+        @apply absolute left-[1ch];
+      }
+
+      &.add {
+        @apply bg-shiki-diff-add;
+
+        &::before {
+          @apply text-shiki-diff-add-symbol content-['+'];
+        }
+      }
+
+      &.remove {
+        @apply bg-shiki-diff-remove opacity-70;
+
+        &::before {
+          @apply text-shiki-diff-remove-symbol content-['-'];
+        }
+      }
+    }
+
+    /* transformerNotationHighlight */
+
+    &.has-highlighted code .line.highlighted {
+      @apply bg-shiki-highlight transition-[background-color] duration-500;
+
+      /* transformerNotationErrorLevel */
+
+      &.error {
+        @apply bg-shiki-error;
+      }
+
+      &.warning {
+        @apply bg-shiki-warning;
+      }
+    }
+
+    /* transformerNotationFocus */
+
+    &.has-focused {
+      & code .line:not(.focused) {
+        @apply opacity-70 blur-[0.095rem] transition-[filter,opacity] duration-300;
+      }
+
+      &:hover code .line:not(.focused) {
+        @apply opacity-100 blur-none;
+      }
+    }
   }
-} */
+}
