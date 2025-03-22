@@ -29,12 +29,24 @@ export const OrderedList = forwardRef<
   HTMLOListElement,
   React.OlHTMLAttributes<HTMLOListElement>
 >(({ className, ...props }, ref) => {
-  return <ol ref={ref} className={cn("my-1", className)} {...props} />;
+  return (
+    <ol
+      ref={ref}
+      className={cn("my-1 list-inside list-decimal -indent-[1ch]", className)}
+      {...props}
+    />
+  );
 });
 
 export const UnorderedList = forwardRef<
   HTMLUListElement,
   React.HTMLAttributes<HTMLUListElement>
 >(({ className, ...props }, ref) => {
-  return <ul ref={ref} className={className} {...props} />;
+  return (
+    <ul
+      ref={ref}
+      className={cn("my-1 list-inside list-['▪_'] -indent-[1ch]", className)}
+      {...props}
+    />
+  );
 });

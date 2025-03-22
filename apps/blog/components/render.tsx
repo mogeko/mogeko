@@ -4,6 +4,7 @@ import { iteratePaginatedAPI, notion } from "@/lib/notion";
 import { iterateHelper, withWraper } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { Icon } from "@/components/icon";
 import { TRow } from "@/components/table-row";
@@ -93,7 +94,11 @@ export const NotionRender: React.FC<{
       const { color, rich_text } = block.paragraph;
 
       return (
-        <p className={colorVariants({ color, className: "my-1" })}>
+        <p
+          className={twMerge(
+            colorVariants({ color, className: "[&:not(:first-child)]:mt-1" }),
+          )}
+        >
           <RichText rich_text={rich_text} />
         </p>
       );
