@@ -32,61 +32,64 @@ export const NotionRender: React.FC<{
   switch (block.type) {
     case "heading_1": {
       const { color, rich_text, is_toggleable } = block.heading_1;
-      const heading = (
-        <Heading id={block.id} color={color} level={1}>
-          <RichText rich_text={rich_text} />
-        </Heading>
-      );
 
       return is_toggleable ? (
-        <Details>
-          <Summary asChild>{heading}</Summary>
+        <Details className="my-1">
+          <Summary asChild>
+            <Heading id={block.id} color={color} level={1}>
+              <RichText rich_text={rich_text} />
+            </Heading>
+          </Summary>
           <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
           </Suspense>
         </Details>
       ) : (
-        heading
+        <Heading className="my-1" id={block.id} color={color} level={1}>
+          <RichText rich_text={rich_text} />
+        </Heading>
       );
     }
 
     case "heading_2": {
       const { color, rich_text, is_toggleable } = block.heading_2;
-      const heading = (
-        <Heading id={block.id} color={color} level={2}>
-          <RichText rich_text={rich_text} />
-        </Heading>
-      );
 
       return is_toggleable ? (
-        <Details>
-          <Summary asChild>{heading}</Summary>
+        <Details className="my-1">
+          <Summary asChild>
+            <Heading id={block.id} color={color} level={2}>
+              <RichText rich_text={rich_text} />
+            </Heading>
+          </Summary>
           <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
           </Suspense>
         </Details>
       ) : (
-        heading
+        <Heading className="my-1" id={block.id} color={color} level={2}>
+          <RichText rich_text={rich_text} />
+        </Heading>
       );
     }
 
     case "heading_3": {
       const { color, rich_text, is_toggleable } = block.heading_3;
-      const heading = (
-        <Heading id={block.id} color={color} level={3}>
-          <RichText rich_text={rich_text} />
-        </Heading>
-      );
 
       return is_toggleable ? (
-        <Details>
-          <Summary asChild>{heading}</Summary>
+        <Details className="my-1">
+          <Summary asChild>
+            <Heading id={block.id} color={color} level={3}>
+              <RichText rich_text={rich_text} />
+            </Heading>
+          </Summary>
           <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
           </Suspense>
         </Details>
       ) : (
-        heading
+        <Heading className="my-1" id={block.id} color={color} level={3}>
+          <RichText rich_text={rich_text} />
+        </Heading>
       );
     }
 

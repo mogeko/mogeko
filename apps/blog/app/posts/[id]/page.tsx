@@ -31,7 +31,7 @@ const Page: NextPage<Props> = async ({ params }) => {
     } = page;
 
     return (
-      <article className="flex flex-col max-w-[80ch] px-[2ch] py-2">
+      <article className="flex flex-col min-h-svh max-w-[80ch] px-[2ch] py-2">
         <header>
           {Name.type === "title" && (
             <h1>

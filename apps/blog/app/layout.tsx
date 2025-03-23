@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function RootLayout({ children }: React.PropsWithChildren) {
+const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <html lang="en">
       <head>
@@ -43,4 +43,6 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

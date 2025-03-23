@@ -24,7 +24,7 @@
     "typescript": "^5.8.2",
     "vite-node": "^2.1.9"
   },
-  "packageManager": "pnpm@10.6.4",
+  "packageManager": "pnpm@10.6.5",
   "engines": {
     "node": ">=20.1.0"
   }
