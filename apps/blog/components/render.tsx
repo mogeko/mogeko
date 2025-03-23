@@ -114,7 +114,7 @@ export const NotionRender: React.FC<{
 
         return (
           <div className="[&:not(:first-child)]:mt-1">
-            <Image width={640} src={file.url} alt={alt} />
+            <Image width={729.6} src={file.url} alt={alt} />
           </div>
         );
       }

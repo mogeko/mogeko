@@ -5,11 +5,7 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    remotePatterns: [
-      {
-        hostname: "prod-files-secure.s3.us-west-2.amazonaws.com",
-      },
-    ],
+    remotePatterns: [{ hostname: "**.amazonaws.com", protocol: "https" }],
   },
   logging: {
     fetches: {

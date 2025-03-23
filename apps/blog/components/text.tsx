@@ -1,9 +1,9 @@
 import { Equation } from "@/components/equation";
+import { Link } from "@/components/ui/link";
 import type { RichTextItemResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
 import { cn as cx } from "@/lib/utils";
 import { cva } from "class-variance-authority";
-import Link from "next/link";
 
 export function plainText(richText: Array<RichTextItemResponse>) {
   return richText.map(({ plain_text }) => plain_text).join();
@@ -14,7 +14,10 @@ const textVariants = cva([], {
     bold: { true: ["font-bold"], false: null },
     italic: { true: ["italic"], false: null },
     strikethrough: { true: ["line-through"], false: null },
-    underline: { true: ["underline underline-offset-4"], false: null },
+    underline: {
+      true: ["underline underline-offset-2 decoration-2"],
+      false: null,
+    },
     code: {
       true: ["bg-muted text-destructive -mx-[3px] px-[3px]"],
       false: null,
@@ -36,13 +39,7 @@ export const RichText: React.FC<{
       const { link, content } = richText.text;
 
       return link ? (
-        <Link
-          className={cx(
-            "bg-muted text-muted-foreground underline underline-offset-2 decoration-2 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none",
-            cn,
-          )}
-          href={link.url}
-        >
+        <Link className={cn} href={link.url}>
           {content}
         </Link>
       ) : (
