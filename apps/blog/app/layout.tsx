@@ -37,6 +37,10 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
           rel="stylesheet"
           href="https://static.zeoseven.com/zsft/442/main/result.css"
         />
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.webmanifest" />
       </head>
       <body className="min-h-svh flex flex-col text-foreground bg-background antialiased font-mono text-base/1">
         <main className="relative flex-1 flex flex-col">{children}</main>
