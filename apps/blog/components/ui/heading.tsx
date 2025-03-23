@@ -1,5 +1,5 @@
+import { Link } from "@/components/ui/link";
 import { type ColorVariantProps, colorVariants } from "@/lib/color-variants";
-import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
 export const Heading: React.FC<
@@ -21,10 +21,7 @@ export const Heading: React.FC<
       {...props}
     >
       {id ? (
-        <Link
-          className="hover:bg-accent hover:text-accent-foreground"
-          href={`#${id}`}
-        >
+        <Link variant="ghost" href={`#${id}`}>
           {(["#", "##", "###"] as const)[level - 1] ?? "#"}
         </Link>
       ) : null}
