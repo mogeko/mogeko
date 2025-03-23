@@ -1,8 +1,8 @@
 "use client";
 
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect } from "react";
 
-const FOCUSEABLE_SELECTORS = `
+const FOCUSEABLE_SELECTOR = `
   button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]),
   textarea:not([disabled]), [tabindex]:not([tabindex="-1"])
 `;
@@ -10,49 +10,42 @@ const FOCUSEABLE_SELECTORS = `
 function isFocusableElement(e: EventTarget | null): e is HTMLElement {
   if (!e || !(e instanceof HTMLElement)) return false;
 
-  return e.matches(FOCUSEABLE_SELECTORS);
+  return e.matches(FOCUSEABLE_SELECTOR);
 }
 
 export const GlobalHotkey: React.FC = () => {
-  const [elements, setElements] = useState<ArrayLike<HTMLElement>>([]);
+  const handleKeyPress = useCallback((event: Event) => {
+    const els = document.querySelectorAll<HTMLElement>(FOCUSEABLE_SELECTOR);
 
-  useEffect(() => {
-    setElements(document.querySelectorAll<HTMLElement>(FOCUSEABLE_SELECTORS));
-  }, []);
+    if (!(event instanceof KeyboardEvent && els.length)) return;
+    if (event.key === "Enter" || event.key === " ") {
+      if (isFocusableElement(event.target)) {
+        event.preventDefault(), event.target.click();
+      }
+    } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+      if (isFocusableElement(event.target)) {
+        event.preventDefault();
 
-  const handleKeyPress = useCallback(
-    (event: Event) => {
-      if (!(event instanceof KeyboardEvent && elements.length)) return;
-      if (event.key === "Enter" || event.key === " ") {
-        if (isFocusableElement(event.target)) {
-          event.preventDefault(), event.target.click();
-        }
-      } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
-        if (isFocusableElement(event.target)) {
-          event.preventDefault();
-
-          for (let i = 0; i < elements.length; i++) {
-            if (elements[i] === event.target) {
-              elements[(i - 1 + elements.length) % elements.length].focus();
-              break;
-            }
-          }
-        }
-      } else if (event.key === "ArrowDown" || event.key === "ArrowRight") {
-        if (isFocusableElement(event.target)) {
-          event.preventDefault();
-
-          for (let i = 0; i < elements.length; i++) {
-            if (elements[i] === event.target) {
-              elements[(i + 1) % elements.length].focus();
-              break;
-            }
+        for (let i = 0; i < els.length; i++) {
+          if (els[i] === event.target) {
+            els[(i - 1 + els.length) % els.length].focus();
+            break;
           }
         }
       }
-    },
-    [elements],
-  );
+    } else if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+      if (isFocusableElement(event.target)) {
+        event.preventDefault();
+
+        for (let i = 0; i < els.length; i++) {
+          if (els[i] === event.target) {
+            els[(i + 1) % els.length].focus();
+            break;
+          }
+        }
+      }
+    }
+  }, []);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
