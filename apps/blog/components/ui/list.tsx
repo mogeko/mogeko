@@ -41,6 +41,7 @@ export const OrderedList = forwardRef<
     />
   );
 });
+OrderedList.displayName = "OrderedList";
 
 export const UnorderedList = forwardRef<
   HTMLUListElement,
@@ -54,3 +55,4 @@ export const UnorderedList = forwardRef<
     />
   );
 });
+UnorderedList.displayName = "UnorderedList";

@@ -1,4 +1,3 @@
-import type { GetBlockResponse } from "@/lib/api-endpoints";
 import { type ClassValue, clsx } from "clsx";
 import { createElement } from "react";
 import { twMerge } from "tailwind-merge";
@@ -31,4 +30,25 @@ export async function* iterateHelper<T>(
   }
 
   yield [initialize, void 0];
+}
+
+export function groupBy<K, T>(
+  items: Iterable<T>,
+  keySelector: (item: T, index: number) => K,
+): Array<[K, Array<T>]> {
+  const result: Array<[K, T[]]> = [];
+  let index = 0;
+
+  for (const item of items) {
+    const key = keySelector(item, index++);
+    const group = result.find(([k]) => k === key);
+
+    if (group) {
+      group[1].push(item);
+    } else {
+      result.push([key, [item]]);
+    }
+  }
+
+  return result;
 }

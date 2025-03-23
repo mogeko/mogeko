@@ -3,6 +3,7 @@ import { Details, Summary } from "@/components/ui/accordion";
 import { ActionLink } from "@/components/ui/action-link";
 import { Heading } from "@/components/ui/heading";
 import { notion } from "@/lib/notion";
+import { groupBy } from "@/lib/utils";
 import { getYear } from "date-fns";
 import type { NextPage } from "next";
 
@@ -17,16 +18,7 @@ const Home: NextPage = async () => {
 
       const pages = await notion.databases.query({
         database_id,
-        sorts: [{ timestamp: "created_time", direction: "descending" }],
-      });
-      const pagesGroup = Object.groupBy(pages.results, (page) => {
-        if ("properties" in page) {
-          const { "Publish Date": _date } = page.properties;
-          const date = _date.type === "date" && _date.date?.start;
-          return date ? getYear(date) : "Unknown";
-        }
-
-        return "Unknown";
+        sorts: [{ property: "Publish Date", direction: "descending" }],
       });
 
       return (
@@ -39,7 +31,15 @@ const Home: NextPage = async () => {
               <RichText rich_text={description} />
             </p>
           </section>
-          {Object.entries(pagesGroup).map(([date, pages]) => {
+          {groupBy(pages.results, (page) => {
+            if ("properties" in page) {
+              const { "Publish Date": _date } = page.properties;
+              const date = _date.type === "date" && _date.date?.start;
+              return date ? getYear(date) : "Unknown";
+            }
+
+            return "Unknown";
+          }).map(([date, pages]) => {
             return (
               <section key={date}>
                 <Details open>
