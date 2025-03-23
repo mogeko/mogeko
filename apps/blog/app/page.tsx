@@ -1,9 +1,11 @@
 import { RichText } from "@/components/text";
 import { Details, Summary } from "@/components/ui/accordion";
 import { ActionLink } from "@/components/ui/action-link";
+import { Badges } from "@/components/ui/badges";
 import { Heading } from "@/components/ui/heading";
 import { notion } from "@/lib/notion";
 import { groupBy } from "@/lib/utils";
+import pkg from "@/package.json";
 import { getYear } from "date-fns";
 import type { NextPage } from "next";
 
@@ -24,13 +26,17 @@ const Home: NextPage = async () => {
       return (
         <article className="flex flex-col gap-1 max-w-[80ch] px-[2ch] py-2">
           <section>
-            <Heading level={1}>
-              <RichText rich_text={title} />
-            </Heading>
+            <header className="flex gap-[1ch]">
+              <h1>
+                <RichText rich_text={title} />
+              </h1>
+              <Badges>{pkg.version}</Badges>
+            </header>
             <p>
               <RichText rich_text={description} />
             </p>
           </section>
+
           {groupBy(pages.results, (page) => {
             if ("properties" in page) {
               const { "Publish Date": _date } = page.properties;

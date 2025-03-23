@@ -1,6 +1,7 @@
 import { GlobalHotkey } from "@/components/global-hotkey";
 import { plainText } from "@/components/text";
 import { notion } from "@/lib/notion";
+import pkg from "@/package.json";
 import { getYear } from "date-fns";
 import type { Metadata } from "next";
 
@@ -17,13 +18,14 @@ export async function generateMetadata(): Promise<Metadata> {
 
       return {
         title: { default: title, template: `%s | ${title}` },
-        description: plainText(database.description),
+        description: pkg.description,
       };
     }
   }
 
   return {
     title: "My Blog",
+    description: pkg.description,
   };
 }
 
