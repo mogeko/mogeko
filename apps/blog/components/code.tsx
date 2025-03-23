@@ -1,6 +1,7 @@
 import { plainText } from "@/components/text";
 import type { CodeBlockObjectResponse } from "@/lib/api-endpoints";
 import { codeToHtml, langAlias } from "@/lib/highlighter";
+import { cn } from "@/lib/utils";
 
 import { transformerColorizedBrackets } from "@shikijs/colorized-brackets";
 import {
@@ -13,7 +14,8 @@ import {
 
 export const Code: React.FC<{
   code: CodeBlockObjectResponse;
-}> = async ({ code: codeBlock }) => {
+  className?: string;
+}> = async ({ code: codeBlock, className }) => {
   const { language, rich_text } = codeBlock.code;
   const html = await codeToHtml(plainText(rich_text), {
     lang: langAlias(language),
@@ -31,7 +33,7 @@ export const Code: React.FC<{
 
   return (
     <div
-      className="my-1 font-mono"
+      className={cn("font-mono", className)}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
       dangerouslySetInnerHTML={{
         __html: html,

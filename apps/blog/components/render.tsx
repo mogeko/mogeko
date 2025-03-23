@@ -10,7 +10,7 @@ import { Icon } from "@/components/icon";
 import { TRow } from "@/components/table-row";
 import { RichText, plainText } from "@/components/text";
 import { Details, Summary } from "@/components/ui/accordion";
-import { Callout } from "@/components/ui/callout";
+import { AlertBanner } from "@/components/ui/alert-banner";
 import { Heading } from "@/components/ui/heading";
 import { Image } from "@/components/ui/image";
 import { ListItem, OrderedList, UnorderedList } from "@/components/ui/list";
@@ -113,7 +113,7 @@ export const NotionRender: React.FC<{
         const alt = plainText(caption);
 
         return (
-          <div>
+          <div className="[&:not(:first-child)]:mt-1">
             <Image width={640} src={file.url} alt={alt} />
           </div>
         );
@@ -123,7 +123,7 @@ export const NotionRender: React.FC<{
     }
 
     case "code": {
-      return <Code code={block} />;
+      return <Code className="[&:not(:first-child)]:mt-1" code={block} />;
     }
 
     case "equation": {
@@ -131,7 +131,7 @@ export const NotionRender: React.FC<{
 
       return (
         <Equation
-          className="flex justify-center items-center"
+          className="flex justify-center items-center [&:not(:first-child)]:mt-1"
           expression={expression}
         />
       );
@@ -141,7 +141,11 @@ export const NotionRender: React.FC<{
       const { icon, rich_text, color } = block.callout;
 
       return (
-        <Callout color={color} icon={<Icon icon={icon} />}>
+        <AlertBanner
+          className="[&:not(:first-child)]:mt-1"
+          color={color as any}
+          icon={<Icon icon={icon} />}
+        >
           <p>
             <RichText rich_text={rich_text} />
           </p>
@@ -150,16 +154,23 @@ export const NotionRender: React.FC<{
               <NotionBlockChildren block={block} />
             </Suspense>
           )}
-        </Callout>
+        </AlertBanner>
       );
     }
 
     case "quote": {
       const { color, rich_text } = block.quote;
-      const className = colorVariants({ color });
 
       return (
-        <blockquote className={className.length ? className : void 0}>
+        <blockquote
+          className={twMerge(
+            colorVariants({
+              className:
+                "box-border shadow-[inset_2px_0_0_0] shadow-border [&:not(:first-child)]:mt-1 pl-[2ch]",
+              color,
+            }),
+          )}
+        >
           <p>
             <RichText rich_text={rich_text} />
           </p>
@@ -201,10 +212,9 @@ export const NotionRender: React.FC<{
 
     case "bulleted_list_item": {
       const { color, rich_text } = block.bulleted_list_item;
-      const className = colorVariants({ color });
 
       return (
-        <ListItem className={className.length ? className : void 0}>
+        <ListItem color={color}>
           <RichText rich_text={rich_text} />
         </ListItem>
       );
@@ -212,20 +222,17 @@ export const NotionRender: React.FC<{
 
     case "numbered_list_item": {
       const { color, rich_text } = block.numbered_list_item;
-      const className = colorVariants({ color });
 
       return (
-        <ListItem className={className.length ? className : void 0}>
+        <ListItem color={color}>
           <RichText rich_text={rich_text} />
         </ListItem>
       );
     }
 
     case "toggle": {
-      const cn = colorVariants({ color: block.toggle.color });
-
       return (
-        <Details className={cn.length ? cn : void 0}>
+        <Details color={block.toggle.color}>
           <Summary>
             <RichText rich_text={block.toggle.rich_text} />
           </Summary>

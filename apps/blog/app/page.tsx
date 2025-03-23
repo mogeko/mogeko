@@ -30,7 +30,7 @@ const Home: NextPage = async () => {
       });
 
       return (
-        <article className="flex flex-col min-h-svh max-w-[80ch] px-[2ch] py-2">
+        <article className="flex flex-col gap-1 max-w-[80ch] px-[2ch] py-2">
           <section>
             <Heading level={1}>
               <RichText rich_text={title} />
@@ -39,36 +39,34 @@ const Home: NextPage = async () => {
               <RichText rich_text={description} />
             </p>
           </section>
-          <main>
-            {Object.entries(pagesGroup).map(([date, pages]) => {
-              return (
-                <section className="my-1" key={date}>
-                  <Details open>
-                    <Summary asChild>
-                      <Heading level={2}>{date}</Heading>
-                    </Summary>
-                    <ul className="pl-[1ch]">
-                      {pages?.map((page) => {
-                        if (!("properties" in page)) return;
+          {Object.entries(pagesGroup).map(([date, pages]) => {
+            return (
+              <section key={date}>
+                <Details open>
+                  <Summary asChild>
+                    <Heading level={2}>{date}</Heading>
+                  </Summary>
+                  <ul className="pl-[1ch]">
+                    {pages?.map((page) => {
+                      if (!("properties" in page)) return;
 
-                        const { Name } = page.properties;
+                      const { Name } = page.properties;
 
-                        if (Name.type === "title" && !("name" in Name)) {
-                          return (
-                            <li key={page.id}>
-                              <ActionLink icon="→" href={`/posts/${page.id}`}>
-                                <RichText rich_text={Name.title} />
-                              </ActionLink>
-                            </li>
-                          );
-                        }
-                      })}
-                    </ul>
-                  </Details>
-                </section>
-              );
-            })}
-          </main>
+                      if (Name.type === "title" && !("name" in Name)) {
+                        return (
+                          <li key={page.id}>
+                            <ActionLink icon="→" href={`/posts/${page.id}`}>
+                              <RichText rich_text={Name.title} />
+                            </ActionLink>
+                          </li>
+                        );
+                      }
+                    })}
+                  </ul>
+                </Details>
+              </section>
+            );
+          })}
         </article>
       );
     }

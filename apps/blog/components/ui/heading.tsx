@@ -15,13 +15,16 @@ export const Heading: React.FC<
       className={twMerge(
         colorVariants({
           color,
-          className: ["scroll-m-3.5 font-extrabold", className],
+          className: ["scroll-m-3.5 font-extrabold flex gap-[1ch]", className],
         }),
       )}
       {...props}
     >
       {id ? (
-        <Link className="pr-[1ch]" href={`#${id}`}>
+        <Link
+          className="hover:bg-accent hover:text-accent-foreground"
+          href={`#${id}`}
+        >
           {(["#", "##", "###"] as const)[level - 1] ?? "#"}
         </Link>
       ) : null}

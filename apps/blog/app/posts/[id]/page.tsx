@@ -1,5 +1,6 @@
 import { NotionRender } from "@/components/render";
 import { RichText } from "@/components/text";
+import { Heading } from "@/components/ui/heading";
 import { notion } from "@/lib/notion";
 import type { Metadata, NextPage } from "next";
 
@@ -31,12 +32,12 @@ const Page: NextPage<Props> = async ({ params }) => {
     } = page;
 
     return (
-      <article className="flex flex-col min-h-svh max-w-[80ch] px-[2ch] py-2">
+      <article className="flex flex-col max-w-[80ch] px-[2ch] py-2">
         <header>
           {Name.type === "title" && (
-            <h1>
+            <Heading id={page.id} level={1}>
               <RichText rich_text={Name.title} />
-            </h1>
+            </Heading>
           )}
         </header>
         <main>

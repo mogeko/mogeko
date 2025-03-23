@@ -14,8 +14,10 @@ export const ListItem = forwardRef<
       ref={ref}
       className={twMerge(
         colorVariants({
-          className:
+          className: [
             "pl-[1ch] focus:outline-none focus:bg-accent focus:text-accent-foreground",
+            className,
+          ],
           color,
         }),
       )}
