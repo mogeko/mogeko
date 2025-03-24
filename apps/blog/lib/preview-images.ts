@@ -1,10 +1,10 @@
-import { unstable_cache } from "next/cache";
+import { unstable_cache as cache } from "next/cache";
 import sharp from "sharp";
 
 type Metadate = { width: number; height: number; blur: string };
 
 export async function getPreviewImage(url: URL) {
-  const createPreviewImage = unstable_cache(
+  const createPreviewImage = cache(
     async (): Promise<Metadate> => {
       return await fetch(url)
         .then((res) => res.arrayBuffer())
