@@ -8,9 +8,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [{ hostname: "**.amazonaws.com", protocol: "https" }],
   },
   logging: {
-    fetches: {
-      fullUrl: true,
-    },
+    fetches: { fullUrl: true },
   },
 };
 

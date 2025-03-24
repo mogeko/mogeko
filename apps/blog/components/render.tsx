@@ -188,25 +188,29 @@ export const NotionRender: React.FC<{
       ).results;
 
       return (
-        <Table>
-          {has_column_header && (
-            <TableHeader>
-              <TRow hasCH={has_column_header} block={head} />
-            </TableHeader>
-          )}
-          <TableBody>
-            {!has_column_header && <TRow hasRH={has_row_header} block={head} />}
-            {rest.map((cell) => {
-              return (
-                <TRow
-                  key={`${block.id}-${cell.id}`}
-                  hasRH={has_row_header}
-                  block={cell}
-                />
-              );
-            })}
-          </TableBody>
-        </Table>
+        <div className="[&:not(:first-child)]:mt-1">
+          <Table>
+            {has_column_header && (
+              <TableHeader>
+                <TRow hasCH={has_column_header} block={head} />
+              </TableHeader>
+            )}
+            <TableBody>
+              {!has_column_header && (
+                <TRow hasRH={has_row_header} block={head} />
+              )}
+              {rest.map((cell) => {
+                return (
+                  <TRow
+                    key={`${block.id}-${cell.id}`}
+                    hasRH={has_row_header}
+                    block={cell}
+                  />
+                );
+              })}
+            </TableBody>
+          </Table>
+        </div>
       );
     }
 
