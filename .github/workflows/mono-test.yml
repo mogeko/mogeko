@@ -22,11 +22,6 @@ jobs:
         with:
           node-version-file: package.json
           cache: "pnpm"
-      - uses: actions/cache@v4.1.0
-        with:
-          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-ms-playwright-
-          path: /home/runner/.cache/ms-playwright
       - run: pnpm install --frozen-lockfile
       - run: pnpm biome ci --reporter=github
       - run: pnpm run test
