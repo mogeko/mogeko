@@ -2,9 +2,9 @@
   .loading {
     display: inline-block;
     width: 1ch;
-    height: calc(var(--text-base) * var(--text-base--line-height));
-    color: inherit;
+    height: var(--spacing);
     vertical-align: baseline;
+    color: inherit;
 
     &::after {
       animation: loading 0.8s steps(1, end) infinite;

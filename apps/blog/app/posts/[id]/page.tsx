@@ -75,7 +75,7 @@ const Page: NextPage<Props> = async ({ params }) => {
               </>
             )}
           </Breadcrumb>
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<Loading className="h-2" />}>
             <Author id={page.created_by.id} />
           </Suspense>
         </header>
