@@ -10,11 +10,13 @@ import { Icon } from "@/components/icon";
 import { TableBox } from "@/components/table-box";
 import { RichText, plainText } from "@/components/text";
 import { Details, Summary } from "@/components/ui/accordion";
-import { AlertBanner } from "@/components/ui/alert-banner";
+import { Card } from "@/components/ui/card";
 import { Heading } from "@/components/ui/heading";
 import { Image } from "@/components/ui/image";
 import { ListItem, OrderedList, UnorderedList } from "@/components/ui/list";
 import { Loading } from "@/components/ui/loading";
+
+type BlockProps = { block: BlockObjectResponse };
 
 const Equation = dynamic(async () => {
   return import("@/components/equation").then((m) => m.Equation);
@@ -31,9 +33,7 @@ export const NotionRender: React.FC<{ id: string }> = async ({ id }) => {
   }
 };
 
-export const NotionBlock: React.FC<{
-  block: BlockObjectResponse;
-}> = async ({ block }) => {
+const NotionBlock: React.FC<BlockProps> = ({ block }) => {
   switch (block.type) {
     case "heading_1": {
       const { color, rich_text, is_toggleable } = block.heading_1;
@@ -143,23 +143,28 @@ export const NotionBlock: React.FC<{
     }
 
     case "callout": {
-      const { icon, rich_text, color } = block.callout;
-
       return (
-        <AlertBanner
+        <Card
           className="[&:not(:first-child)]:mt-1"
-          color={color as any}
-          icon={<Icon icon={icon} />}
+          title="Notice"
+          variant="left"
         >
-          <p>
-            <RichText rich_text={rich_text} />
-          </p>
-          {block.has_children && (
-            <Suspense fallback={<Loading />}>
-              <NotionBlockChildren block={block} />
-            </Suspense>
-          )}
-        </AlertBanner>
+          <div className="flex gap-[1ch]">
+            <div>
+              <Icon icon={block.callout.icon} />
+            </div>
+            <div>
+              <p>
+                <RichText rich_text={block.callout.rich_text} />
+              </p>
+              {block.has_children && (
+                <Suspense fallback={<Loading />}>
+                  <NotionBlockChildren block={block} />
+                </Suspense>
+              )}
+            </div>
+          </div>
+        </Card>
       );
     }
 
@@ -245,10 +250,8 @@ export const NotionBlock: React.FC<{
   }
 };
 
-export const NotionBlockChildren: React.FC<{
-  block: BlockObjectResponse;
-}> = async ({ block: { id, ...rest } }) => {
-  if (!rest.has_children) return;
+const NotionBlockChildren: React.FC<BlockProps> = async ({ block: _block }) => {
+  if (!_block.has_children) return;
 
   const [OList, UList] = [OrderedList, UnorderedList].map(withWraper);
   const acc: Array<React.ReactNode> = [];
@@ -257,7 +260,7 @@ export const NotionBlockChildren: React.FC<{
   };
 
   for await (const [block, next] of iterateHelper(
-    iteratePaginatedAPI(notion.blocks.children.list, { block_id: id }),
+    iteratePaginatedAPI(notion.blocks.children.list, { block_id: _block.id }),
   )) {
     if (!("type" in block)) return;
 

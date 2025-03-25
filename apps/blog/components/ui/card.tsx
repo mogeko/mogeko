@@ -1,7 +1,10 @@
 import { cn } from "@/lib/utils";
 
 export const Card: React.FC<
-  React.HTMLAttributes<HTMLElement> & { variant?: "left" | "center" | "right" }
+  Omit<React.HTMLAttributes<HTMLElement>, "title"> & {
+    title?: React.ReactNode;
+    variant?: "left" | "center" | "right";
+  }
 > = ({ className, children, title, variant = "center", ...props }) => {
   return (
     <article

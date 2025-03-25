@@ -43,7 +43,16 @@ export const TableRow = forwardRef<
   HTMLTableRowElement,
   React.HTMLAttributes<HTMLTableRowElement>
 >(({ className, ...props }, ref) => {
-  return <tr ref={ref} className={className} {...props} />;
+  return (
+    <tr
+      ref={ref}
+      className={cn(
+        "outline-none focus:bg-accent focus:text-accent-foreground",
+        className,
+      )}
+      {...props}
+    />
+  );
 });
 TableRow.displayName = "TableRow";
 
