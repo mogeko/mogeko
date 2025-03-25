@@ -5,7 +5,7 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env.local", ".env.production"],
-      "env": ["SITE_*"],
+      "env": ["NOTION_*", "APP_*", "OAUTH_*", "ENCRYPTION_PASSWD"],
       "outputs": ["dist", ".vercel", ".next"]
     },
     "start": { "dependsOn": ["build"], "cache": false, "persistent": true },
