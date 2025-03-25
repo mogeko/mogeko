@@ -5,7 +5,10 @@
   "type": "module",
   "types": "dist/astro-mermaid.d.ts",
   "private": true,
-  "keywords": ["astro-integration", "mermaid"],
+  "keywords": [
+    "astro-integration",
+    "mermaid"
+  ],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
   "exports": {
@@ -31,7 +34,7 @@
   "devDependencies": {
     "@mogeko/tsconfig": "workspace:^",
     "@types/hast": "^3.0.4",
-    "@types/node": "^22.13.9",
+    "@types/node": "^22.13.13",
     "@vitest/coverage-v8": "^2.1.9",
     "astro": "^4.16.18",
     "tsup": "^8.4.0",

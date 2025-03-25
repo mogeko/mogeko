@@ -5,7 +5,10 @@
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
-  "keywords": ["remark", "plugin"],
+  "keywords": [
+    "remark",
+    "plugin"
+  ],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
   "repository": {
@@ -18,7 +21,10 @@
     "url": "https://github.com/mogeko/mogeko/issues",
     "email": "zhengjunyi@live.com"
   },
-  "files": ["dist", "CHANGELOG.md"],
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "test": "vitest run",
     "cov": "vitest run --coverage",
@@ -33,7 +39,7 @@
   "devDependencies": {
     "@mogeko/tsconfig": "workspace:^",
     "@types/mdast": "^4.0.4",
-    "@types/node": "^22.13.9",
+    "@types/node": "^22.13.13",
     "@vitest/coverage-v8": "^2.1.9",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2",
