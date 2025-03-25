@@ -1,16 +1,13 @@
 import { cn } from "@/lib/utils";
-import { forwardRef } from "react";
 
-export const ActionButton = forwardRef<
-  HTMLButtonElement,
+export const ActionButton: React.FC<
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
     hotkey?: React.ReactNode;
     open?: boolean;
   }
->(({ className, children, hotkey, open, ...props }, ref) => {
+> = ({ className, children, hotkey, open, ...props }) => {
   return (
     <button
-      ref={ref}
       className={cn(
         "inline-flex items-center justify-center cursor-pointer outline-none shrink-0 hover:[&>kbd]:bg-accent hover:[&>kbd]:text-accent-foreground hover:[&>span]:shadow-accent focus:[&>kbd]:bg-accent focus:[&>kbd]:text-accent-foreground focus:[&>span]:shadow-accent",
         className,
@@ -32,5 +29,4 @@ export const ActionButton = forwardRef<
       </span>
     </button>
   );
-});
-ActionButton.displayName = "ActionButton";
+};

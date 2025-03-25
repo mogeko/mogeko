@@ -1,14 +1,11 @@
 import { cn } from "@/lib/utils";
-import { forwardRef } from "react";
 
-export const Breadcrumb = forwardRef<
-  HTMLElement,
-  React.HTMLAttributes<HTMLElement>
->(({ className, ...props }, ref) => {
+type NavProps = React.ComponentProps<"nav">;
+
+export const Breadcrumb: React.FC<NavProps> = ({ className, ...props }) => {
   return (
     <nav
       aria-label="breadcrumb"
-      ref={ref}
       className={cn(
         "flex flex-wrap items-center break-words gap-[1ch]",
         className,
@@ -16,8 +13,7 @@ export const Breadcrumb = forwardRef<
       {...props}
     />
   );
-});
-Breadcrumb.displayName = "Breadcrumb";
+};
 
 export const BreadcrumbSeparator: React.FC = () => {
   return <span>{"\u276F"}</span>;

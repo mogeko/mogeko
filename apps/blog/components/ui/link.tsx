@@ -1,6 +1,5 @@
 import { type VariantProps, cva } from "class-variance-authority";
 import NextLink from "next/link";
-import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 export const linkVariants = cva(
@@ -19,17 +18,13 @@ export const linkVariants = cva(
   },
 );
 
-export const Link = forwardRef<
-  React.ComponentRef<typeof NextLink>,
-  React.ComponentPropsWithoutRef<typeof NextLink> &
-    VariantProps<typeof linkVariants>
->(({ className, variant, ...props }, ref) => {
+export const Link: React.FC<
+  React.ComponentProps<typeof NextLink> & VariantProps<typeof linkVariants>
+> = ({ className, variant, ...props }) => {
   return (
     <NextLink
-      ref={ref}
       className={twMerge(linkVariants({ variant, className }))}
       {...props}
     />
   );
-});
-Link.displayName = "Link";
+};

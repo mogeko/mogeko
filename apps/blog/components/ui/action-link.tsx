@@ -1,14 +1,11 @@
 import { cn } from "@/lib/utils";
 import NextLink from "next/link";
-import { forwardRef } from "react";
 
-export const ActionLink = forwardRef<
-  React.ComponentRef<typeof NextLink>,
+export const ActionLink: React.FC<
   React.ComponentProps<typeof NextLink> & { icon?: React.ReactNode }
->(({ icon, className, children, ...props }, ref) => {
+> = ({ icon, className, children, ...props }) => {
   return (
     <NextLink
-      ref={ref}
       className={cn(
         "flex items-start justify-between bg-transparent text-foreground outline-none hover:[&>figure]:bg-accent focus:[&>figure]:bg-accent",
         className,
@@ -23,5 +20,4 @@ export const ActionLink = forwardRef<
       </span>
     </NextLink>
   );
-});
-ActionLink.displayName = "ActionLink";
+};

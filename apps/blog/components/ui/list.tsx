@@ -1,17 +1,12 @@
 import { type ColorVariantProps, colorVariants } from "@/lib/color-variants";
 import { cn } from "@/lib/utils";
-import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
-export const ListItem = forwardRef<
-  HTMLLIElement,
+export const ListItem: React.FC<
   React.LiHTMLAttributes<HTMLLIElement> & ColorVariantProps
->(({ className, color, ...props }, ref) => {
-  // TODO: Handle KeyDown event
-
+> = ({ className, color, ...props }) => {
   return (
     <li
-      ref={ref}
       className={twMerge(
         colorVariants({
           className: [
@@ -24,33 +19,26 @@ export const ListItem = forwardRef<
       {...props}
     />
   );
-});
-ListItem.displayName = "ListItem";
+};
 
-export const OrderedList = forwardRef<
-  HTMLOListElement,
+export const OrderedList: React.FC<
   React.OlHTMLAttributes<HTMLOListElement>
->(({ className, ...props }, ref) => {
+> = ({ className, ...props }) => {
   return (
     <ol
-      ref={ref}
       className={cn("my-1 list-inside list-decimal -indent-[1ch]", className)}
       {...props}
     />
   );
-});
-OrderedList.displayName = "OrderedList";
+};
 
-export const UnorderedList = forwardRef<
-  HTMLUListElement,
+export const UnorderedList: React.FC<
   React.HTMLAttributes<HTMLUListElement>
->(({ className, ...props }, ref) => {
+> = ({ className, ...props }) => {
   return (
     <ul
-      ref={ref}
       className={cn("my-1 list-inside list-['▪_'] -indent-[1ch]", className)}
       {...props}
     />
   );
-});
-UnorderedList.displayName = "UnorderedList";
+};

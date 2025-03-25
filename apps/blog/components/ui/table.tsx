@@ -1,51 +1,39 @@
 import { cn } from "@/lib/utils";
-import { forwardRef } from "react";
 
-export const Table = forwardRef<
-  HTMLTableElement,
-  React.TableHTMLAttributes<HTMLTableElement>
->(({ className, ...props }, ref) => {
+export const Table: React.FC<
+  {} & React.TableHTMLAttributes<HTMLTableElement>
+> = ({ className, ...props }) => {
   return (
     <table
-      ref={ref}
       className={cn("relative w-full border-spacing-0", className)}
       {...props}
     />
   );
-});
-Table.displayName = "Table";
+};
 
-export const TableHeader = forwardRef<
-  HTMLTableSectionElement,
+export const TableHeader: React.FC<
   React.HTMLAttributes<HTMLTableSectionElement>
->(({ className, ...props }, ref) => {
-  return <thead ref={ref} className={className} {...props} />;
-});
-TableHeader.displayName = "TableHeader";
+> = ({ className, ...props }) => {
+  return <thead className={className} {...props} />;
+};
 
-export const TableBody = forwardRef<
-  HTMLTableSectionElement,
+export const TableBody: React.FC<
   React.HTMLAttributes<HTMLTableSectionElement>
->(({ className, ...props }, ref) => {
-  return <tbody ref={ref} className={className} {...props} />;
-});
-TableBody.displayName = "TableBody";
+> = ({ className, ...props }) => {
+  return <tbody className={className} {...props} />;
+};
 
-export const TableFooter = forwardRef<
-  HTMLTableSectionElement,
+export const TableFooter: React.FC<
   React.HTMLAttributes<HTMLTableSectionElement>
->(({ className, ...props }, ref) => {
-  return <tfoot ref={ref} className={className} {...props} />;
-});
-TableFooter.displayName = "TableFooter";
+> = ({ className, ...props }) => {
+  return <tfoot className={className} {...props} />;
+};
 
-export const TableRow = forwardRef<
-  HTMLTableRowElement,
-  React.HTMLAttributes<HTMLTableRowElement>
->(({ className, ...props }, ref) => {
+export const TableRow: React.FC<
+  {} & React.HTMLAttributes<HTMLTableRowElement>
+> = ({ className, ...props }) => {
   return (
     <tr
-      ref={ref}
       className={cn(
         "outline-none focus:bg-accent focus:text-accent-foreground",
         className,
@@ -53,16 +41,13 @@ export const TableRow = forwardRef<
       {...props}
     />
   );
-});
-TableRow.displayName = "TableRow";
+};
 
-export const TableHead = forwardRef<
-  HTMLTableCellElement,
+export const TableHead: React.FC<
   React.TdHTMLAttributes<HTMLTableCellElement>
->(({ className, ...props }, ref) => {
+> = ({ className, ...props }) => {
   return (
     <th
-      ref={ref}
       className={cn(
         "[&:not(:first-child)]:pl-[1ch] shrink-0 font-normal text-left",
         className,
@@ -70,27 +55,21 @@ export const TableHead = forwardRef<
       {...props}
     />
   );
-});
-TableHead.displayName = "TableHead";
+};
 
-export const TableCell = forwardRef<
-  HTMLTableCellElement,
+export const TableCell: React.FC<
   React.TdHTMLAttributes<HTMLTableCellElement>
->(({ className, ...props }, ref) => {
+> = ({ className, ...props }) => {
   return (
     <td
-      ref={ref}
       className={cn("[&:not(:first-child)]:pl-[1ch] shrink-0", className)}
       {...props}
     />
   );
-});
-TableCell.displayName = "TableCell";
+};
 
-export const TableCaption = forwardRef<
-  HTMLElement,
-  React.HTMLAttributes<HTMLElement>
->(({ className, ...props }, ref) => {
-  return <caption ref={ref} className={className} {...props} />;
-});
-TableCaption.displayName = "TableCaption";
+export const TableCaption: React.FC<
+  {} & {} & React.HTMLAttributes<HTMLElement>
+> = ({ className, ...props }) => {
+  return <caption className={className} {...props} />;
+};
