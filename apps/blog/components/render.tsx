@@ -1,4 +1,4 @@
-import type { GetBlockResponse } from "@/lib/api-endpoints";
+import type { BlockObjectResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
 import { iteratePaginatedAPI, notion } from "@/lib/notion";
 import { iterateHelper, withWraper } from "@/lib/utils";
@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { Icon } from "@/components/icon";
-import { TRow } from "@/components/table-row";
+import { TableBox } from "@/components/table-box";
 import { RichText, plainText } from "@/components/text";
 import { Details, Summary } from "@/components/ui/accordion";
 import { AlertBanner } from "@/components/ui/alert-banner";
@@ -15,7 +15,6 @@ import { Heading } from "@/components/ui/heading";
 import { Image } from "@/components/ui/image";
 import { ListItem, OrderedList, UnorderedList } from "@/components/ui/list";
 import { Loading } from "@/components/ui/loading";
-import { Table, TableBody, TableHeader } from "@/components/ui/table";
 
 const Equation = dynamic(async () => {
   return import("@/components/equation").then((m) => m.Equation);
@@ -24,11 +23,17 @@ const Code = dynamic(async () => {
   return import("@/components/code").then((m) => m.Code);
 });
 
-export const NotionRender: React.FC<{
-  block: GetBlockResponse;
-}> = async ({ block }) => {
-  if (!("type" in block)) return;
+export const NotionRender: React.FC<{ id: string }> = async ({ id }) => {
+  const block = await notion.blocks.retrieve({ block_id: id });
 
+  if ("type" in block) {
+    return <NotionBlock block={block} />;
+  }
+};
+
+export const NotionBlock: React.FC<{
+  block: BlockObjectResponse;
+}> = async ({ block }) => {
   switch (block.type) {
     case "heading_1": {
       const { color, rich_text, is_toggleable } = block.heading_1;
@@ -182,34 +187,11 @@ export const NotionRender: React.FC<{
     }
 
     case "table": {
-      const { has_column_header, has_row_header } = block.table;
-      const [head, ...rest] = (
-        await notion.blocks.children.list({ block_id: block.id })
-      ).results;
-
       return (
         <div className="[&:not(:first-child)]:mt-1">
-          <Table>
-            {has_column_header && (
-              <TableHeader>
-                <TRow hasCH={has_column_header} block={head} />
-              </TableHeader>
-            )}
-            <TableBody>
-              {!has_column_header && (
-                <TRow hasRH={has_row_header} block={head} />
-              )}
-              {rest.map((cell) => {
-                return (
-                  <TRow
-                    key={`${block.id}-${cell.id}`}
-                    hasRH={has_row_header}
-                    block={cell}
-                  />
-                );
-              })}
-            </TableBody>
-          </Table>
+          <Suspense fallback={<Loading />}>
+            <TableBox block={block} />
+          </Suspense>
         </div>
       );
     }
@@ -218,8 +200,11 @@ export const NotionRender: React.FC<{
       const { color, rich_text } = block.bulleted_list_item;
 
       return (
-        <ListItem color={color}>
+        <ListItem tabIndex={0} color={color}>
           <RichText rich_text={rich_text} />
+          <Suspense fallback={<Loading />}>
+            <NotionBlockChildren block={block} />
+          </Suspense>
         </ListItem>
       );
     }
@@ -228,8 +213,11 @@ export const NotionRender: React.FC<{
       const { color, rich_text } = block.numbered_list_item;
 
       return (
-        <ListItem color={color}>
+        <ListItem tabIndex={0} color={color}>
           <RichText rich_text={rich_text} />
+          <Suspense fallback={<Loading />}>
+            <NotionBlockChildren block={block} />
+          </Suspense>
         </ListItem>
       );
     }
@@ -258,33 +246,37 @@ export const NotionRender: React.FC<{
 };
 
 export const NotionBlockChildren: React.FC<{
-  block: GetBlockResponse;
+  block: BlockObjectResponse;
 }> = async ({ block: { id, ...rest } }) => {
-  if ("type" in rest && rest.has_children) {
-    const [OList, UList] = [OrderedList, UnorderedList].map(withWraper);
+  if (!rest.has_children) return;
 
-    const acc: Array<React.ReactNode> = [];
+  const [OList, UList] = [OrderedList, UnorderedList].map(withWraper);
+  const acc: Array<React.ReactNode> = [];
+  const _type = (x: any, t: string): x is BlockObjectResponse => {
+    return "type" in x && x.type === t;
+  };
 
-    for await (const [block, next] of iterateHelper<GetBlockResponse>(
-      iteratePaginatedAPI(notion.blocks.children.list, { block_id: id }),
-    )) {
-      if ("type" in block && block.type === "bulleted_list_item") {
-        UList.push(<NotionRender key={block.id} block={block} />);
+  for await (const [block, next] of iterateHelper(
+    iteratePaginatedAPI(notion.blocks.children.list, { block_id: id }),
+  )) {
+    if (!("type" in block)) return;
 
-        if (next && "type" in next && next.type !== "bulleted_list_item") {
-          acc.push(<UList key={`ul-${block.id}`} />);
-        }
-      } else if ("type" in block && block.type === "numbered_list_item") {
-        OList.push(<NotionRender key={block.id} block={block} />);
+    if (block.type === "bulleted_list_item") {
+      UList.push(<NotionBlock key={block.id} block={block} />);
 
-        if (next && "type" in next && next.type !== "numbered_list_item") {
-          acc.push(<OList key={`ol-${block.id}`} />);
-        }
-      } else {
-        acc.push(<NotionRender key={block.id} block={block} />);
+      if (!next || !_type(next, "bulleted_list_item")) {
+        acc.push(<UList key={`ul-${block.id}`} />);
       }
-    }
+    } else if (block.type === "numbered_list_item") {
+      OList.push(<NotionBlock key={block.id} block={block} />);
 
-    return acc;
+      if (!next || !_type(next, "numbered_list_item")) {
+        acc.push(<OList key={`ol-${block.id}`} />);
+      }
+    } else {
+      acc.push(<NotionBlock key={block.id} block={block} />);
+    }
   }
+
+  return acc;
 };

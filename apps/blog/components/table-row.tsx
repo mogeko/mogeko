@@ -1,18 +1,22 @@
 import { RichText } from "@/components/text";
 import { TableCell, TableHead, TableRow } from "@/components/ui/table";
 import type { GetBlockResponse } from "@/lib/api-endpoints";
+import { forwardRef } from "react";
 
-export const TRow: React.FC<
-  {} & { hasCH?: boolean; hasRH?: boolean; block: GetBlockResponse }
-> = ({ block, hasCH = false, hasRH = false }) => {
+type TRowProps = { hy?: boolean; hx?: boolean; block: GetBlockResponse };
+
+export const TRow = forwardRef<
+  React.ComponentRef<typeof TableRow>,
+  React.ComponentProps<typeof TableRow> & TRowProps
+>(({ block, hy = false, hx = false, ...props }, ref) => {
   if ("type" in block && block.type === "table_row") {
     const [head, ...rest] = block.table_row.cells;
 
-    const RestCell = hasCH ? TableHead : TableCell;
-    const HeadCell = hasRH ? TableHead : RestCell;
+    const RestCell = hy ? TableHead : TableCell;
+    const HeadCell = hx ? TableHead : RestCell;
 
     return (
-      <TableRow>
+      <TableRow ref={ref} {...props}>
         <HeadCell>
           <RichText rich_text={head} />
         </HeadCell>
@@ -26,4 +30,5 @@ export const TRow: React.FC<
       </TableRow>
     );
   }
-};
+});
+TRow.displayName = "TRow";

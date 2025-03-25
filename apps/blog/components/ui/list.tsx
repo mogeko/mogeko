@@ -21,8 +21,6 @@ export const ListItem = forwardRef<
           color,
         }),
       )}
-      // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
-      tabIndex={0}
       {...props}
     />
   );
