@@ -1,13 +1,14 @@
 import { RichText } from "@/components/text";
 import { TableCell, TableHead, TableRow } from "@/components/ui/table";
 import type { GetBlockResponse } from "@/lib/api-endpoints";
+import { isFullBlock } from "@/lib/notion";
 
 type TRowProps = { hy?: boolean; hx?: boolean; block: GetBlockResponse };
 
 export const TRow: React.FC<
   React.ComponentProps<typeof TableRow> & TRowProps
 > = ({ block, hy = false, hx = false, ...props }) => {
-  if ("type" in block && block.type === "table_row") {
+  if (isFullBlock(block) && block.type === "table_row") {
     const [head, ...rest] = block.table_row.cells;
 
     const RestCell = hy ? TableHead : TableCell;

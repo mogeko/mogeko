@@ -3,7 +3,7 @@ import { Details, Summary } from "@/components/ui/accordion";
 import { ActionLink } from "@/components/ui/action-link";
 import { Badges } from "@/components/ui/badges";
 import { Heading } from "@/components/ui/heading";
-import { notion } from "@/lib/notion";
+import { isFullDatabase, isFullPage, notion } from "@/lib/notion";
 import { groupBy } from "@/lib/utils";
 import pkg from "@/package.json";
 import { getYear } from "date-fns";
@@ -15,7 +15,7 @@ const Home: NextPage = async () => {
   if (database_id) {
     const database = await notion.databases.retrieve({ database_id });
 
-    if ("title" in database) {
+    if (isFullDatabase(database)) {
       const { title, description } = database;
 
       const pages = await notion.databases.query({
@@ -38,7 +38,7 @@ const Home: NextPage = async () => {
           </section>
 
           {groupBy(pages.results, (page) => {
-            if ("properties" in page) {
+            if (isFullPage(page)) {
               const { "Publish Date": _date } = page.properties;
               const date = _date.type === "date" && _date.date?.start;
               return date ? getYear(date) : "Unknown";
@@ -54,7 +54,7 @@ const Home: NextPage = async () => {
                   </Summary>
                   <ul className="pl-[1ch]">
                     {pages?.map((page) => {
-                      if (!("properties" in page)) return;
+                      if (!isFullPage(page)) return;
 
                       const { Name } = page.properties;
 

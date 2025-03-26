@@ -1,6 +1,6 @@
 import { GlobalHotkey } from "@/components/global-hotkey";
 import { plainText } from "@/components/text";
-import { notion } from "@/lib/notion";
+import { isFullDatabase, notion } from "@/lib/notion";
 import pkg from "@/package.json";
 import { getYear } from "date-fns";
 import type { Metadata } from "next";
@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   if (database_id) {
     const database = await notion.databases.retrieve({ database_id });
 
-    if ("title" in database) {
+    if (isFullDatabase(database)) {
       const title = plainText(database.title);
 
       return {

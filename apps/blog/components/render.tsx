@@ -1,6 +1,6 @@
 import type { BlockObjectResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
-import { iteratePaginatedAPI, notion } from "@/lib/notion";
+import { isFullBlock, iteratePaginatedAPI, notion } from "@/lib/notion";
 import { iterateHelper, withWraper } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
@@ -28,7 +28,7 @@ const Code = dynamic(async () => {
 export const NotionRender: React.FC<{ id: string }> = async ({ id }) => {
   const block = await notion.blocks.retrieve({ block_id: id });
 
-  if ("type" in block) {
+  if (isFullBlock(block)) {
     return <NotionBlock block={block} />;
   }
 };
@@ -255,25 +255,23 @@ const NotionBlockChildren: React.FC<BlockProps> = async ({ block: _block }) => {
 
   const [OList, UList] = [OrderedList, UnorderedList].map(withWraper);
   const acc: Array<React.ReactNode> = [];
-  const _type = (x: any, t: string): x is BlockObjectResponse => {
-    return "type" in x && x.type === t;
-  };
+  const _type = (block: any) => isFullBlock(block) && block.type;
 
   for await (const [block, next] of iterateHelper(
     iteratePaginatedAPI(notion.blocks.children.list, { block_id: _block.id }),
   )) {
-    if (!("type" in block)) return;
+    if (!isFullBlock(block)) return;
 
     if (block.type === "bulleted_list_item") {
       UList.push(<NotionBlock key={block.id} block={block} />);
 
-      if (!next || !_type(next, "bulleted_list_item")) {
+      if (!next || _type(next) !== "bulleted_list_item") {
         acc.push(<UList key={`ul-${block.id}`} />);
       }
     } else if (block.type === "numbered_list_item") {
       OList.push(<NotionBlock key={block.id} block={block} />);
 
-      if (!next || !_type(next, "numbered_list_item")) {
+      if (!next || _type(next) !== "numbered_list_item") {
         acc.push(<OList key={`ol-${block.id}`} />);
       }
     } else {
