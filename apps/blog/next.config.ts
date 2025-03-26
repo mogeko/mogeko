@@ -3,17 +3,12 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      {
-        hostname: "**.amazonaws.com",
-        protocol: "https",
-      },
+      { protocol: "https", hostname: "**.notionusercontent.com" },
+      { protocol: "https", hostname: "**.amazonaws.com" },
     ],
   },
   logging: {
     fetches: { fullUrl: true },
-  },
-  typescript: {
-    ignoreBuildErrors: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
