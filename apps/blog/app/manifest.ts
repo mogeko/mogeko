@@ -1,5 +1,6 @@
 import { plainText } from "@/components/text";
 import { isFullDatabase, notion } from "@/lib/notion";
+import pkg from "@/package.json";
 import type { MetadataRoute } from "next";
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
@@ -15,7 +16,7 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
     if (isFullDatabase(database)) {
       return {
         name: plainText(database.title),
-        description: plainText(database.description),
+        description: pkg.description,
         icons,
       };
     }

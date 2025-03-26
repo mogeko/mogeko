@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 
   return {
-    title: "My Blog",
+    title: pkg.name,
     description: pkg.description,
   };
 }
