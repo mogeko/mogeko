@@ -32,14 +32,27 @@
   --spacing: calc(21.5 / 16 * 1rem);
 }
 
-/* @variant dark {
-  @theme {
-    --color-background: #171717;
-    --color-foreground: #ffffff;
-  }
-} */
+/* Numbered List */
 
-/* shiki */
+@layer utilities {
+  body {
+    counter-set: list-counter;
+  }
+
+  .numbered-list-item {
+    counter-increment: list-counter;
+
+    &::before {
+      content: counter(list-counter) ".";
+    }
+
+    & ~ :not(&) {
+      counter-reset: list-counter;
+    }
+  }
+}
+
+/* Shiki */
 
 @theme {
   --color-shiki-diff-add: rgba(16, 185, 129, 0.16);

@@ -12,13 +12,12 @@ import type { NextPage } from "next";
 import { Suspense } from "react";
 
 const PageList: React.FC<{ id: string }> = async ({ id }) => {
-  const pages = await notion.databases.query({
+  const { results } = await notion.databases.query({
     database_id: id,
     sorts: [{ property: "Publish Date", direction: "descending" }],
   });
 
-  return groupBy(pages.results, (page) => {
-    if (!isFullPage(page)) return "Unknown";
+  return groupBy(results.filter(isFullPage), (page) => {
     const { "Publish Date": _date } = page.properties;
     const date = _date.type === "date" && _date.date?.start;
     return date ? getYear(date) : "Unknown";
@@ -30,19 +29,15 @@ const PageList: React.FC<{ id: string }> = async ({ id }) => {
         </Summary>
         <ul className="pl-[1ch]">
           {pages.map((page) => {
-            if (!isFullPage(page)) return;
-
-            const { Name } = page.properties;
-
-            if (Name.type === "title" && !("name" in Name)) {
-              return (
+            return (
+              page.properties.Name.type === "title" && (
                 <li key={page.id}>
                   <ActionLink icon="→" href={`/posts/${page.id}`}>
-                    <RichText rich_text={Name.title} />
+                    <RichText rich_text={page.properties.Name.title} />
                   </ActionLink>
                 </li>
-              );
-            }
+              )
+            );
           })}
         </ul>
       </Details>

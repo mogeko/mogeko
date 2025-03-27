@@ -1,7 +1,6 @@
 import type { BlockObjectResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
 import { isFullBlock, iteratePaginatedAPI, notion } from "@/lib/notion";
-import { iterateHelper, withWraper } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { twMerge } from "tailwind-merge";
@@ -13,7 +12,7 @@ import { Details, Summary } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import { Heading } from "@/components/ui/heading";
 import { Image } from "@/components/ui/image";
-import { ListItem, OrderedList, UnorderedList } from "@/components/ui/list";
+import { ListItem } from "@/components/ui/list";
 import { Loading } from "@/components/ui/loading";
 
 type BlockProps = { block: BlockObjectResponse };
@@ -104,7 +103,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return (
         <p
           className={twMerge(
-            colorVariants({ color, className: "[&:not(:first-child)]:mt-1" }),
+            colorVariants({ color, className: "[&:not(:first-child)]:my-1" }),
           )}
         >
           <RichText rich_text={rich_text} />
@@ -118,7 +117,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
         const alt = plainText(caption);
 
         return (
-          <div className="[&:not(:first-child)]:mt-1">
+          <div className="[&:not(:first-child)]:my-1">
             <Image width={729.6} src={file.url} alt={alt} />
           </div>
         );
@@ -128,7 +127,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
     }
 
     case "code": {
-      return <Code className="[&:not(:first-child)]:mt-1" code={block} />;
+      return <Code className="[&:not(:first-child)]:my-1" code={block} />;
     }
 
     case "equation": {
@@ -136,7 +135,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
 
       return (
         <Equation
-          className="flex justify-center items-center [&:not(:first-child)]:mt-1"
+          className="flex justify-center items-center [&:not(:first-child)]:my-1"
           expression={expression}
         />
       );
@@ -145,7 +144,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
     case "callout": {
       return (
         <Card
-          className="[&:not(:first-child)]:mt-1"
+          className="[&:not(:first-child)]:my-1"
           title="Notice"
           variant="left"
         >
@@ -176,7 +175,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
           className={twMerge(
             colorVariants({
               className:
-                "box-border shadow-[inset_2px_0_0_0] shadow-border [&:not(:first-child)]:mt-1 pl-[2ch]",
+                "box-border shadow-[inset_2px_0_0_0] shadow-border [&:not(:first-child)]:my-1 pl-[2ch]",
               color,
             }),
           )}
@@ -193,7 +192,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
 
     case "table": {
       return (
-        <div className="[&:not(:first-child)]:mt-1">
+        <div className="[&:not(:first-child)]:my-1">
           <Suspense fallback={<Loading />}>
             <TableBox block={block} />
           </Suspense>
@@ -205,11 +204,19 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       const { color, rich_text } = block.bulleted_list_item;
 
       return (
-        <ListItem tabIndex={0} color={color}>
-          <RichText rich_text={rich_text} />
-          <Suspense fallback={<Loading />}>
-            <NotionBlockChildren block={block} />
-          </Suspense>
+        <ListItem
+          tabIndex={0}
+          className="flex gap-[1ch] before:content-['▪']"
+          color={color}
+        >
+          <div className="flex-1">
+            <p>
+              <RichText rich_text={rich_text} />
+            </p>
+            <Suspense fallback={<Loading />}>
+              <NotionBlockChildren block={block} />
+            </Suspense>
+          </div>
         </ListItem>
       );
     }
@@ -218,11 +225,19 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       const { color, rich_text } = block.numbered_list_item;
 
       return (
-        <ListItem tabIndex={0} color={color}>
-          <RichText rich_text={rich_text} />
-          <Suspense fallback={<Loading />}>
-            <NotionBlockChildren block={block} />
-          </Suspense>
+        <ListItem
+          tabIndex={0}
+          className="numbered-list-item flex gap-[1ch]"
+          color={color}
+        >
+          <div className="flex-1">
+            <p>
+              <RichText rich_text={rich_text} />
+            </p>
+            <Suspense fallback={<Loading />}>
+              <NotionBlockChildren block={block} />
+            </Suspense>
+          </div>
         </ListItem>
       );
     }
@@ -251,33 +266,19 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
 };
 
 const NotionBlockChildren: React.FC<BlockProps> = async ({ block: _block }) => {
-  if (!_block.has_children) return;
+  if (_block.has_children) {
+    const blockFeeds: Array<React.ReactNode> = [];
 
-  const [OList, UList] = [OrderedList, UnorderedList].map(withWraper);
-  const acc: Array<React.ReactNode> = [];
-  const _type = (block: any) => isFullBlock(block) && block.type;
-
-  for await (const [block, next] of iterateHelper(
-    iteratePaginatedAPI(notion.blocks.children.list, { block_id: _block.id }),
-  )) {
-    if (!isFullBlock(block)) return;
-
-    if (block.type === "bulleted_list_item") {
-      UList.push(<NotionBlock key={block.id} block={block} />);
-
-      if (!next || _type(next) !== "bulleted_list_item") {
-        acc.push(<UList key={`ul-${block.id}`} />);
+    for await (const block of iteratePaginatedAPI(notion.blocks.children.list, {
+      block_id: _block.id,
+    })) {
+      if (isFullBlock(block)) {
+        blockFeeds.push(
+          <NotionBlock key={`notion-chilren-${block.id}`} block={block} />,
+        );
       }
-    } else if (block.type === "numbered_list_item") {
-      OList.push(<NotionBlock key={block.id} block={block} />);
-
-      if (!next || _type(next) !== "numbered_list_item") {
-        acc.push(<OList key={`ol-${block.id}`} />);
-      }
-    } else {
-      acc.push(<NotionBlock key={block.id} block={block} />);
     }
-  }
 
-  return acc;
+    return blockFeeds;
+  }
 };
