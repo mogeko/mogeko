@@ -11,7 +11,7 @@ export const Summary: React.FC<
   return (
     <summary
       className={cn(
-        "flex w-full outline-none before:content-['▸'] group-open:before:content-['▾'] hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+        "flex w-full outline-none before:content-['▸'] group-open:before:content-['▾'] hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground marker:hidden",
         className,
       )}
       tabIndex={0}

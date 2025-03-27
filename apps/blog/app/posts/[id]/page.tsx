@@ -76,7 +76,10 @@ const Page: NextPage<Props> = async ({ params }) => {
             </>
           )}
         </Breadcrumb>
-        <Suspense fallback={<Loading className="h-2" />}>
+        <Suspense
+          // CLS: Ensure that the height we need has the highest priority
+          fallback={<Loading style={{ height: "calc(var(--spacing) * 2)" }} />}
+        >
           <Author id={page.created_by.id} />
         </Suspense>
       </header>
