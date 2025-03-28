@@ -1,5 +1,13 @@
 # @mogeko/typography
 
+## 0.1.9
+
+### Patch Changes
+
+- [#260](https://github.com/mogeko/mogeko/pull/260) [`4fb30f8`](https://github.com/mogeko/mogeko/commit/4fb30f8a3f546b909406a258324158f8f0e98c58) Thanks [@dependabot](https://github.com/apps/dependabot)! - Bump Tailwind CSS to v4.
+
+  Due to the large number of breaking changes in Tailwind CSS v4, I have removed unit tests until I find a new testing method.
+
 ## 0.1.8
 
 ### Patch Changes
