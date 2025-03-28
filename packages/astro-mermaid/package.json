@@ -24,8 +24,8 @@
   "dependencies": {
     "hast-util-class-list": "^2.0.1",
     "hastscript": "^9.0.1",
-    "rehype-mermaid": "^2.1.0",
-    "shiki": "^1.29.2",
+    "rehype-mermaid": "^3.0.0",
+    "shiki": "^3.2.1",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {

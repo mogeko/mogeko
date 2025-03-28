@@ -1,7 +1,8 @@
 queue_rules:
   - name: dependabot
     queue_conditions:
-      - "check-success=Build and Deploy to Vercel Preview"
+      - "check-success=Vercel Preview Comments"
+      - "check-success=Build the Packages"
       - "check-success=Test Monorepo Packages"
     batch_size: 10
     batch_max_wait_time: 5min
@@ -20,7 +21,8 @@ pull_request_rules:
     conditions:
       - "author=dependabot[bot]"
       - "label=dependencies"
-      - "check-success=Build and Deploy to Vercel Preview"
+      - "check-success=Vercel Preview Comments"
+      - "check-success=Build the Packages"
       - "check-success=Test Monorepo Packages"
     actions:
       queue:

@@ -22,7 +22,7 @@
     "next": "^15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "satori": "^0.12.1",
+    "satori": "^0.12.2",
     "server-only": "^0.0.1",
     "sharp": "^0.33.5",
     "shiki": "^3.2.1",
@@ -35,7 +35,7 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.0.16",
+    "tailwindcss": "^4.0.17",
     "typescript": "^5.8.2"
   }
 }
