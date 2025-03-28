@@ -46,7 +46,7 @@
       content: counter(list-counter) ".";
     }
 
-    & ~ :not(&) {
+    & + :not(&) {
       counter-reset: list-counter;
     }
   }

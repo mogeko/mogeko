@@ -24,14 +24,6 @@ const Code = dynamic(async () => {
   return import("@/components/code").then((m) => m.Code);
 });
 
-export const NotionRender: React.FC<{ id: string }> = async ({ id }) => {
-  const block = await notion.blocks.retrieve({ block_id: id });
-
-  if (isFullBlock(block)) {
-    return <NotionBlock block={block} />;
-  }
-};
-
 const NotionBlock: React.FC<BlockProps> = ({ block }) => {
   switch (block.type) {
     case "heading_1": {
@@ -59,7 +51,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       const { color, rich_text, is_toggleable } = block.heading_2;
 
       return is_toggleable ? (
-        <Details className="my-1">
+        <Details className="mt-1">
           <Summary asChild>
             <Heading id={block.id} color={color} level={2}>
               <RichText rich_text={rich_text} />
@@ -70,7 +62,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
           </Suspense>
         </Details>
       ) : (
-        <Heading className="my-1" id={block.id} color={color} level={2}>
+        <Heading className="mt-1" id={block.id} color={color} level={2}>
           <RichText rich_text={rich_text} />
         </Heading>
       );
@@ -80,7 +72,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       const { color, rich_text, is_toggleable } = block.heading_3;
 
       return is_toggleable ? (
-        <Details className="my-1">
+        <Details className="mt-1">
           <Summary asChild>
             <Heading id={block.id} color={color} level={3}>
               <RichText rich_text={rich_text} />
@@ -91,7 +83,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
           </Suspense>
         </Details>
       ) : (
-        <Heading className="my-1" id={block.id} color={color} level={3}>
+        <Heading className="mt-1" id={block.id} color={color} level={3}>
           <RichText rich_text={rich_text} />
         </Heading>
       );
@@ -103,7 +95,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return (
         <p
           className={twMerge(
-            colorVariants({ color, className: "[&:not(:first-child)]:my-1" }),
+            colorVariants({ color, className: "[&:not(:first-child)]:mt-1" }),
           )}
         >
           <RichText rich_text={rich_text} />
@@ -117,7 +109,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
         const alt = plainText(caption);
 
         return (
-          <div className="[&:not(:first-child)]:my-1">
+          <div className="mt-1">
             <Image width={729.6} src={file.url} alt={alt} />
           </div>
         );
@@ -127,7 +119,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
     }
 
     case "code": {
-      return <Code className="[&:not(:first-child)]:my-1" code={block} />;
+      return <Code className="mt-1" code={block} />;
     }
 
     case "equation": {
@@ -135,7 +127,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
 
       return (
         <Equation
-          className="flex justify-center items-center [&:not(:first-child)]:my-1"
+          className="flex justify-center items-center mt-1"
           expression={expression}
         />
       );
@@ -143,11 +135,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
 
     case "callout": {
       return (
-        <Card
-          className="[&:not(:first-child)]:my-1"
-          title="Notice"
-          variant="left"
-        >
+        <Card className="mt-1" title="Notice" variant="left">
           <div className="flex gap-[1ch]">
             <div>
               <Icon icon={block.callout.icon} />
@@ -175,7 +163,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
           className={twMerge(
             colorVariants({
               className:
-                "box-border shadow-[inset_2px_0_0_0] shadow-border [&:not(:first-child)]:my-1 pl-[2ch]",
+                "box-border shadow-[inset_2px_0_0_0] shadow-border mt-1 pl-[2ch]",
               color,
             }),
           )}
@@ -192,7 +180,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
 
     case "table": {
       return (
-        <div className="[&:not(:first-child)]:my-1">
+        <div className="my-1">
           <Suspense fallback={<Loading />}>
             <TableBox block={block} />
           </Suspense>
@@ -206,7 +194,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return (
         <ListItem
           tabIndex={0}
-          className="flex gap-[1ch] before:content-['▪']"
+          className="flex gap-[1ch] before:content-['▪'] [&:not(&+&)]:mt-1"
           color={color}
         >
           <div className="flex-1">
@@ -227,7 +215,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return (
         <ListItem
           tabIndex={0}
-          className="numbered-list-item flex gap-[1ch]"
+          className="numbered-list-item flex gap-[1ch] [&:not(&+&)]:mt-1"
           color={color}
         >
           <div className="flex-1">
@@ -244,7 +232,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
 
     case "toggle": {
       return (
-        <Details color={block.toggle.color}>
+        <Details className="mt-1" color={block.toggle.color}>
           <Summary>
             <RichText rich_text={block.toggle.rich_text} />
           </Summary>
@@ -280,5 +268,13 @@ const NotionBlockChildren: React.FC<BlockProps> = async ({ block: _block }) => {
     }
 
     return blockFeeds;
+  }
+};
+
+export const NotionRender: React.FC<{ id: string }> = async ({ id }) => {
+  const block = await notion.blocks.retrieve({ block_id: id });
+
+  if (isFullBlock(block)) {
+    return <NotionBlock block={block} />;
   }
 };

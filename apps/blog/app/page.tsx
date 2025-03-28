@@ -11,7 +11,7 @@ import { getYear } from "date-fns";
 import type { NextPage } from "next";
 import { Suspense } from "react";
 
-const PageList: React.FC<{ id: string }> = async ({ id }) => {
+const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
   const { results } = await notion.databases.query({
     database_id: id,
     sorts: [{ property: "Publish Date", direction: "descending" }],
@@ -68,7 +68,7 @@ const Home: NextPage = async () => {
             </p>
           </section>
           <Suspense fallback={<Loading />}>
-            <PageList id={database_id} />
+            <PageFeeds id={database_id} />
           </Suspense>
         </article>
       );

@@ -40,6 +40,8 @@ export default async function Icon({ id }: { id: string }) {
     return new NextResponse(svg, {
       headers: {
         "Content-Type": "image/svg+xml",
+        // Set the `cache-control` to be consistent with `ImageResponse`
+        // See: https://vercel.com/docs/og-image-generation/og-image-api
         "cache-control": "public, immutable, no-transform, max-age=31536000",
       },
     });
