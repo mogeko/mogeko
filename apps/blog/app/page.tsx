@@ -55,14 +55,14 @@ const Home: NextPage = async () => {
       const { title, description } = database;
 
       return (
-        <article className="flex flex-col gap-1 max-w-[80ch] px-[2ch] py-2">
+        <div className="flex flex-col gap-1 max-w-[80ch] px-[2ch] py-2">
           <section>
-            <header className="flex gap-[1ch]">
+            <hgroup className="flex gap-[1ch]">
               <h1>
                 <RichText richText={title} />
               </h1>
               <Badges>{pkg.version}</Badges>
-            </header>
+            </hgroup>
             <p>
               <RichText richText={description} />
             </p>
@@ -70,7 +70,7 @@ const Home: NextPage = async () => {
           <Suspense fallback={<Loading />}>
             <PageFeeds id={database_id} />
           </Suspense>
-        </article>
+        </div>
       );
     }
   }

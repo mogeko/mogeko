@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-@theme inline {
-  --font-mono: "Maple Mono NF CN", ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, "Liberation Mono", "Courier New", monospace;
-}
-
 @theme {
   --color-background: var(--color-white);
   --color-foreground: var(--color-black);
