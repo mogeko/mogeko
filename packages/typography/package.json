@@ -24,8 +24,6 @@
   },
   "files": ["dist", "CHANGELOG.md"],
   "scripts": {
-    "test": "vitest run",
-    "cov": "vitest run --coverage",
     "build": "tsup"
   },
   "dependencies": {
@@ -38,9 +36,7 @@
     "@mogeko/tsconfig": "workspace:^",
     "@types/node": "^22.13.14",
     "@types/ramda": "^0.30.2",
-    "@vitest/coverage-v8": "^3.0.9",
     "tsup": "^8.4.0",
-    "typescript": "^5.8.2",
-    "vitest": "^3.0.9"
+    "typescript": "^5.8.2"
   }
 }
