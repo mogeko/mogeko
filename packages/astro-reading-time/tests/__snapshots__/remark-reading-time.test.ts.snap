@@ -16,7 +16,8 @@ exports[`remarkReadingTime > adds reading time to the frontmatter 1`] = `
         "text": "Hello, world!",
       },
     ],
-    "imagePaths": Set {},
+    "localImagePaths": [],
+    "remoteImagePaths": [],
   },
 }
 `;
