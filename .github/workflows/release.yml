@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    name: Build and Publish Packages
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ github.actor }}
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4.1.0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4.3.0
+        with:
+          node-version-file: package.json
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build -F "./packages/*"
+      - name: Create Version PR or Publish to NPM
+        id: changesets
+        uses: changesets/action@v1.4.10
+        with:
+          commit: "chore(release): version packages"
+          title: "chore(release): version packages"
+          version: pnpm vite-node .github/changeset-version.ts
+          publish: pnpm changeset publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_ENV: "production"

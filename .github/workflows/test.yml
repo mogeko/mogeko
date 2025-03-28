@@ -1,4 +1,4 @@
-name: Monorepo Test
+name: Test
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  test:
     name: Test Monorepo Packages
     runs-on: ubuntu-latest
     env:
