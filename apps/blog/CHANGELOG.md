@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.1.0
+
+### Minor Changes
+
+- [#258](https://github.com/mogeko/mogeko/pull/258) [`a853fab`](https://github.com/mogeko/mogeko/commit/a853fab90f8340c9ade7182ac046425aea39623b) Thanks [@mogeko](https://github.com/mogeko)! - Switch the web framework to Next.js.
+
 ## 0.0.17
 
 ### Patch Changes
