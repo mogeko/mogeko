@@ -11,7 +11,7 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{js,jsx,ts,tsx,astro,vue}]
+[*.{js,jsx,mjs,cjs,ts,tsx}]
 quote_type = double
 indent_size = 2
 
@@ -24,5 +24,5 @@ indent_size = 2
 trim_trailing_whitespace = false
 indent_size = 2
 
-[*.{json,toml,yaml,yml}]
+[*.{json,jsonc,toml,yaml,yml}]
 indent_size = 2

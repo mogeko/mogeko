@@ -1,58 +1,13 @@
-# Astro Starter Kit: Basics
+# Mogeko`s Blog
 
-```sh
-npm create astro@latest -- --template basics
-```
+这是 Mogeko 的个人博客 (**BETA**)，地址：**<https://next.mogeko.me>**。
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+> 当新博客建设后完成，会替换掉旧博客 (**<https://mogeko.me>**)。
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+使用 [Notion](https://www.notion.com/zh-cn) 作为内容管理系统 (CMS)，使用 [Next.js](https://nextjs.org) 开发前端网站并部署在 [Vercel](https://vercel.com)。同时，在开发过程中，受到了 [shadcn/ui](https://ui.shadcn.com) 和 [SRCL](https://www.sacred.computer) 的启发。
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## LICENSE
 
-## 🚀 Project Structure
+本[项目](.)中的所有**代码**均采用 [MIT License](../../LICENSE-MIT) 开源。
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-# LICENSE
-
-The code in this project is licensed under [MIT](./LICENSE), content licensed under [CC BY-NC-SA 4.0](./src/content/LICENSE).
+本[博客](https://next.mogeko.me)中的所有**文章**均采用 [CC BY-NC-SA 4.0 Deed](../../LICENSE-CC-BY-4.0) 发布。

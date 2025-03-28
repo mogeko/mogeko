@@ -1,4 +1,4 @@
-# blog
+# @mogeko/blog
 
 ## 0.0.17
 

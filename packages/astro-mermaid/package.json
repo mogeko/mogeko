@@ -22,20 +22,20 @@
     "playwright-core": "^1.0.0"
   },
   "dependencies": {
-    "hast-util-class-list": "^2.0.0",
-    "hastscript": "^9.0.0",
+    "hast-util-class-list": "^2.0.1",
+    "hastscript": "^9.0.1",
     "rehype-mermaid": "^2.1.0",
-    "shiki": "^1.22.0",
+    "shiki": "^1.29.2",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@mogeko/tsconfig": "workspace:^",
     "@types/hast": "^3.0.4",
-    "@types/node": "^22.10.1",
-    "@vitest/coverage-v8": "^2.1.8",
+    "@types/node": "^22.13.13",
+    "@vitest/coverage-v8": "^2.1.9",
     "astro": "^4.16.18",
-    "tsup": "^8.3.5",
-    "typescript": "^5.7.2",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
     "unified": "^11.0.5",
     "vitest": "^2.1.9"
   }

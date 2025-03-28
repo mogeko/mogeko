@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-mono: "Maple Mono NF CN", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@theme {
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-black);
+
+  --color-card: var(--color-white);
+  --color-card-foreground: var(--color-black);
+  --color-popover: rgba(224, 224, 224, 1);
+  --color-popover-foreground: var(--color-white);
+
+  --color-primary: var(--color-black);
+  --color-primary-foreground: var(--color-white);
+  --color-secondary: rgba(224, 224, 224, 1);
+  --color-secondary-foreground: var(--color-black);
+  --color-muted: rgba(168, 168, 168, 0.2);
+  --color-muted-foreground: var(--color-black);
+  --color-accent: rgba(92, 255, 59, 1);
+  --color-accent-foreground: var(--color-black);
+  --color-destructive: hsl(0, 69%, 48%);
+  --color-destructive-foreground: var(--color-black);
+
+  --color-border: rgba(198, 198, 198, 1);
+  --color-input: rgba(244, 244, 244, 1);
+  --color-ring: var(--color-accent);
+
+  --spacing: calc(21.5 / 16 * 1rem);
+}
+
+/* Numbered List */
+
+@layer utilities {
+  body {
+    counter-set: list-counter;
+  }
+
+  .numbered-list-item {
+    counter-increment: list-counter;
+
+    &::before {
+      content: counter(list-counter) ".";
+    }
+
+    & + :not(&) {
+      counter-reset: list-counter;
+    }
+  }
+}
+
+/* Shiki */
+
+@theme {
+  --color-shiki-diff-add: rgba(16, 185, 129, 0.16);
+  --color-shiki-diff-add-symbol: hsl(151, 65%, 54%);
+  --color-shiki-diff-remove: rgba(244, 63, 94, 0.16);
+  --color-shiki-diff-remove-symbol: hsl(0, 45%, 63%);
+  --color-shiki-highlight: rgba(101, 117, 133, 0.16);
+  --color-shiki-error: rgba(244, 63, 94, 0.16);
+  --color-shiki-warning: rgba(234, 179, 8, 0.16);
+  --color-shiki-word-highlight: var(--color-muted);
+}
+
+@layer utilities {
+  .shiki {
+    @apply relative pl-[3ch] py-1 whitespace-pre-wrap;
+
+    & code .line {
+      @apply inline-block -mx-[3ch] pl-[3ch] pr-[1ch] w-[calc(100%+3ch)];
+
+      /* transformerNotationWordHighlight */
+
+      & .highlighted-word {
+        @apply -mx-[3px] px-[3px] bg-shiki-word-highlight;
+      }
+    }
+
+    /* transformerNotationDiff */
+
+    &.has-diff code .line.diff {
+      @apply transition-[background-color] duration-500;
+
+      &::before {
+        @apply absolute left-[1ch];
+      }
+
+      &.add {
+        @apply bg-shiki-diff-add;
+
+        &::before {
+          @apply text-shiki-diff-add-symbol content-['+'];
+        }
+      }
+
+      &.remove {
+        @apply bg-shiki-diff-remove opacity-70;
+
+        &::before {
+          @apply text-shiki-diff-remove-symbol content-['-'];
+        }
+      }
+    }
+
+    /* transformerNotationHighlight */
+
+    &.has-highlighted code .line.highlighted {
+      @apply bg-shiki-highlight transition-[background-color] duration-500;
+
+      /* transformerNotationErrorLevel */
+
+      &.error {
+        @apply bg-shiki-error;
+      }
+
+      &.warning {
+        @apply bg-shiki-warning;
+      }
+    }
+
+    /* transformerNotationFocus */
+
+    &.has-focused {
+      & code .line:not(.focused) {
+        @apply opacity-70 blur-[0.095rem] transition-[filter,opacity] duration-300;
+      }
+
+      &:hover code .line:not(.focused) {
+        @apply opacity-100 blur-none;
+      }
+    }
+  }
+}

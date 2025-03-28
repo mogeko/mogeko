@@ -1,0 +1,42 @@
+/* To ensure that the class names of Tailwind CSS have higher priority */
+@layer components {
+  .loading {
+    display: inline-block;
+    width: 1ch;
+    height: var(--spacing);
+    vertical-align: baseline;
+    color: inherit;
+
+    &::after {
+      animation: loading 0.8s steps(1, end) infinite;
+      content: var(--tw-content);
+    }
+  }
+
+  @keyframes loading {
+    0% {
+      content: "⣾";
+    }
+    12.5% {
+      content: "⣽";
+    }
+    25% {
+      content: "⣻";
+    }
+    37.5% {
+      content: "⢿";
+    }
+    50% {
+      content: "⡿";
+    }
+    62.5% {
+      content: "⣟";
+    }
+    75% {
+      content: "⣯";
+    }
+    87.5% {
+      content: "⣷";
+    }
+  }
+}

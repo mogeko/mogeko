@@ -1,36 +1,24 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "organizeImports": { "enabled": true },
-  "linter": {
-    "rules": {
-      "suspicious": {
-        "noExplicitAny": "off"
-      },
-      "style": {
-        "noCommaOperator": "off"
-      }
-    }
-  },
-  "formatter": {
-    "useEditorconfig": true
-  },
-  "files": { "ignoreUnknown": true },
   "vcs": {
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true
   },
-  "overrides": [
-    {
-      "include": ["*.svelte", "*.astro", "*.vue"],
-      "linter": {
-        "rules": {
-          "style": {
-            "useImportType": "off",
-            "useConst": "off"
-          }
-        }
-      }
+  "files": { "ignoreUnknown": true, "ignore": [] },
+  "formatter": { "enabled": true, "useEditorconfig": true },
+  "organizeImports": { "enabled": true },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "suspicious": {
+        "noAssignInExpressions": "off",
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "off"
+      },
+      "style": { "noCommaOperator": "off" }
     }
-  ]
+  },
+  "javascript": { "formatter": { "quoteStyle": "double" } }
 }

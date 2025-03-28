@@ -1,0 +1,35 @@
+name: Test
+
+on:
+  push:
+    branches-ignore: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test Monorepo Packages
+    runs-on: ubuntu-latest
+    env:
+      TURBO_FORCE: true
+    steps:
+      - uses: actions/checkout@v4.2.1
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4.0.0
+      - name: Set up Node.js
+        uses: actions/setup-node@v4.0.4
+        with:
+          node-version-file: package.json
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm biome ci --reporter=github
+      - run: pnpm run test
+      - name: Generate Coverage Reports
+        run: pnpm run cov
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.6.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: mogeko/mogeko
+          fail_ci_if_error: false

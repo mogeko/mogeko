@@ -1,4 +1,4 @@
-name: snk generater
+name: Snk Generater
 
 on:
   schedule: # run automatically every 24 hours
