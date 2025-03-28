@@ -6,7 +6,7 @@ import { twMerge } from "tailwind-merge";
 export const Summary: React.FC<
   React.HTMLAttributes<HTMLElement> & { asChild?: boolean }
 > = ({ className, children, asChild, ...props }) => {
-  const Comp = asChild ? (Slot as any) : "span";
+  const Comp = asChild ? Slot : "span";
 
   return (
     <summary
