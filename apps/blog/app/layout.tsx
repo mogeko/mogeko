@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <html lang="en">
+    <html lang="zh-CN">
       <head>
         {/* biome-ignore format: <explanation> */}
         <link rel="preconnect" href="https://static.zeoseven.com" crossOrigin="anonymous" />

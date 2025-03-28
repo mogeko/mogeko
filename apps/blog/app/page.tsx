@@ -33,7 +33,7 @@ const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
               page.properties.Name.type === "title" && (
                 <li key={page.id}>
                   <ActionLink icon="→" href={`/posts/${page.id}`}>
-                    <RichText rich_text={page.properties.Name.title} />
+                    <RichText richText={page.properties.Name.title} />
                   </ActionLink>
                 </li>
               )
@@ -59,12 +59,12 @@ const Home: NextPage = async () => {
           <section>
             <header className="flex gap-[1ch]">
               <h1>
-                <RichText rich_text={title} />
+                <RichText richText={title} />
               </h1>
               <Badges>{pkg.version}</Badges>
             </header>
             <p>
-              <RichText rich_text={description} />
+              <RichText richText={description} />
             </p>
           </section>
           <Suspense fallback={<Loading />}>

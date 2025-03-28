@@ -17,12 +17,12 @@ export const TRow: React.FC<
     return (
       <TableRow {...props}>
         <HeadCell>
-          <RichText rich_text={head} />
+          <RichText richText={head} />
         </HeadCell>
         {rest.map((cell, i) => {
           return (
             <RestCell key={`${block.id}-${i}`}>
-              <RichText rich_text={cell} />
+              <RichText richText={cell} />
             </RestCell>
           );
         })}

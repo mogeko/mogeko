@@ -1,13 +1,10 @@
 import { Equation } from "@/components/equation";
+import { Mention } from "@/components/mention";
 import { Link } from "@/components/ui/link";
 import type { RichTextItemResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
 import { cn as cx } from "@/lib/utils";
 import { cva } from "class-variance-authority";
-
-export function plainText(richText: Array<RichTextItemResponse>) {
-  return richText.map(({ plain_text }) => plain_text).join();
-}
 
 const textVariants = cva([], {
   variants: {
@@ -25,33 +22,39 @@ const textVariants = cva([], {
   },
 });
 
-export const RichText: React.FC<{
-  rich_text: RichTextItemResponse | Array<RichTextItemResponse>;
-  className?: string;
-}> = ({ rich_text, className }) => {
-  const RichTextRender: React.FC<{ richText: RichTextItemResponse }> = ({
-    richText,
-  }) => {
-    const { color, ...rest } = richText.annotations;
-    const cn = cx(textVariants(rest), colorVariants({ color }), className);
+export function plainText(richText: Array<RichTextItemResponse>) {
+  return richText.map(({ plain_text }) => plain_text).join();
+}
 
-    if (richText.type === "text") {
-      const { link, content } = richText.text;
+export const RichText: React.FC<{
+  richText: Array<RichTextItemResponse>;
+  className?: string;
+}> = ({ richText, className }) => {
+  return richText.map((richTextItem, i) => {
+    const { color, ...rest } = richTextItem.annotations;
+    const cn = cx(textVariants(rest), colorVariants({ color }), className);
+    const key = `${richTextItem.plain_text}-${i}`;
+
+    if (richTextItem.type === "text") {
+      const { link, content } = richTextItem.text;
 
       return link ? (
-        <Link className={cn} href={link.url}>
+        <Link key={key} className={cn} href={link.url}>
           {content}
         </Link>
       ) : (
-        <span className={cn.length ? cn : void 0}>{content}</span>
+        <span key={key} className={cn.length ? cn : void 0}>
+          {content}
+        </span>
       );
     }
 
-    if (richText.type === "equation") {
-      const { expression } = richText.equation;
+    if (richTextItem.type === "equation") {
+      const { expression } = richTextItem.equation;
 
       return (
         <Equation
+          key={key}
           className={cn.length ? cn : void 0}
           expression={expression}
           inline
@@ -59,15 +62,18 @@ export const RichText: React.FC<{
       );
     }
 
-    if (richText.type === "mention") {
-    }
-  };
+    if (richTextItem.type === "mention") {
+      const { mention, plain_text } = richTextItem;
 
-  return Array.isArray(rich_text) ? (
-    rich_text.map((text, i) => {
-      return <RichTextRender key={`${text.plain_text}-${i}`} richText={text} />;
-    })
-  ) : (
-    <RichTextRender richText={rich_text} />
-  );
+      return (
+        <Mention
+          key={key}
+          className={cn.length ? cn : void 0}
+          mention={mention}
+        >
+          {plain_text}
+        </Mention>
+      );
+    }
+  });
 };

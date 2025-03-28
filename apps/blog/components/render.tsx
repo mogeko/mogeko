@@ -14,6 +14,7 @@ import { Heading } from "@/components/ui/heading";
 import { Image } from "@/components/ui/image";
 import { ListItem } from "@/components/ui/list";
 import { Loading } from "@/components/ui/loading";
+import { Separator } from "@/components/ui/separator";
 
 type BlockProps = { block: BlockObjectResponse };
 
@@ -33,7 +34,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
         <Details className="my-1">
           <Summary asChild>
             <Heading id={block.id} color={color} level={1}>
-              <RichText rich_text={rich_text} />
+              <RichText richText={rich_text} />
             </Heading>
           </Summary>
           <Suspense fallback={<Loading />}>
@@ -42,7 +43,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
         </Details>
       ) : (
         <Heading className="my-1" id={block.id} color={color} level={1}>
-          <RichText rich_text={rich_text} />
+          <RichText richText={rich_text} />
         </Heading>
       );
     }
@@ -54,7 +55,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
         <Details className="mt-1">
           <Summary asChild>
             <Heading id={block.id} color={color} level={2}>
-              <RichText rich_text={rich_text} />
+              <RichText richText={rich_text} />
             </Heading>
           </Summary>
           <Suspense fallback={<Loading />}>
@@ -63,7 +64,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
         </Details>
       ) : (
         <Heading className="mt-1" id={block.id} color={color} level={2}>
-          <RichText rich_text={rich_text} />
+          <RichText richText={rich_text} />
         </Heading>
       );
     }
@@ -75,7 +76,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
         <Details className="mt-1">
           <Summary asChild>
             <Heading id={block.id} color={color} level={3}>
-              <RichText rich_text={rich_text} />
+              <RichText richText={rich_text} />
             </Heading>
           </Summary>
           <Suspense fallback={<Loading />}>
@@ -84,7 +85,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
         </Details>
       ) : (
         <Heading className="mt-1" id={block.id} color={color} level={3}>
-          <RichText rich_text={rich_text} />
+          <RichText richText={rich_text} />
         </Heading>
       );
     }
@@ -98,7 +99,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
             colorVariants({ color, className: "[&:not(:first-child)]:mt-1" }),
           )}
         >
-          <RichText rich_text={rich_text} />
+          <RichText richText={rich_text} />
         </p>
       );
     }
@@ -142,7 +143,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
             </div>
             <div>
               <p>
-                <RichText rich_text={block.callout.rich_text} />
+                <RichText richText={block.callout.rich_text} />
               </p>
               {block.has_children && (
                 <Suspense fallback={<Loading />}>
@@ -169,7 +170,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
           )}
         >
           <p>
-            <RichText rich_text={rich_text} />
+            <RichText richText={rich_text} />
           </p>
           <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
@@ -199,7 +200,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
         >
           <div className="flex-1">
             <p>
-              <RichText rich_text={rich_text} />
+              <RichText richText={rich_text} />
             </p>
             <Suspense fallback={<Loading />}>
               <NotionBlockChildren block={block} />
@@ -220,7 +221,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
         >
           <div className="flex-1">
             <p>
-              <RichText rich_text={rich_text} />
+              <RichText richText={rich_text} />
             </p>
             <Suspense fallback={<Loading />}>
               <NotionBlockChildren block={block} />
@@ -234,13 +235,17 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return (
         <Details className="mt-1" color={block.toggle.color}>
           <Summary>
-            <RichText rich_text={block.toggle.rich_text} />
+            <RichText richText={block.toggle.rich_text} />
           </Summary>
           <Suspense fallback={<Loading />}>
             <NotionBlockChildren block={block} />
           </Suspense>
         </Details>
       );
+    }
+
+    case "divider": {
+      return <Separator className="my-1" />;
     }
 
     case "child_page": {

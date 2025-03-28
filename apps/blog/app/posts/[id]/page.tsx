@@ -71,7 +71,7 @@ const Page: NextPage<Props> = async ({ params }) => {
             <>
               <BreadcrumbSeparator />
               <Link href={`/posts/${id}`}>
-                <RichText rich_text={Name.title} />
+                <RichText richText={Name.title} />
               </Link>
             </>
           )}
@@ -87,7 +87,7 @@ const Page: NextPage<Props> = async ({ params }) => {
       <main>
         {Name.type === "title" && (
           <Heading className="mb-1" id={page.id} level={1}>
-            <RichText rich_text={Name.title} />
+            <RichText richText={Name.title} />
           </Heading>
         )}
         <Suspense fallback={<Loading />}>
