@@ -1,4 +1,5 @@
-@layer utilities {
+/* To ensure that the class names of Tailwind CSS have higher priority */
+@layer components {
   .loading {
     display: inline-block;
     width: 1ch;
