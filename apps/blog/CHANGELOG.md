@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.1.2
+
+### Patch Changes
+
+- [#265](https://github.com/mogeko/mogeko/pull/265) [`f9625bc`](https://github.com/mogeko/mogeko/commit/f9625bcad9ab14cd597b46ad304aec24a2064cd4) Thanks [@mogeko](https://github.com/mogeko)! - Allow the use of the `lang:<name>` tag in Notion's Code Block for languages not existing in the Code Block.
+
 ## 0.1.1
 
 ### Patch Changes
