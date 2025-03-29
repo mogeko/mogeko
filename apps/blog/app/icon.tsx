@@ -30,20 +30,21 @@ export default async function Icon({ id }: { id: string }) {
   }
 
   if (id === "svg") {
-    const svg = await satori(
-      <div tw="flex p-[15%] bg-black w-full h-full">
-        <div tw="w-[23.952px] h-[38.4px] bg-[rgba(92,255,59,1)]" />
-      </div>,
-      { width: 192, height: 192, fonts: [] },
-    );
-
-    return new NextResponse(svg, {
-      headers: {
-        "Content-Type": "image/svg+xml",
-        // Set the `cache-control` to be consistent with `ImageResponse`
-        // See: https://vercel.com/docs/og-image-generation/og-image-api
-        "cache-control": "public, immutable, no-transform, max-age=31536000",
+    return new NextResponse(
+      await satori(
+        <div tw="flex p-[15%] bg-black w-full h-full">
+          <div tw="w-[23.952px] h-[38.4px] bg-[rgba(92,255,59,1)]" />
+        </div>,
+        { width: 192, height: 192, fonts: [] },
+      ),
+      {
+        headers: {
+          "Content-Type": "image/svg+xml",
+          // Set the `cache-control` to be consistent with `ImageResponse`
+          // See: https://vercel.com/docs/og-image-generation/og-image-api
+          "cache-control": "public, immutable, no-transform, max-age=31536000",
+        },
       },
-    });
+    );
   }
 }

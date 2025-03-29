@@ -7,6 +7,8 @@ import type { Metadata } from "next";
 
 import "@/styles/globals.css";
 
+export const revalidate = 60; // 1 minute
+
 export async function generateMetadata(): Promise<Metadata> {
   const database_id = process.env.NOTION_DATABASE_ID;
 
@@ -45,14 +47,21 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
         <link rel="icon" href="/icon/512" type="image/png" sizes="512x512" />
         <link rel="apple-touch-icon" href="/apple-icon?<generated>" />
         <link rel="manifest" href="/manifest.webmanifest" />
+        <style>{`
+          :root {
+            --font-mono: "Maple Mono NF CN", ui-monospace, monospace;
+          }
+        `}</style>
       </head>
-      <body className="min-h-svh flex flex-col text-foreground bg-background antialiased font-mono text-base/1">
-        <main className="relative flex-1 flex flex-col">{children}</main>
-        <footer className="mb-3">
-          <p className="px-[2ch]">
-            Copyright © 2017 - {getYear(new Date())}. All rights reserved.
-          </p>
-        </footer>
+      <body className="min-h-svh text-foreground bg-background antialiased font-mono text-base/1">
+        <div className="relative min-h-svh flex flex-col">
+          <main className="flex flex-1 flex-col">{children}</main>
+          <footer className="mb-3">
+            <p className="px-[2ch]">
+              Copyright © 2017 - {getYear(new Date())}. All rights reserved.
+            </p>
+          </footer>
+        </div>
         <GlobalHotkey />
       </body>
     </html>
