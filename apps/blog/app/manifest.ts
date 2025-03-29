@@ -8,7 +8,6 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
   const icons = [
     { src: "/icon/192", type: "image/png", sizes: "192x192" },
     { src: "/icon/512", type: "image/png", sizes: "512x512" },
-    { src: "/icon/svg", type: "image/svg+xml", suzes: "any" },
   ];
 
   if (database_id) {
@@ -17,7 +16,10 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
     if (isFullDatabase(database)) {
       return {
         name: plainText(database.title),
+        short_name: plainText(database.title),
         description: pkg.description,
+        start_url: "/",
+        display: "browser",
         icons,
       };
     }
