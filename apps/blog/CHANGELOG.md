@@ -1,5 +1,13 @@
 # @mogeko/blog
 
+## 0.1.1
+
+### Patch Changes
+
+- [#263](https://github.com/mogeko/mogeko/pull/263) [`615e56f`](https://github.com/mogeko/mogeko/commit/615e56f292b8565e40954ec8b9f95da677cd6b72) Thanks [@mogeko](https://github.com/mogeko)! - Add sitemap.xml generation.
+
+- [#263](https://github.com/mogeko/mogeko/pull/263) [`2dfbe6b`](https://github.com/mogeko/mogeko/commit/2dfbe6b1ea5edc7345ce3be77ab8acd4c2d87b95) Thanks [@mogeko](https://github.com/mogeko)! - Add robots.txt generation for SEO.
+
 ## 0.1.0
 
 ### Minor Changes
