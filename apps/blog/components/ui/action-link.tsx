@@ -3,13 +3,14 @@ import NextLink from "next/link";
 
 export const ActionLink: React.FC<
   React.ComponentProps<typeof NextLink> & { icon?: React.ReactNode }
-> = ({ icon, className, children, ...props }) => {
+> = ({ icon, className, children, tabIndex = 0, ...props }) => {
   return (
     <NextLink
       className={cn(
         "flex items-start justify-between bg-transparent text-foreground outline-none hover:[&>figure]:bg-accent focus:[&>figure]:bg-accent",
         className,
       )}
+      tabIndex={tabIndex}
       {...props}
     >
       <figure className="inline-flex items-center justify-center shrink w-[3ch] bg-border text-foreground select-none">

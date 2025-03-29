@@ -1,12 +1,12 @@
 import { NotionRender } from "@/components/render";
-import { RichText } from "@/components/text";
+import { RichText, plainText } from "@/components/text";
 import { Avatar } from "@/components/ui/avatar";
 import { Breadcrumb, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { Link } from "@/components/ui/link";
 import { Loading } from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
-import { isFullBlock, isFullPage, notion } from "@/lib/notion";
+import { isFullPage, notion } from "@/lib/notion";
 import { intlFormat } from "date-fns";
 import type { Metadata, NextPage } from "next";
 import { Suspense } from "react";
@@ -18,11 +18,11 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
 
-  const block = await notion.blocks.retrieve({ block_id: id });
+  const page = await notion.pages.retrieve({ page_id: id });
 
-  if (isFullBlock(block) && block.type === "child_page") {
+  if (isFullPage(page) && page.properties.Name.type === "title") {
     return {
-      title: block.child_page.title,
+      title: plainText(page.properties.Name.title),
     } satisfies Metadata;
   }
 }
@@ -61,8 +61,8 @@ const Page: NextPage<Props> = async ({ params }) => {
   };
 
   return (
-    <article className="flex flex-col max-w-[80ch] px-[2ch] py-2">
-      <header>
+    <div className="flex flex-col max-w-[80ch] px-[2ch] py-2">
+      <section>
         <Breadcrumb className="mb-1">
           <Link href="/">Home</Link>
           <BreadcrumbSeparator />
@@ -82,9 +82,9 @@ const Page: NextPage<Props> = async ({ params }) => {
         >
           <Author id={page.created_by.id} />
         </Suspense>
-      </header>
+      </section>
       <Separator className="mt-1 mb-3" />
-      <main>
+      <article>
         {Name.type === "title" && (
           <Heading className="mb-1" id={page.id} level={1}>
             <RichText richText={Name.title} />
@@ -93,8 +93,8 @@ const Page: NextPage<Props> = async ({ params }) => {
         <Suspense fallback={<Loading />}>
           <NotionRender id={id} />
         </Suspense>
-      </main>
-    </article>
+      </article>
+    </div>
   );
 };
 

@@ -29,9 +29,9 @@
 
 /* Numbered List */
 
-@layer utilities {
+@layer components {
   body {
-    counter-set: list-counter;
+    counter-reset: list-counter;
   }
 
   .numbered-list-item {

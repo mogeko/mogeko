@@ -20,10 +20,11 @@ export const linkVariants = cva(
 
 export const Link: React.FC<
   React.ComponentProps<typeof NextLink> & VariantProps<typeof linkVariants>
-> = ({ className, variant, ...props }) => {
+> = ({ className, variant, tabIndex = 0, ...props }) => {
   return (
     <NextLink
       className={twMerge(linkVariants({ variant, className }))}
+      tabIndex={tabIndex}
       {...props}
     />
   );
