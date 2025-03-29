@@ -2,7 +2,6 @@ packages:
   - apps/*
   - packages/*
 onlyBuiltDependencies:
-  - '@fortawesome/fontawesome-free'
-  - canvas
+  - '@biomejs/biome'
   - esbuild
   - sharp

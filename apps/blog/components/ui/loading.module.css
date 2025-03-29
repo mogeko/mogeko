@@ -1,6 +1,8 @@
 /* To ensure that the class names of Tailwind CSS have higher priority */
 @layer components {
   .loading {
+    --loding-frame: "⣾";
+
     display: inline-block;
     width: 1ch;
     height: var(--spacing);
@@ -9,34 +11,34 @@
 
     &::after {
       animation: loading 0.8s steps(1, end) infinite;
-      content: var(--tw-content);
+      content: var(--loding-frame);
     }
   }
 
   @keyframes loading {
     0% {
-      content: "⣾";
+      --loding-frame: "⣾";
     }
     12.5% {
-      content: "⣽";
+      --loding-frame: "⣽";
     }
     25% {
-      content: "⣻";
+      --loding-frame: "⣻";
     }
     37.5% {
-      content: "⢿";
+      --loding-frame: "⢿";
     }
     50% {
-      content: "⡿";
+      --loding-frame: "⡿";
     }
     62.5% {
-      content: "⣟";
+      --loding-frame: "⣟";
     }
     75% {
-      content: "⣯";
+      --loding-frame: "⣯";
     }
     87.5% {
-      content: "⣷";
+      --loding-frame: "⣷";
     }
   }
 }
