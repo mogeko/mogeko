@@ -7,6 +7,8 @@ import type { Metadata } from "next";
 
 import "@/styles/globals.css";
 
+export const revalidate = 60; // 1 minute
+
 export async function generateMetadata(): Promise<Metadata> {
   const database_id = process.env.NOTION_DATABASE_ID;
 

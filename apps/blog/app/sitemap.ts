@@ -1,16 +1,16 @@
 import { isFullPage, iteratePaginatedAPI, notion } from "@/lib/notion";
 import type { MetadataRoute } from "next";
 
-export const revalidate = 60; // 1 minute
+export const revalidate = 86400; // 1 day
 
 const isProd = () => process.env.NODE_ENV === "production";
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const databaseId = process.env.NOTION_DATABASE_ID;
   const vercelUrl = process.env.VERCEL_URL;
-  const BASE_URL = isProd() ? `https://${vercelUrl}` : "http://localhost:3000";
+  const baseUrl = isProd() ? `https://${vercelUrl}` : "http://localhost:3000";
   const acc: MetadataRoute.Sitemap = [
-    { url: BASE_URL, changeFrequency: "weekly", priority: 1 },
+    { url: baseUrl, changeFrequency: "weekly", priority: 1 },
   ];
 
   if (databaseId) {
@@ -19,7 +19,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     })) {
       if (isFullPage(page)) {
         acc.push({
-          url: `${BASE_URL}/posts/${page.id}`,
+          url: `${baseUrl}/posts/${page.id}`,
           lastModified: new Date(page.last_edited_time),
           changeFrequency: "weekly",
           priority: 0.8,
