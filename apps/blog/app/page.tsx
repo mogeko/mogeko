@@ -30,7 +30,6 @@ const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
         </Summary>
         <ul className="pl-[1ch]">
           {pages.map((page) => {
-            console.log(shortId(page.id));
             return (
               page.properties.Name.type === "title" && (
                 <li key={page.id}>
