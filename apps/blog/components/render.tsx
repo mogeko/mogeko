@@ -15,6 +15,7 @@ import { Image } from "@/components/ui/image";
 import { ListItem } from "@/components/ui/list";
 import { Loading } from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
+import { formatShortId } from "@/lib/utils";
 
 type BlockProps = { block: BlockObjectResponse };
 
@@ -26,6 +27,8 @@ const Code = dynamic(async () => {
 });
 
 const NotionBlock: React.FC<BlockProps> = ({ block }) => {
+  const shortId = formatShortId(block.id);
+
   switch (block.type) {
     case "heading_1": {
       const { color, rich_text, is_toggleable } = block.heading_1;
@@ -33,7 +36,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return is_toggleable ? (
         <Details className="my-1">
           <Summary asChild>
-            <Heading id={block.id} color={color} level={1}>
+            <Heading id={shortId} color={color} level={1}>
               <RichText richText={rich_text} />
             </Heading>
           </Summary>
@@ -42,7 +45,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
           </Suspense>
         </Details>
       ) : (
-        <Heading className="my-1" id={block.id} color={color} level={1}>
+        <Heading id={shortId} className="my-1" color={color} level={1}>
           <RichText richText={rich_text} />
         </Heading>
       );
@@ -54,7 +57,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return is_toggleable ? (
         <Details className="mt-1">
           <Summary asChild>
-            <Heading id={block.id} color={color} level={2}>
+            <Heading id={shortId} color={color} level={2}>
               <RichText richText={rich_text} />
             </Heading>
           </Summary>
@@ -63,7 +66,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
           </Suspense>
         </Details>
       ) : (
-        <Heading className="mt-1" id={block.id} color={color} level={2}>
+        <Heading className="mt-1" id={shortId} color={color} level={2}>
           <RichText richText={rich_text} />
         </Heading>
       );
@@ -75,7 +78,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return is_toggleable ? (
         <Details className="mt-1">
           <Summary asChild>
-            <Heading id={block.id} color={color} level={3}>
+            <Heading id={shortId} color={color} level={3}>
               <RichText richText={rich_text} />
             </Heading>
           </Summary>
@@ -84,7 +87,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
           </Suspense>
         </Details>
       ) : (
-        <Heading className="mt-1" id={block.id} color={color} level={3}>
+        <Heading className="mt-1" id={shortId} color={color} level={3}>
           <RichText richText={rich_text} />
         </Heading>
       );
