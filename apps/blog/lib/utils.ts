@@ -52,3 +52,12 @@ export function groupBy<K, T>(
 
   return result;
 }
+
+export function shortId(id?: string) {
+  let result: string | undefined;
+
+  if (id?.length === 36) result = id.replace(/[-]/g, "");
+  if (id?.length === 32) result = id;
+
+  return result?.trim();
+}

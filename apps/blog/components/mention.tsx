@@ -1,5 +1,6 @@
 import { Link } from "@/components/ui/link";
 import type { MentionRichTextItemResponse } from "@/lib/api-endpoints";
+import { shortId } from "@/lib/utils";
 
 export const Mention: React.FC<
   React.PropsWithChildren<{
@@ -9,7 +10,7 @@ export const Mention: React.FC<
 > = ({ className, mention, children }) => {
   if (mention.type === "page") {
     return (
-      <Link className={className} href={`/posts/${mention.page.id}`}>
+      <Link className={className} href={`/posts/${shortId(mention.page.id)}`}>
         {children}
       </Link>
     );
@@ -17,7 +18,10 @@ export const Mention: React.FC<
 
   if (mention.type === "database") {
     return (
-      <Link className={className} href={`/posts/${mention.database.id}`}>
+      <Link
+        className={className}
+        href={`/posts/${shortId(mention.database.id)}`}
+      >
         {children}
       </Link>
     );

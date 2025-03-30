@@ -38,15 +38,29 @@ export const RichText: React.FC<{
     if (richTextItem.type === "text") {
       const { link, content } = richTextItem.text;
 
-      return link ? (
-        <Link key={key} className={cn} href={link.url}>
-          {content}
-        </Link>
-      ) : (
-        <span key={key} className={cn.length ? cn : void 0}>
-          {content}
-        </span>
-      );
+      if (!link) {
+        return (
+          <span key={key} className={cn.length ? cn : void 0}>
+            {content}
+          </span>
+        );
+      }
+
+      if (link.url.startsWith("https://")) {
+        return (
+          <Link key={key} className={cn} href={link.url}>
+            {content}
+          </Link>
+        );
+      }
+
+      if (link.url.startsWith("/")) {
+        return (
+          <Link key={key} className={cn} href={`/posts${link.url}`}>
+            {content}
+          </Link>
+        );
+      }
     }
 
     if (richTextItem.type === "equation") {
