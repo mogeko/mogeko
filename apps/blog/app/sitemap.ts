@@ -3,12 +3,9 @@ import type { MetadataRoute } from "next";
 
 export const revalidate = 86400; // 1 day
 
-const isProd = () => process.env.NODE_ENV === "production";
-
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const databaseId = process.env.NOTION_DATABASE_ID;
-  const vercelUrl = process.env.VERCEL_URL;
-  const baseUrl = isProd() ? `https://${vercelUrl}` : "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000";
   const acc: MetadataRoute.Sitemap = [
     { url: baseUrl, changeFrequency: "weekly", priority: 1 },
   ];

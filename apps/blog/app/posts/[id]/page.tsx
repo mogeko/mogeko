@@ -7,7 +7,7 @@ import { Link } from "@/components/ui/link";
 import { Loading } from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
 import { isFullPage, notion } from "@/lib/notion";
-import { shortId } from "@/lib/utils";
+import { formatShortId } from "@/lib/utils";
 import { intlFormat } from "date-fns";
 import type { Metadata, NextPage } from "next";
 import { Suspense } from "react";
@@ -21,9 +21,14 @@ export async function generateMetadata({ params }: Props) {
 
   const page = await notion.pages.retrieve({ page_id: id });
 
-  if (isFullPage(page) && page.properties.Name.type === "title") {
+  if (!isFullPage(page)) return;
+
+  const { Name, Tags } = page.properties;
+
+  if (Name.type === "title" && Tags.type === "multi_select") {
     return {
-      title: plainText(page.properties.Name.title),
+      title: plainText(Name.title),
+      keywords: Tags.multi_select.map((tag) => tag.name),
     } satisfies Metadata;
   }
 }
@@ -35,10 +40,8 @@ const Page: NextPage<Props> = async ({ params }) => {
 
   if (!isFullPage(page)) return;
 
-  const {
-    properties: { Name, "Publish Date": _date, "Featured Image": _cover },
-  } = page;
-  const date = _date.type === "date" && _date.date?.start;
+  const { Name, "Publish Date": date } = page.properties;
+  const publidhDate = date.type === "date" && date.date?.start;
 
   const Author: React.FC<{ id: string }> = async ({ id }) => {
     const { avatar_url, name } = await notion.users.retrieve({ user_id: id });
@@ -55,7 +58,7 @@ const Page: NextPage<Props> = async ({ params }) => {
         )}
         <div>
           <p>{name ?? "Anonymous"}</p>
-          <p>{date && intlFormat(date)}</p>
+          <p>{publidhDate && intlFormat(publidhDate)}</p>
         </div>
       </div>
     );
@@ -71,7 +74,7 @@ const Page: NextPage<Props> = async ({ params }) => {
           {Name.type === "title" && (
             <>
               <BreadcrumbSeparator />
-              <Link href={`/posts/${shortId(id)}`}>
+              <Link href={`/posts/${formatShortId(id)}`}>
                 <RichText richText={Name.title} />
               </Link>
             </>
@@ -87,7 +90,7 @@ const Page: NextPage<Props> = async ({ params }) => {
       <Separator className="mt-1 mb-3" />
       <article>
         {Name.type === "title" && (
-          <Heading className="mb-1" id={page.id} level={1}>
+          <Heading id={formatShortId(page.id)} className="my-1" level={1}>
             <RichText richText={Name.title} />
           </Heading>
         )}

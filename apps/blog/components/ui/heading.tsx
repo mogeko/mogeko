@@ -1,6 +1,5 @@
 import { Link } from "@/components/ui/link";
 import { type ColorVariantProps, colorVariants } from "@/lib/color-variants";
-import { shortId } from "@/lib/utils";
 import { twMerge } from "tailwind-merge";
 
 export const Heading: React.FC<
@@ -12,7 +11,7 @@ export const Heading: React.FC<
 
   return (
     <Comp
-      id={shortId(id)}
+      id={id}
       className={twMerge(
         colorVariants({
           color,
@@ -22,7 +21,7 @@ export const Heading: React.FC<
       {...props}
     >
       {id ? (
-        <Link variant="ghost" href={`#${shortId(id)}`}>
+        <Link variant="ghost" href={`#${id}`}>
           {(["#", "##", "###"] as const)[level - 1] ?? "#"}
         </Link>
       ) : null}
