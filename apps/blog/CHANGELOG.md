@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.1.3
+
+### Patch Changes
+
+- [#268](https://github.com/mogeko/mogeko/pull/268) [`6f661a3`](https://github.com/mogeko/mogeko/commit/6f661a3473759f22c18e1366cb99b8ba23682dfb) Thanks [@mogeko](https://github.com/mogeko)! - Implement shortId utility and update links to use short IDs.
+
 ## 0.1.2
 
 ### Patch Changes
