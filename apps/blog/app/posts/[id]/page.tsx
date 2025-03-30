@@ -7,6 +7,7 @@ import { Link } from "@/components/ui/link";
 import { Loading } from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
 import { isFullPage, notion } from "@/lib/notion";
+import { shortId } from "@/lib/utils";
 import { intlFormat } from "date-fns";
 import type { Metadata, NextPage } from "next";
 import { Suspense } from "react";
@@ -70,7 +71,7 @@ const Page: NextPage<Props> = async ({ params }) => {
           {Name.type === "title" && (
             <>
               <BreadcrumbSeparator />
-              <Link href={`/posts/${id}`}>
+              <Link href={`/posts/${shortId(id)}`}>
                 <RichText richText={Name.title} />
               </Link>
             </>

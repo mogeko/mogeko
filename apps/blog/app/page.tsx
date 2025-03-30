@@ -6,6 +6,7 @@ import { Heading } from "@/components/ui/heading";
 import { Loading } from "@/components/ui/loading";
 import { isFullDatabase, isFullPage, notion } from "@/lib/notion";
 import { groupBy } from "@/lib/utils";
+import { shortId } from "@/lib/utils";
 import pkg from "@/package.json";
 import { getYear } from "date-fns";
 import type { NextPage } from "next";
@@ -29,10 +30,11 @@ const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
         </Summary>
         <ul className="pl-[1ch]">
           {pages.map((page) => {
+            console.log(shortId(page.id));
             return (
               page.properties.Name.type === "title" && (
                 <li key={page.id}>
-                  <ActionLink icon="→" href={`/posts/${page.id}`}>
+                  <ActionLink icon="→" href={`/posts/${shortId(page.id)}`}>
                     <RichText richText={page.properties.Name.title} />
                   </ActionLink>
                 </li>
