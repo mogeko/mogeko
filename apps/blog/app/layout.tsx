@@ -41,11 +41,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
           rel="stylesheet"
           href="https://static.zeoseven.com/zsft/442/main/result.css"
         />
-        <style>{`
-          :root {
-            --font-mono: "Maple Mono NF CN", ui-monospace, monospace;
-          }
-        `}</style>
+        <style>{`:root { --font-mono: "Maple Mono NF CN", ui-monospace, monospace; }`}</style>
       </head>
       <body className="min-h-svh text-foreground bg-background antialiased font-mono text-base/1">
         <div className="relative min-h-svh flex flex-col">
