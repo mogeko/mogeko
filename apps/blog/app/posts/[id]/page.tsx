@@ -21,9 +21,14 @@ export async function generateMetadata({ params }: Props) {
 
   const page = await notion.pages.retrieve({ page_id: id });
 
-  if (isFullPage(page) && page.properties.Name.type === "title") {
+  if (!isFullPage(page)) return;
+
+  const { Name, Tags } = page.properties;
+
+  if (Name.type === "title" && Tags.type === "multi_select") {
     return {
-      title: plainText(page.properties.Name.title),
+      title: plainText(Name.title),
+      keywords: Tags.multi_select.map((tag) => tag.name),
     } satisfies Metadata;
   }
 }
@@ -35,10 +40,8 @@ const Page: NextPage<Props> = async ({ params }) => {
 
   if (!isFullPage(page)) return;
 
-  const {
-    properties: { Name, "Publish Date": _date, "Featured Image": _cover },
-  } = page;
-  const date = _date.type === "date" && _date.date?.start;
+  const { Name, "Publish Date": date } = page.properties;
+  const publidhDate = date.type === "date" && date.date?.start;
 
   const Author: React.FC<{ id: string }> = async ({ id }) => {
     const { avatar_url, name } = await notion.users.retrieve({ user_id: id });
@@ -55,7 +58,7 @@ const Page: NextPage<Props> = async ({ params }) => {
         )}
         <div>
           <p>{name ?? "Anonymous"}</p>
-          <p>{date && intlFormat(date)}</p>
+          <p>{publidhDate && intlFormat(publidhDate)}</p>
         </div>
       </div>
     );
