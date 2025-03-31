@@ -10,6 +10,7 @@ import { isFullPage, notion } from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
 import { intlFormat } from "date-fns";
 import type { Metadata, NextPage } from "next";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 type Props = {
@@ -17,11 +18,13 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props) {
-  const { id } = await params;
+  const page_id = formatShortId((await params).id);
 
-  const page = await notion.pages.retrieve({ page_id: id });
+  if (!page_id) return notFound();
 
-  if (!isFullPage(page)) return;
+  const page = await notion.pages.retrieve({ page_id });
+
+  if (!isFullPage(page)) return notFound();
 
   const { Name, Tags } = page.properties;
 
@@ -34,11 +37,13 @@ export async function generateMetadata({ params }: Props) {
 }
 
 const Page: NextPage<Props> = async ({ params }) => {
-  const { id } = await params;
+  const page_id = formatShortId((await params).id);
 
-  const page = await notion.pages.retrieve({ page_id: id });
+  if (!page_id) return notFound();
 
-  if (!isFullPage(page)) return;
+  const page = await notion.pages.retrieve({ page_id });
+
+  if (!isFullPage(page)) return notFound();
 
   const { Name, "Publish Date": date } = page.properties;
   const publidhDate = date.type === "date" && date.date?.start;
@@ -65,7 +70,7 @@ const Page: NextPage<Props> = async ({ params }) => {
   };
 
   return (
-    <div className="flex flex-col max-w-[80ch] px-[2ch] py-2">
+    <div className="flex flex-1 flex-col max-w-[80ch] px-[2ch] py-2">
       <section>
         <Breadcrumb className="mb-1">
           <Link href="/">Home</Link>
@@ -74,7 +79,7 @@ const Page: NextPage<Props> = async ({ params }) => {
           {Name.type === "title" && (
             <>
               <BreadcrumbSeparator />
-              <Link href={`/posts/${formatShortId(id)}`}>
+              <Link href={`/posts/${page_id}`}>
                 <RichText richText={Name.title} />
               </Link>
             </>
@@ -84,18 +89,18 @@ const Page: NextPage<Props> = async ({ params }) => {
           // In order to optimize Cumulative Layout Shift (CLS)
           fallback={<Loading className="h-2" />}
         >
-          <Author id={page.created_by.id} />
+          <Author id={page.created_by.id /* Long ID */} />
         </Suspense>
       </section>
       <Separator className="mt-1 mb-3" />
       <article>
         {Name.type === "title" && (
-          <Heading id={formatShortId(page.id)} className="my-1" level={1}>
+          <Heading id={page_id} className="my-1" level={1}>
             <RichText richText={Name.title} />
           </Heading>
         )}
         <Suspense fallback={<Loading />}>
-          <NotionRender id={id} />
+          <NotionRender id={page_id} />
         </Suspense>
       </article>
     </div>

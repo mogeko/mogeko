@@ -53,11 +53,11 @@ export function groupBy<K, T>(
   return result;
 }
 
-export function formatShortId(id: string) {
+export function formatShortId(id?: string) {
   let result: string | undefined;
 
-  if (id.length === 36) result = id.replace(/[-]/g, "");
-  if (id.length === 32) result = id;
+  if (id?.length === 36) result = id.replace(/[-]/g, "");
+  if (id?.length === 32) result = id;
 
   return result?.trim();
 }

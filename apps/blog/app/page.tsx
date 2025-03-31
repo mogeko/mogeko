@@ -9,6 +9,7 @@ import { formatShortId, groupBy } from "@/lib/utils";
 import pkg from "@/package.json";
 import { getYear } from "date-fns";
 import type { NextPage } from "next";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
@@ -49,34 +50,34 @@ const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
 };
 
 const Home: NextPage = async () => {
-  const database_id = process.env.NOTION_DATABASE_ID;
+  const database_id = formatShortId(process.env.NOTION_DATABASE_ID);
 
-  if (database_id) {
-    const database = await notion.databases.retrieve({ database_id });
+  if (!database_id) return notFound();
 
-    if (isFullDatabase(database)) {
-      const { title, description } = database;
+  const database = await notion.databases.retrieve({ database_id });
 
-      return (
-        <div className="flex flex-col gap-1 max-w-[80ch] px-[2ch] py-2">
-          <section>
-            <hgroup className="flex gap-[1ch]">
-              <h1>
-                <RichText richText={title} />
-              </h1>
-              <Badges>{pkg.version}</Badges>
-            </hgroup>
-            <p>
-              <RichText richText={description} />
-            </p>
-          </section>
-          <Suspense fallback={<Loading />}>
-            <PageFeeds id={database_id} />
-          </Suspense>
-        </div>
-      );
-    }
-  }
+  if (!isFullDatabase(database)) return notFound();
+
+  const { title, description } = database;
+
+  return (
+    <div className="flex flex-1 flex-col gap-1 max-w-[80ch] px-[2ch] py-2">
+      <section>
+        <hgroup className="flex gap-[1ch]">
+          <h1>
+            <RichText richText={title} />
+          </h1>
+          <Badges>{pkg.version}</Badges>
+        </hgroup>
+        <p>
+          <RichText richText={description} />
+        </p>
+      </section>
+      <Suspense fallback={<Loading />}>
+        <PageFeeds id={database_id} />
+      </Suspense>
+    </div>
+  );
 };
 
 export default Home;
