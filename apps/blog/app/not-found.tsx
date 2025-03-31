@@ -8,11 +8,9 @@ export const metadata: Metadata = {
 const Prompt: React.FC<
   React.HTMLAttributes<HTMLDivElement> & { cursor?: boolean }
 > = ({ children, cursor, ...props }) => {
-  const region = process.env.VERCEL_REGION;
-
   return (
     <div className="flex items-center gap-[1ch]" {...props}>
-      <span>{`[user@vercel${region ? `-${region}` : ""} ~]$`}</span>
+      <span>{"[user@vercel ~]$"}</span>
       {children}
       {cursor && (
         <span className="inline-block bg-accent w-[1ch] h-1 animate-blink" />
