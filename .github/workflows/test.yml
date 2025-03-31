@@ -14,11 +14,11 @@ jobs:
     env:
       TURBO_FORCE: true
     steps:
-      - uses: actions/checkout@v4.2.1
+      - uses: actions/checkout@v4.2.2
       - name: Set up pnpm
-        uses: pnpm/action-setup@v4.0.0
+        uses: pnpm/action-setup@v4.1.0
       - name: Set up Node.js
-        uses: actions/setup-node@v4.0.4
+        uses: actions/setup-node@v4.3.0
         with:
           node-version-file: package.json
           cache: "pnpm"
@@ -28,7 +28,7 @@ jobs:
       - name: Generate Coverage Reports
         run: pnpm run cov
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4.6.0
+        uses: codecov/codecov-action@v5.4.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: mogeko/mogeko
