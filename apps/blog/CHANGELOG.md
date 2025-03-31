@@ -1,5 +1,15 @@
 # @mogeko/blog
 
+## 0.1.4
+
+### Patch Changes
+
+- [#271](https://github.com/mogeko/mogeko/pull/271) [`3074f7f`](https://github.com/mogeko/mogeko/commit/3074f7f4562e7aa274de2768df0a0450120f8a2e) Thanks [@mogeko](https://github.com/mogeko)! - Update base URL handling in robots and sitemap functions to use Vercel production URL.
+
+- [#271](https://github.com/mogeko/mogeko/pull/271) [`3074f7f`](https://github.com/mogeko/mogeko/commit/3074f7f4562e7aa274de2768df0a0450120f8a2e) Thanks [@mogeko](https://github.com/mogeko)! - Add custom 404 Not Found page with ASCII art and error message.
+
+- [#271](https://github.com/mogeko/mogeko/pull/271) [`3074f7f`](https://github.com/mogeko/mogeko/commit/3074f7f4562e7aa274de2768df0a0450120f8a2e) Thanks [@mogeko](https://github.com/mogeko)! - Enhance error handling for database and page retrievals with notFound responses.
+
 ## 0.1.3
 
 ### Patch Changes
