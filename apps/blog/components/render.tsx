@@ -96,7 +96,10 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return (
         <p
           className={twMerge(
-            colorVariants({ color, className: "[&:not(:first-child)]:mt-1" }),
+            colorVariants({
+              color,
+              className: "[&:not(:first-child)]:mt-1 text-clip",
+            }),
           )}
         >
           <RichText richText={rich_text} />
