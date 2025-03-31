@@ -5,7 +5,8 @@ export const revalidate = 86400; // 1 day
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const databaseId = process.env.NOTION_DATABASE_ID;
-  const baseUrl = process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000";
+  const domain = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  const baseUrl = domain ? `https://${domain}` : "http://localhost:3000";
   const acc: MetadataRoute.Sitemap = [
     { url: baseUrl, changeFrequency: "weekly", priority: 1 },
   ];
