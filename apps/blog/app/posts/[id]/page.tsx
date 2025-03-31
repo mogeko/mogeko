@@ -70,7 +70,7 @@ const Page: NextPage<Props> = async ({ params }) => {
   };
 
   return (
-    <div className="flex flex-col max-w-[80ch] px-[2ch] py-2">
+    <div className="flex flex-1 flex-col max-w-[80ch] px-[2ch] py-2">
       <section>
         <Breadcrumb className="mb-1">
           <Link href="/">Home</Link>

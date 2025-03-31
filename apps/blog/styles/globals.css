@@ -25,6 +25,14 @@
   --color-ring: var(--color-accent);
 
   --spacing: calc(21.5 / 16 * 1rem);
+
+  --animate-blink: blink 1s step-start infinite;
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
 }
 
 /* Numbered List */

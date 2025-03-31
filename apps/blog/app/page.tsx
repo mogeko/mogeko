@@ -61,7 +61,7 @@ const Home: NextPage = async () => {
   const { title, description } = database;
 
   return (
-    <div className="flex flex-col gap-1 max-w-[80ch] px-[2ch] py-2">
+    <div className="flex flex-1 flex-col gap-1 max-w-[80ch] px-[2ch] py-2">
       <section>
         <hgroup className="flex gap-[1ch]">
           <h1>
