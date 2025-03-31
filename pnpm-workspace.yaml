@@ -3,5 +3,6 @@ packages:
   - packages/*
 onlyBuiltDependencies:
   - '@biomejs/biome'
+  - '@vercel/speed-insights'
   - esbuild
   - sharp

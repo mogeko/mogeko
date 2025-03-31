@@ -3,6 +3,7 @@ import { plainText } from "@/components/text";
 import { isFullDatabase, notion } from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
 import pkg from "@/package.json";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getYear } from "date-fns";
 import type { Metadata } from "next";
 
@@ -53,6 +54,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
             </p>
           </footer>
         </div>
+        <SpeedInsights />
         <GlobalHotkey />
       </body>
     </html>
