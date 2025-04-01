@@ -6,22 +6,22 @@
 
   --color-card: var(--color-white);
   --color-card-foreground: var(--color-black);
-  --color-popover: rgba(224, 224, 224, 1);
+  --color-popover: var(--color-neutral-200);
   --color-popover-foreground: var(--color-white);
 
   --color-primary: var(--color-black);
   --color-primary-foreground: var(--color-white);
-  --color-secondary: rgba(224, 224, 224, 1);
+  --color-secondary: var(--color-neutral-200);
   --color-secondary-foreground: var(--color-black);
-  --color-muted: rgba(168, 168, 168, 0.2);
+  --color-muted: --alpha(var(--color-neutral-400) / 20%);
   --color-muted-foreground: var(--color-black);
-  --color-accent: rgba(92, 255, 59, 1);
+  --color-accent: oklch(0.88 0.2641 140.8);
   --color-accent-foreground: var(--color-black);
-  --color-destructive: hsl(0, 69%, 48%);
+  --color-destructive: oklch(0.55 0.2034 27.09);
   --color-destructive-foreground: var(--color-black);
 
-  --color-border: rgba(198, 198, 198, 1);
-  --color-input: rgba(244, 244, 244, 1);
+  --color-border: var(--color-neutral-300);
+  --color-input: var(--color-neutral-100);
   --color-ring: var(--color-accent);
 
   --spacing: calc(21.5 / 16 * 1rem);
@@ -58,13 +58,13 @@
 /* Shiki */
 
 @theme {
-  --color-shiki-diff-add: rgba(16, 185, 129, 0.16);
-  --color-shiki-diff-add-symbol: hsl(151, 65%, 54%);
-  --color-shiki-diff-remove: rgba(244, 63, 94, 0.16);
-  --color-shiki-diff-remove-symbol: hsl(0, 45%, 63%);
-  --color-shiki-highlight: rgba(101, 117, 133, 0.16);
-  --color-shiki-error: rgba(244, 63, 94, 0.16);
-  --color-shiki-warning: rgba(234, 179, 8, 0.16);
+  --color-shiki-diff-add: --alpha(var(--color-emerald-400) / 16%);
+  --color-shiki-diff-add-symbol: var(--color-green-400);
+  --color-shiki-diff-remove: --alpha(var(--color-rose-500) / 16%);
+  --color-shiki-diff-remove-symbol: var(--color-red-400);
+  --color-shiki-highlight: --alpha(var(--color-slate-500) / 16%);
+  --color-shiki-error: --alpha(var(--color-rose-500) / 16%);
+  --color-shiki-warning: --alpha(var(--color-yellow-500) / 16%);
   --color-shiki-word-highlight: var(--color-muted);
 }
 
