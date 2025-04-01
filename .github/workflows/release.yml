@@ -29,7 +29,7 @@ jobs:
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - run: pnpm build -F "./packages/*"
-      - name: Create Version PR or Publish to NPM
+      - name: Create Changesets PR or Publish to NPM
         id: changesets
         uses: changesets/action@v1.4.10
         with:
@@ -41,3 +41,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_ENV: "production"
+      - name: Enable auto-merge for Changesets PRs
+        if: steps.changesets.outputs.hasChangesets == true
+        run: gh pr merge --auto --merge "https://github.com/$REPO/pull/$PR"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ steps.changesets.outputs.pullRequestNumber }}
+          REPO: ${{ github.repository }}
