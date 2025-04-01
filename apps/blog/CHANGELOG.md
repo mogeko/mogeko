@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.1.6
+
+### Patch Changes
+
+- [#283](https://github.com/mogeko/mogeko/pull/283) [`9fe37db`](https://github.com/mogeko/mogeko/commit/9fe37db89901a083a59773f32a0ba34dfa47dd3d) Thanks [@mogeko](https://github.com/mogeko)! - Implement OAuth access token and authorization routes with AES-GCM encryption.
+
 ## 0.1.5
 
 ### Patch Changes
