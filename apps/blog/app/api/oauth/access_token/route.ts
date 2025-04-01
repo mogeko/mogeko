@@ -1,7 +1,7 @@
 import { decrypt, encrypt } from "@/lib/ase-gcm";
 import { type NextRequest, NextResponse } from "next/server";
 
-const TOKEN_VALIDITY_PERIOD = 1000 * 60 * 60 * 24 * 365; // 1 year;
+const TOKEN_VALIDITY_PERIOD = 31536000000; // 1 year;
 
 export async function GET({ nextUrl }: NextRequest) {
   const state = nextUrl.searchParams.get("state");

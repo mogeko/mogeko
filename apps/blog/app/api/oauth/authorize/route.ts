@@ -1,7 +1,7 @@
 import { encrypt } from "@/lib/ase-gcm";
 import { type NextRequest, NextResponse } from "next/server";
 
-const DEFAULT_VALIDITY_PERIOD = 5 * 60 * 1000; // 5 minutes
+const DEFAULT_VALIDITY_PERIOD = 300000; // 5 minutes
 
 export async function GET({ nextUrl }: NextRequest) {
   const client_id = process.env.OAUTH_CLIENT_ID;
