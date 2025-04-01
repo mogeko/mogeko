@@ -1,5 +1,14 @@
 # @mogeko/blog
 
+## 0.1.5
+
+### Patch Changes
+
+- [#279](https://github.com/mogeko/mogeko/pull/279) [`fffaa97`](https://github.com/mogeko/mogeko/commit/fffaa970e9721edb21331256bb7ce323387f0701) Thanks [@mogeko](https://github.com/mogeko)! - Update color variables for improved theming consistency.
+
+  - Use a unified color system (`oklch`).
+  - Choose colors from the [TailwindCSS color palette](https://tailwindcss.com/docs/colors) whenever possible.
+
 ## 0.1.4
 
 ### Patch Changes
