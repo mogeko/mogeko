@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
   const baseUrl = domain ? `https://${domain}` : "http://localhost:3000";
 
   return {
-    rules: { userAgent: "*", allow: "/" },
+    rules: { userAgent: "*", allow: "/", disallow: "/api" },
     sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
