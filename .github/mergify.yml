@@ -8,10 +8,3 @@ pull_request_rules:
       - "head~=changeset-release"
     actions:
       merge:
-
-  - name: Automatic label for blog updates
-    conditions:
-      - "files~=^apps/blog/"
-    actions:
-      label:
-        add: ["app:blog"]
