@@ -1,0 +1,27 @@
+"app:blog":
+  - changed-files:
+    - any-glob-to-any-file: ["apps/blog/**/*"]
+
+"package:astro-mermaid":
+  - changed-files:
+    - any-glob-to-any-file: ["packages/astro-mermaid/**/*"]
+
+"package:astro-reading-time":
+  - changed-files:
+    - any-glob-to-any-file: ["packages/astro-reading-time/**/*"]
+
+"package:remark-anchor-link":
+  - changed-files:
+    - any-glob-to-any-file: ["packages/remark-anchor-link/**/*"]
+
+"package:tsconfig":
+  - changed-files:
+    - any-glob-to-any-file: ["packages/tsconfig/**/*"]
+
+"package:typography":
+  - changed-files:
+    - any-glob-to-any-file: ["packages/typography/**/*"]
+
+"package:utils":
+  - changed-files:
+    - any-glob-to-any-file: ["packages/utils/**/*"]

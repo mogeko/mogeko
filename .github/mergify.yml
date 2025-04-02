@@ -4,14 +4,8 @@ pull_request_rules:
       - "title=chore(release): version packages"
       - "commits=chore(release): version packages"
       - "author=github-actions[bot]"
+      - "check-success=Vercel Preview Comments"
       - "files~=CHANGELOG.md"
       - "head~=changeset-release"
     actions:
       merge:
-
-  - name: Automatic label for blog updates
-    conditions:
-      - "files~=^apps/blog/"
-    actions:
-      label:
-        add: ["app:blog"]
