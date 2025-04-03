@@ -201,7 +201,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
           className="flex gap-[1ch] before:content-['▪'] [&:not(&+&)]:mt-1"
           color={color}
         >
-          <div className="flex-1">
+          <div className="flex-1 [&>:last-child:not(:first-child)]:mb-1">
             <p>
               <RichText richText={rich_text} />
             </p>
@@ -222,7 +222,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
           className="numbered-list-item flex gap-[1ch] [&:not(&+&)]:mt-1"
           color={color}
         >
-          <div className="flex-1">
+          <div className="flex-1 [&>:last-child:not(:first-child)]:mb-1">
             <p>
               <RichText richText={rich_text} />
             </p>
