@@ -1,4 +1,4 @@
-import { decrypt, encrypt } from "@/ase-gcm";
+import { decrypt, encrypt } from "@/aes-gcm";
 import { describe, expect, it } from "vitest";
 
 describe("ase-gcm", () => {
