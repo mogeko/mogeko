@@ -1,5 +1,11 @@
 # @mogeko/tsconfig
 
+## 0.0.7
+
+### Patch Changes
+
+- [#289](https://github.com/mogeko/mogeko/pull/289) [`603760e`](https://github.com/mogeko/mogeko/commit/603760e6461537ae608acfb84154f463e7d57f95) Thanks [@mogeko](https://github.com/mogeko)! - Do not set a default `target` anymore.
+
 ## 0.0.6
 
 ### Patch Changes
