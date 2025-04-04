@@ -1,10 +1,13 @@
-import path from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "tsup";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   entryPoints: {
-    "ase-gcm": path.resolve(__dirname, "./src/ase-gcm.ts"),
-    index: path.resolve(__dirname, "./index.ts"),
+    "ase-gcm": resolve(__dirname, "./src/ase-gcm.ts"),
+    index: resolve(__dirname, "./index.ts"),
   },
   format: ["esm"],
   clean: true,

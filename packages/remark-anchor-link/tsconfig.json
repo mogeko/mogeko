@@ -4,6 +4,6 @@
   "compilerOptions": {
     "types": ["vitest/importMeta"]
   },
-  "include": ["index.ts"],
+  "include": ["index.ts", "*.config.ts"],
   "exclude": ["node_modules", "dist"]
 }
