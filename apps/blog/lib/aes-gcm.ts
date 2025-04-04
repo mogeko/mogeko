@@ -1,4 +1,6 @@
+import { Buffer } from "node:buffer";
 import { getRandomValues, subtle } from "node:crypto";
+import { TextDecoder, TextEncoder } from "node:util";
 
 export async function encrypt(plaintext: string, password: string) {
   const pwUtf8 = new TextEncoder().encode(password);
@@ -11,10 +13,8 @@ export async function encrypt(plaintext: string, password: string) {
   const ptUint8 = new TextEncoder().encode(plaintext);
   const ctBuffer = await subtle.encrypt(alg, key, ptUint8);
 
-  const ctString = String.fromCharCode(...new Uint8Array(ctBuffer));
-  const ctBase64 = Buffer.from(ctString, "binary").toString("base64");
-
-  const ivHex = Array.from(iv, (b) => `00${b.toString(16)}`.slice(-2)).join("");
+  const ivHex = Buffer.from(iv).toString("hex");
+  const ctBase64 = Buffer.from(ctBuffer).toString("base64");
 
   return ivHex + ctBase64;
 }
@@ -24,15 +24,12 @@ export async function decrypt(ciphertext: string, password: string) {
   const pwHash = await subtle.digest("SHA-256", pwUtf8);
 
   const iv = Buffer.from(ciphertext.slice(0, 24), "hex");
-  const alg = { name: "AES-GCM", iv: new Uint8Array(iv) };
+  const alg = { name: "AES-GCM", iv };
   const key = await subtle.importKey("raw", pwHash, alg, false, ["decrypt"]);
 
-  const ctStr = Buffer.from(ciphertext.slice(24), "base64").toString("binary");
-  const ctUint8 = new Uint8Array(
-    (ctStr.match(/[\s\S]/g) as RegExpExecArray).map((ch) => ch.charCodeAt(0)),
-  );
+  const ctBuffer = Buffer.from(ciphertext.slice(24), "base64");
 
-  const plainBuffer = await subtle.decrypt(alg, key, ctUint8);
+  const plainBuffer = await subtle.decrypt(alg, key, ctBuffer);
 
   return new TextDecoder().decode(plainBuffer);
 }

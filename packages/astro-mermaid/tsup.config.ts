@@ -1,11 +1,14 @@
-import path from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "tsup";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   entryPoints: {
-    "astro-mermaid": path.resolve(__dirname, "index.ts"),
-    "shiki-transformer": path.resolve(__dirname, "src/shiki-transformer.ts"),
-    "rehype-wrapper": path.resolve(__dirname, "src/rehype-wrapper.ts"),
+    "astro-mermaid": resolve(__dirname, "index.ts"),
+    "shiki-transformer": resolve(__dirname, "src/shiki-transformer.ts"),
+    "rehype-wrapper": resolve(__dirname, "src/rehype-wrapper.ts"),
   },
   format: ["esm"],
   clean: true,

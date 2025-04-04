@@ -1,9 +1,12 @@
-import path from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "tsup";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   entryPoints: {
-    index: path.resolve(__dirname, "src/index.ts"),
+    index: resolve(__dirname, "src/index.ts"),
   },
   format: ["esm", "cjs"],
   clean: true,

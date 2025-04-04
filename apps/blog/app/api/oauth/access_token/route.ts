@@ -1,4 +1,4 @@
-import { decrypt, encrypt } from "@/lib/ase-gcm";
+import { decrypt, encrypt } from "@/lib/aes-gcm";
 import { type NextRequest, NextResponse } from "next/server";
 
 const TOKEN_VALIDITY_PERIOD = 31536000000; // 1 year;
