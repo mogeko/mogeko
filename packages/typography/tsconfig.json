@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@mogeko/tsconfig/default.tsconfig.json",
   "compilerOptions": {
+    "target": "ESNext",
     "baseUrl": ".",
     "paths": { "@/*": ["./src/*"] }
   },
