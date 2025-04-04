@@ -1,14 +1,14 @@
 import { Buffer } from "node:buffer";
-import { getRandomValues, subtle } from "node:crypto";
+import { subtle, webcrypto } from "node:crypto";
 import { TextDecoder, TextEncoder } from "node:util";
 
 export async function encrypt(plaintext: string, password: string) {
   const pwUtf8 = new TextEncoder().encode(password);
   const pwHash = await subtle.digest("SHA-256", pwUtf8);
 
-  // Since `getRandomValues` fills the buffer with random bytes,
+  // Since `webcrypto.getRandomValues` fills the buffer with random bytes,
   // we use `Buffer.allocUnsafe` to allocate RAM directly.
-  const iv = getRandomValues(Buffer.allocUnsafe(12));
+  const iv = webcrypto.getRandomValues(Buffer.allocUnsafe(12));
   const alg = { name: "AES-GCM", iv };
   const key = await subtle.importKey("raw", pwHash, alg, false, ["encrypt"]);
 
