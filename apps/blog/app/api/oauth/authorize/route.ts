@@ -1,4 +1,4 @@
-import { encrypt } from "@/lib/ase-gcm";
+import { encrypt } from "@/lib/aes-gcm";
 import { type NextRequest, NextResponse } from "next/server";
 
 const DEFAULT_VALIDITY_PERIOD = 300000; // 5 minutes
