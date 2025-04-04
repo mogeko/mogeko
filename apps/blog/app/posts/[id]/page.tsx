@@ -1,7 +1,7 @@
 import { NotionRender } from "@/components/render";
 import { RichText, plainText } from "@/components/text";
 import { Avatar } from "@/components/ui/avatar";
-import { Breadcrumb, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Breadcrumb, BreadcrumbItem } from "@/components/ui/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { Link } from "@/components/ui/link";
 import { Loading } from "@/components/ui/loading";
@@ -73,15 +73,21 @@ const Page: NextPage<Props> = async ({ params }) => {
     <div className="flex flex-1 flex-col max-w-[80ch] px-[2ch] py-2">
       <section>
         <Breadcrumb className="mb-1">
-          <Link href="/">Home</Link>
-          <BreadcrumbSeparator />
-          <Link href="/">Posts</Link>
+          <BreadcrumbItem>
+            <Link href="/">Home</Link>
+          </BreadcrumbItem>
+          <BreadcrumbItem.Separator />
+          <BreadcrumbItem>
+            <Link href="/">Posts</Link>
+          </BreadcrumbItem>
           {Name.type === "title" && (
             <>
-              <BreadcrumbSeparator />
-              <Link href={`/posts/${page_id}`}>
-                <RichText richText={Name.title} />
-              </Link>
+              <BreadcrumbItem.Separator />
+              <BreadcrumbItem>
+                <Link href={`/posts/${page_id}`}>
+                  <RichText richText={Name.title} />
+                </Link>
+              </BreadcrumbItem>
             </>
           )}
         </Breadcrumb>

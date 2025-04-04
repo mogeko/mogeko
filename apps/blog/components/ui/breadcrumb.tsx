@@ -1,20 +1,31 @@
 import { cn } from "@/lib/utils";
+import type React from "react";
 
-type NavProps = React.ComponentProps<"nav">;
+type NavProps = React.HTMLAttributes<HTMLElement>;
 
-export const Breadcrumb: React.FC<NavProps> = ({ className, ...props }) => {
+export const Breadcrumb: React.FC<NavProps> = ({ children, ...props }) => {
   return (
-    <nav
-      aria-label="breadcrumb"
-      className={cn(
-        "flex flex-wrap items-center break-words gap-[1ch]",
-        className,
-      )}
+    <nav aria-label="breadcrumb" {...props}>
+      <ol className="flex flex-wrap items-centerflex break-words gap-[1ch]">
+        {children}
+      </ol>
+    </nav>
+  );
+};
+
+type LiProps = React.LiHTMLAttributes<HTMLLIElement>;
+
+export const BreadcrumbItem: React.FC<LiProps> & {
+  Separator: React.FC<LiProps>;
+} = ({ className, ...props }) => {
+  return (
+    <li
+      className={cn("inline-flex items-center gap-[1ch]", className)}
       {...props}
     />
   );
 };
 
-export const BreadcrumbSeparator: React.FC = () => {
-  return <span>{"\u276F"}</span>;
+BreadcrumbItem.Separator = ({ children, ...props }) => {
+  return <li {...props}>{children ?? <span>&#x276F;</span>}</li>;
 };
