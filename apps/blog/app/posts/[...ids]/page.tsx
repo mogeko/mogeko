@@ -85,7 +85,7 @@ const Page: NextPage<Props> = async ({ params }) => {
           // In order to optimize Cumulative Layout Shift (CLS)
           fallback={<Loading className="h-2" />}
         >
-          <Author page={parent} user_id={page.created_by.id /* Long ID */} />
+          <Author page={parent} />
         </Suspense>
       </section>
       <Separator className="mt-1 mb-3" />

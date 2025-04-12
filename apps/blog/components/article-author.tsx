@@ -3,12 +3,13 @@ import type { PageObjectResponse } from "@/lib/api-endpoints";
 import { notion } from "@/lib/notion";
 import { intlFormat } from "date-fns";
 
-type AuthorProps = { user_id: string; page: PageObjectResponse };
+type AuthorProps = { page: PageObjectResponse };
 
-export const Author: React.FC<AuthorProps> = async ({ user_id, page }) => {
+export const Author: React.FC<AuthorProps> = async ({ page }) => {
+  const user_id = page.created_by.id /* Long ID */;
   const { avatar_url, name } = await notion.users.retrieve({ user_id });
   const date = page.properties["Publish Date"];
-  const publidhDate = date.type === "date" && date.date?.start;
+  const publidhDate = date.type === "date" ? date.date?.start : null;
 
   return (
     <div className="flex justify-start items-center">
@@ -22,7 +23,7 @@ export const Author: React.FC<AuthorProps> = async ({ user_id, page }) => {
       )}
       <div>
         <p>{name ?? "Anonymous"}</p>
-        <p>{publidhDate && intlFormat(publidhDate)}</p>
+        <p>{intlFormat(publidhDate ?? page.created_time)}</p>
       </div>
     </div>
   );
