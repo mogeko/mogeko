@@ -11,50 +11,48 @@ import { formatShortId } from "@/lib/utils";
 import { intlFormat } from "date-fns";
 import type { Metadata, NextPage } from "next";
 import { notFound } from "next/navigation";
-import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: Promise<{ ids: Array<string> }>;
 };
 
 export async function generateMetadata({ params }: Props) {
-  const page_id = formatShortId((await params).id);
+  const [parent_id, page_id] = (await params).ids.map(formatShortId);
 
-  if (!page_id) return notFound();
+  if (!parent_id || !page_id) return notFound();
 
+  const parent = await notion.pages.retrieve({ page_id: parent_id });
   const page = await notion.pages.retrieve({ page_id });
 
-  if (!isFullPage(page)) return notFound();
+  if (!isFullPage(parent) || !isFullPage(page)) return {};
 
-  const { Name, Tags } = page.properties;
+  const { Name, Tags } = parent.properties;
 
-  if (Name?.type === "title" && Tags?.type === "multi_select") {
+  if (Name.type === "title" && Tags.type === "multi_select") {
+    const t = page.properties.title;
+
     return {
-      title: plainText(Name.title),
+      title: `${plainText(Name.title)}${t.type === "title" ? ` - ${plainText(t.title)}` : ""}`,
       keywords: Tags.multi_select.map((tag) => tag.name),
     } satisfies Metadata;
   }
 }
 
 const Page: NextPage<Props> = async ({ params }) => {
-  const page_id = formatShortId((await params).id);
+  const [parent_id, page_id] = (await params).ids.map(formatShortId);
 
-  if (!page_id) return notFound();
+  if (!parent_id || !page_id) return notFound();
 
+  const parent = await notion.pages.retrieve({ page_id: parent_id });
   const page = await notion.pages.retrieve({ page_id });
 
-  if (!isFullPage(page)) return notFound();
-
-  if (page.parent.type === "page_id") {
-    return redirect(`/posts/${formatShortId(page.parent.page_id)}/${page_id}`);
-  }
-
-  const { Name, "Publish Date": date } = page.properties;
-  const publidhDate = date.type === "date" && date.date?.start;
+  if (!isFullPage(parent) || !isFullPage(page)) return notFound();
 
   const Author: React.FC<{ id: string }> = async ({ id }) => {
     const { avatar_url, name } = await notion.users.retrieve({ user_id: id });
+    const date = parent.properties["Publish Date"];
+    const publidhDate = date.type === "date" && date.date?.start;
 
     return (
       <div className="flex justify-start items-center">
@@ -85,12 +83,22 @@ const Page: NextPage<Props> = async ({ params }) => {
           <BreadcrumbItem>
             <Link href="/">Posts</Link>
           </BreadcrumbItem>
-          {Name.type === "title" && (
+          {parent.properties.Name.type === "title" && (
             <>
               <BreadcrumbItem.Separator />
               <BreadcrumbItem>
-                <Link href={`/posts/${page_id}`}>
-                  <RichText richText={Name.title} />
+                <Link href={`/posts/${parent_id}`}>
+                  <RichText richText={parent.properties.Name.title} />
+                </Link>
+              </BreadcrumbItem>
+            </>
+          )}
+          {page.properties.title.type === "title" && (
+            <>
+              <BreadcrumbItem.Separator />
+              <BreadcrumbItem>
+                <Link href={`/posts/${parent_id}/${page_id}`}>
+                  <RichText richText={page.properties.title.title} />
                 </Link>
               </BreadcrumbItem>
             </>
@@ -105,9 +113,9 @@ const Page: NextPage<Props> = async ({ params }) => {
       </section>
       <Separator className="mt-1 mb-3" />
       <article>
-        {Name.type === "title" && (
+        {page.properties.title.type === "title" && (
           <Heading id={page_id} className="my-1" level={1}>
-            <RichText richText={Name.title} />
+            <RichText richText={page.properties.title.title} />
           </Heading>
         )}
         <Suspense fallback={<Loading />}>
