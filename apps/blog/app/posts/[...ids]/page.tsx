@@ -1,6 +1,6 @@
+import { Author } from "@/components/article-author";
 import { NotionRender } from "@/components/render";
 import { RichText, plainText } from "@/components/text";
-import { Avatar } from "@/components/ui/avatar";
 import { Breadcrumb, BreadcrumbItem } from "@/components/ui/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { Link } from "@/components/ui/link";
@@ -8,7 +8,6 @@ import { Loading } from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
 import { isFullPage, notion } from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
-import { intlFormat } from "date-fns";
 import type { Metadata, NextPage } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
@@ -25,15 +24,16 @@ export async function generateMetadata({ params }: Props) {
   const parent = await notion.pages.retrieve({ page_id: parent_id });
   const page = await notion.pages.retrieve({ page_id });
 
-  if (!isFullPage(parent) || !isFullPage(page)) return {};
+  if (!isFullPage(parent) || !isFullPage(page)) return notFound();
 
   const { Name, Tags } = parent.properties;
 
   if (Name.type === "title" && Tags.type === "multi_select") {
-    const t = page.properties.title;
+    const sub = page.properties.title;
+    const tail = sub.type === "title" ? ` - ${plainText(sub.title)}` : "";
 
     return {
-      title: `${plainText(Name.title)}${t.type === "title" ? ` - ${plainText(t.title)}` : ""}`,
+      title: `${plainText(Name.title)}${tail}`,
       keywords: Tags.multi_select.map((tag) => tag.name),
     } satisfies Metadata;
   }
@@ -48,29 +48,6 @@ const Page: NextPage<Props> = async ({ params }) => {
   const page = await notion.pages.retrieve({ page_id });
 
   if (!isFullPage(parent) || !isFullPage(page)) return notFound();
-
-  const Author: React.FC<{ id: string }> = async ({ id }) => {
-    const { avatar_url, name } = await notion.users.retrieve({ user_id: id });
-    const date = parent.properties["Publish Date"];
-    const publidhDate = date.type === "date" && date.date?.start;
-
-    return (
-      <div className="flex justify-start items-center">
-        {avatar_url && (
-          <Avatar
-            src={avatar_url}
-            className="w-[43px] mr-[calc(5ch-43px)]"
-            width={43}
-            alt={name ?? "Author"}
-          />
-        )}
-        <div>
-          <p>{name ?? "Anonymous"}</p>
-          <p>{publidhDate && intlFormat(publidhDate)}</p>
-        </div>
-      </div>
-    );
-  };
 
   return (
     <div className="flex flex-1 flex-col max-w-[80ch] px-[2ch] py-2">
@@ -108,7 +85,7 @@ const Page: NextPage<Props> = async ({ params }) => {
           // In order to optimize Cumulative Layout Shift (CLS)
           fallback={<Loading className="h-2" />}
         >
-          <Author id={page.created_by.id /* Long ID */} />
+          <Author page={parent} user_id={page.created_by.id /* Long ID */} />
         </Suspense>
       </section>
       <Separator className="mt-1 mb-3" />

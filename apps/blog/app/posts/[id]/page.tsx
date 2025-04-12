@@ -1,6 +1,6 @@
+import { Author } from "@/components/article-author";
 import { NotionRender } from "@/components/render";
 import { RichText, plainText } from "@/components/text";
-import { Avatar } from "@/components/ui/avatar";
 import { Breadcrumb, BreadcrumbItem } from "@/components/ui/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { Link } from "@/components/ui/link";
@@ -8,7 +8,6 @@ import { Loading } from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
 import { isFullPage, notion } from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
-import { intlFormat } from "date-fns";
 import type { Metadata, NextPage } from "next";
 import { notFound } from "next/navigation";
 import { redirect } from "next/navigation";
@@ -50,30 +49,6 @@ const Page: NextPage<Props> = async ({ params }) => {
     return redirect(`/posts/${formatShortId(page.parent.page_id)}/${page_id}`);
   }
 
-  const { Name, "Publish Date": date } = page.properties;
-  const publidhDate = date.type === "date" && date.date?.start;
-
-  const Author: React.FC<{ id: string }> = async ({ id }) => {
-    const { avatar_url, name } = await notion.users.retrieve({ user_id: id });
-
-    return (
-      <div className="flex justify-start items-center">
-        {avatar_url && (
-          <Avatar
-            src={avatar_url}
-            className="w-[43px] mr-[calc(5ch-43px)]"
-            width={43}
-            alt={name ?? "Author"}
-          />
-        )}
-        <div>
-          <p>{name ?? "Anonymous"}</p>
-          <p>{publidhDate && intlFormat(publidhDate)}</p>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="flex flex-1 flex-col max-w-[80ch] px-[2ch] py-2">
       <section>
@@ -85,12 +60,12 @@ const Page: NextPage<Props> = async ({ params }) => {
           <BreadcrumbItem>
             <Link href="/">Posts</Link>
           </BreadcrumbItem>
-          {Name.type === "title" && (
+          {page.properties.Name.type === "title" && (
             <>
               <BreadcrumbItem.Separator />
               <BreadcrumbItem>
                 <Link href={`/posts/${page_id}`}>
-                  <RichText richText={Name.title} />
+                  <RichText richText={page.properties.Name.title} />
                 </Link>
               </BreadcrumbItem>
             </>
@@ -100,14 +75,14 @@ const Page: NextPage<Props> = async ({ params }) => {
           // In order to optimize Cumulative Layout Shift (CLS)
           fallback={<Loading className="h-2" />}
         >
-          <Author id={page.created_by.id /* Long ID */} />
+          <Author page={page} user_id={page.created_by.id /* Long ID */} />
         </Suspense>
       </section>
       <Separator className="mt-1 mb-3" />
       <article>
-        {Name.type === "title" && (
+        {page.properties.Name.type === "title" && (
           <Heading id={page_id} className="my-1" level={1}>
-            <RichText richText={Name.title} />
+            <RichText richText={page.properties.Name.title} />
           </Heading>
         )}
         <Suspense fallback={<Loading />}>
