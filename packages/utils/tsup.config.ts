@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   entryPoints: {
-    "ase-gcm": resolve(__dirname, "./src/ase-gcm.ts"),
+    "aes-gcm": resolve(__dirname, "./src/aes-gcm.ts"),
     index: resolve(__dirname, "./index.ts"),
   },
   format: ["esm"],

@@ -1,6 +1,7 @@
 import type { BlockObjectResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/color-variants";
 import { isFullBlock, iteratePaginatedAPI, notion } from "@/lib/notion";
+import { formatShortId } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { twMerge } from "tailwind-merge";
@@ -9,6 +10,7 @@ import { Icon } from "@/components/icon";
 import { TableBox } from "@/components/table-box";
 import { RichText, plainText } from "@/components/text";
 import { Details, Summary } from "@/components/ui/accordion";
+import { ActionLink } from "@/components/ui/action-link";
 import { Card } from "@/components/ui/card";
 import { Heading } from "@/components/ui/heading";
 import { Image } from "@/components/ui/image";
@@ -252,11 +254,19 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
     }
 
     case "child_page": {
-      return (
-        <Suspense fallback={<Loading />}>
-          <NotionBlockChildren block={block} />
-        </Suspense>
-      );
+      const { child_page, parent } = block;
+
+      if (parent.type === "page_id") {
+        return (
+          <ActionLink
+            className="[&:not(&+&)]:mt-1"
+            href={`/posts/${formatShortId(parent.page_id)}/${formatShortId(block.id)}`}
+            icon="→"
+          >
+            {child_page.title}
+          </ActionLink>
+        );
+      }
     }
   }
 };
@@ -279,10 +289,16 @@ const NotionBlockChildren: React.FC<BlockProps> = async ({ block: _block }) => {
   }
 };
 
-export const NotionRender: React.FC<{ id: string }> = async ({ id }) => {
+export const NotionRender: React.FC<
+  {} & { id: string; hasChildren?: boolean }
+> = async ({ id, hasChildren }) => {
   const block = await notion.blocks.retrieve({ block_id: id });
 
   if (isFullBlock(block)) {
-    return <NotionBlock block={block} />;
+    return hasChildren ? (
+      <NotionBlockChildren block={block} />
+    ) : (
+      <NotionBlock block={block} />
+    );
   }
 };
