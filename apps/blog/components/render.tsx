@@ -254,15 +254,19 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
     }
 
     case "child_page": {
-      return (
-        <ActionLink
-          className="[&:not(&+&)]:mt-1"
-          href={`./${formatShortId(block.id)}`}
-          icon="→"
-        >
-          {block.child_page.title}
-        </ActionLink>
-      );
+      const { child_page, parent } = block;
+
+      if (parent.type === "page_id") {
+        return (
+          <ActionLink
+            className="[&:not(&+&)]:mt-1"
+            href={`/posts/${formatShortId(parent.page_id)}/${formatShortId(block.id)}`}
+            icon="→"
+          >
+            {child_page.title}
+          </ActionLink>
+        );
+      }
     }
   }
 };
