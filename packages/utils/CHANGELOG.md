@@ -1,5 +1,11 @@
 # @mogeko/utils
 
+## 0.6.3
+
+### Patch Changes
+
+- [#294](https://github.com/mogeko/mogeko/pull/294) [`c009220`](https://github.com/mogeko/mogeko/commit/c009220bdf165ae14c8e4026c7800b053b3cced5) Thanks [@mogeko](https://github.com/mogeko)! - Optimizing AES-GCM encryption and decryption by reducing unnecessary type conversions.
+
 ## 0.6.2
 
 ### Patch Changes
