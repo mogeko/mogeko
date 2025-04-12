@@ -1,5 +1,12 @@
 # remark-anchor-link
 
+## 0.1.12
+
+### Patch Changes
+
+- Updated dependencies [[`c009220`](https://github.com/mogeko/mogeko/commit/c009220bdf165ae14c8e4026c7800b053b3cced5)]:
+  - @mogeko/utils@0.6.3
+
 ## 0.1.11
 
 ### Patch Changes

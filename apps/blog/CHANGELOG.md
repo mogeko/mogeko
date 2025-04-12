@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.1.7
+
+### Patch Changes
+
+- [#294](https://github.com/mogeko/mogeko/pull/294) [`2ab4582`](https://github.com/mogeko/mogeko/commit/2ab458262233d9f38a82d6d3c19b893576973197) Thanks [@mogeko](https://github.com/mogeko)! - Implement secondary pages.
+
 ## 0.1.6
 
 ### Patch Changes
