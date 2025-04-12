@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props) {
   const parent = await notion.pages.retrieve({ page_id: parent_id });
   const page = await notion.pages.retrieve({ page_id });
 
-  if (!isFullPage(parent) || !isFullPage(page)) return {};
+  if (!isFullPage(parent) || !isFullPage(page)) return notFound();
 
   const { Name, Tags } = parent.properties;
 
