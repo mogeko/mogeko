@@ -96,7 +96,7 @@ const Page: NextPage<Props> = async ({ params }) => {
           </Heading>
         )}
         <Suspense fallback={<Loading />}>
-          <NotionRender id={page_id} hasChildren />
+          <NotionRender id={page_id} />
         </Suspense>
       </article>
     </div>
