@@ -267,20 +267,49 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return <Separator className="my-1" />;
     }
 
+    case "column_list": {
+      return (
+        <div className="flex flex-col justify-stretch items-stretch [&:not(:first-child)]:mt-1 sm:gap-[1ch] sm:flex-row">
+          {block.has_children && (
+            <Suspense fallback={<Loading />}>
+              <NotionRender id={block.id} />
+            </Suspense>
+          )}
+        </div>
+      );
+    }
+
+    case "column": {
+      return (
+        <div className="flex-initial flex-col justify-start items-start w-full">
+          {block.has_children && (
+            <Suspense fallback={<Loading />}>
+              <NotionRender id={block.id} />
+            </Suspense>
+          )}
+        </div>
+      );
+    }
+
     case "child_page": {
       const { child_page, parent } = block;
 
-      if (parent.type === "page_id") {
-        return (
-          <ActionLink
-            className="[&:not(&+&)]:mt-1"
-            href={`/posts/${formatShortId(parent.page_id)}/${formatShortId(block.id)}`}
-            icon="→"
-          >
-            {child_page.title}
-          </ActionLink>
-        );
-      }
+      let parent_id: string | undefined;
+
+      if (parent.type === "block_id") parent_id = parent.block_id;
+      if (parent.type === "page_id") parent_id = parent.page_id;
+
+      if (!parent_id) return;
+
+      return (
+        <ActionLink
+          className="[&:not(&+&):not(:first-child)]:mt-1"
+          href={`/posts/${formatShortId(parent_id)}/${formatShortId(block.id)}`}
+          icon="→"
+        >
+          {child_page.title}
+        </ActionLink>
+      );
     }
   }
 };
@@ -293,7 +322,7 @@ export const NotionRender: React.FC<{ id: string }> = async ({ id }) => {
   })) {
     if (isFullBlock(block)) {
       blockFeeds.push(
-        <NotionBlock key={`notion-chilren-${block.id}`} block={block} />,
+        <NotionBlock key={`notion-render-${block.id}`} block={block} />,
       );
     }
   }
