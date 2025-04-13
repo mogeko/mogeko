@@ -1,5 +1,13 @@
 # @mogeko/blog
 
+## 0.1.8
+
+### Patch Changes
+
+- [#298](https://github.com/mogeko/mogeko/pull/298) [`3d951af`](https://github.com/mogeko/mogeko/commit/3d951aff620e4ed416b15ca96fea1e6e4c0b3d57) Thanks [@mogeko](https://github.com/mogeko)! - Add support for column and column_list blocks in NotionRender.
+
+- [#298](https://github.com/mogeko/mogeko/pull/298) [`39cf02c`](https://github.com/mogeko/mogeko/commit/39cf02ca7f14b4ae1a3a17c64d892364abc7f63a) Thanks [@mogeko](https://github.com/mogeko)! - Reduce one unnecessary network fetch.
+
 ## 0.1.7
 
 ### Patch Changes
