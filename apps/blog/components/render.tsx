@@ -1,5 +1,5 @@
 import type { BlockObjectResponse } from "@/lib/api-endpoints";
-import { colorVariants } from "@/lib/color-variants";
+import { colorVariants } from "@/lib/colors";
 import { isFullBlock, iteratePaginatedAPI, notion } from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
 import dynamic from "next/dynamic";

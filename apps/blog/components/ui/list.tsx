@@ -1,4 +1,4 @@
-import { type ColorVariantProps, colorVariants } from "@/lib/color-variants";
+import { type ColorVariantProps, colorVariants } from "@/lib/colors";
 import { twMerge } from "tailwind-merge";
 
 export const ListItem: React.FC<
