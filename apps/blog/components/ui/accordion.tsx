@@ -1,4 +1,4 @@
-import { type ColorVariantProps, colorVariants } from "@/lib/color-variants";
+import { type ColorVariantProps, colorVariants } from "@/lib/colors";
 import { cn } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 import { twMerge } from "tailwind-merge";

@@ -1,5 +1,5 @@
 import { Link } from "@/components/ui/link";
-import { type ColorVariantProps, colorVariants } from "@/lib/color-variants";
+import { type ColorVariantProps, colorVariants } from "@/lib/colors";
 import { twMerge } from "tailwind-merge";
 
 export const Heading: React.FC<

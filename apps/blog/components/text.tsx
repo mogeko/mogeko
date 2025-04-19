@@ -2,7 +2,7 @@ import { Equation } from "@/components/equation";
 import { Mention } from "@/components/mention";
 import { Link } from "@/components/ui/link";
 import type { RichTextItemResponse } from "@/lib/api-endpoints";
-import { colorVariants } from "@/lib/color-variants";
+import { colorVariants } from "@/lib/colors";
 import { cn as cx } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 

@@ -1,7 +1,7 @@
 /**
  * This file is extracted from the GitHub repo `makenotion/notion-sdk-js`.
  *
- * Permalink: https://github.com/makenotion/notion-sdk-js/blob/eed58030649895b95ab9b97e2959f77bab19cd62/src/api-endpoints.ts
+ * Permalink: https://github.com/makenotion/notion-sdk-js/blob/716fa2132ce0a63d3ff0977825c9616fa5c27edb/src/api-endpoints.ts
  */
 
 // cspell:disable-file
@@ -784,7 +784,19 @@ export type TextRichTextItemResponse = {
 
 type LinkPreviewMentionResponse = { url: TextRequest };
 
-type LinkMentionResponse = { href: string };
+type LinkMentionResponse = {
+  href: string;
+  title?: string;
+  description?: string;
+  link_author?: string;
+  link_provider?: string;
+  thumbnail_url?: string;
+  icon_url?: string;
+  iframe_url?: string;
+  height?: number;
+  padding?: number;
+  padding_top?: number;
+};
 
 type TemplateMentionDateTemplateMentionResponse = {
   type: "template_mention_date";
@@ -6338,6 +6350,14 @@ type RichTextItemRequest =
       };
     };
 
+type InternalFileRequest = { url: string; expiry_time?: string };
+
+type ExternalFileRequest = { url: TextRequest };
+
+type InternalOrExternalFileWithNameRequest =
+  | { file: InternalFileRequest; name: StringRequest; type?: "file" }
+  | { external: ExternalFileRequest; name: StringRequest; type?: "external" };
+
 export type BlockObjectRequestWithoutChildren =
   | {
       embed: { url: string; caption?: Array<RichTextItemRequest> };
@@ -6351,7 +6371,7 @@ export type BlockObjectRequestWithoutChildren =
     }
   | {
       image: {
-        external: { url: TextRequest };
+        external: ExternalFileRequest;
         type?: "external";
         caption?: Array<RichTextItemRequest>;
       };
@@ -6360,7 +6380,7 @@ export type BlockObjectRequestWithoutChildren =
     }
   | {
       video: {
-        external: { url: TextRequest };
+        external: ExternalFileRequest;
         type?: "external";
         caption?: Array<RichTextItemRequest>;
       };
@@ -6369,7 +6389,7 @@ export type BlockObjectRequestWithoutChildren =
     }
   | {
       pdf: {
-        external: { url: TextRequest };
+        external: ExternalFileRequest;
         type?: "external";
         caption?: Array<RichTextItemRequest>;
       };
@@ -6378,7 +6398,7 @@ export type BlockObjectRequestWithoutChildren =
     }
   | {
       file: {
-        external: { url: TextRequest };
+        external: ExternalFileRequest;
         type?: "external";
         caption?: Array<RichTextItemRequest>;
         name?: StringRequest;
@@ -6388,7 +6408,7 @@ export type BlockObjectRequestWithoutChildren =
     }
   | {
       audio: {
-        external: { url: TextRequest };
+        external: ExternalFileRequest;
         type?: "external";
         caption?: Array<RichTextItemRequest>;
       };
@@ -6502,7 +6522,7 @@ export type BlockObjectRequestWithoutChildren =
         rich_text: Array<RichTextItemRequest>;
         icon?:
           | { emoji: EmojiRequest; type?: "emoji" }
-          | { external: { url: TextRequest }; type?: "external" }
+          | { external: ExternalFileRequest; type?: "external" }
           | {
               custom_emoji: { id: IdRequest; name?: string; url?: string };
               type?: "custom_emoji";
@@ -6533,7 +6553,7 @@ export type BlockObjectRequest =
     }
   | {
       image: {
-        external: { url: TextRequest };
+        external: ExternalFileRequest;
         type?: "external";
         caption?: Array<RichTextItemRequest>;
       };
@@ -6542,7 +6562,7 @@ export type BlockObjectRequest =
     }
   | {
       video: {
-        external: { url: TextRequest };
+        external: ExternalFileRequest;
         type?: "external";
         caption?: Array<RichTextItemRequest>;
       };
@@ -6551,7 +6571,7 @@ export type BlockObjectRequest =
     }
   | {
       pdf: {
-        external: { url: TextRequest };
+        external: ExternalFileRequest;
         type?: "external";
         caption?: Array<RichTextItemRequest>;
       };
@@ -6560,7 +6580,7 @@ export type BlockObjectRequest =
     }
   | {
       file: {
-        external: { url: TextRequest };
+        external: ExternalFileRequest;
         type?: "external";
         caption?: Array<RichTextItemRequest>;
         name?: StringRequest;
@@ -6570,7 +6590,7 @@ export type BlockObjectRequest =
     }
   | {
       audio: {
-        external: { url: TextRequest };
+        external: ExternalFileRequest;
         type?: "external";
         caption?: Array<RichTextItemRequest>;
       };
@@ -6641,7 +6661,7 @@ export type BlockObjectRequest =
                 }
               | {
                   image: {
-                    external: { url: TextRequest };
+                    external: ExternalFileRequest;
                     type?: "external";
                     caption?: Array<RichTextItemRequest>;
                   };
@@ -6650,7 +6670,7 @@ export type BlockObjectRequest =
                 }
               | {
                   video: {
-                    external: { url: TextRequest };
+                    external: ExternalFileRequest;
                     type?: "external";
                     caption?: Array<RichTextItemRequest>;
                   };
@@ -6659,7 +6679,7 @@ export type BlockObjectRequest =
                 }
               | {
                   pdf: {
-                    external: { url: TextRequest };
+                    external: ExternalFileRequest;
                     type?: "external";
                     caption?: Array<RichTextItemRequest>;
                   };
@@ -6668,7 +6688,7 @@ export type BlockObjectRequest =
                 }
               | {
                   file: {
-                    external: { url: TextRequest };
+                    external: ExternalFileRequest;
                     type?: "external";
                     caption?: Array<RichTextItemRequest>;
                     name?: StringRequest;
@@ -6678,7 +6698,7 @@ export type BlockObjectRequest =
                 }
               | {
                   audio: {
-                    external: { url: TextRequest };
+                    external: ExternalFileRequest;
                     type?: "external";
                     caption?: Array<RichTextItemRequest>;
                   };
@@ -6837,7 +6857,7 @@ export type BlockObjectRequest =
                     children?: Array<BlockObjectRequestWithoutChildren>;
                     icon?:
                       | { emoji: EmojiRequest; type?: "emoji" }
-                      | { external: { url: TextRequest }; type?: "external" }
+                      | { external: ExternalFileRequest; type?: "external" }
                       | {
                           custom_emoji: {
                             id: IdRequest;
@@ -6885,7 +6905,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -6894,7 +6914,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -6903,7 +6923,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -6912,7 +6932,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -6922,7 +6942,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7077,7 +7097,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -7121,7 +7141,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7130,7 +7150,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7139,7 +7159,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7148,7 +7168,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -7158,7 +7178,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7313,7 +7333,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -7357,7 +7377,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7366,7 +7386,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7375,7 +7395,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7384,7 +7404,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -7394,7 +7414,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7549,7 +7569,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -7593,7 +7613,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7602,7 +7622,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7611,7 +7631,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7620,7 +7640,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -7630,7 +7650,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7785,7 +7805,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -7828,7 +7848,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7837,7 +7857,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7846,7 +7866,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -7855,7 +7875,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -7865,7 +7885,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8020,7 +8040,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -8063,7 +8083,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8072,7 +8092,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8081,7 +8101,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8090,7 +8110,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -8100,7 +8120,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8255,7 +8275,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -8298,7 +8318,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8307,7 +8327,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8316,7 +8336,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8325,7 +8345,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -8335,7 +8355,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8490,7 +8510,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -8533,7 +8553,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8542,7 +8562,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8551,7 +8571,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8560,7 +8580,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -8570,7 +8590,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8725,7 +8745,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -8768,7 +8788,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8777,7 +8797,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8786,7 +8806,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8795,7 +8815,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -8805,7 +8825,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -8960,7 +8980,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -9004,7 +9024,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9013,7 +9033,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9022,7 +9042,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9031,7 +9051,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -9041,7 +9061,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9196,7 +9216,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -9238,7 +9258,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9247,7 +9267,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9256,7 +9276,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9265,7 +9285,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -9275,7 +9295,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9430,7 +9450,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -9473,7 +9493,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9482,7 +9502,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9491,7 +9511,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9500,7 +9520,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -9510,7 +9530,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9665,7 +9685,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -9689,7 +9709,7 @@ export type BlockObjectRequest =
         >;
         icon?:
           | { emoji: EmojiRequest; type?: "emoji" }
-          | { external: { url: TextRequest }; type?: "external" }
+          | { external: ExternalFileRequest; type?: "external" }
           | {
               custom_emoji: { id: IdRequest; name?: string; url?: string };
               type?: "custom_emoji";
@@ -9714,7 +9734,7 @@ export type BlockObjectRequest =
             }
           | {
               image: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9723,7 +9743,7 @@ export type BlockObjectRequest =
             }
           | {
               video: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9732,7 +9752,7 @@ export type BlockObjectRequest =
             }
           | {
               pdf: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9741,7 +9761,7 @@ export type BlockObjectRequest =
             }
           | {
               file: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
                 name?: StringRequest;
@@ -9751,7 +9771,7 @@ export type BlockObjectRequest =
             }
           | {
               audio: {
-                external: { url: TextRequest };
+                external: ExternalFileRequest;
                 type?: "external";
                 caption?: Array<RichTextItemRequest>;
               };
@@ -9906,7 +9926,7 @@ export type BlockObjectRequest =
                 children?: Array<BlockObjectRequestWithoutChildren>;
                 icon?:
                   | { emoji: EmojiRequest; type?: "emoji" }
-                  | { external: { url: TextRequest }; type?: "external" }
+                  | { external: ExternalFileRequest; type?: "external" }
                   | {
                       custom_emoji: {
                         id: IdRequest;
@@ -10219,18 +10239,7 @@ type CreatePageBodyParameters = {
         | { checkbox: boolean; type?: "checkbox" }
         | { relation: Array<{ id: IdRequest }>; type?: "relation" }
         | {
-            files: Array<
-              | {
-                  file: { url: string; expiry_time?: string };
-                  name: StringRequest;
-                  type?: "file";
-                }
-              | {
-                  external: { url: TextRequest };
-                  name: StringRequest;
-                  type?: "external";
-                }
-            >;
+            files: Array<InternalOrExternalFileWithNameRequest>;
             type?: "files";
           }
         | {
@@ -10334,18 +10343,7 @@ type CreatePageBodyParameters = {
         | null
         | boolean
         | Array<{ id: IdRequest }>
-        | Array<
-            | {
-                file: { url: string; expiry_time?: string };
-                name: StringRequest;
-                type?: "file";
-              }
-            | {
-                external: { url: TextRequest };
-                name: StringRequest;
-                type?: "external";
-              }
-          >
+        | Array<InternalOrExternalFileWithNameRequest>
         | {
             id: StringRequest;
             name?: StringRequest;
@@ -10364,14 +10362,14 @@ type CreatePageBodyParameters = {
   icon?:
     | { emoji: EmojiRequest; type?: "emoji" }
     | null
-    | { external: { url: TextRequest }; type?: "external" }
+    | { external: ExternalFileRequest; type?: "external" }
     | null
     | {
         custom_emoji: { id: IdRequest; name?: string; url?: string };
         type?: "custom_emoji";
       }
     | null;
-  cover?: { external: { url: TextRequest }; type?: "external" } | null;
+  cover?: { external: ExternalFileRequest; type?: "external" } | null;
   content?: Array<BlockObjectRequest>;
   children?: Array<BlockObjectRequest>;
 };
@@ -10502,18 +10500,7 @@ type UpdatePageBodyParameters = {
         | { checkbox: boolean; type?: "checkbox" }
         | { relation: Array<{ id: IdRequest }>; type?: "relation" }
         | {
-            files: Array<
-              | {
-                  file: { url: string; expiry_time?: string };
-                  name: StringRequest;
-                  type?: "file";
-                }
-              | {
-                  external: { url: TextRequest };
-                  name: StringRequest;
-                  type?: "external";
-                }
-            >;
+            files: Array<InternalOrExternalFileWithNameRequest>;
             type?: "files";
           }
         | {
@@ -10617,18 +10604,7 @@ type UpdatePageBodyParameters = {
         | null
         | boolean
         | Array<{ id: IdRequest }>
-        | Array<
-            | {
-                file: { url: string; expiry_time?: string };
-                name: StringRequest;
-                type?: "file";
-              }
-            | {
-                external: { url: TextRequest };
-                name: StringRequest;
-                type?: "external";
-              }
-          >
+        | Array<InternalOrExternalFileWithNameRequest>
         | {
             id: StringRequest;
             name?: StringRequest;
@@ -10647,14 +10623,14 @@ type UpdatePageBodyParameters = {
   icon?:
     | { emoji: EmojiRequest; type?: "emoji" }
     | null
-    | { external: { url: TextRequest }; type?: "external" }
+    | { external: ExternalFileRequest; type?: "external" }
     | null
     | {
         custom_emoji: { id: IdRequest; name?: string; url?: string };
         type?: "custom_emoji";
       }
     | null;
-  cover?: { external: { url: TextRequest }; type?: "external" } | null;
+  cover?: { external: ExternalFileRequest; type?: "external" } | null;
   archived?: boolean;
   in_trash?: boolean;
 };
@@ -10734,7 +10710,7 @@ type UpdateBlockBodyParameters =
   | {
       image: {
         caption?: Array<RichTextItemRequest>;
-        external?: { url: TextRequest };
+        external?: ExternalFileRequest;
       };
       type?: "image";
       archived?: boolean;
@@ -10743,7 +10719,7 @@ type UpdateBlockBodyParameters =
   | {
       video: {
         caption?: Array<RichTextItemRequest>;
-        external?: { url: TextRequest };
+        external?: ExternalFileRequest;
       };
       type?: "video";
       archived?: boolean;
@@ -10752,7 +10728,7 @@ type UpdateBlockBodyParameters =
   | {
       pdf: {
         caption?: Array<RichTextItemRequest>;
-        external?: { url: TextRequest };
+        external?: ExternalFileRequest;
       };
       type?: "pdf";
       archived?: boolean;
@@ -10761,7 +10737,7 @@ type UpdateBlockBodyParameters =
   | {
       file: {
         caption?: Array<RichTextItemRequest>;
-        external?: { url: TextRequest };
+        external?: ExternalFileRequest;
         name?: StringRequest;
       };
       type?: "file";
@@ -10771,7 +10747,7 @@ type UpdateBlockBodyParameters =
   | {
       audio: {
         caption?: Array<RichTextItemRequest>;
-        external?: { url: TextRequest };
+        external?: ExternalFileRequest;
       };
       type?: "audio";
       archived?: boolean;
@@ -10913,7 +10889,7 @@ type UpdateBlockBodyParameters =
         rich_text?: Array<RichTextItemRequest>;
         icon?:
           | { emoji: EmojiRequest; type?: "emoji" }
-          | { external: { url: TextRequest }; type?: "external" }
+          | { external: ExternalFileRequest; type?: "external" }
           | {
               custom_emoji: { id: IdRequest; name?: string; url?: string };
               type?: "custom_emoji";
@@ -11092,14 +11068,14 @@ type UpdateDatabaseBodyParameters = {
   icon?:
     | { emoji: EmojiRequest; type?: "emoji" }
     | null
-    | { external: { url: TextRequest }; type?: "external" }
+    | { external: ExternalFileRequest; type?: "external" }
     | null
     | {
         custom_emoji: { id: IdRequest; name?: string; url?: string };
         type?: "custom_emoji";
       }
     | null;
-  cover?: { external: { url: TextRequest }; type?: "external" } | null;
+  cover?: { external: ExternalFileRequest; type?: "external" } | null;
   properties?: Record<
     string,
     | {
@@ -11605,14 +11581,14 @@ type CreateDatabaseBodyParameters = {
   icon?:
     | { emoji: EmojiRequest; type?: "emoji" }
     | null
-    | { external: { url: TextRequest }; type?: "external" }
+    | { external: ExternalFileRequest; type?: "external" }
     | null
     | {
         custom_emoji: { id: IdRequest; name?: string; url?: string };
         type?: "custom_emoji";
       }
     | null;
-  cover?: { external: { url: TextRequest }; type?: "external" } | null;
+  cover?: { external: ExternalFileRequest; type?: "external" } | null;
   title?: Array<RichTextItemRequest>;
   description?: Array<RichTextItemRequest>;
   is_inline?: boolean;
@@ -11678,6 +11654,10 @@ export const search = {
 type CreateCommentBodyParameters =
   | {
       parent: { page_id: IdRequest; type?: "page_id" };
+      rich_text: Array<RichTextItemRequest>;
+    }
+  | {
+      parent: { block_id: IdRequest; type?: "block_id" };
       rich_text: Array<RichTextItemRequest>;
     }
   | { discussion_id: IdRequest; rich_text: Array<RichTextItemRequest> };
@@ -11761,4 +11741,36 @@ export const oauthToken = {
   queryParams: [],
   bodyParams: ["grant_type", "code", "redirect_uri", "external_account"],
   path: (): string => "oauth/token",
+} as const;
+
+type OauthRevokeBodyParameters = { token: string };
+
+export type OauthRevokeParameters = OauthRevokeBodyParameters;
+
+export type OauthRevokeResponse = Record<string, never>;
+
+export const oauthRevoke = {
+  method: "post",
+  pathParams: [],
+  queryParams: [],
+  bodyParams: ["token"],
+  path: (): string => "oauth/revoke",
+} as const;
+
+type OauthIntrospectBodyParameters = { token: string };
+
+export type OauthIntrospectParameters = OauthIntrospectBodyParameters;
+
+export type OauthIntrospectResponse = {
+  active: boolean;
+  scope?: string;
+  iat?: number;
+};
+
+export const oauthIntrospect = {
+  method: "post",
+  pathParams: [],
+  queryParams: [],
+  bodyParams: ["token"],
+  path: (): string => "oauth/introspect",
 } as const;
