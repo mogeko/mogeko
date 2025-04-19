@@ -11,18 +11,23 @@ import "server-only";
 
 export const Image: React.FC<
   Omit<React.ComponentProps<typeof NextImage>, "src"> & { src: string }
-> = async ({ src, ...props }) => {
+> = async ({ alt, src, ...props }) => {
+  const fileName = parse(src).name;
   const { public_id, width, height } = await cloudinary.uploader.upload(src, {
-    public_id: `${await sha1(new URL(src).pathname)}-${parse(src).name}`,
-    tags: ["notion"],
     folder: "notion-images",
+    public_id: `${await sha1(new URL(src).pathname)}-${fileName}`,
+    tags: ["notion"],
     overwrite: false,
   });
 
-  const h = props.width ? (height / width) * Number(props.width) : height;
-
   return (
-    <NextImage height={h} loader={imageLoader} src={public_id} {...props} />
+    <NextImage
+      height={props.width ? (height / width) * Number(props.width) : height}
+      loader={imageLoader}
+      src={public_id}
+      alt={alt.length ? alt : fileName}
+      {...props}
+    />
   );
 };
 
