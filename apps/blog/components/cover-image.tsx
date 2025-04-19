@@ -1,4 +1,4 @@
-import { Image } from "@/components/ui/image";
+import { Image } from "@/components/image";
 import type { FilesPropertyItemObjectResponse } from "@/lib/api-endpoints";
 
 export const CoverImage: React.FC<{
