@@ -1,5 +1,15 @@
 # @mogeko/blog
 
+## 0.2.0
+
+### Minor Changes
+
+- [#303](https://github.com/mogeko/mogeko/pull/303) [`d46c048`](https://github.com/mogeko/mogeko/commit/d46c04867760e2d166bbec02150e1f80720dd8d4) Thanks [@mogeko](https://github.com/mogeko)! - Refactor image handling with Cloudinary integration.
+
+### Patch Changes
+
+- [#303](https://github.com/mogeko/mogeko/pull/303) [`9fa8b5a`](https://github.com/mogeko/mogeko/commit/9fa8b5a5a8b40154ea1d5cd6bdc6265f384096c5) Thanks [@mogeko](https://github.com/mogeko)! - Set up global Cache for the Notion API.
+
 ## 0.1.8
 
 ### Patch Changes
