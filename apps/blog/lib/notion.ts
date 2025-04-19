@@ -4,7 +4,14 @@ import "server-only";
 
 export const notion = new Client({
   auth: process.env.NOTION_AUTH_TOKEN,
-  fetch: fetch, // Using Next.js `fetch` to obtain optimization
+  fetch: (input, init) => {
+    return fetch(input, {
+      next: {
+        revalidate: 10 * 60, // 10 minute
+      },
+      ...init,
+    });
+  },
 });
 
 export * from "@notionhq/client";
