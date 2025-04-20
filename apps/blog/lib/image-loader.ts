@@ -1,11 +1,12 @@
 "use client";
 
-import type { ImageLoaderProps } from "next/image";
+import type { ImageLoader } from "next/image";
 
+// Need to set `images.remotePatterns` in `next.config.js` to allow loading images from Cloudinary
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/mogeko/image/upload";
 
-export function imageLoader({ src, width, quality }: ImageLoaderProps) {
+export const cloudinaryLoader: ImageLoader = ({ src, width, quality }) => {
   const params = ["f_auto", "c_limit", `w_${width}`, `q_${quality || "auto"}`];
 
   return `${CLOUDINARY_BASE_URL}/${params.join(",")}/${src}`;
-}
+};

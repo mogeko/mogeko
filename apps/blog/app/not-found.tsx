@@ -9,11 +9,13 @@ const Prompt: React.FC<
   React.HTMLAttributes<HTMLDivElement> & { cursor?: boolean }
 > = ({ children, cursor, ...props }) => {
   return (
-    <div className="flex items-center gap-[1ch]" {...props}>
-      <span>{"[user@vercel ~]$"}</span>
-      {children}
+    <div className="inline-flex items-center" {...props}>
+      <span>
+        {"[user@vercel ~]$ "}
+        {children}
+      </span>
       {cursor && (
-        <span className="inline-block bg-accent w-[1ch] h-1 animate-blink" />
+        <span className="inline-block bg-accent ml-[1ch] w-[1ch] h-1 animate-blink" />
       )}
     </div>
   );
@@ -22,9 +24,7 @@ const Prompt: React.FC<
 const NotFound: NextPage = () => {
   return (
     <div className="flex flex-1 flex-col max-w-[80ch] px-[2ch] py-2">
-      <Prompt>
-        <span>cat error.log</span>
-      </Prompt>
+      <Prompt>cat error.log</Prompt>
       <div className="flex flex-col mb-1">
         <pre className="whitespace-pre-wrap">
           {[

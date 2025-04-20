@@ -34,7 +34,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <html lang="zh-CN">
       <head>
-        {/* biome-ignore format: <explanation> */}
+        {/* biome-ignore format: false */}
         <link rel="preconnect" href="https://static.zeoseven.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"

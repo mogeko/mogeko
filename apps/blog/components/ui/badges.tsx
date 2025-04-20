@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 
-export const Badges: React.FC<
-  {} & {} & React.HTMLAttributes<HTMLSpanElement>
-> = ({ className, ...props }) => {
+type BadgesProps = React.HTMLAttributes<HTMLSpanElement>;
+
+export const Badges: React.FC<BadgesProps> = ({ className, ...props }) => {
   return (
     <span
       className={cn(
