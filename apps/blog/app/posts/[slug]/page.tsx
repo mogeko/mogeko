@@ -9,16 +9,15 @@ import { Separator } from "@/components/ui/separator";
 import { isFullPage, notion } from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
 import type { Metadata, NextPage } from "next";
-import { notFound } from "next/navigation";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props) {
-  const page_id = formatShortId((await params).id);
+  const page_id = formatShortId((await params).slug);
 
   if (!page_id) return notFound();
 
@@ -28,7 +27,7 @@ export async function generateMetadata({ params }: Props) {
 
   const { Name, Tags } = page.properties;
 
-  if (Name?.type === "title" && Tags?.type === "multi_select") {
+  if (Name.type === "title" && Tags.type === "multi_select") {
     return {
       title: plainText(Name.title),
       keywords: Tags.multi_select.map((tag) => tag.name),
@@ -37,17 +36,13 @@ export async function generateMetadata({ params }: Props) {
 }
 
 const Page: NextPage<Props> = async ({ params }) => {
-  const page_id = formatShortId((await params).id);
+  const page_id = formatShortId((await params).slug);
 
   if (!page_id) return notFound();
 
   const page = await notion.pages.retrieve({ page_id });
 
   if (!isFullPage(page)) return notFound();
-
-  if (page.parent.type === "page_id") {
-    return redirect(`/posts/${formatShortId(page.parent.page_id)}/${page_id}`);
-  }
 
   return (
     <div className="flex flex-1 flex-col max-w-[80ch] px-[2ch] py-2">

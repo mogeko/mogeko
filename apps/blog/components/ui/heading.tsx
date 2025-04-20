@@ -15,7 +15,10 @@ export const Heading: React.FC<
       className={twMerge(
         colorVariants({
           color,
-          className: ["scroll-m-3.5 font-extrabold flex gap-[1ch]", className],
+          className: [
+            "scroll-m-3.5 font-extrabold flex gap-[1ch] text-base/1",
+            className,
+          ],
         }),
       )}
       {...props}
