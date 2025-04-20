@@ -4,10 +4,12 @@ export const Table: React.FC<
   {} & React.TableHTMLAttributes<HTMLTableElement>
 > = ({ className, ...props }) => {
   return (
-    <table
-      className={cn("relative w-full border-spacing-0", className)}
-      {...props}
-    />
+    <div className="relative w-full overflow-auto">
+      <table
+        className={cn("w-full caption-bottom border-spacing-0", className)}
+        {...props}
+      />
+    </div>
   );
 };
 

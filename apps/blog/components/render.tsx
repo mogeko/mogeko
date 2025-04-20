@@ -194,11 +194,9 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
 
     case "table": {
       return (
-        <div className="my-1">
-          <Suspense fallback={<Loading />}>
-            <TableBox block={block} />
-          </Suspense>
-        </div>
+        <Suspense fallback={<Loading />}>
+          <TableBox className="my-1" block={block} />
+        </Suspense>
       );
     }
 
