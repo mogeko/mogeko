@@ -1,5 +1,13 @@
 # @mogeko/blog
 
+## 0.2.1
+
+### Patch Changes
+
+- [#306](https://github.com/mogeko/mogeko/pull/306) [`e4b8fb5`](https://github.com/mogeko/mogeko/commit/e4b8fb51c77ab21e3c6fe0ad5bae359a9b17e708) Thanks [@mogeko](https://github.com/mogeko)! - Remove nested pages to keep it simple.
+
+  Since Cloudinary handles the image processing load, designing nested pages as a performance compromise is no longer necessary.
+
 ## 0.2.0
 
 ### Minor Changes
