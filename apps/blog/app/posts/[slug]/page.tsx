@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { isFullPage, notion } from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
 import type { Metadata, NextPage } from "next";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 type Props = {

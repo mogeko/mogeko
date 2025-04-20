@@ -2,6 +2,7 @@
 
 import type { ImageLoaderProps } from "next/image";
 
+// Need to set `images.remotePatterns` in `next.config.js` to allow loading images from Cloudinary
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/mogeko/image/upload";
 
 export function imageLoader({ src, width, quality }: ImageLoaderProps) {

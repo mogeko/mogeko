@@ -34,7 +34,7 @@ export const Code: React.FC<{
   return (
     <div
       className={cn("font-mono", className)}
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: HTML is sanitized
       dangerouslySetInnerHTML={{
         __html: html,
       }}
