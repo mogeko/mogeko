@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.2.2
+
+### Patch Changes
+
+- [#311](https://github.com/mogeko/mogeko/pull/311) [`4137277`](https://github.com/mogeko/mogeko/commit/4137277e16fd4818ec80bb2cf9bcfee84e8f72b5) Thanks [@mogeko](https://github.com/mogeko)! - Filter out article pages with a Status of "Draft".
+
 ## 0.2.1
 
 ### Patch Changes
