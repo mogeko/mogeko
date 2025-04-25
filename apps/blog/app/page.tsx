@@ -16,6 +16,10 @@ const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
   const { results } = await notion.databases.query({
     database_id: id,
     sorts: [{ property: "Publish Date", direction: "descending" }],
+    filter:
+      process.env.NODE_ENV === "production"
+        ? { property: "wG%5CE", status: { equals: "Published" } }
+        : void 0,
   });
 
   return groupBy(results.filter(isFullPage), (page) => {
