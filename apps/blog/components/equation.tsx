@@ -2,9 +2,9 @@ import { renderToString } from "katex";
 
 import "katex/dist/katex.min.css";
 
-type Props = { expression: string; inline?: boolean; className?: string };
-
-export const Equation: React.FC<Props> = ({ expression, inline, ...props }) => {
+export const Equation: React.FC<
+  { expression: string; inline?: boolean } & React.HTMLAttributes<HTMLElement>
+> = ({ expression, inline, ...props }) => {
   const Comp = inline ? "span" : "p";
 
   return (

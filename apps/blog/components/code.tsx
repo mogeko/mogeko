@@ -12,31 +12,29 @@ import {
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 
-export const Code: React.FC<{
-  code: CodeBlockObjectResponse;
-  className?: string;
-}> = async ({ code: codeBlock, className }) => {
+export const Code: React.FC<
+  { code: CodeBlockObjectResponse } & React.HTMLAttributes<HTMLDivElement>
+> = async ({ code: codeBlock, className }) => {
   const { language, rich_text, caption } = codeBlock.code;
-  const html = await codeToHtml(plainText(rich_text), {
-    lang: langAlias(language, plainText(caption)),
-    theme: "andromeeda",
-    transformers: [
-      transformerColorizedBrackets(),
-      transformerNotationDiff(),
-      transformerNotationErrorLevel(),
-      transformerNotationWordHighlight(),
-      transformerNotationFocus(),
-      transformerNotationHighlight(),
-    ],
-    tabindex: -1,
-  });
 
   return (
     <div
       className={cn("font-mono", className)}
       // biome-ignore lint/security/noDangerouslySetInnerHtml: HTML is sanitized
       dangerouslySetInnerHTML={{
-        __html: html,
+        __html: await codeToHtml(plainText(rich_text), {
+          lang: langAlias(language, plainText(caption)),
+          theme: "andromeeda",
+          transformers: [
+            transformerColorizedBrackets(),
+            transformerNotationDiff(),
+            transformerNotationErrorLevel(),
+            transformerNotationWordHighlight(),
+            transformerNotationFocus(),
+            transformerNotationHighlight(),
+          ],
+          tabindex: -1,
+        }),
       }}
     />
   );
