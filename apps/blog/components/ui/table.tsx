@@ -4,7 +4,7 @@ export const Table: React.FC<
   {} & React.TableHTMLAttributes<HTMLTableElement>
 > = ({ className, ...props }) => {
   return (
-    <div className="relative w-full overflow-auto">
+    <div className="relative w-full overflow-x-auto">
       <table
         className={cn("w-full caption-bottom border-spacing-0", className)}
         {...props}
