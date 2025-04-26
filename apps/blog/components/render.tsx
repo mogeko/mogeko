@@ -139,7 +139,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
 
       return (
         <Equation
-          className="flex justify-center items-center mt-1"
+          className="flex justify-center items-center mt-1 overflow-x-auto"
           expression={expression}
         />
       );

@@ -70,7 +70,7 @@
 
 @layer utilities {
   .shiki {
-    @apply relative pl-[3ch] py-1 whitespace-pre-wrap overflow-auto;
+    @apply relative pl-[3ch] py-1 whitespace-pre-wrap overflow-x-auto;
 
     & code .line {
       @apply inline-block -mx-[3ch] pl-[3ch] pr-[1ch] w-[calc(100%+3ch)];
