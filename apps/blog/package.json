@@ -13,7 +13,7 @@
   "dependencies": {
     "@notionhq/client": "^2.3.0",
     "@radix-ui/react-slot": "^1.2.0",
-    "@shikijs/colorized-brackets": "^3.2.2",
+    "@shikijs/colorized-brackets": "^3.3.0",
     "@shikijs/transformers": "^3.2.2",
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.6.0",
