@@ -16,6 +16,10 @@ export function handleError(e: React.SyntheticEvent<HTMLImageElement, Event>) {
 
   // Since the Cloudinary CDN is not always available in China, we use ImageKit
   // as a fallback. The image is stored in Cloudinary and proxied through ImageKit.
-  target.src = `https://ik.imagekit.io/mogeko/${target.src}`;
+  // See: https://imagekit.io/docs/integration/web-proxy
+  if (target.src.startsWith(CLOUDINARY_BASE_URL)) {
+    target.src = `https://ik.imagekit.io/mogeko/${target.src}`;
+  }
+
   target.onerror = null; // prevents looping
 }
