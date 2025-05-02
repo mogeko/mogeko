@@ -1,5 +1,15 @@
 # @mogeko/blog
 
+## 0.2.3
+
+### Patch Changes
+
+- [#317](https://github.com/mogeko/mogeko/pull/317) [`1d51014`](https://github.com/mogeko/mogeko/commit/1d51014c9124c5a69d19d98501c72802c32ba63d) Thanks [@mogeko](https://github.com/mogeko)! - Add error handling for image loading.
+
+  Since the Cloudinary CDN is not always available in China, we use ImageKitas a fallback. The image is stored in Cloudinary and proxied through ImageKit.
+
+  See: https://imagekit.io/docs/integration/web-proxy
+
 ## 0.2.2
 
 ### Patch Changes
