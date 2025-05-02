@@ -3,7 +3,7 @@ import { subtle } from "node:crypto";
 import { parse } from "node:path";
 import { URL } from "node:url";
 import { TextEncoder } from "node:util";
-import { cloudinaryLoader } from "@/lib/image-loader";
+import { cloudinaryLoader, handleError } from "@/lib/image-loader";
 import { v2 as cloudinary } from "cloudinary";
 import { unstable_cache as cache } from "next/cache";
 import NextImage from "next/image";
@@ -27,6 +27,7 @@ export const Image: React.FC<
       loader={cloudinaryLoader}
       src={public_id}
       alt={alt.length ? alt : fileName}
+      onError={handleError}
       {...props}
     />
   );
