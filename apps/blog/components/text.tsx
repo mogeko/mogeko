@@ -47,7 +47,7 @@ export const RichText: React.FC<{
         );
       }
 
-      if (new URLPattern({ protocol: "http{s}?" }).test(link.url)) {
+      if (new URLPattern().test(link.url)) {
         return (
           <Link key={key} className={cn} href={link.url}>
             {content}
