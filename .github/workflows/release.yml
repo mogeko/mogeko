@@ -31,7 +31,7 @@ jobs:
       - run: pnpm build -F "./packages/*"
       - name: Create Version PR or Publish to NPM
         id: changesets
-        uses: changesets/action@v1.5.0
+        uses: changesets/action@v1.5.2
         with:
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
