@@ -5,6 +5,7 @@ import type { RichTextItemResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/colors";
 import { cn as cx } from "@/lib/utils";
 import { cva } from "class-variance-authority";
+import { URLPattern } from "urlpattern-polyfill";
 
 const textVariants = cva([], {
   variants: {
@@ -46,7 +47,7 @@ export const RichText: React.FC<{
         );
       }
 
-      if (link.url.startsWith("https://")) {
+      if (new URLPattern({ protocol: "http{s}?" }).test(link.url)) {
         return (
           <Link key={key} className={cn} href={link.url}>
             {content}
