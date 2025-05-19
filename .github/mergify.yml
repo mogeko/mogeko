@@ -14,8 +14,6 @@ pull_request_rules:
       - "author=dependabot[bot]"
       - "label=dependencies"
       - "check-success=Vercel Preview Comments"
-      - "check-success=Analyze (actions)"
-      - "check-success=Analyze (javascript-typescript)"
       - "check-success=Build the Packages"
       - "check-success=Test Monorepo Packages"
     actions:
