@@ -13,7 +13,7 @@
   "dependencies": {
     "@notionhq/client": "^3.0.1",
     "@radix-ui/react-slot": "^1.2.2",
-    "@shikijs/colorized-brackets": "^3.5.0",
+    "@shikijs/colorized-brackets": "^3.6.0",
     "@shikijs/transformers": "^3.4.2",
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.6.1",
@@ -23,7 +23,7 @@
     "next": "^15.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "satori": "^0.13.1",
+    "satori": "^0.15.2",
     "server-only": "^0.0.1",
     "shiki": "^3.4.2",
     "tailwind-merge": "^3.3.0",
