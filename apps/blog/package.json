@@ -23,7 +23,7 @@
     "next": "^15.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "satori": "^0.13.1",
+    "satori": "^0.15.2",
     "server-only": "^0.0.1",
     "shiki": "^3.4.2",
     "tailwind-merge": "^3.3.0",
