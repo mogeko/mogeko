@@ -18,7 +18,7 @@ jobs:
     env:
       TURBO_FORCE: true
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v5.0.0
       - name: Set up pnpm
         uses: pnpm/action-setup@v4.1.0
       - name: Set up Node.js
