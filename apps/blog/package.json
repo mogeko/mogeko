@@ -11,7 +11,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@notionhq/client": "^4.0.1",
+    "@notionhq/client": "^4.0.2",
     "@radix-ui/react-slot": "^1.2.2",
     "@shikijs/colorized-brackets": "^3.8.1",
     "@shikijs/transformers": "^3.4.2",
