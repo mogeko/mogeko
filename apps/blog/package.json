@@ -11,7 +11,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@notionhq/client": "^4.0.2",
+    "@notionhq/client": "^5.0.0",
     "@radix-ui/react-slot": "^1.2.2",
     "@shikijs/colorized-brackets": "^3.11.0",
     "@shikijs/transformers": "^3.4.2",
@@ -23,7 +23,7 @@
     "next": "^15.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "satori": "^0.16.1",
+    "satori": "^0.18.2",
     "server-only": "^0.0.1",
     "shiki": "^3.4.2",
     "tailwind-merge": "^3.3.0",
