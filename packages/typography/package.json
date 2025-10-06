@@ -35,7 +35,7 @@
   "devDependencies": {
     "@mogeko/tsconfig": "workspace:^",
     "@types/node": "^22.15.21",
-    "@types/ramda": "^0.30.2",
+    "@types/ramda": "^0.31.1",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"
   }
