@@ -13,8 +13,8 @@ import { formatShortId, groupBy } from "@/lib/utils";
 import pkg from "@/package.json";
 
 const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
-  const { results } = await notion.databases.query({
-    database_id: id,
+  const { results } = await notion.dataSources.query({
+    data_source_id: id,
     sorts: [{ property: "%3DTrF", direction: "descending" }],
     filter:
       process.env.NODE_ENV === "production"
@@ -62,24 +62,24 @@ const Home: NextPage = async () => {
 
   if (!isFullDatabase(database)) return notFound();
 
-  const { title, description } = database;
-
   return (
     <div className="flex flex-1 flex-col gap-1 max-w-[80ch] px-[2ch] py-2">
       <section>
         <hgroup className="flex gap-[1ch]">
           <h1>
-            <RichText richText={title} />
+            <RichText richText={database.title} />
           </h1>
           <Badges>{pkg.version}</Badges>
         </hgroup>
         <p>
-          <RichText richText={description} />
+          <RichText richText={database.description} />
         </p>
       </section>
-      <Suspense fallback={<Loading />}>
-        <PageFeeds id={database_id} />
-      </Suspense>
+      {database.data_sources.map(({ id }) => (
+        <Suspense key={id} fallback={<Loading />}>
+          <PageFeeds id={id} />
+        </Suspense>
+      ))}
     </div>
   );
 };
