@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
 import NextLink from "next/link";
+import { cn } from "@/lib/utils";
 
 export const ActionLink: React.FC<
   React.ComponentProps<typeof NextLink> & { icon?: React.ReactNode }

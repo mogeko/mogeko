@@ -1,5 +1,5 @@
-import { Link } from "@/components/ui/link";
 import type { Metadata, NextPage } from "next";
+import { Link } from "@/components/ui/link";
 
 export const metadata: Metadata = {
   title: "404 Not Found",

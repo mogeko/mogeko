@@ -1,5 +1,5 @@
-import { tryCatch } from "@/try-catch";
 import { afterAll, describe, expect, it, vi } from "vitest";
+import { tryCatch } from "@/try-catch";
 
 describe("tryCatch", () => {
   afterAll(() => {

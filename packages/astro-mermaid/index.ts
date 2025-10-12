@@ -1,7 +1,7 @@
-import { rehypeWrapper } from "@/rehype-wrapper";
-import { addMermaidClass } from "@/shiki-transformer";
 import type { AstroIntegration } from "astro";
 import rehypeMermaid, { type RehypeMermaidOptions } from "rehype-mermaid";
+import { rehypeWrapper } from "@/rehype-wrapper";
+import { addMermaidClass } from "@/shiki-transformer";
 
 export default function mermaid(
   options: RehypeMermaidOptions = { strategy: "img-svg" },

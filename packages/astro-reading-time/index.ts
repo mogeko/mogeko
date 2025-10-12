@@ -1,5 +1,5 @@
-import { remarkReadingTime } from "@/lib/remark-reading-time";
 import type { AstroIntegration } from "astro";
+import { remarkReadingTime } from "@/lib/remark-reading-time";
 
 export default function astroReadingTime(): AstroIntegration {
   return {

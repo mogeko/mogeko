@@ -1,6 +1,6 @@
-import { addMermaidClass } from "@/shiki-transformer";
 import { codeToHtml } from "shiki";
 import { describe, expect, it } from "vitest";
+import { addMermaidClass } from "@/shiki-transformer";
 
 const mermaidCode = `
 flowchart TD

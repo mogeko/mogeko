@@ -1,7 +1,7 @@
+import { intlFormat } from "date-fns";
 import { Avatar } from "@/components/ui/avatar";
 import type { PageObjectResponse } from "@/lib/api-endpoints";
 import { notion } from "@/lib/notion";
-import { intlFormat } from "date-fns";
 
 type AuthorProps = { page: PageObjectResponse };
 

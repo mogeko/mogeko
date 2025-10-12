@@ -1,6 +1,9 @@
+import type { Metadata, NextPage } from "next";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { Author } from "@/components/article-author";
 import { NotionRender } from "@/components/render";
-import { RichText, plainText } from "@/components/text";
+import { plainText, RichText } from "@/components/text";
 import { Breadcrumb, BreadcrumbItem } from "@/components/ui/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { Link } from "@/components/ui/link";
@@ -8,9 +11,6 @@ import { Loading } from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
 import { isFullPage, notion } from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
-import type { Metadata, NextPage } from "next";
-import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
 type Props = {
   params: Promise<{ slug: string }>;

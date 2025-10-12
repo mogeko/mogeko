@@ -1,6 +1,6 @@
-import { remarkReadingTime } from "@/lib/remark-reading-time";
 import { createMarkdownProcessor } from "@astrojs/markdown-remark";
 import { describe, expect, it } from "vitest";
+import { remarkReadingTime } from "@/lib/remark-reading-time";
 
 const md = "# Hello, world!\n\nThis is a test markdown content.";
 

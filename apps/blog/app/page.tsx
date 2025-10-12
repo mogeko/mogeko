@@ -1,3 +1,7 @@
+import { getYear } from "date-fns";
+import type { NextPage } from "next";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { RichText } from "@/components/text";
 import { Details, Summary } from "@/components/ui/accordion";
 import { ActionLink } from "@/components/ui/action-link";
@@ -7,10 +11,6 @@ import { Loading } from "@/components/ui/loading";
 import { isFullDatabase, isFullPage, notion } from "@/lib/notion";
 import { formatShortId, groupBy } from "@/lib/utils";
 import pkg from "@/package.json";
-import { getYear } from "date-fns";
-import type { NextPage } from "next";
-import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
 const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
   const { results } = await notion.databases.query({

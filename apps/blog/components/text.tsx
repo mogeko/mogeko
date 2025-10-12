@@ -1,11 +1,11 @@
+import { cva } from "class-variance-authority";
+import { URLPattern } from "urlpattern-polyfill";
 import { Equation } from "@/components/equation";
 import { Mention } from "@/components/mention";
 import { Link } from "@/components/ui/link";
 import type { RichTextItemResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/colors";
 import { cn as cx } from "@/lib/utils";
-import { cva } from "class-variance-authority";
-import { URLPattern } from "urlpattern-polyfill";
 
 const textVariants = cva([], {
   variants: {
@@ -90,5 +90,7 @@ export const RichText: React.FC<{
         </Mention>
       );
     }
+
+    return null;
   });
 };

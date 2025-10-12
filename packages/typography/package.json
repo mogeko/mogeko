@@ -9,7 +9,10 @@
     "import": "./dist/index.js"
   },
   "private": false,
-  "keywords": ["typography", "tailwind"],
+  "keywords": [
+    "typography",
+    "tailwind"
+  ],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
   "repository": {
@@ -22,7 +25,10 @@
     "url": "https://github.com/mogeko/mogeko/issues",
     "email": "zhengjunyi@live.com"
   },
-  "files": ["dist", "CHANGELOG.md"],
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "build": "tsup"
   },
@@ -34,7 +40,7 @@
   },
   "devDependencies": {
     "@mogeko/tsconfig": "workspace:^",
-    "@types/node": "^22.15.21",
+    "@types/node": "^24.7.1",
     "@types/ramda": "^0.30.2",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3"
