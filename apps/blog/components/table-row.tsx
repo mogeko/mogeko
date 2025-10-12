@@ -1,7 +1,6 @@
 import { RichText } from "@/components/text";
 import { TableCell, TableHead, TableRow } from "@/components/ui/table";
-import type { GetBlockResponse } from "@/lib/api-endpoints";
-import { isFullBlock } from "@/lib/notion";
+import { type GetBlockResponse, isFullBlock } from "@/lib/notion";
 
 type TRowProps = { hy?: boolean; hx?: boolean; block: GetBlockResponse };
 

@@ -1,5 +1,5 @@
 import { Image } from "@/components/image";
-import type { FilesPropertyItemObjectResponse } from "@/lib/api-endpoints";
+import type { FilesPropertyItemObjectResponse } from "@/lib/notion";
 
 export const CoverImage: React.FC<{
   property: Pick<FilesPropertyItemObjectResponse, "files">;
