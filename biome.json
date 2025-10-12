@@ -5,19 +5,25 @@
     "clientKind": "git",
     "useIgnoreFile": true
   },
-  "files": { "ignoreUnknown": true, "ignore": [] },
+  "files": { "ignoreUnknown": true },
   "formatter": { "enabled": true, "useEditorconfig": true },
-  "organizeImports": { "enabled": true },
   "linter": {
+    "domains": {
+      "next": "recommended"
+    },
     "enabled": true,
     "rules": {
       "recommended": true,
       "suspicious": {
         "noAssignInExpressions": "off",
         "noExplicitAny": "off",
-        "noArrayIndexKey": "off"
+        "noArrayIndexKey": "off",
+        "noUnknownAtRules": "off"
       },
-      "style": { "noCommaOperator": "off" }
+      "complexity": {
+        "noUselessStringRaw": "off",
+        "noCommaOperator": "off"
+      }
     }
   },
   "javascript": { "formatter": { "quoteStyle": "double" } }

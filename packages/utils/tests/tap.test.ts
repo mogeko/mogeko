@@ -1,5 +1,5 @@
-import { tap } from "@/tap";
 import { afterAll, describe, expect, it, vi } from "vitest";
+import { tap } from "@/tap";
 
 describe("tap", () => {
   afterAll(() => {

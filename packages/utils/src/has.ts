@@ -18,7 +18,7 @@ export function has<K extends PropertyKey>(
   key: K,
   obj: unknown,
 ): obj is ObjectHavingSome<K> {
-  return !isNil(obj) && Object.prototype.hasOwnProperty.call(obj, key);
+  return !isNil(obj) && Object.hasOwn(obj, key);
 }
 
 type ObjectHavingSome<Key extends PropertyKey> = {

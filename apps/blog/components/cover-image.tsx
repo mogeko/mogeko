@@ -14,5 +14,7 @@ export const CoverImage: React.FC<{
         </div>
       );
     }
+
+    return null;
   });
 };

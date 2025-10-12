@@ -1,5 +1,5 @@
-import { isFullPage, iteratePaginatedAPI, notion } from "@/lib/notion";
 import type { MetadataRoute } from "next";
+import { isFullPage, iteratePaginatedAPI, notion } from "@/lib/notion";
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const databaseId = process.env.NOTION_DATABASE_ID;

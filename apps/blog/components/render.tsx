@@ -1,15 +1,10 @@
-import type { BlockObjectResponse } from "@/lib/api-endpoints";
-import { colorVariants } from "@/lib/colors";
-import { isFullBlock, iteratePaginatedAPI, notion } from "@/lib/notion";
-import { formatShortId } from "@/lib/utils";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { twMerge } from "tailwind-merge";
-
 import { Icon } from "@/components/icon";
 import { Image } from "@/components/image";
 import { TableBox } from "@/components/table-box";
-import { RichText, plainText } from "@/components/text";
+import { plainText, RichText } from "@/components/text";
 import { Details, Summary } from "@/components/ui/accordion";
 import { ActionLink } from "@/components/ui/action-link";
 import { Card } from "@/components/ui/card";
@@ -17,6 +12,10 @@ import { Heading } from "@/components/ui/heading";
 import { ListItem } from "@/components/ui/list";
 import { Loading } from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
+import type { BlockObjectResponse } from "@/lib/api-endpoints";
+import { colorVariants } from "@/lib/colors";
+import { isFullBlock, iteratePaginatedAPI, notion } from "@/lib/notion";
+import { formatShortId } from "@/lib/utils";
 
 type BlockProps = { block: BlockObjectResponse };
 

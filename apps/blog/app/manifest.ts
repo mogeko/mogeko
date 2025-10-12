@@ -1,7 +1,7 @@
+import type { MetadataRoute } from "next";
 import { plainText } from "@/components/text";
 import { isFullDatabase, notion } from "@/lib/notion";
 import pkg from "@/package.json";
-import type { MetadataRoute } from "next";
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
   const database_id = process.env.NOTION_DATABASE_ID;

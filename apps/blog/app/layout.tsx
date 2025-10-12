@@ -1,10 +1,10 @@
+import { getYear } from "date-fns";
+import type { Metadata } from "next";
 import { GlobalHotkey } from "@/components/global-hotkey";
 import { plainText } from "@/components/text";
 import { isFullDatabase, notion } from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
 import pkg from "@/package.json";
-import { getYear } from "date-fns";
-import type { Metadata } from "next";
 
 import "@/styles/globals.css";
 

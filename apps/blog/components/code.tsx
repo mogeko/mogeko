@@ -1,8 +1,3 @@
-import { plainText } from "@/components/text";
-import type { CodeBlockObjectResponse } from "@/lib/api-endpoints";
-import { cn } from "@/lib/utils";
-import { type BundledLanguage, type SpecialLanguage, codeToHtml } from "shiki";
-
 import { transformerColorizedBrackets } from "@shikijs/colorized-brackets";
 import {
   transformerNotationDiff,
@@ -11,6 +6,10 @@ import {
   transformerNotationHighlight,
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
+import { type BundledLanguage, codeToHtml, type SpecialLanguage } from "shiki";
+import { plainText } from "@/components/text";
+import type { CodeBlockObjectResponse } from "@/lib/api-endpoints";
+import { cn } from "@/lib/utils";
 
 export const Code: React.FC<
   { code: CodeBlockObjectResponse } & React.HTMLAttributes<HTMLDivElement>
