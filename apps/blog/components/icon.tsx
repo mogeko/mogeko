@@ -1,4 +1,4 @@
-import type { CalloutBlockObjectResponse } from "@/lib/api-endpoints";
+import type { CalloutBlockObjectResponse } from "@/lib/notion";
 
 type IconBlock = CalloutBlockObjectResponse["callout"]["icon"];
 

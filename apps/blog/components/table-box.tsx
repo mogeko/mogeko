@@ -1,7 +1,6 @@
 import { TRow } from "@/components/table-row";
 import { Table, TableBody, TableHeader } from "@/components/ui/table";
-import type { TableBlockObjectResponse } from "@/lib/api-endpoints";
-import { notion } from "@/lib/notion";
+import { notion, type TableBlockObjectResponse } from "@/lib/notion";
 
 export const TableBox: React.FC<
   React.ComponentProps<typeof Table> & { block: TableBlockObjectResponse }

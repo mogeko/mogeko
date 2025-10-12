@@ -8,7 +8,7 @@ import {
 } from "@shikijs/transformers";
 import { type BundledLanguage, codeToHtml, type SpecialLanguage } from "shiki";
 import { plainText } from "@/components/text";
-import type { CodeBlockObjectResponse } from "@/lib/api-endpoints";
+import type { CodeBlockObjectResponse } from "@/lib/notion";
 import { cn } from "@/lib/utils";
 
 export const Code: React.FC<
@@ -48,6 +48,7 @@ function langAlias(lang: NotionLang, polyfill?: string): ShikiLang {
   }
 
   if (lang === "plain text") return "plaintext";
+  if (lang === "abc") return "plaintext";
   if (lang === "agda") return "plaintext";
   if (lang === "java/c/c++/c#") return "java";
   if (lang === "arduino") return "c++";

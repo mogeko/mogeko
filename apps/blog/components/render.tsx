@@ -12,9 +12,13 @@ import { Heading } from "@/components/ui/heading";
 import { ListItem } from "@/components/ui/list";
 import { Loading } from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
-import type { BlockObjectResponse } from "@/lib/api-endpoints";
 import { colorVariants } from "@/lib/colors";
-import { isFullBlock, iteratePaginatedAPI, notion } from "@/lib/notion";
+import {
+  type BlockObjectResponse,
+  isFullBlock,
+  iteratePaginatedAPI,
+  notion,
+} from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
 
 type BlockProps = { block: BlockObjectResponse };

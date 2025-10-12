@@ -1,5 +1,5 @@
 import { Link } from "@/components/ui/link";
-import type { MentionRichTextItemResponse } from "@/lib/api-endpoints";
+import type { MentionRichTextItemResponse } from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
 
 export const Mention: React.FC<
