@@ -7,8 +7,8 @@ import { plainText, RichText } from "@/components/text";
 import { Breadcrumb, BreadcrumbItem } from "@/components/ui/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { Link } from "@/components/ui/link";
-import { Loading } from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
+import { Spinner } from "@/components/ui/spinner";
 import { isFullPage, notion } from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
 
@@ -68,7 +68,7 @@ const Page: NextPage<Props> = async ({ params }) => {
         </Breadcrumb>
         <Suspense
           // In order to optimize Cumulative Layout Shift (CLS)
-          fallback={<Loading className="h-2" />}
+          fallback={<Spinner className="h-2" />}
         >
           <Author page={page} />
         </Suspense>
@@ -80,7 +80,7 @@ const Page: NextPage<Props> = async ({ params }) => {
             <RichText richText={page.properties.Name.title} />
           </Heading>
         )}
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<Spinner />}>
           <NotionRender id={page_id} />
         </Suspense>
       </article>
