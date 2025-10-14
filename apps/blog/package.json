@@ -19,8 +19,8 @@
     "cloudinary": "^2.6.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-    "katex": "^0.16.23",
-    "next": "^15.5.4",
+    "katex": "^0.16.25",
+    "next": "^15.5.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "satori": "^0.18.2",
@@ -32,9 +32,9 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.7",
     "@tsconfig/next": "^2.0.3",
-    "@types/node": "^24.7.1",
+    "@types/node": "^24.7.2",
     "@types/react": "^19.1.4",
-    "@types/react-dom": "^19.1.5",
+    "@types/react-dom": "^19.2.2",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3"
