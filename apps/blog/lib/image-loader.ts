@@ -2,24 +2,12 @@
 
 import type { ImageLoader } from "next/image";
 
-// Need to set `images.remotePatterns` in `next.config.js` to allow loading images from Cloudinary
-const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/mogeko/image/upload";
+// Need to set `images.remotePatterns` in `next.config.js` to allow loading images from ImageKit
+const IK_BASE_URL = "https://ik.imagekit.io/mogeko";
 
-export const cloudinaryLoader: ImageLoader = ({ src, width, quality }) => {
-  const params = ["f_auto", "c_limit", `w_${width}`, `q_${quality || "auto"}`];
+// Docs: https://imagekit.io/docs/image-transformation
+export const imageKitLoader: ImageLoader = ({ src, width, quality }) => {
+  const params = [`w-${width}`, `q-${quality || 80}`];
 
-  return `${CLOUDINARY_BASE_URL}/${params.join(",")}/${src}`;
+  return `${IK_BASE_URL}/${src}?tr=${params.join(",")}`;
 };
-
-export function handleError(e: React.SyntheticEvent<HTMLImageElement, Event>) {
-  const target = e.target as HTMLImageElement;
-
-  // Since the Cloudinary CDN is not always available in China, we use ImageKit
-  // as a fallback. The image is stored in Cloudinary and proxied through ImageKit.
-  // See: https://imagekit.io/docs/integration/web-proxy
-  if (target.src.startsWith(CLOUDINARY_BASE_URL)) {
-    target.src = `https://ik.imagekit.io/mogeko/${target.src}`;
-  }
-
-  target.onerror = null; // prevents looping
-}

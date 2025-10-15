@@ -10,8 +10,8 @@ import { ActionLink } from "@/components/ui/action-link";
 import { Card } from "@/components/ui/card";
 import { Heading } from "@/components/ui/heading";
 import { ListItem } from "@/components/ui/list";
-import { Loading } from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
+import { Spinner } from "@/components/ui/spinner";
 import { colorVariants } from "@/lib/colors";
 import {
   type BlockObjectResponse,
@@ -43,7 +43,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
             </Heading>
           </Summary>
           {block.has_children && (
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<Spinner />}>
               <NotionRender id={block.id} />
             </Suspense>
           )}
@@ -66,7 +66,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
             </Heading>
           </Summary>
           {block.has_children && (
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<Spinner />}>
               <NotionRender id={block.id} />
             </Suspense>
           )}
@@ -89,7 +89,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
             </Heading>
           </Summary>
           {block.has_children && (
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<Spinner />}>
               <NotionRender id={block.id} />
             </Suspense>
           )}
@@ -160,7 +160,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
                 <RichText richText={block.callout.rich_text} />
               </p>
               {block.has_children && (
-                <Suspense fallback={<Loading />}>
+                <Suspense fallback={<Spinner />}>
                   <NotionRender id={block.id} />
                 </Suspense>
               )}
@@ -187,7 +187,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
             <RichText richText={rich_text} />
           </p>
           {block.has_children && (
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<Spinner />}>
               <NotionRender id={block.id} />
             </Suspense>
           )}
@@ -197,7 +197,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
 
     case "table": {
       return (
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<Spinner />}>
           <TableBox className="my-1" block={block} />
         </Suspense>
       );
@@ -217,7 +217,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
               <RichText richText={rich_text} />
             </p>
             {block.has_children && (
-              <Suspense fallback={<Loading />}>
+              <Suspense fallback={<Spinner />}>
                 <NotionRender id={block.id} />
               </Suspense>
             )}
@@ -240,7 +240,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
               <RichText richText={rich_text} />
             </p>
             {block.has_children && (
-              <Suspense fallback={<Loading />}>
+              <Suspense fallback={<Spinner />}>
                 <NotionRender id={block.id} />
               </Suspense>
             )}
@@ -256,7 +256,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
             <RichText richText={block.toggle.rich_text} />
           </Summary>
           {block.has_children && (
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<Spinner />}>
               <NotionRender id={block.id} />
             </Suspense>
           )}
@@ -272,7 +272,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return (
         <div className="flex flex-col justify-stretch items-stretch [&:not(:first-child)]:mt-1 sm:gap-[1ch] sm:flex-row">
           {block.has_children && (
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<Spinner />}>
               <NotionRender id={block.id} />
             </Suspense>
           )}
@@ -284,7 +284,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return (
         <div className="flex-initial flex-col justify-start items-start w-full">
           {block.has_children && (
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<Spinner />}>
               <NotionRender id={block.id} />
             </Suspense>
           )}

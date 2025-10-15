@@ -1,0 +1,44 @@
+/* To ensure that the class names of Tailwind CSS have higher priority */
+@layer components {
+  .spinner {
+    --spinner-frame: "⣾";
+
+    display: inline-block;
+    width: 1ch;
+    height: var(--spacing);
+    vertical-align: baseline;
+    color: inherit;
+
+    &::after {
+      animation: spinner 0.8s steps(1, end) infinite;
+      content: var(--spinner-frame);
+    }
+  }
+
+  @keyframes spinner {
+    0% {
+      --spinner-frame: "⣾";
+    }
+    12.5% {
+      --spinner-frame: "⣽";
+    }
+    25% {
+      --spinner-frame: "⣻";
+    }
+    37.5% {
+      --spinner-frame: "⢿";
+    }
+    50% {
+      --spinner-frame: "⡿";
+    }
+    62.5% {
+      --spinner-frame: "⣟";
+    }
+    75% {
+      --spinner-frame: "⣯";
+    }
+    87.5% {
+      --spinner-frame: "⣷";
+    }
+  }
+}

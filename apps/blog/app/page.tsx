@@ -7,7 +7,7 @@ import { Details, Summary } from "@/components/ui/accordion";
 import { ActionLink } from "@/components/ui/action-link";
 import { Badges } from "@/components/ui/badges";
 import { Heading } from "@/components/ui/heading";
-import { Loading } from "@/components/ui/loading";
+import { Spinner } from "@/components/ui/spinner";
 import { isFullDatabase, isFullPage, notion } from "@/lib/notion";
 import { formatShortId, groupBy } from "@/lib/utils";
 import pkg from "@/package.json";
@@ -76,7 +76,7 @@ const Home: NextPage = async () => {
         </p>
       </section>
       {database.data_sources.map(({ id }) => (
-        <Suspense key={id} fallback={<Loading />}>
+        <Suspense key={id} fallback={<Spinner />}>
           <PageFeeds id={id} />
         </Suspense>
       ))}
