@@ -13,10 +13,12 @@ export async function upload(opts: UploadOptions): Promise<UploadResponse> {
 
   for (const [key, value] of Object.entries(opts)) {
     if (value !== undefined) {
-      if (Array.isArray(value)) {
+      if (typeof value === "boolean") {
+        formData.append(key, value ? "true" : "false");
+      } else if (Array.isArray(value)) {
         formData.append(key, value.join(","));
       } else {
-        formData.append(key, String(value));
+        formData.append(key, value);
       }
     }
   }
@@ -43,7 +45,7 @@ function base64(plaintext: string): string {
 }
 
 export type UploadOptions = {
-  file: string;
+  file: string | Blob | File;
   fileName: string;
   useUniqueFileName?: boolean;
   tags?: string[];
