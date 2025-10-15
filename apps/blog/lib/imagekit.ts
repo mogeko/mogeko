@@ -43,7 +43,7 @@ const base64 = cache(async (plaintext: string): Promise<string> => {
   return Buffer.from(plaintext).toString("base64");
 });
 
-type UploadOptions = {
+export type UploadOptions = {
   file: string;
   fileName: string;
   useUniqueFileName?: boolean;
@@ -59,7 +59,7 @@ type UploadOptions = {
   checks?: string;
 };
 
-type UploadResponse = ImageResponse | VideoResponse;
+export type UploadResponse = ImageResponse | VideoResponse;
 
 type ImageResponse = {
   fileId: string;
