@@ -1,5 +1,15 @@
 # @mogeko/blog
 
+## 0.2.4
+
+### Patch Changes
+
+- [#380](https://github.com/mogeko/mogeko/pull/380) [`aa60b85`](https://github.com/mogeko/mogeko/commit/aa60b850332c74d25d798e581c4197545b9e8dc0) Thanks [@mogeko](https://github.com/mogeko)! - Adapt to the new Data Sources API for Notion API
+
+- [#380](https://github.com/mogeko/mogeko/pull/380) [`7877c26`](https://github.com/mogeko/mogeko/commit/7877c26f28bf5776bf8116ca1f88060920bed7b0) Thanks [@mogeko](https://github.com/mogeko)! - Setup React Compiler.
+
+- [#380](https://github.com/mogeko/mogeko/pull/380) [`9edfa74`](https://github.com/mogeko/mogeko/commit/9edfa743a04d520ec4f17b3d43d22b1e38dd0bfa) Thanks [@mogeko](https://github.com/mogeko)! - Integrate Redis for image caching.
+
 ## 0.2.3
 
 ### Patch Changes
