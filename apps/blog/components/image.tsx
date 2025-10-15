@@ -12,7 +12,8 @@ export const Image: React.FC<
 > = async ({ alt, src, ...props }) => {
   const hash = await sha1(new URL(src).pathname);
 
-  let cached = await redis.hgetall<ImageCache>(`image:${hash}`);
+  // Cache the `redis.hgetall` call to save quota and reduce latency.
+  let cached = await cache(redis.hgetall)<ImageCache>(`image:${hash}`);
 
   if (!cached) {
     const { width, height, name, filePath } = await upload({
