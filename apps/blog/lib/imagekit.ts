@@ -1,5 +1,4 @@
 import { Buffer } from "node:buffer";
-import { unstable_cache as cache } from "next/cache";
 
 import "server-only";
 
@@ -26,7 +25,7 @@ export async function upload(opts: UploadOptions): Promise<UploadResponse> {
     method: "POST",
     headers: {
       Accept: "application/json",
-      Authorization: `Basic ${await base64(`${priveKey}:`)}`,
+      Authorization: `Basic ${base64(`${priveKey}:`)}`,
       ContentType: "multipart/form-data",
     },
     body: formData,
@@ -39,9 +38,9 @@ export async function upload(opts: UploadOptions): Promise<UploadResponse> {
   return (await res.json()) as UploadResponse;
 }
 
-const base64 = cache(async (plaintext: string): Promise<string> => {
+function base64(plaintext: string): string {
   return Buffer.from(plaintext).toString("base64");
-});
+}
 
 export type UploadOptions = {
   file: string;
