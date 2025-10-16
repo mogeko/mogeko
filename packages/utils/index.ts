@@ -7,6 +7,8 @@ export { is } from "@/is";
 export { isEmpty } from "@/is-empty";
 export { isNil } from "@/is-nil";
 export { memoize } from "@/memoize";
+export { omit } from "@/omit";
+export { pick } from "@/pick";
 export { range } from "@/range";
 export { tap } from "@/tap";
 export { tryCatch } from "@/try-catch";
