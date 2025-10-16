@@ -34,7 +34,9 @@ export async function upload(opts: UploadOptions): Promise<UploadResponse> {
   });
 
   if (!res.ok) {
-    throw new Error(`Failed to upload image: ${res.statusText}`);
+    const { message } = (await res.json()) as ErrorResponse;
+
+    throw new Error(message || res.statusText);
   }
 
   return (await res.json()) as UploadResponse;
@@ -90,4 +92,9 @@ type VideoResponse = {
   duration: number;
   audioCodec: string;
   videoCodec: string;
+};
+
+type ErrorResponse = {
+  message: string;
+  help: string;
 };
