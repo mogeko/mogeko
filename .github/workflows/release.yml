@@ -41,3 +41,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_ENV: "production"
+      - name: Enable auto-merge for Changesets PRs
+        if: steps.changesets.outputs.hasChangesets
+        run: gh pr --repo "$REPO" merge --auto --merge "$PR_NUM"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUM: ${{ steps.changesets.outputs.pullRequestNumber }}
+          REPO: ${{ github.repository }}
