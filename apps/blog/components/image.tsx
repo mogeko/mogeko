@@ -1,6 +1,5 @@
-import { Buffer } from "node:buffer";
-import { subtle } from "node:crypto";
-import { parse } from "node:path";
+import { parse } from "node:path/posix";
+import { URL } from "node:url";
 import { unstable_cache as cache } from "next/cache";
 import NextImage from "next/image";
 import { imageKitLoader } from "@/lib/image-loader";
@@ -10,16 +9,18 @@ import { redis } from "@/lib/redis";
 export const Image: React.FC<
   Omit<React.ComponentProps<typeof NextImage>, "src"> & { src: string }
 > = async ({ alt, src, ...props }) => {
-  const hash = await sha1(new URL(src).pathname);
+  const { pathname } = new URL(src);
+  const { name: imageName, dir } = parse(pathname);
+  const hkey = `notion-images:${pathname}`;
 
   // Cache the `redis.hgetall` call to save quota and reduce latency.
-  let cached = await cache(redis.hgetall)<ImageCache>(`image:${hash}`);
+  let cached = await cache(redis.hgetall)<ImageCache>(hkey);
 
   if (!cached) {
     const { width, height, name, filePath } = await upload({
       file: src,
-      fileName: `${hash}-${parse(src).name}`,
-      folder: "notion-images",
+      fileName: imageName,
+      folder: `notion-images/${dir}`,
       tags: ["notion"],
       useUniqueFileName: false,
       overwriteFile: true,
@@ -27,7 +28,7 @@ export const Image: React.FC<
 
     cached = { width, height, name, filePath };
 
-    await redis.hset(`image:${hash}`, cached);
+    await redis.hset(hkey, cached);
   }
 
   const { filePath, name, width, height } = cached;
@@ -42,14 +43,6 @@ export const Image: React.FC<
     />
   );
 };
-
-const sha1 = cache(async (plaintext: string): Promise<string> => {
-  const utf8 = new TextEncoder().encode(plaintext);
-
-  return await subtle.digest("SHA-1", utf8).then((hash) => {
-    return Buffer.from(hash).toString("hex");
-  });
-});
 
 type ImageCache = Pick<
   UploadResponse,
