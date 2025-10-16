@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.2.5
+
+### Patch Changes
+
+- [#385](https://github.com/mogeko/mogeko/pull/385) [`bbedcb1`](https://github.com/mogeko/mogeko/commit/bbedcb13c47ee425d2beb8f569ea489dbb1341f9) Thanks [@mogeko](https://github.com/mogeko)! - Improve error handling and enable auto-merge for Changesets PRs
+
 ## 0.2.4
 
 ### Patch Changes
