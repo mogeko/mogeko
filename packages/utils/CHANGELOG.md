@@ -1,5 +1,11 @@
 # @mogeko/utils
 
+## 0.7.0
+
+### Minor Changes
+
+- [#387](https://github.com/mogeko/mogeko/pull/387) [`072cdb9`](https://github.com/mogeko/mogeko/commit/072cdb9d60a27dca57ae563824f7aed8d93aed9e) Thanks [@mogeko](https://github.com/mogeko)! - Add omit and pick utility functions.
+
 ## 0.6.3
 
 ### Patch Changes
