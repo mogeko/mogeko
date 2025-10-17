@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.2.6
+
+### Patch Changes
+
+- [#390](https://github.com/mogeko/mogeko/pull/390) [`f701d5c`](https://github.com/mogeko/mogeko/commit/f701d5ce4ed50a6fdf89cc6a703d46a105d0885a) Thanks [@mogeko](https://github.com/mogeko)! - Improve image handling by making file names more semantic and enhancing cache key management.
+
 ## 0.2.5
 
 ### Patch Changes
