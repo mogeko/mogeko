@@ -11,8 +11,8 @@ export const Image: React.FC<
   Omit<React.ComponentProps<typeof NextImage>, "src"> & { src: string }
 > = async ({ alt, src: file, ...props }) => {
   const { name: fileName, dir } = parse(new URL(file).pathname);
-  const [key, folder] = ((path: string) => {
-    return [`notion-images:${path}`, `/notion-images/${path}`];
+  const [key, folder] = ((id: string) => {
+    return [`notion-images:${id}`, `/notion-images/${id}`];
   })(basename(dir));
 
   let cached = await cache(redis.json.get, [], {
