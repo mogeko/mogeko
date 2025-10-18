@@ -15,6 +15,7 @@ export const Image: React.FC<
     return [`notion-images:${id}`, `/notion-images/${id}`];
   })(basename(dir));
 
+  // Cache the `redis.json.get` call to save quota and reduce latency
   let cached = await cache(redis.json.get, [], {
     tags: [key],
   })<UploadResponse>(key);
