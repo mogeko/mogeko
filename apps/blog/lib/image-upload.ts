@@ -3,7 +3,7 @@ import { unstable_cache as cache, revalidateTag } from "next/cache";
 import { after } from "next/server";
 import sharp from "sharp";
 import { redis } from "@/lib/redis";
-import { BUCKET_NAME as Bucket, s3 } from "@/lib/s3";
+import { BUCKET_NAME, s3 } from "@/lib/s3";
 
 export async function upload(opts: UploadOptions): Promise<UploadResponse> {
   const res = await fetch(opts.url);
@@ -19,16 +19,22 @@ export async function upload(opts: UploadOptions): Promise<UploadResponse> {
   const blurDataURL = await blur.toBuffer().then((data) => {
     return `data:image/${format};base64,${data.toString("base64")}`;
   });
-  // biome-ignore format: Allow using multiple declarations in one line
-  const name = opts.fileName, filePath = `${opts.id}/${name}`;
+  const name = opts.fileName;
+  const filePath = `${opts.id}/${name}`;
+  const mimeType = `image/${format}`;
 
   const { ETag: eTag } = await s3.send(
-    new PutObjectCommand({ Bucket, Key: filePath, Body: Buffer.from(buffer) }),
+    new PutObjectCommand({
+      Bucket: BUCKET_NAME,
+      Body: Buffer.from(buffer),
+      Key: filePath,
+      ContentType: mimeType,
+    }),
   );
 
-  const data = { height, width, name, filePath, format, blurDataURL, eTag };
+  const data = { height, width, name, filePath, mimeType, blurDataURL, eTag };
 
-  await redis.hset(`${Bucket ?? "images"}:${opts.id}`, data);
+  await redis.hset(`${BUCKET_NAME ?? "images"}:${opts.id}`, data);
 
   after(() => revalidateTag(opts.id));
 
@@ -38,7 +44,7 @@ export async function upload(opts: UploadOptions): Promise<UploadResponse> {
 export async function getUpload<T extends UploadResponse>(
   key: string,
 ): Promise<T | null> {
-  const bucket = Bucket ?? "images";
+  const bucket = BUCKET_NAME ?? "images";
 
   // Cache the `redis.hgetall` call to save quota and reduce latency
   return await cache(redis.hgetall, [], { tags: [bucket, key] })<T>(
@@ -57,7 +63,7 @@ export type UploadResponse = {
   width: number;
   filePath: string;
   name: string;
-  format: string;
+  mimeType?: string;
   blurDataURL: string;
   eTag?: string;
 };

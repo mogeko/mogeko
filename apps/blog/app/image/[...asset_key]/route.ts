@@ -1,28 +1,33 @@
-import { GetObjectCommand } from "@aws-sdk/client-s3";
+import { GetObjectCommand, NoSuchKey } from "@aws-sdk/client-s3";
 import { type NextRequest, NextResponse } from "next/server";
-import { getUpload } from "@/lib/image-upload";
-import { BUCKET_NAME, s3 } from "@/lib/s3";
+import { BUCKET_NAME as Bucket, s3 } from "@/lib/s3";
 
 type RContext = RouteContext<"/image/[...asset_key]">;
 
-export async function GET(_req: NextRequest, ctx: RContext) {
+export async function GET(req: NextRequest, ctx: RContext) {
   const { asset_key } = await ctx.params;
 
-  const upload = await getUpload(asset_key[0]);
-
   try {
-    const { Body } = await s3.send(
-      new GetObjectCommand({ Bucket: BUCKET_NAME, Key: asset_key.join("/") }),
+    const { Body, ContentType } = await s3.send(
+      new GetObjectCommand({ Bucket, Key: asset_key.join("/") }),
     );
 
-    if (!Body || !upload) {
-      return NextResponse.redirect("/404");
+    if (!Body) {
+      return NextResponse.redirect(new URL("/404", req.url));
     }
 
-    return new NextResponse(Body.transformToWebStream(), {
-      headers: { "Content-Type": `image/${upload.format}` },
+    const stream = Body.transformToWebStream();
+
+    return new NextResponse(stream, {
+      headers: {
+        ContentType: ContentType || "application/octet-stream",
+      },
     });
-  } catch (_err) {
+  } catch (err: unknown) {
+    if (err instanceof NoSuchKey) {
+      return NextResponse.redirect(new URL("/404", req.url));
+    }
+
     return NextResponse.error();
   }
 }
