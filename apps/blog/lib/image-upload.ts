@@ -1,3 +1,5 @@
+import { unstable_cache as cache, revalidateTag } from "next/cache";
+import { after } from "next/server";
 import sharp from "sharp";
 import { redis } from "@/lib/redis";
 import { BUCKET_NAME, PutObjectCommand, s3 } from "@/lib/s3";
@@ -27,8 +29,19 @@ export async function upload(opts: UploadOptions): Promise<UploadResponse> {
 
   await redis.hset(`${Bucket ?? "images"}:${folder}`, data);
 
+  after(() => revalidateTag(folder));
+
   return data;
 }
+
+export const getUpload: typeof redis.hgetall = async (key: string) => {
+  const bucket = BUCKET_NAME ?? "images";
+
+  // Cache the `redis.hgetall` call to save quota and reduce latency
+  return await cache(redis.hgetall, [], { tags: [bucket, key] })(
+    `${bucket}:${key}`,
+  );
+};
 
 export type UploadOptions = {
   url: string | URL | Request;
@@ -40,7 +53,7 @@ export type UploadResponse = {
   height: number;
   width: number;
   filePath: string;
-  name?: string;
+  name: string;
   format: string;
   blurDataURL: string;
   eTag?: string;
