@@ -11,6 +11,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.913.0",
     "@notionhq/client": "^5.1.0",
     "@radix-ui/react-slot": "^1.2.2",
     "@shikijs/colorized-brackets": "^3.13.0",
@@ -19,12 +20,14 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "jose": "^6.1.0",
     "katex": "^0.16.25",
     "next": "^15.5.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "satori": "^0.18.2",
     "server-only": "^0.0.1",
+    "sharp": "^0.34.4",
     "shiki": "^3.4.2",
     "tailwind-merge": "^3.3.0",
     "urlpattern-polyfill": "^10.1.0"

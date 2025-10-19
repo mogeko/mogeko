@@ -15,8 +15,8 @@ export async function GET({ nextUrl }: NextRequest) {
     );
   }
 
-  const client_id = process.env.OAUTH_CLIENT_ID;
-  const client_secret = process.env.OAUTH_CLIENT_SECRET;
+  const client_id = process.env.GH_APP_CLIENT_ID;
+  const client_secret = process.env.GH_APP_CLIENT_SECRET;
   const passwd = process.env.APP_ENCRYPTION_PASSWD;
 
   if (!client_id || !client_secret || !passwd) {
