@@ -35,6 +35,12 @@ export async function upload(opts: UploadOptions): Promise<UploadResponse> {
       Body: Buffer.from(buffer),
       Key: filePath,
       ContentType: mimeType,
+      Metadata: {
+        uploadedBy: "mogeko-blog",
+        height: height.toString(),
+        width: width.toString(),
+        blurDataURL,
+      },
     }),
   );
 
