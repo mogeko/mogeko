@@ -1,40 +1,26 @@
 import { basename, parse } from "node:path/posix";
 import { URL } from "node:url";
-import { unstable_cache as cache, revalidateTag } from "next/cache";
 import NextImage from "next/image";
-import { after } from "next/server";
-import { imageKitLoader } from "@/lib/image-loader";
-import { type UploadResponse, upload } from "@/lib/imagekit";
-import { redis } from "@/lib/redis";
+import { getUpload, upload } from "@/lib/image-upload";
 
 export const Image: React.FC<
   Omit<React.ComponentProps<typeof NextImage>, "src"> & { src: string }
-> = async ({ alt, src: file, ...props }) => {
-  const { name: fileName, dir } = parse(new URL(file).pathname);
-  const [key, folder] = ((id: string) => {
-    return [`notion-images:${id}`, `/notion-images/${id}`];
-  })(basename(dir));
+> = async ({ alt, src: url, id, ...props }) => {
+  const { name: fileName, dir } = parse(new URL(url).pathname);
+  const key = id ?? basename(dir);
 
-  // Cache the `redis.json.get` call to save quota and reduce latency
-  let cached = await cache(redis.json.get, [], {
-    tags: [key],
-  })<UploadResponse>(key);
+  let cached = await getUpload(key);
 
   if (!cached) {
-    cached = await upload({ file, fileName, folder, useUniqueFileName: false });
-
-    await redis.json.set(key, "$", cached);
-
-    after(() => revalidateTag(key));
+    cached = await upload({ url, fileName, id: key });
   }
 
-  const { filePath, name, width, height } = cached;
+  const { height, width, filePath, name } = cached;
 
   return (
     <NextImage
-      loader={imageKitLoader}
       height={props.width ? (height / width) * Number(props.width) : height}
-      src={filePath}
+      src={`/image/${filePath}`}
       alt={alt.length ? alt : name}
       {...props}
     />

@@ -1,8 +1,10 @@
 import { importPKCS8, SignJWT } from "jose";
 
+import "server-only";
+
 export async function jwt(): Promise<string> {
-  const clientId = process.env.OAUTH_CLIENT_ID;
-  const pkcs8 = process.env.APP_PRIVATE_KEY;
+  const clientId = process.env.GH_APP_CLIENT_ID;
+  const pkcs8 = process.env.GH_APP_PRIVATE_KEY;
 
   if (!pkcs8 || !clientId) {
     throw new Error("Missing environment variables for authentication.");
