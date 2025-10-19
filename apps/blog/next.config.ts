@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "**.notionusercontent.com" },
       { protocol: "https", hostname: "**.amazonaws.com" },
-      { protocol: "https", hostname: "ik.imagekit.io" },
     ],
   },
   logging: {
