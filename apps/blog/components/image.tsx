@@ -10,13 +10,11 @@ export const Image: React.FC<
   const { name: fileName, dir } = parse(url.pathname);
   const id = imageId || basename(dir);
 
-  let cached = await getUpload(id);
-
-  if (!cached) {
-    cached = await upload({ url, fileName, id });
-  }
-
-  const { height, width, filePath, name, blurDataURL } = cached;
+  const { height, width, filePath, name, blurDataURL } = await getUpload(
+    id,
+  ).then((data) => {
+    return data || upload({ url, fileName, id });
+  });
 
   return (
     <NextImage
