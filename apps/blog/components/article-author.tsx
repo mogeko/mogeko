@@ -1,5 +1,5 @@
 import { intlFormat } from "date-fns";
-import { Avatar } from "@/components/ui/avatar";
+import { Image } from "@/components/image";
 import { notion, type PageObjectResponse } from "@/lib/notion";
 
 type AuthorProps = { page: PageObjectResponse };
@@ -13,9 +13,10 @@ export const Author: React.FC<AuthorProps> = async ({ page }) => {
   return (
     <div className="flex justify-start items-center">
       {avatar_url && (
-        <Avatar
+        <Image
           src={avatar_url}
-          className="w-[43px] mr-[calc(5ch-43px)]"
+          className="w-[43px] mr-[calc(5ch-43px)] inline-block relative h-2"
+          height={43}
           width={43}
           alt={name ?? "Author"}
         />
