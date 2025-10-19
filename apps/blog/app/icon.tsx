@@ -39,10 +39,10 @@ export default async function Icon({ id }: { id: string }) {
       ),
       {
         headers: {
-          "Content-Type": "image/svg+xml",
           // Set the `cache-control` to be consistent with `ImageResponse`
           // See: https://vercel.com/docs/og-image-generation/og-image-api
-          "cache-control": "public, immutable, no-transform, max-age=31536000",
+          "Cache-Control": "public, immutable, no-transform, max-age=31536000",
+          "Content-Type": "image/svg+xml",
         },
       },
     );

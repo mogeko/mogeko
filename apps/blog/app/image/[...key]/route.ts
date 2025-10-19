@@ -20,7 +20,7 @@ export async function GET(req: NextRequest, ctx: RContext) {
 
     return new NextResponse(stream, {
       headers: {
-        ContentType: ContentType || "application/octet-stream",
+        "Content-Type": ContentType || "application/octet-stream",
       },
     });
   } catch (err: unknown) {
