@@ -9,7 +9,13 @@ export async function upload(opts: UploadOptions): Promise<UploadResponse> {
   const res = await fetch(opts.url);
 
   if (!res.ok) {
-    throw new Error(`Response status: ${res.status}`);
+    if ((await res.text()).match("Request has expired")) {
+      after(() => revalidateTag("notion"));
+
+      throw new Error("Notion image request has expired, revalidating tag");
+    }
+
+    throw new Error(`Failed to fetch image: ${res.status}`);
   }
 
   const buffer = await res.arrayBuffer();
