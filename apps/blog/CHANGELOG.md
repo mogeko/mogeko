@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.2.7
+
+### Patch Changes
+
+- [#394](https://github.com/mogeko/mogeko/pull/394) [`bfdea88`](https://github.com/mogeko/mogeko/commit/bfdea888c41403912cfedd5404309ba9f7ccc28c) Thanks [@mogeko](https://github.com/mogeko)! - Add Cloudflare R2 as the storage backend and implement the image upload logic.
+
 ## 0.2.6
 
 ### Patch Changes
