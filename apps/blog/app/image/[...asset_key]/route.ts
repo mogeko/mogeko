@@ -1,10 +1,11 @@
+import { GetObjectCommand } from "@aws-sdk/client-s3";
 import { type NextRequest, NextResponse } from "next/server";
 import { getUpload } from "@/lib/image-upload";
-import { BUCKET_NAME, GetObjectCommand, s3 } from "@/lib/s3";
+import { BUCKET_NAME, s3 } from "@/lib/s3";
 
-type Context = RouteContext<"/image/[...asset_key]">;
+type RContext = RouteContext<"/image/[...asset_key]">;
 
-export async function GET(_req: NextRequest, ctx: Context) {
+export async function GET(_req: NextRequest, ctx: RContext) {
   const { asset_key } = await ctx.params;
 
   const upload = await getUpload(asset_key[0]);

@@ -8,5 +8,3 @@ export const s3 = new S3Client({
 });
 
 export const BUCKET_NAME = process.env.R2_BUCKET_NAME;
-
-export { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";

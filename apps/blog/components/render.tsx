@@ -125,7 +125,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
 
         return (
           <div className="mt-1">
-            <Image id={block.id} width={729.6} src={file.url} alt={alt} />
+            <Image imageId={block.id} width={729.6} src={file.url} alt={alt} />
           </div>
         );
       }

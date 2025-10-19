@@ -4,24 +4,27 @@ import NextImage from "next/image";
 import { getUpload, upload } from "@/lib/image-upload";
 
 export const Image: React.FC<
-  Omit<React.ComponentProps<typeof NextImage>, "src"> & { src: string }
-> = async ({ alt, src: url, id, ...props }) => {
-  const { name: fileName, dir } = parse(new URL(url).pathname);
-  const key = id ?? basename(dir);
+  React.ComponentProps<typeof NextImage> & { imageId?: string }
+> = async ({ alt, src, imageId, ...props }) => {
+  const url = new URL(src);
+  const { name: fileName, dir } = parse(url.pathname);
+  const id = imageId || basename(dir);
 
-  let cached = await getUpload(key);
+  let cached = await getUpload(id);
 
   if (!cached) {
-    cached = await upload({ url, fileName, id: key });
+    cached = await upload({ url, fileName, id });
   }
 
-  const { height, width, filePath, name } = cached;
+  const { height, width, filePath, name, blurDataURL } = cached;
 
   return (
     <NextImage
-      height={props.width ? (height / width) * Number(props.width) : height}
       src={`/image/${filePath}`}
+      height={props.width ? (height / width) * Number(props.width) : height}
       alt={alt.length ? alt : name}
+      placeholder="blur"
+      blurDataURL={blurDataURL}
       {...props}
     />
   );

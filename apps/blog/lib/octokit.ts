@@ -2,6 +2,31 @@ import { importPKCS8, SignJWT } from "jose";
 
 import "server-only";
 
+export async function discussions() {
+  const data = await fetch("https://api.github.com/graphql", {
+    method: "POST",
+    headers: {
+      Authorization: `bearer ${await jwt()}`,
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      query: `
+        query {
+          repository(owner: $owner, name: $name) {
+            totalCount
+          }
+        }
+      `,
+      variables: {
+        owner: "mogeko",
+        name: "mogeko",
+      },
+    }),
+  });
+
+  return await data.json();
+}
+
 export async function jwt(): Promise<string> {
   const clientId = process.env.GH_APP_CLIENT_ID;
   const pkcs8 = process.env.GH_APP_PRIVATE_KEY;

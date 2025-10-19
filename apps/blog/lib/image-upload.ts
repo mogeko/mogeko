@@ -1,8 +1,9 @@
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { unstable_cache as cache, revalidateTag } from "next/cache";
 import { after } from "next/server";
 import sharp from "sharp";
 import { redis } from "@/lib/redis";
-import { BUCKET_NAME as Bucket, PutObjectCommand, s3 } from "@/lib/s3";
+import { BUCKET_NAME as Bucket, s3 } from "@/lib/s3";
 
 export async function upload(opts: UploadOptions): Promise<UploadResponse> {
   const res = await fetch(opts.url);
