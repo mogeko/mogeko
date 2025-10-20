@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.913.0",
+    "@chinese-fonts/maple-mono-cn": "^2.0.0",
     "@notionhq/client": "^5.1.0",
     "@radix-ui/react-slot": "^1.2.2",
     "@shikijs/colorized-brackets": "^3.13.0",
