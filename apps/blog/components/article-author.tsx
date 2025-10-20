@@ -14,6 +14,7 @@ export const Author: React.FC<AuthorProps> = async ({ page }) => {
     <div className="flex justify-start items-center">
       {avatar_url && (
         <Image
+          uploadId={user_id}
           src={avatar_url}
           className="w-[43px] mr-[calc(5ch-43px)] inline-block relative h-2"
           height={43}

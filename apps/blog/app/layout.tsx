@@ -6,6 +6,7 @@ import { isFullDatabase, notion } from "@/lib/notion";
 import { formatShortId } from "@/lib/utils";
 import pkg from "@/package.json";
 
+import "@chinese-fonts/maple-mono-cn/dist/MapleMono-CN-Regular/result.css";
 import "@/styles/globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -34,13 +35,7 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <html lang="zh-CN">
       <head>
-        {/* biome-ignore format: false */}
-        <link rel="preconnect" href="https://static.zeoseven.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://static.zeoseven.com/zsft/442/main/result.css"
-        />
-        <style>{`:root { --font-mono: "Maple Mono NF CN", ui-monospace, monospace; }`}</style>
+        <style>{`:root { --font-mono: "Maple Mono CN", ui-monospace, monospace; }`}</style>
       </head>
       <body className="min-h-svh text-foreground bg-background antialiased font-mono text-base/1">
         <div className="relative min-h-svh flex flex-col">

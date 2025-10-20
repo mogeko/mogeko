@@ -29,6 +29,9 @@ importers:
       '@aws-sdk/client-s3':
         specifier: ^3.913.0
         version: 3.913.0
+      '@chinese-fonts/maple-mono-cn':
+        specifier: ^2.0.0
+        version: 2.0.0
       '@notionhq/client':
         specifier: ^5.1.0
         version: 5.1.0
@@ -655,6 +658,9 @@ packages:
 
   '@chevrotain/utils@11.0.3':
     resolution: {integrity: sha512-YslZMgtJUyuMbZ+aKvfF3x1f5liK4mWNxghFRv7jqRR9C3R3fAOGTTKvxXDa2Y1s9zSbcpuO0cAxDYsc9SrXoQ==}
+
+  '@chinese-fonts/maple-mono-cn@2.0.0':
+    resolution: {integrity: sha512-DrPvr2/SjeGBtOspkJY6ygFlPnltCCJlmZIgVbupHp3tvxBrIjBz8aIT1obCxqz61cJP9eNU977tse7c8NiLZw==}
 
   '@emnapi/runtime@1.5.0':
     resolution: {integrity: sha512-97/BJ3iXHww3djw6hYIfErCZFee7qCtrneuLa20UXFCOTCfBM2cvQHjWJ2EG0s0MtdNwInarqCTz35i4wWXHsQ==}
@@ -5169,6 +5175,8 @@ snapshots:
   '@chevrotain/types@11.0.3': {}
 
   '@chevrotain/utils@11.0.3': {}
+
+  '@chinese-fonts/maple-mono-cn@2.0.0': {}
 
   '@emnapi/runtime@1.5.0':
     dependencies:
