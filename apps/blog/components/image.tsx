@@ -4,17 +4,17 @@ import NextImage from "next/image";
 import { getUpload, upload } from "@/lib/image-upload";
 
 export const Image: React.FC<
-  React.ComponentProps<typeof NextImage> & { imageId?: string }
-> = async ({ alt, src, imageId, ...props }) => {
+  React.ComponentProps<typeof NextImage> & { uploadId?: string }
+> = async ({ alt, src, uploadId, ...props }) => {
   const url = new URL(src);
   const { name: fileName, dir } = parse(url.pathname);
-  const id = imageId || basename(dir);
+  const id = uploadId || basename(dir);
 
   try {
     const { height, width, filePath, name, blurDataURL } = await getUpload(
       id,
     ).then((data) => {
-      return data || upload({ url, fileName, id });
+      return data || upload({ id, url, fileName });
     });
 
     return (
