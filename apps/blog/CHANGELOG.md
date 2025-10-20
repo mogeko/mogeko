@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.2.8
+
+### Patch Changes
+
+- [#399](https://github.com/mogeko/mogeko/pull/399) [`870fdcf`](https://github.com/mogeko/mogeko/commit/870fdcf6ccb50bb9d7011db9d42692b3eaa5786e) Thanks [@mogeko](https://github.com/mogeko)! - Host Maple Mono CN font locally instead of using public CDNs.
+
 ## 0.2.7
 
 ### Patch Changes
