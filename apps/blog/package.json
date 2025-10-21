@@ -13,7 +13,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.913.0",
     "@chinese-fonts/maple-mono-cn": "^2.0.0",
-    "@notionhq/client": "^5.1.0",
+    "@notionhq/client": "^5.3.0",
     "@radix-ui/react-slot": "^1.2.2",
     "@shikijs/colorized-brackets": "^3.13.0",
     "@shikijs/transformers": "^3.4.2",
@@ -23,7 +23,7 @@
     "date-fns": "^4.1.0",
     "jose": "^6.1.0",
     "katex": "^0.16.25",
-    "next": "^15.5.5",
+    "next": "^15.5.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "satori": "^0.18.2",
@@ -42,7 +42,7 @@
     "@types/react-dom": "^19.2.2",
     "babel-plugin-react-compiler": "^1.0.0",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.11",
+    "tailwindcss": "^4.1.15",
     "typescript": "^5.8.3"
   }
 }
