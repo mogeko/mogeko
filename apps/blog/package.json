@@ -35,9 +35,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.6",
-    "@tailwindcss/postcss": "^4.1.7",
+    "@tailwindcss/postcss": "^4.1.15",
     "@tsconfig/next": "^2.0.3",
-    "@types/node": "^24.7.2",
+    "@types/node": "^24.9.1",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.2.2",
     "babel-plugin-react-compiler": "^1.0.0",
