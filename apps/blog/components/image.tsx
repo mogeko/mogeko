@@ -1,7 +1,7 @@
 import { basename, parse } from "node:path/posix";
 import { URL } from "node:url";
 import NextImage from "next/image";
-import { getUpload, upload } from "@/lib/image-upload";
+import { getMeta, upload } from "@/lib/image-upload";
 
 export const Image: React.FC<
   React.ComponentProps<typeof NextImage> & { uploadId?: string }
@@ -11,7 +11,7 @@ export const Image: React.FC<
   const id = uploadId || basename(dir);
 
   try {
-    const { height, width, filePath, name, blurDataURL } = await getUpload(
+    const { height, width, filePath, name, blurDataURL } = await getMeta(
       id,
     ).then((data) => {
       return data || upload({ id, url, fileName });
