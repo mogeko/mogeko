@@ -1,4 +1,5 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { lookup } from "mime-types";
 import { unstable_cache as cache, revalidateTag } from "next/cache";
 import { after } from "next/server";
 import sharp from "sharp";
@@ -27,7 +28,7 @@ export async function upload(opts: UploadOptions): Promise<UploadResponse> {
   });
   const name = opts.fileName;
   const filePath = `${opts.id}/${name}`;
-  const mimeType = `image/${format}`;
+  const mimeType = lookup(name) || "application/octet-stream";
 
   const { ETag: eTag } = await s3.send(
     new PutObjectCommand({
