@@ -11,17 +11,17 @@ export const Image: React.FC<
   const id = uploadId || basename(dir);
 
   try {
-    const { height, width, filePath, name, blurDataURL } = await getMeta(
-      id,
-    ).then((data) => {
-      return data || upload({ id, url, fileName });
-    });
+    const { height, width, filePath, name, blurDataURL, mimeType } =
+      await getMeta(id).then((data) => {
+        return data || upload({ id, url, fileName });
+      });
 
     return (
       <NextImage
         src={`/image/${filePath}`}
         height={props.width ? (height / width) * Number(props.width) : height}
         alt={alt.length ? alt : name}
+        unoptimized={mimeType === "image/svg+xml"}
         placeholder="blur"
         blurDataURL={blurDataURL}
         {...props}
