@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PostProps) {
   }
 }
 
-const PagePromise: NextPage<PostProps> = ({ params }) => {
+const Page: NextPage<PostProps> = ({ params }) => {
   const id = params.then(({ slug }) => formatShortId(slug) || notFound());
   const page = retrievePage(id);
 
@@ -77,15 +77,15 @@ const PagePromise: NextPage<PostProps> = ({ params }) => {
 };
 
 const PostBreadcrumbItem: React.FC<{ page: PagePromise }> = async (props) => {
-  const page = await props.page;
+  const { properties, id } = await props.page;
 
-  if (page.properties.Name.type === "title") {
+  if (properties.Name.type === "title") {
     return (
       <>
         <BreadcrumbItem.Separator />
         <BreadcrumbItem>
-          <Link href={`/posts/${page.id}`}>
-            <RichText richText={page.properties.Name.title} />
+          <Link href={`/posts/${id}`}>
+            <RichText richText={properties.Name.title} />
           </Link>
         </BreadcrumbItem>
       </>
@@ -94,12 +94,12 @@ const PostBreadcrumbItem: React.FC<{ page: PagePromise }> = async (props) => {
 };
 
 const PostHeader: React.FC<{ page: PagePromise }> = async (props) => {
-  const page = await props.page;
+  const { properties, id } = await props.page;
 
-  if (page.properties.Name.type === "title") {
+  if (properties.Name.type === "title") {
     return (
-      <Heading id={page.id} className="my-1" level={1}>
-        <RichText richText={page.properties.Name.title} />
+      <Heading id={id} className="my-1" level={1}>
+        <RichText richText={properties.Name.title} />
       </Heading>
     );
   }
@@ -109,4 +109,4 @@ const PostBody: React.FC<{ id: Promise<string> }> = async ({ id }) => {
   return <NotionRender id={await id} />;
 };
 
-export default PagePromise;
+export default Page;
