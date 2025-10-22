@@ -1,12 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { getUpload } from "@/lib/image-upload";
+import { getImageParams } from "@/lib/image-upload";
 
 type RContext = RouteContext<"/image/[id]">;
 
 export async function GET(req: NextRequest, ctx: RContext) {
   const { id } = await ctx.params;
 
-  const redirectURL = await getUpload(id).then((data) => {
+  const redirectURL = await getImageParams(id).then((data) => {
     if (data) {
       return new URL(`/image/${data.filePath}`, req.url);
     } else {
