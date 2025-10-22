@@ -7,10 +7,10 @@ import sharp from "sharp";
 import { redis } from "@/lib/redis";
 import { BUCKET_NAME, s3 } from "@/lib/s3";
 
-export async function upload(options: Options): Promise<ImageMetaWithPath> {
-  const filePath = `${options.id}/${options.fileName}`;
+export async function upload(options: Options): Promise<ImageParamWithPath> {
+  const filePath = `${options.key}/${options.fileName}`;
 
-  return await setMeta<ImageMetaWithPath>(async (buffer, meta) => {
+  return await setImageParams<ImageParamWithPath>(async (buffer, meta) => {
     const { ETag: _eTag } = await s3.send(
       new PutObjectCommand({
         Bucket: BUCKET_NAME,
@@ -30,17 +30,17 @@ export async function upload(options: Options): Promise<ImageMetaWithPath> {
   }, options);
 }
 
-export async function setMeta<T extends ImageMeta>(
-  uploader: (buff: Buffer, meta: ImageMeta) => Promise<T>,
+export async function setImageParams<T extends ImageParam>(
+  uploader: (buff: Buffer, meta: ImageParam) => Promise<T>,
   options: Options,
 ): Promise<T>;
-export async function setMeta(options: Options): Promise<ImageMeta>;
-export async function setMeta<T extends ImageMeta>(
-  uploader: Options | ((buff: Buffer, meta: ImageMeta) => Promise<T>),
+export async function setImageParams(options: Options): Promise<ImageParam>;
+export async function setImageParams<T extends ImageParam>(
+  uploader: Options | ((buff: Buffer, meta: ImageParam) => Promise<T>),
   options?: Options,
 ): Promise<T> {
   if (!(uploader instanceof Function) || !options) {
-    return setMeta<T>(async (_, meta) => meta as T, uploader as Options);
+    return setImageParams<T>(async (_, meta) => meta as T, uploader as Options);
   } else {
     const res = await fetch(options.url);
 
@@ -62,21 +62,21 @@ export async function setMeta<T extends ImageMeta>(
     const blurDataURL = await blur.toBuffer().then((data) => {
       return `data:${mimeType};base64,${data.toString("base64")}`;
     });
-    const { fileName: name, id } = options;
+    const { fileName: name, key } = options;
 
     const meta = { mimeType, name, height, width, blurDataURL };
 
     const data = await uploader(Buffer.from(buffer), meta);
 
-    await redis.hset(`${BUCKET_NAME ?? "images"}:${id}`, data);
+    await redis.hset(`${BUCKET_NAME ?? "images"}:${key}`, data);
 
-    after(() => revalidateTag(id));
+    after(() => revalidateTag(key));
 
     return data;
   }
 }
 
-export async function getMeta<T extends ImageMetaWithPath>(
+export async function getImageParams<T extends ImageParamWithPath>(
   key: string,
 ): Promise<T | null> {
   const bucket = BUCKET_NAME ?? "images";
@@ -90,10 +90,10 @@ export async function getMeta<T extends ImageMetaWithPath>(
 type Options = {
   fileName: string;
   url: string | URL | Request;
-  id: string;
+  key: string;
 };
 
-export type ImageMeta = {
+export type ImageParam = {
   name: string;
   height: number;
   width: number;
@@ -101,6 +101,6 @@ export type ImageMeta = {
   blurDataURL: string;
 };
 
-export type ImageMetaWithPath = {
+export type ImageParamWithPath = {
   filePath: string;
-} & ImageMeta;
+} & ImageParam;
