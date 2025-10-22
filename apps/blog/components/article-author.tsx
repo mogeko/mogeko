@@ -2,9 +2,10 @@ import { intlFormat } from "date-fns";
 import { Image } from "@/components/image";
 import { notion, type PageObjectResponse } from "@/lib/notion";
 
-type AuthorProps = { page: PageObjectResponse };
-
-export const Author: React.FC<AuthorProps> = async ({ page }) => {
+export const Author: React.FC<{
+  page: Promise<PageObjectResponse>;
+}> = async (props) => {
+  const page = await props.page;
   const user_id = page.created_by.id /* Long ID */;
   const { avatar_url, name } = await notion.users.retrieve({ user_id });
   const date = page.properties["Publish Date"];

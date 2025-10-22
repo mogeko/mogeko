@@ -1,16 +1,16 @@
 import { Buffer } from "node:buffer";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { lookup } from "mime-types";
-import { unstable_cache as cache, revalidateTag } from "next/cache";
+import { cacheLife, cacheTag, updateTag } from "next/cache";
 import { after } from "next/server";
 import sharp from "sharp";
 import { redis } from "@/lib/redis";
 import { BUCKET_NAME, s3 } from "@/lib/s3";
 
-export async function upload(options: Options): Promise<ImageParamWithPath> {
+export async function upload(options: Options): Promise<ImageMetaWithPath> {
   const filePath = `${options.key}/${options.fileName}`;
 
-  return await setImageParams<ImageParamWithPath>(async (buffer, meta) => {
+  return await setImageParams<ImageMetaWithPath>(async (buffer, meta) => {
     const { ETag: _eTag } = await s3.send(
       new PutObjectCommand({
         Bucket: BUCKET_NAME,
@@ -46,7 +46,7 @@ export async function setImageParams<T extends ImageParam>(
 
     if (!res.ok) {
       if ((await res.text()).match("Request has expired")) {
-        after(() => revalidateTag("notion"));
+        after(() => updateTag("notion"));
 
         throw new Error("Notion image request has expired, revalidating tag");
       }
@@ -70,21 +70,23 @@ export async function setImageParams<T extends ImageParam>(
 
     await redis.hset(`${BUCKET_NAME ?? "images"}:${key}`, data);
 
-    after(() => revalidateTag(key));
+    after(() => updateTag(key));
 
     return data;
   }
 }
 
-export async function getImageParams<T extends ImageParamWithPath>(
+export async function getImageParams<T extends ImageMetaWithPath>(
   key: string,
 ): Promise<T | null> {
+  "use cache";
+
   const bucket = BUCKET_NAME ?? "images";
 
-  // Cache the `redis.hgetall` call to save quota and reduce latency
-  return await cache(redis.hgetall, [], { tags: [bucket, key] })<T>(
-    `${bucket}:${key}`,
-  );
+  cacheTag(bucket, key);
+  cacheLife("max");
+
+  return await redis.hgetall<T>(`${bucket}:${key}`);
 }
 
 type Options = {
@@ -101,6 +103,6 @@ export type ImageParam = {
   blurDataURL: string;
 };
 
-export type ImageParamWithPath = {
+export type ImageMetaWithPath = {
   filePath: string;
 } & ImageParam;

@@ -14,11 +14,11 @@
     "changeset": "changeset"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.6",
+    "@biomejs/biome": "^2.2.7",
     "@changesets/changelog-github": "^0.5.1",
-    "@changesets/cli": "^2.29.4",
-    "turbo": "^2.5.4",
-    "vite-node": "^3.2.3"
+    "@changesets/cli": "^2.29.7",
+    "turbo": "^2.5.8",
+    "vite-node": "^3.2.4"
   },
   "packageManager": "pnpm@10.19.0",
   "engines": {

@@ -47,4 +47,7 @@ export default async function Icon({ id }: { id: string }) {
       },
     );
   }
+
+  // TODO
+  return new NextResponse("Not Found", { status: 404 });
 }
