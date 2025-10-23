@@ -1,45 +1,31 @@
 import type { Metadata, NextPage } from "next";
-import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Author } from "@/components/article-author";
+import { PostBreadcrumbItem, PostHeader } from "@/components/post-staffs";
 import { NotionRender } from "@/components/render";
-import { plainText, RichText } from "@/components/text";
+import { plainText } from "@/components/text";
 import { Breadcrumb, BreadcrumbItem } from "@/components/ui/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { Link } from "@/components/ui/link";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
-import { isFullPage, notion, type PageObjectResponse } from "@/lib/notion";
+import { retrievePage } from "@/lib/retrieve-page";
 import { formatShortId } from "@/lib/utils";
 
-type PagePromise = Promise<PageObjectResponse>;
-type PostProps = PageProps<"/posts/[slug]">;
+export async function generateMetadata({ params }: PageProps<"/posts/[slug]">) {
+  const id = formatShortId((await params).slug);
+  const props = (await retrievePage(id))?.properties;
 
-async function retrievePage(id: Promise<string>): PagePromise {
-  "use cache";
-
-  const page = await notion.pages.retrieve({ page_id: await id });
-
-  return isFullPage(page) ? page : notFound();
-}
-
-export async function generateMetadata({ params }: PostProps) {
-  const { properties } = await retrievePage(
-    params.then(({ slug }) => formatShortId(slug) || notFound()),
-  );
-  const { Tags, Name } = properties;
-
-  if (Name.type === "title" && Tags.type === "multi_select") {
+  if (props?.Name.type === "title" && props.Tags.type === "multi_select") {
     return {
-      title: plainText(Name.title),
-      keywords: Tags.multi_select.map((tag) => tag.name),
+      title: plainText(props.Name.title),
+      keywords: props.Tags.multi_select.map((tag) => tag.name),
     } satisfies Metadata;
   }
 }
 
-const Page: NextPage<PostProps> = ({ params }) => {
-  const id = params.then(({ slug }) => formatShortId(slug) || notFound());
-  const page = retrievePage(id);
+const Page: NextPage<PageProps<"/posts/[slug]">> = ({ params }) => {
+  const id = params.then(({ slug }) => formatShortId(slug));
 
   return (
     <div className="flex flex-1 flex-col max-w-[80ch] px-[2ch] py-2">
@@ -52,21 +38,22 @@ const Page: NextPage<PostProps> = ({ params }) => {
           <BreadcrumbItem>
             <Link href="/">Posts</Link>
           </BreadcrumbItem>
-          <Suspense fallback={<Spinner />}>
-            <PostBreadcrumbItem page={page} />
+          <BreadcrumbItem.Separator />
+          <Suspense fallback={<Breadcrumb>...</Breadcrumb>}>
+            <PostBreadcrumbItem id={id} />
           </Suspense>
         </Breadcrumb>
         <Suspense
           // In order to optimize Cumulative Layout Shift (CLS)
           fallback={<Spinner className="h-2" />}
         >
-          <Author page={page} />
+          <Author id={id} />
         </Suspense>
       </section>
       <Separator className="mt-1 mb-3" />
       <article>
-        <Suspense fallback={<Spinner />}>
-          <PostHeader page={page} />
+        <Suspense fallback={<HeadingLoading />}>
+          <PostHeader id={id} />
         </Suspense>
         <Suspense fallback={<Spinner />}>
           <PostBody id={id} />
@@ -76,37 +63,22 @@ const Page: NextPage<PostProps> = ({ params }) => {
   );
 };
 
-const PostBreadcrumbItem: React.FC<{ page: PagePromise }> = async (props) => {
-  const { properties, id } = await props.page;
-
-  if (properties.Name.type === "title") {
-    return (
-      <>
-        <BreadcrumbItem.Separator />
-        <BreadcrumbItem>
-          <Link href={`/posts/${id}`}>
-            <RichText richText={properties.Name.title} />
-          </Link>
-        </BreadcrumbItem>
-      </>
-    );
-  }
+const HeadingLoading: React.FC = () => {
+  return (
+    <Heading className="my-1" level={1}>
+      ...
+    </Heading>
+  );
 };
 
-const PostHeader: React.FC<{ page: PagePromise }> = async (props) => {
-  const { properties, id } = await props.page;
+export const PostBody: React.FC<{
+  id: Promise<string | undefined>;
+}> = async (props) => {
+  const id = await props.id;
 
-  if (properties.Name.type === "title") {
-    return (
-      <Heading id={id} className="my-1" level={1}>
-        <RichText richText={properties.Name.title} />
-      </Heading>
-    );
+  if (id) {
+    return <NotionRender id={id} />;
   }
-};
-
-const PostBody: React.FC<{ id: Promise<string> }> = async ({ id }) => {
-  return <NotionRender id={await id} />;
 };
 
 export default Page;
