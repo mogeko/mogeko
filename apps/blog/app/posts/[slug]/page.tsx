@@ -1,48 +1,31 @@
 import type { Metadata, NextPage } from "next";
-import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Author } from "@/components/article-author";
+import { PostBreadcrumbItem, PostHeader } from "@/components/post-staffs";
 import { NotionRender } from "@/components/render";
-import { plainText, RichText } from "@/components/text";
+import { plainText } from "@/components/text";
 import { Breadcrumb, BreadcrumbItem } from "@/components/ui/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { Link } from "@/components/ui/link";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
-import { isFullPage, notion } from "@/lib/notion";
+import { retrievePage } from "@/lib/retrieve-page";
 import { formatShortId } from "@/lib/utils";
 
-type Props = {
-  params: Promise<{ slug: string }>;
-};
+export async function generateMetadata({ params }: PageProps<"/posts/[slug]">) {
+  const id = formatShortId((await params).slug);
+  const props = (await retrievePage(id))?.properties;
 
-export async function generateMetadata({ params }: Props) {
-  const page_id = formatShortId((await params).slug);
-
-  if (!page_id) return notFound();
-
-  const page = await notion.pages.retrieve({ page_id });
-
-  if (!isFullPage(page)) return notFound();
-
-  const { Name, Tags } = page.properties;
-
-  if (Name.type === "title" && Tags.type === "multi_select") {
+  if (props?.Name.type === "title" && props.Tags.type === "multi_select") {
     return {
-      title: plainText(Name.title),
-      keywords: Tags.multi_select.map((tag) => tag.name),
+      title: plainText(props.Name.title),
+      keywords: props.Tags.multi_select.map((tag) => tag.name),
     } satisfies Metadata;
   }
 }
 
-const Page: NextPage<Props> = async ({ params }) => {
-  const page_id = formatShortId((await params).slug);
-
-  if (!page_id) return notFound();
-
-  const page = await notion.pages.retrieve({ page_id });
-
-  if (!isFullPage(page)) return notFound();
+const Page: NextPage<PageProps<"/posts/[slug]">> = ({ params }) => {
+  const id = params.then(({ slug }) => formatShortId(slug));
 
   return (
     <div className="flex flex-1 flex-col max-w-[80ch] px-[2ch] py-2">
@@ -55,37 +38,47 @@ const Page: NextPage<Props> = async ({ params }) => {
           <BreadcrumbItem>
             <Link href="/">Posts</Link>
           </BreadcrumbItem>
-          {page.properties.Name.type === "title" && (
-            <>
-              <BreadcrumbItem.Separator />
-              <BreadcrumbItem>
-                <Link href={`/posts/${page_id}`}>
-                  <RichText richText={page.properties.Name.title} />
-                </Link>
-              </BreadcrumbItem>
-            </>
-          )}
+          <BreadcrumbItem.Separator />
+          <Suspense fallback={<Breadcrumb>...</Breadcrumb>}>
+            <PostBreadcrumbItem id={id} />
+          </Suspense>
         </Breadcrumb>
         <Suspense
           // In order to optimize Cumulative Layout Shift (CLS)
           fallback={<Spinner className="h-2" />}
         >
-          <Author page={page} />
+          <Author id={id} />
         </Suspense>
       </section>
       <Separator className="mt-1 mb-3" />
       <article>
-        {page.properties.Name.type === "title" && (
-          <Heading id={page_id} className="my-1" level={1}>
-            <RichText richText={page.properties.Name.title} />
-          </Heading>
-        )}
+        <Suspense fallback={<HeadingLoading />}>
+          <PostHeader id={id} />
+        </Suspense>
         <Suspense fallback={<Spinner />}>
-          <NotionRender id={page_id} />
+          <PostBody id={id} />
         </Suspense>
       </article>
     </div>
   );
+};
+
+const HeadingLoading: React.FC = () => {
+  return (
+    <Heading className="my-1" level={1}>
+      ...
+    </Heading>
+  );
+};
+
+export const PostBody: React.FC<{
+  id: Promise<string | undefined>;
+}> = async (props) => {
+  const id = await props.id;
+
+  if (id) {
+    return <NotionRender id={id} />;
+  }
 };
 
 export default Page;

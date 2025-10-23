@@ -8,14 +8,10 @@ const nextConfig: NextConfig = {
     ],
     minimumCacheTTL: 2678400, // 31 days
   },
+  reactCompiler: true,
+  cacheComponents: true,
   logging: {
     fetches: { fullUrl: true },
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  experimental: {
-    reactCompiler: true,
   },
 };
 

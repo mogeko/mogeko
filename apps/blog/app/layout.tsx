@@ -1,3 +1,4 @@
+import { performance } from "node:perf_hooks";
 import { getYear } from "date-fns";
 import type { Metadata } from "next";
 import { GlobalHotkey } from "@/components/global-hotkey";
@@ -42,7 +43,8 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
           <main className="flex flex-1 flex-col">{children}</main>
           <footer className="mb-3">
             <p className="px-[2ch]">
-              Copyright © 2017 - {getYear(new Date())}. All rights reserved.
+              Copyright © 2017 - {getYear(performance.now())}. All rights
+              reserved.
             </p>
           </footer>
         </div>
