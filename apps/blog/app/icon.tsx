@@ -7,10 +7,14 @@ export function generateImageMetadata() {
     { contentType: "image/png", size: { width: 512, height: 512 }, id: "512" },
     { contentType: "image/png", size: { width: 192, height: 192 }, id: "192" },
     { contentType: "image/svg+xml", id: "svg" },
-  ];
+  ] as const;
 }
 
-export default async function Icon({ id }: { id: string }) {
+type LegalId = ReturnType<typeof generateImageMetadata>[number]["id"];
+
+export default async function Icon(props: { id: Promise<LegalId> }) {
+  const id = await props.id;
+
   if (id === "192") {
     return new ImageResponse(
       <div tw="flex p-[15%] bg-black w-full h-full">
@@ -47,7 +51,4 @@ export default async function Icon({ id }: { id: string }) {
       },
     );
   }
-
-  // TODO
-  return new NextResponse("Not Found", { status: 404 });
 }
