@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.2.9
+
+### Patch Changes
+
+- [#405](https://github.com/mogeko/mogeko/pull/405) [`dee2da1`](https://github.com/mogeko/mogeko/commit/dee2da1943e18d9512f90b1c912244e388f4b382) Thanks [@mogeko](https://github.com/mogeko)! - Upgrade and adapt to Next.js 16.
+
 ## 0.2.8
 
 ### Patch Changes
