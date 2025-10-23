@@ -6,7 +6,7 @@ type NavProps = React.HTMLAttributes<HTMLElement>;
 export const Breadcrumb: React.FC<NavProps> = ({ children, ...props }) => {
   return (
     <nav aria-label="breadcrumb" {...props}>
-      <ol className="flex flex-wrap items-centerflex break-words gap-[1ch]">
+      <ol className="flex flex-wrap items-centerflex wrap-break-word gap-[1ch]">
         {children}
       </ol>
     </nav>

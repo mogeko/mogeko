@@ -109,7 +109,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
           className={twMerge(
             colorVariants({
               color,
-              className: "[&:not(:first-child)]:mt-1 text-clip",
+              className: "not-first:mt-1 text-clip",
             }),
           )}
         >
@@ -270,7 +270,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
 
     case "column_list": {
       return (
-        <div className="flex flex-col justify-stretch items-stretch [&:not(:first-child)]:mt-1 sm:gap-[1ch] sm:flex-row">
+        <div className="flex flex-col justify-stretch items-stretch not-first:mt-1 sm:gap-[1ch] sm:flex-row">
           {block.has_children && (
             <Suspense fallback={<Spinner />}>
               <NotionRender id={block.id} />

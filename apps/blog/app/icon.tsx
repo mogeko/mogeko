@@ -43,9 +43,7 @@ export default async function Icon(props: { id: Promise<LegalId> }) {
       ),
       {
         headers: {
-          // Set the `cache-control` to be consistent with `ImageResponse`
-          // See: https://vercel.com/docs/og-image-generation/og-image-api
-          "Cache-Control": "public, immutable, no-transform, max-age=31536000",
+          "Cache-Control": "public, max-age=2678400, must-revalidate",
           "Content-Type": "image/svg+xml",
         },
       },
