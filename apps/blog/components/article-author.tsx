@@ -12,8 +12,8 @@ export const Author: React.FC<{ page: PageObjectResponse }> = async (props) => {
 
   return (
     <div className="flex justify-start items-center">
-      <Suspense fallback={<Spinner className="w-[43px] h-[43px]" />}>
-        {avatar_url && (
+      {avatar_url && (
+        <Suspense fallback={<Spinner className="w-[43px] h-[43px]" />}>
           <Image
             uploadId={user_id}
             src={avatar_url}
@@ -22,8 +22,8 @@ export const Author: React.FC<{ page: PageObjectResponse }> = async (props) => {
             width={43}
             alt={name ?? "Author"}
           />
-        )}
-      </Suspense>
+        </Suspense>
+      )}
       <div>
         <p>{name ?? "Anonymous"}</p>
         <p>{intlFormat(publidhDate ?? props.page.created_time)}</p>
