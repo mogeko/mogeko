@@ -54,13 +54,10 @@ export function groupBy<K, T>(
 }
 
 export function formatUUID(uuid?: string) {
-  if (uuid) {
-    const cleand = uuid.replace(/[^a-f0-9]/gi, "").replace(/[-\s]/g, "");
+  let result: string | undefined;
 
-    if (cleand.length !== 32) return;
+  if (uuid?.length === 36) result = uuid.replace(/[-]/g, "");
+  if (uuid?.length === 32) result = uuid;
 
-    return uuid
-      .replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, "$1-$2-$3-$4-$5")
-      .toLocaleLowerCase();
-  }
+  return result?.trim().toLocaleLowerCase();
 }

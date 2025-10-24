@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
+import { Fragment, Suspense } from "react";
 import { twMerge } from "tailwind-merge";
 import { Icon } from "@/components/icon";
 import { Image } from "@/components/image";
@@ -13,15 +13,8 @@ import { ListItem } from "@/components/ui/list";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { colorVariants } from "@/lib/colors";
-import {
-  type BlockObjectResponse,
-  isFullBlock,
-  iteratePaginatedAPI,
-  notion,
-} from "@/lib/notion";
+import { type BlockObjectResponse, isFullBlock, notion } from "@/lib/notion";
 import { formatUUID } from "@/lib/utils";
-
-type BlockProps = { block: BlockObjectResponse };
 
 const Equation = dynamic(async () => {
   return import("@/components/equation").then((m) => m.Equation);
@@ -30,7 +23,7 @@ const Code = dynamic(async () => {
   return import("@/components/code").then((m) => m.Code);
 });
 
-const NotionBlock: React.FC<BlockProps> = ({ block }) => {
+const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
   switch (block.type) {
     case "heading_1": {
       const { color, rich_text, is_toggleable } = block.heading_1;
@@ -315,18 +308,29 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
   }
 };
 
-export const NotionRender: React.FC<{ id: string }> = async ({ id }) => {
-  const blockFeeds: Array<React.ReactNode> = [];
-
-  for await (const block of iteratePaginatedAPI(notion.blocks.children.list, {
+export const NotionRender: React.FC<{
+  id: string;
+  cursor?: string | null;
+}> = async ({ cursor, id }) => {
+  const blocks = await notion.blocks.children.list({
     block_id: id,
-  })) {
-    if (isFullBlock(block)) {
-      blockFeeds.push(
-        <NotionBlock key={`notion-render-${block.id}`} block={block} />,
-      );
-    }
-  }
+    start_cursor: cursor ?? void 0,
+  });
 
-  return blockFeeds;
+  return (
+    <Fragment>
+      {blocks.results.map((block, i) => {
+        return (
+          isFullBlock(block) && (
+            <NotionBlock key={`notion-${i}-${block.id}`} block={block} />
+          )
+        );
+      })}
+      {blocks.has_more && (
+        <Suspense fallback={<Spinner />}>
+          <NotionRender id={id} cursor={blocks.next_cursor} />
+        </Suspense>
+      )}
+    </Fragment>
+  );
 };
