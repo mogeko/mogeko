@@ -5,7 +5,7 @@ export async function retrievePage(page_id?: string) {
   "use cache";
 
   if (page_id) {
-    cacheTag("notion", "article", page_id);
+    cacheTag("notion", "page", page_id);
     cacheLife("default");
 
     const page = await notion.pages.retrieve({ page_id });

@@ -1,3 +1,4 @@
+import { cacheLife, cacheTag } from "next/cache";
 import dynamic from "next/dynamic";
 import { Fragment, Suspense } from "react";
 import { twMerge } from "tailwind-merge";
@@ -313,8 +314,6 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
   }
 };
 
-const queryBlocks = notion.blocks.children.list;
-
 export const NotionRender: React.FC<
   Omit<ListBlockChildrenParameters, "start_cursor"> & {
     start_cursor?: string | null;
@@ -342,3 +341,12 @@ export const NotionRender: React.FC<
     </Fragment>
   );
 };
+
+async function queryBlocks(args: ListBlockChildrenParameters) {
+  "use cache";
+
+  cacheTag("notion", "block", args.block_id);
+  cacheLife("default");
+
+  return await notion.blocks.children.list(args);
+}
