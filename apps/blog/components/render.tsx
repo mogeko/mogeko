@@ -19,7 +19,7 @@ import {
   iteratePaginatedAPI,
   notion,
 } from "@/lib/notion";
-import { formatShortId } from "@/lib/utils";
+import { formatUUID } from "@/lib/utils";
 
 type BlockProps = { block: BlockObjectResponse };
 
@@ -305,7 +305,7 @@ const NotionBlock: React.FC<BlockProps> = ({ block }) => {
       return (
         <ActionLink
           className="[&:not(&+&):not(:first-child)]:mt-1"
-          href={`/posts/${formatShortId(parent_id)}/${formatShortId(block.id)}`}
+          href={`/posts/${formatUUID(parent_id)}/${formatUUID(block.id)}`}
           icon="→"
         >
           {child_page.title}

@@ -9,7 +9,7 @@ import { Badges } from "@/components/ui/badges";
 import { Heading } from "@/components/ui/heading";
 import { Spinner } from "@/components/ui/spinner";
 import { isFullDatabase, isFullPage, notion } from "@/lib/notion";
-import { formatShortId, groupBy } from "@/lib/utils";
+import { formatUUID, groupBy } from "@/lib/utils";
 import pkg from "@/package.json";
 
 const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
@@ -37,10 +37,7 @@ const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
             return (
               page.properties.Name.type === "title" && (
                 <li key={page.id}>
-                  <ActionLink
-                    href={`/posts/${formatShortId(page.id)}`}
-                    icon="→"
-                  >
+                  <ActionLink href={`/posts/${formatUUID(page.id)}`} icon="→">
                     <RichText richText={page.properties.Name.title} />
                   </ActionLink>
                 </li>
@@ -54,7 +51,7 @@ const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
 };
 
 const Home: NextPage = async () => {
-  const database_id = formatShortId(process.env.NOTION_DATABASE_ID);
+  const database_id = formatUUID(process.env.NOTION_DATABASE_ID);
 
   if (!database_id) return notFound();
 
