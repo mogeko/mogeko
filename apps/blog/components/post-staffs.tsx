@@ -1,10 +1,11 @@
+import { Author } from "@/components/article-author";
 import { RichText } from "@/components/text";
 import { BreadcrumbItem } from "@/components/ui/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { Link } from "@/components/ui/link";
 import { retrievePage } from "@/lib/retrieve-page";
 
-export const PostBreadcrumbItem: React.FC<{
+export const PostBcItem: React.FC<{
   id: Promise<string | undefined>;
 }> = async (props) => {
   const page = await props.id.then(retrievePage);
@@ -31,5 +32,15 @@ export const PostHeader: React.FC<{
         <RichText richText={page.properties.Name.title} />
       </Heading>
     );
+  }
+};
+
+export const PostAuthor: React.FC<{
+  id: Promise<string | undefined>;
+}> = async (props) => {
+  const page = await props.id.then(retrievePage);
+
+  if (page) {
+    return <Author page={page} />;
   }
 };

@@ -53,11 +53,11 @@ export function groupBy<K, T>(
   return result;
 }
 
-export function formatShortId(id?: string) {
+export function formatUUID(uuid?: string) {
   let result: string | undefined;
 
-  if (id?.length === 36) result = id.replace(/[-]/g, "");
-  if (id?.length === 32) result = id;
+  if (uuid?.length === 36) result = uuid.replace(/[-]/g, "");
+  if (uuid?.length === 32) result = uuid;
 
-  return result?.trim();
+  return result?.trim().toLocaleLowerCase();
 }

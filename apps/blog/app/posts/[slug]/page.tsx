@@ -1,7 +1,6 @@
 import type { Metadata, NextPage } from "next";
 import { Suspense } from "react";
-import { Author } from "@/components/article-author";
-import { PostBreadcrumbItem, PostHeader } from "@/components/post-staffs";
+import { PostAuthor, PostBcItem, PostHeader } from "@/components/post-staffs";
 import { NotionRender } from "@/components/render";
 import { plainText } from "@/components/text";
 import { Breadcrumb, BreadcrumbItem } from "@/components/ui/breadcrumb";
@@ -10,10 +9,10 @@ import { Link } from "@/components/ui/link";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { retrievePage } from "@/lib/retrieve-page";
-import { formatShortId } from "@/lib/utils";
+import { formatUUID } from "@/lib/utils";
 
 export async function generateMetadata({ params }: PageProps<"/posts/[slug]">) {
-  const id = formatShortId((await params).slug);
+  const id = formatUUID((await params).slug);
   const props = (await retrievePage(id))?.properties;
 
   if (props?.Name.type === "title" && props.Tags.type === "multi_select") {
@@ -25,7 +24,7 @@ export async function generateMetadata({ params }: PageProps<"/posts/[slug]">) {
 }
 
 const Page: NextPage<PageProps<"/posts/[slug]">> = ({ params }) => {
-  const id = params.then(({ slug }) => formatShortId(slug));
+  const id = params.then(({ slug }) => formatUUID(slug));
 
   return (
     <div className="flex flex-1 flex-col max-w-[80ch] px-[2ch] py-2">
@@ -39,15 +38,12 @@ const Page: NextPage<PageProps<"/posts/[slug]">> = ({ params }) => {
             <Link href="/">Posts</Link>
           </BreadcrumbItem>
           <BreadcrumbItem.Separator />
-          <Suspense fallback={<Breadcrumb>...</Breadcrumb>}>
-            <PostBreadcrumbItem id={id} />
+          <Suspense fallback={<BreadcrumbItem>...</BreadcrumbItem>}>
+            <PostBcItem id={id} />
           </Suspense>
         </Breadcrumb>
-        <Suspense
-          // In order to optimize Cumulative Layout Shift (CLS)
-          fallback={<Spinner className="h-2" />}
-        >
-          <Author id={id} />
+        <Suspense fallback={<Spinner className="h-2" />}>
+          <PostAuthor id={id} />
         </Suspense>
       </section>
       <Separator className="mt-1 mb-3" />
