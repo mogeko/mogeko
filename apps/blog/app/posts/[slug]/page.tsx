@@ -73,7 +73,7 @@ export const PostBody: React.FC<{
   const id = await props.id;
 
   if (id) {
-    return <NotionRender id={id} />;
+    return <NotionRender block_id={id} />;
   }
 };
 
