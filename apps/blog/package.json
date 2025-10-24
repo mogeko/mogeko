@@ -1,6 +1,6 @@
 {
   "name": "@mogeko/blog",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "type": "module",
   "description": "A place to share what I've learned, what I'm working on, and what I'm thinking about",
   "private": true,
