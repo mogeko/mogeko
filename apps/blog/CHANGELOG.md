@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.2.10
+
+### Patch Changes
+
+- [#407](https://github.com/mogeko/mogeko/pull/407) [`1763399`](https://github.com/mogeko/mogeko/commit/17633998b51c6ec6e40ad56f01044d3862bb6bbe) Thanks [@mogeko](https://github.com/mogeko)! - Implementing page-by-page rendering for paginated content.
+
 ## 0.2.9
 
 ### Patch Changes
