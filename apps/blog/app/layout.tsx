@@ -3,7 +3,7 @@ import { getYear } from "date-fns";
 import type { Metadata } from "next";
 import { GlobalHotkey } from "@/components/global-hotkey";
 import { plainText } from "@/components/text";
-import { isFullDatabase, notion } from "@/lib/notion";
+import { retrieveDatabase } from "@/lib/notion";
 import { formatUUID } from "@/lib/utils";
 import pkg from "@/package.json";
 
@@ -12,18 +12,15 @@ import "@/styles/globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const database_id = formatUUID(process.env.NOTION_DATABASE_ID);
+  const database = await retrieveDatabase(database_id);
 
-  if (database_id) {
-    const database = await notion.databases.retrieve({ database_id });
+  if (database) {
+    const title = plainText(database.title);
 
-    if (isFullDatabase(database)) {
-      const title = plainText(database.title);
-
-      return {
-        title: { default: title, template: `%s | ${title}` },
-        description: pkg.description,
-      };
-    }
+    return {
+      title: { default: title, template: `%s | ${title}` },
+      description: pkg.description,
+    };
   }
 
   return {
@@ -32,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
+const RootLayout: React.FC<LayoutProps<"/">> = ({ children }) => {
   return (
     <html lang="zh-CN">
       <head>

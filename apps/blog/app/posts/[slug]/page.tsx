@@ -8,7 +8,7 @@ import { Heading } from "@/components/ui/heading";
 import { Link } from "@/components/ui/link";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
-import { retrievePage } from "@/lib/retrieve-page";
+import { retrievePage } from "@/lib/notion";
 import { formatUUID } from "@/lib/utils";
 
 export async function generateMetadata({ params }: PageProps<"/posts/[slug]">) {

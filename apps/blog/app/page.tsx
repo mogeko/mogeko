@@ -1,6 +1,5 @@
 import { getYear } from "date-fns";
 import type { NextPage } from "next";
-import { cacheLife, cacheTag } from "next/cache";
 import { Suspense } from "react";
 import { RichText } from "@/components/text";
 import { Details, Summary } from "@/components/ui/accordion";
@@ -8,28 +7,12 @@ import { ActionLink } from "@/components/ui/action-link";
 import { Badges } from "@/components/ui/badges";
 import { Heading } from "@/components/ui/heading";
 import { Spinner } from "@/components/ui/spinner";
-import { isFullDatabase, isFullPage, notion } from "@/lib/notion";
+import { isFullPage, notion, retrieveDatabase } from "@/lib/notion";
 import { formatUUID, groupBy } from "@/lib/utils";
 import pkg from "@/package.json";
 
-async function retrieveDatabase(database_id?: string) {
-  "use cache";
-
-  if (database_id) {
-    const database = await notion.databases.retrieve({ database_id });
-
-    cacheTag("notion", "database", database_id);
-    cacheLife("default");
-
-    if (isFullDatabase(database)) {
-      return database;
-    }
-  }
-}
-
-const Home: NextPage = async () => {
+const Home: NextPage<PageProps<"/">> = async () => {
   const database_id = formatUUID(process.env.NOTION_DATABASE_ID);
-
   const database = await retrieveDatabase(database_id);
 
   if (!database) {
