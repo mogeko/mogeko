@@ -68,7 +68,7 @@ export async function setImageParams<T extends ImageParam>(
 
     const data = await uploader(Buffer.from(buffer), meta);
 
-    await redis.hset(`${BUCKET_NAME ?? "images"}:${key}`, data);
+    await redis.hset(`image:${key}`, data);
 
     after(() => updateTag(key));
 
@@ -81,12 +81,10 @@ export async function getImageParams<T extends ImageMetaWithPath>(
 ): Promise<T | null> {
   "use cache";
 
-  const bucket = BUCKET_NAME ?? "images";
-
-  cacheTag(bucket, key);
+  cacheTag("image", key);
   cacheLife("max");
 
-  return await redis.hgetall<T>(`${bucket}:${key}`);
+  return await redis.hgetall<T>(`image:${key}`);
 }
 
 type Options = {
