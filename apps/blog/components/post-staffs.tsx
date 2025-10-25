@@ -3,7 +3,7 @@ import { RichText } from "@/components/text";
 import { BreadcrumbItem } from "@/components/ui/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 import { Link } from "@/components/ui/link";
-import { retrievePage } from "@/lib/retrieve-page";
+import { retrievePage } from "@/lib/notion";
 
 export const PostBcItem: React.FC<{
   id: Promise<string | undefined>;

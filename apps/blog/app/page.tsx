@@ -1,6 +1,5 @@
 import { getYear } from "date-fns";
 import type { NextPage } from "next";
-import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { RichText } from "@/components/text";
 import { Details, Summary } from "@/components/ui/accordion";
@@ -8,9 +7,41 @@ import { ActionLink } from "@/components/ui/action-link";
 import { Badges } from "@/components/ui/badges";
 import { Heading } from "@/components/ui/heading";
 import { Spinner } from "@/components/ui/spinner";
-import { isFullDatabase, isFullPage, notion } from "@/lib/notion";
+import { isFullPage, notion, retrieveDatabase } from "@/lib/notion";
 import { formatUUID, groupBy } from "@/lib/utils";
 import pkg from "@/package.json";
+
+const Home: NextPage<PageProps<"/">> = async () => {
+  const database_id = formatUUID(process.env.NOTION_DATABASE_ID);
+  const database = await retrieveDatabase(database_id);
+
+  if (!database) {
+    throw new Error(
+      `Unable to retrieve Notion Database: ${database_id ?? ""}.`,
+    );
+  }
+
+  return (
+    <div className="flex flex-1 flex-col gap-1 max-w-[80ch] px-[2ch] py-2">
+      <section>
+        <hgroup className="flex gap-[1ch]">
+          <h1>
+            <RichText richText={database.title} />
+          </h1>
+          <Badges>{pkg.version}</Badges>
+        </hgroup>
+        <p>
+          <RichText richText={database.description} />
+        </p>
+      </section>
+      {database.data_sources.map(({ id }) => (
+        <Suspense key={id} fallback={<Spinner />}>
+          <PageFeeds id={id} />
+        </Suspense>
+      ))}
+    </div>
+  );
+};
 
 const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
   const { results } = await notion.dataSources.query({
@@ -48,37 +79,6 @@ const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
       </Details>
     </section>
   ));
-};
-
-const Home: NextPage = async () => {
-  const database_id = formatUUID(process.env.NOTION_DATABASE_ID);
-
-  if (!database_id) return notFound();
-
-  const database = await notion.databases.retrieve({ database_id });
-
-  if (!isFullDatabase(database)) return notFound();
-
-  return (
-    <div className="flex flex-1 flex-col gap-1 max-w-[80ch] px-[2ch] py-2">
-      <section>
-        <hgroup className="flex gap-[1ch]">
-          <h1>
-            <RichText richText={database.title} />
-          </h1>
-          <Badges>{pkg.version}</Badges>
-        </hgroup>
-        <p>
-          <RichText richText={database.description} />
-        </p>
-      </section>
-      {database.data_sources.map(({ id }) => (
-        <Suspense key={id} fallback={<Spinner />}>
-          <PageFeeds id={id} />
-        </Suspense>
-      ))}
-    </div>
-  );
 };
 
 export default Home;

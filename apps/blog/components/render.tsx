@@ -1,3 +1,4 @@
+import { cacheLife, cacheTag } from "next/cache";
 import dynamic from "next/dynamic";
 import { Fragment, Suspense } from "react";
 import { twMerge } from "tailwind-merge";
@@ -13,7 +14,12 @@ import { ListItem } from "@/components/ui/list";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { colorVariants } from "@/lib/colors";
-import { type BlockObjectResponse, isFullBlock, notion } from "@/lib/notion";
+import {
+  type BlockObjectResponse,
+  isFullBlock,
+  type ListBlockChildrenParameters,
+  notion,
+} from "@/lib/notion";
 import { formatUUID } from "@/lib/utils";
 
 const Equation = dynamic(async () => {
@@ -37,7 +43,7 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
           </Summary>
           {block.has_children && (
             <Suspense fallback={<Spinner />}>
-              <NotionRender id={block.id} />
+              <NotionRender block_id={block.id} />
             </Suspense>
           )}
         </Details>
@@ -60,7 +66,7 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
           </Summary>
           {block.has_children && (
             <Suspense fallback={<Spinner />}>
-              <NotionRender id={block.id} />
+              <NotionRender block_id={block.id} />
             </Suspense>
           )}
         </Details>
@@ -83,7 +89,7 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
           </Summary>
           {block.has_children && (
             <Suspense fallback={<Spinner />}>
-              <NotionRender id={block.id} />
+              <NotionRender block_id={block.id} />
             </Suspense>
           )}
         </Details>
@@ -154,7 +160,7 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
               </p>
               {block.has_children && (
                 <Suspense fallback={<Spinner />}>
-                  <NotionRender id={block.id} />
+                  <NotionRender block_id={block.id} />
                 </Suspense>
               )}
             </div>
@@ -181,7 +187,7 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
           </p>
           {block.has_children && (
             <Suspense fallback={<Spinner />}>
-              <NotionRender id={block.id} />
+              <NotionRender block_id={block.id} />
             </Suspense>
           )}
         </blockquote>
@@ -211,7 +217,7 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
             </p>
             {block.has_children && (
               <Suspense fallback={<Spinner />}>
-                <NotionRender id={block.id} />
+                <NotionRender block_id={block.id} />
               </Suspense>
             )}
           </div>
@@ -234,7 +240,7 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
             </p>
             {block.has_children && (
               <Suspense fallback={<Spinner />}>
-                <NotionRender id={block.id} />
+                <NotionRender block_id={block.id} />
               </Suspense>
             )}
           </div>
@@ -250,7 +256,7 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
           </Summary>
           {block.has_children && (
             <Suspense fallback={<Spinner />}>
-              <NotionRender id={block.id} />
+              <NotionRender block_id={block.id} />
             </Suspense>
           )}
         </Details>
@@ -266,7 +272,7 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
         <div className="flex flex-col justify-stretch items-stretch not-first:mt-1 sm:gap-[1ch] sm:flex-row">
           {block.has_children && (
             <Suspense fallback={<Spinner />}>
-              <NotionRender id={block.id} />
+              <NotionRender block_id={block.id} />
             </Suspense>
           )}
         </div>
@@ -278,7 +284,7 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
         <div className="flex-initial flex-col justify-start items-start w-full">
           {block.has_children && (
             <Suspense fallback={<Spinner />}>
-              <NotionRender id={block.id} />
+              <NotionRender block_id={block.id} />
             </Suspense>
           )}
         </div>
@@ -308,29 +314,39 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
   }
 };
 
-export const NotionRender: React.FC<{
-  id: string;
-  cursor?: string | null;
-}> = async ({ cursor, id }) => {
-  const blocks = await notion.blocks.children.list({
-    block_id: id,
-    start_cursor: cursor ?? void 0,
+export const NotionRender: React.FC<
+  Omit<ListBlockChildrenParameters, "start_cursor"> & {
+    start_cursor?: string | null;
+  }
+> = async ({ start_cursor, ...props }) => {
+  const { results, has_more, next_cursor } = await queryBlocks({
+    ...props,
+    start_cursor: start_cursor ?? void 0,
   });
 
   return (
     <Fragment>
-      {blocks.results.map((block, i) => {
+      {results.map((block, i) => {
         return (
           isFullBlock(block) && (
             <NotionBlock key={`notion-${i}-${block.id}`} block={block} />
           )
         );
       })}
-      {blocks.has_more && (
+      {has_more && (
         <Suspense fallback={<Spinner />}>
-          <NotionRender id={id} cursor={blocks.next_cursor} />
+          <NotionRender start_cursor={next_cursor} {...props} />
         </Suspense>
       )}
     </Fragment>
   );
 };
+
+async function queryBlocks(args: ListBlockChildrenParameters) {
+  "use cache";
+
+  cacheTag("notion", "block", args.block_id);
+  cacheLife("default");
+
+  return await notion.blocks.children.list(args);
+}
