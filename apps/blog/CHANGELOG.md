@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.2.11
+
+### Patch Changes
+
+- [#410](https://github.com/mogeko/mogeko/pull/410) [`0885380`](https://github.com/mogeko/mogeko/commit/0885380407578b2e463234428d17a1af289866ac) Thanks [@mogeko](https://github.com/mogeko)! - Optimize the format of database keys to make them more semantic and prepare for handling non-Notion images.
+
 ## 0.2.10
 
 ### Patch Changes
