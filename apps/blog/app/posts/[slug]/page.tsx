@@ -9,10 +9,10 @@ import { Link } from "@/components/ui/link";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { retrievePage } from "@/lib/notion";
-import { formatUUID } from "@/lib/utils";
+import { shortenUUID } from "@/lib/utils";
 
 export async function generateMetadata({ params }: PageProps<"/posts/[slug]">) {
-  const id = formatUUID((await params).slug);
+  const id = shortenUUID((await params).slug);
   const props = (await retrievePage(id))?.properties;
 
   if (props?.Name.type === "title" && props.Tags.type === "multi_select") {
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps<"/posts/[slug]">) {
 }
 
 const Page: NextPage<PageProps<"/posts/[slug]">> = ({ params }) => {
-  const id = params.then(({ slug }) => formatUUID(slug));
+  const id = params.then(({ slug }) => shortenUUID(slug));
 
   return (
     <div className="flex flex-1 flex-col max-w-[80ch] px-[2ch] py-2">

@@ -53,7 +53,7 @@ export function groupBy<K, T>(
   return result;
 }
 
-export function formatUUID(uuid?: string) {
+export function shortenUUID(uuid?: string) {
   let result: string | undefined;
 
   if (uuid?.length === 36) result = uuid.replace(/[-]/g, "");

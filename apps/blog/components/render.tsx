@@ -20,7 +20,7 @@ import {
   type ListBlockChildrenParameters,
   notion,
 } from "@/lib/notion";
-import { formatUUID } from "@/lib/utils";
+import { shortenUUID } from "@/lib/utils";
 
 const Equation = dynamic(async () => {
   return import("@/components/equation").then((m) => m.Equation);
@@ -304,7 +304,7 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
       return (
         <ActionLink
           className="[&:not(&+&):not(:first-child)]:mt-1"
-          href={`/posts/${formatUUID(parent_id)}/${formatUUID(block.id)}`}
+          href={`/posts/${shortenUUID(parent_id)}/${shortenUUID(block.id)}`}
           icon="→"
         >
           {child_page.title}

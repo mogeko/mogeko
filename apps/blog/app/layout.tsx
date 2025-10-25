@@ -4,14 +4,14 @@ import type { Metadata } from "next";
 import { GlobalHotkey } from "@/components/global-hotkey";
 import { plainText } from "@/components/text";
 import { retrieveDatabase } from "@/lib/notion";
-import { formatUUID } from "@/lib/utils";
+import { shortenUUID } from "@/lib/utils";
 import pkg from "@/package.json";
 
 import "@chinese-fonts/maple-mono-cn/dist/MapleMono-CN-Regular/result.css";
 import "@/styles/globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const database_id = formatUUID(process.env.NOTION_DATABASE_ID);
+  const database_id = shortenUUID(process.env.NOTION_DATABASE_ID);
   const database = await retrieveDatabase(database_id);
 
   if (database) {
