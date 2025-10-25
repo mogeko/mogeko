@@ -11,22 +11,24 @@ import "@chinese-fonts/maple-mono-cn/dist/MapleMono-CN-Regular/result.css";
 import "@/styles/globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const metadata: Metadata = {
+    title: pkg.name,
+    robots: { index: true, follow: true },
+    description: pkg.description,
+  };
+
   const database_id = shortenUUID(process.env.NOTION_DATABASE_ID);
   const database = await retrieveDatabase(database_id);
 
   if (database) {
     const title = plainText(database.title);
 
-    return {
+    Object.assign(metadata, {
       title: { default: title, template: `%s | ${title}` },
-      description: pkg.description,
-    };
+    });
   }
 
-  return {
-    title: pkg.name,
-    description: pkg.description,
-  };
+  return metadata;
 }
 
 const RootLayout: React.FC<LayoutProps<"/">> = ({ children }) => {
