@@ -1,6 +1,6 @@
 import { Link } from "@/components/ui/link";
 import type { MentionRichTextItemResponse } from "@/lib/notion";
-import { formatUUID } from "@/lib/utils";
+import { shortenUUID } from "@/lib/utils";
 
 export const Mention: React.FC<
   React.PropsWithChildren<{
@@ -12,7 +12,7 @@ export const Mention: React.FC<
     return (
       <Link
         className={className}
-        href={`/posts/${formatUUID(mention.page.id)}`}
+        href={`/posts/${shortenUUID(mention.page.id)}`}
       >
         {children}
       </Link>
@@ -23,7 +23,7 @@ export const Mention: React.FC<
     return (
       <Link
         className={className}
-        href={`/posts/${formatUUID(mention.database.id)}`}
+        href={`/posts/${shortenUUID(mention.database.id)}`}
       >
         {children}
       </Link>

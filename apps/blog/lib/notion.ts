@@ -9,7 +9,7 @@ export const notion = new Client({
     return await fetch(input, {
       next: {
         revalidate: 10 * 60, // 10 minute
-        tags: ["notion"],
+        tags: ["notion", "fetch"],
       },
       ...init,
     });

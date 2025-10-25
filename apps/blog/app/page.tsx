@@ -8,11 +8,11 @@ import { Badges } from "@/components/ui/badges";
 import { Heading } from "@/components/ui/heading";
 import { Spinner } from "@/components/ui/spinner";
 import { isFullPage, notion, retrieveDatabase } from "@/lib/notion";
-import { formatUUID, groupBy } from "@/lib/utils";
+import { groupBy, shortenUUID } from "@/lib/utils";
 import pkg from "@/package.json";
 
 const Home: NextPage<PageProps<"/">> = async () => {
-  const database_id = formatUUID(process.env.NOTION_DATABASE_ID);
+  const database_id = shortenUUID(process.env.NOTION_DATABASE_ID);
   const database = await retrieveDatabase(database_id);
 
   if (!database) {
@@ -68,7 +68,7 @@ const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
             return (
               page.properties.Name.type === "title" && (
                 <li key={page.id}>
-                  <ActionLink href={`/posts/${formatUUID(page.id)}`} icon="→">
+                  <ActionLink href={`/posts/${shortenUUID(page.id)}`} icon="→">
                     <RichText richText={page.properties.Name.title} />
                   </ActionLink>
                 </li>
