@@ -1,21 +1,28 @@
-import { basename, parse } from "node:path/posix";
+import { subtle } from "node:crypto";
+import { parse } from "node:path/posix";
 import { URL } from "node:url";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import NextImage from "next/image";
 import { getImage, type ImageResp, setImage } from "@/lib/image-helper";
 import { BUCKET_NAME, s3 } from "@/lib/s3";
 
+export type NotionImageResp = ImageResp & { filePath: string };
+
 export const Image: React.FC<
-  React.ComponentProps<typeof NextImage> & { uploadId?: string }
-> = async ({ alt, src, uploadId, ...props }) => {
+  React.ComponentProps<typeof NextImage> & { notionId?: string }
+> = async ({ alt, src, notionId, ...props }) => {
   const url = new URL(src);
-  const { name: fileName, dir } = parse(url.pathname);
-  const key = uploadId || basename(dir);
+  const key = notionId || (await sha1(url.toString()));
+  const { name: fileName } = parse(url.pathname);
 
   try {
-    const data: NotionImageResp | ImageResp = await getImage(key).then(
-      (data) => {
-        return data || upload({ key, url, fileName });
+    const data: ImageResp | NotionImageResp = await getImage(key).then(
+      (imageResp) => {
+        if (!imageResp) {
+          return (notionId ? upload : setImage)({ key, url, fileName });
+        } else {
+          return imageResp;
+        }
       },
     );
 
@@ -38,9 +45,15 @@ export const Image: React.FC<
   }
 };
 
-export type NotionImageResp = ImageResp & { filePath: string };
+export async function sha1(plaintext: string): Promise<string> {
+  const utf8 = new TextEncoder().encode(plaintext);
 
-export async function upload(
+  return await subtle.digest("SHA-1", utf8).then((hash) => {
+    return Buffer.from(hash).toString("hex");
+  });
+}
+
+async function upload(
   options: Parameters<typeof setImage>[number],
 ): Promise<NotionImageResp> {
   const filePath = `${options.key}/${options.fileName}`;

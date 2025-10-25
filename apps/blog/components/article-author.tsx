@@ -15,7 +15,7 @@ export const Author: React.FC<{ page: PageObjectResponse }> = async (props) => {
       {avatar_url && (
         <Suspense fallback={<Spinner className="w-[43px] h-[43px]" />}>
           <Image
-            uploadId={user_id}
+            notionId={user_id}
             src={avatar_url}
             className="w-[43px] mr-[calc(5ch-43px)] inline-block relative h-2"
             height={43}
