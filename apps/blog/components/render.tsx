@@ -118,18 +118,23 @@ const NotionBlock: React.FC<{ block: BlockObjectResponse }> = ({ block }) => {
     }
 
     case "image": {
-      if (block.image.type === "file") {
-        const { file, caption } = block.image;
-        const alt = plainText(caption);
+      let props: { notionId?: string; src: string } | undefined;
 
-        return (
-          <div className="mt-1">
-            <Image uploadId={block.id} width={729.6} src={file.url} alt={alt} />
-          </div>
-        );
+      if (block.image.type === "file") {
+        props = { src: block.image.file.url, notionId: block.id };
+      } else if (block.image.type === "external") {
+        props = { src: block.image.external.url };
       }
 
-      return;
+      if (!props) return;
+
+      const alt = plainText(block.image.caption);
+
+      return (
+        <div className="mt-1">
+          <Image width={729.6} alt={alt} {...props} />
+        </div>
+      );
     }
 
     case "code": {

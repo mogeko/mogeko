@@ -1,25 +1,36 @@
-import { basename, parse } from "node:path/posix";
+import { subtle } from "node:crypto";
+import { parse } from "node:path/posix";
 import { URL } from "node:url";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 import NextImage from "next/image";
-import { getImageParams, upload } from "@/lib/image-upload";
+import { getImage, type ImageResp, setImage } from "@/lib/image-helper";
+import { BUCKET_NAME, s3 } from "@/lib/s3";
+
+export type NotionImageResp = ImageResp & { filePath: string };
 
 export const Image: React.FC<
-  React.ComponentProps<typeof NextImage> & { uploadId?: string }
-> = async ({ alt, src, uploadId, ...props }) => {
+  React.ComponentProps<typeof NextImage> & { notionId?: string }
+> = async ({ alt, src, notionId, ...props }) => {
   const url = new URL(src);
-  const { name: fileName, dir } = parse(url.pathname);
-  const key = uploadId || basename(dir);
+  const key = notionId || (await sha1(url.toString()));
+  const { name: fileName } = parse(url.pathname);
 
   try {
-    const data = await getImageParams(key).then((data) => {
-      return data || upload({ key, url, fileName });
-    });
+    const data: ImageResp | NotionImageResp = await getImage(key).then(
+      (imageResp) => {
+        if (!imageResp) {
+          return (notionId ? upload : setImage)({ key, url, fileName });
+        } else {
+          return imageResp;
+        }
+      },
+    );
 
-    const { height, width, filePath, name, blurDataURL, mimeType } = data;
+    const { height, width, name, blurDataURL, mimeType, ...rest } = data;
 
     return (
       <NextImage
-        src={`/image/${filePath}`}
+        src={"filePath" in rest ? `/image/${rest.filePath}` : src}
         height={props.width ? (height / width) * Number(props.width) : height}
         alt={alt.length ? alt : name}
         unoptimized={mimeType === "image/svg+xml"}
@@ -33,3 +44,36 @@ export const Image: React.FC<
     return <img src={url.toString()} alt={alt} />;
   }
 };
+
+export async function sha1(plaintext: string): Promise<string> {
+  const utf8 = new TextEncoder().encode(plaintext);
+
+  return await subtle.digest("SHA-1", utf8).then((hash) => {
+    return Buffer.from(hash).toString("hex");
+  });
+}
+
+async function upload(
+  options: Parameters<typeof setImage>[number],
+): Promise<NotionImageResp> {
+  const filePath = `${options.key}/${options.fileName}`;
+
+  return await setImage(async (buffer, meta) => {
+    const { ETag: _eTag } = await s3.send(
+      new PutObjectCommand({
+        Bucket: BUCKET_NAME,
+        Body: buffer,
+        Key: filePath,
+        ContentType: meta.mimeType,
+        Metadata: {
+          uploadedBy: "mogeko-blog",
+          height: meta.height.toString(),
+          width: meta.width.toString(),
+          blurDataURL: meta.blurDataURL,
+        },
+      }),
+    );
+
+    return { ...meta, filePath };
+  }, options);
+}

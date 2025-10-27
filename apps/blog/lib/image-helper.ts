@@ -1,46 +1,21 @@
 import { Buffer } from "node:buffer";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { lookup } from "mime-types";
 import { cacheLife, cacheTag, updateTag } from "next/cache";
 import { after } from "next/server";
 import sharp from "sharp";
 import { redis } from "@/lib/redis";
-import { BUCKET_NAME, s3 } from "@/lib/s3";
 
-export async function upload(options: Options): Promise<ImageMetaWithPath> {
-  const filePath = `${options.key}/${options.fileName}`;
-
-  return await setImageParams<ImageMetaWithPath>(async (buffer, meta) => {
-    const { ETag: _eTag } = await s3.send(
-      new PutObjectCommand({
-        Bucket: BUCKET_NAME,
-        Body: buffer,
-        Key: filePath,
-        ContentType: meta.mimeType,
-        Metadata: {
-          uploadedBy: "mogeko-blog",
-          height: meta.height.toString(),
-          width: meta.width.toString(),
-          blurDataURL: meta.blurDataURL,
-        },
-      }),
-    );
-
-    return { ...meta, filePath };
-  }, options);
-}
-
-export async function setImageParams<T extends ImageParam>(
-  uploader: (buff: Buffer, meta: ImageParam) => Promise<T>,
+export async function setImage<T extends ImageResp>(
+  uploader: (buff: Buffer, meta: ImageResp) => Promise<T>,
   options: Options,
 ): Promise<T>;
-export async function setImageParams(options: Options): Promise<ImageParam>;
-export async function setImageParams<T extends ImageParam>(
-  uploader: Options | ((buff: Buffer, meta: ImageParam) => Promise<T>),
+export async function setImage(options: Options): Promise<ImageResp>;
+export async function setImage<T extends ImageResp>(
+  uploader: Options | ((buff: Buffer, meta: ImageResp) => Promise<T>),
   options?: Options,
 ): Promise<T> {
   if (!(uploader instanceof Function) || !options) {
-    return setImageParams<T>(async (_, meta) => meta as T, uploader as Options);
+    return setImage<T>(async (_, meta) => meta as T, uploader as Options);
   } else {
     const res = await fetch(options.url);
 
@@ -76,7 +51,7 @@ export async function setImageParams<T extends ImageParam>(
   }
 }
 
-export async function getImageParams<T extends ImageMetaWithPath>(
+export async function getImage<T extends ImageResp>(
   key: string,
 ): Promise<T | null> {
   "use cache";
@@ -93,14 +68,10 @@ type Options = {
   key: string;
 };
 
-export type ImageParam = {
+export type ImageResp = {
   name: string;
   height: number;
   width: number;
-  mimeType?: string;
   blurDataURL: string;
+  mimeType?: string;
 };
-
-export type ImageMetaWithPath = {
-  filePath: string;
-} & ImageParam;
