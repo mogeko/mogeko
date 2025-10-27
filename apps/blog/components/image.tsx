@@ -16,13 +16,9 @@ export const Image: React.FC<
   const { name: fileName } = parse(url.pathname);
 
   try {
-    const data: ImageResp | NotionImageResp = await getImage(key).then(
-      (imageResp) => {
-        if (!imageResp) {
-          return (notionId ? upload : setImage)({ key, url, fileName });
-        } else {
-          return imageResp;
-        }
+    const data = await getImage<ImageResp | NotionImageResp>(key).catch(
+      (_err: unknown) => {
+        return (notionId ? upload : setImage)({ key, url, fileName });
       },
     );
 
@@ -39,7 +35,7 @@ export const Image: React.FC<
         {...props}
       />
     );
-  } catch (_err) {
+  } catch (_err: unknown) {
     // biome-ignore lint: Rollback to unoptimized original image
     return <img src={url.toString()} alt={alt} />;
   }
