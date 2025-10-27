@@ -1,5 +1,11 @@
-import { Client, isFullDatabase, isFullPage } from "@notionhq/client";
+import {
+  APIErrorCode,
+  Client,
+  isFullDatabase,
+  isFullPage,
+} from "@notionhq/client";
 import { cacheLife, cacheTag } from "next/cache";
+import { notFound } from "next/navigation";
 
 import "server-only";
 
@@ -19,14 +25,26 @@ export const notion = new Client({
 export async function retrieveDatabase(database_id?: string) {
   "use cache";
 
-  if (database_id) {
-    const database = await notion.databases.retrieve({ database_id });
+  try {
+    if (!database_id) {
+      throw { code: APIErrorCode.ObjectNotFound };
+    }
 
     cacheTag("notion", "database", database_id);
     cacheLife("default");
 
+    const database = await notion.databases.retrieve({ database_id });
+
     if (isFullDatabase(database)) {
       return database;
+    }
+  } catch (err: any) {
+    if ("code" in err) {
+      switch (err.code) {
+        case APIErrorCode.ObjectNotFound: {
+          notFound();
+        }
+      }
     }
   }
 }
@@ -34,7 +52,11 @@ export async function retrieveDatabase(database_id?: string) {
 export async function retrievePage(page_id?: string) {
   "use cache";
 
-  if (page_id) {
+  try {
+    if (!page_id) {
+      throw { code: APIErrorCode.ObjectNotFound };
+    }
+
     cacheTag("notion", "page", page_id);
     cacheLife("default");
 
@@ -42,6 +64,14 @@ export async function retrievePage(page_id?: string) {
 
     if (isFullPage(page)) {
       return page;
+    }
+  } catch (err: any) {
+    if ("code" in err) {
+      switch (err.code) {
+        case APIErrorCode.ObjectNotFound: {
+          notFound();
+        }
+      }
     }
   }
 }
