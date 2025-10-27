@@ -19,10 +19,6 @@ export async function setImage<T extends ImageResp>(
     const res = await fetch(options.url);
 
     if (!res.ok) {
-      if ((await res.text()).match("Request has expired")) {
-        throw new Error("Notion image request has expired, revalidating tag");
-      }
-
       throw new Error(`Failed to fetch image: ${res.status}`);
     }
 
