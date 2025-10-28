@@ -3,6 +3,7 @@ import { parse } from "node:path/posix";
 import { URL } from "node:url";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import NextImage from "next/image";
+import { NotFoundError } from "@/lib/errors";
 import { getImage, type ImageResp, setImage } from "@/lib/image-helper";
 import { BUCKET_NAME, s3 } from "@/lib/s3";
 
@@ -17,8 +18,12 @@ export const Image: React.FC<
 
   try {
     const data = await getImage<ImageResp | NotionImageResp>(key).catch(
-      (_err: unknown) => {
-        return (notionId ? upload : setImage)({ key, url, fileName });
+      (err: unknown) => {
+        if (NotFoundError.isNotFoundError(err)) {
+          return (notionId ? upload : setImage)({ key, url, fileName });
+        } else {
+          throw err;
+        }
       },
     );
 

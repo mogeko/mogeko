@@ -2,6 +2,7 @@ import { Buffer } from "node:buffer";
 import { lookup } from "mime-types";
 import { cacheLife, cacheTag } from "next/cache";
 import sharp from "sharp";
+import { NotFoundError } from "@/lib/errors";
 import { redis } from "@/lib/redis";
 
 export async function setImage<T extends ImageResp>(
@@ -45,14 +46,14 @@ export async function setImage<T extends ImageResp>(
 export async function getImage<T extends ImageResp>(key: string): Promise<T> {
   "use cache";
 
-  cacheTag("image", key);
-  cacheLife("max");
-
   const data = await redis.hgetall<T>(`image:${key}`);
 
   if (!data) {
-    throw new Error(`Values not found for key: ${key}`);
+    throw new NotFoundError(`No record found with key: ${key}`);
   }
+
+  cacheTag("image", data.name, key);
+  cacheLife("max");
 
   return data;
 }
