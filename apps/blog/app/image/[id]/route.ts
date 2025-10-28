@@ -1,21 +1,20 @@
+import { notFound } from "next/navigation";
 import { type NextRequest, NextResponse } from "next/server";
 import type { NotionImageResp } from "@/components/image";
 import { getImage, type ImageResp } from "@/lib/image-helper";
 
-type RContext = RouteContext<"/image/[id]">;
-
-export async function GET(req: NextRequest, ctx: RContext) {
+export async function GET(req: NextRequest, ctx: RouteContext<"/image/[id]">) {
   const { id } = await ctx.params;
 
-  type Resp = ImageResp | NotionImageResp;
+  try {
+    const data = await getImage<ImageResp | NotionImageResp>(id);
 
-  const redirectURL = await getImage<Resp>(id).then((data) => {
-    if (data && "filePath" in data) {
-      return new URL(`/image/${data.filePath}`, req.url);
+    if ("filePath" in data) {
+      return NextResponse.redirect(new URL(`/image/${data.filePath}`, req.url));
     } else {
-      return new URL("/404", req.url);
+      throw new Error(`Values not found for key: ${id}`);
     }
-  });
-
-  return NextResponse.redirect(redirectURL);
+  } catch (_err: unknown) {
+    notFound();
+  }
 }
