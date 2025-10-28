@@ -16,9 +16,7 @@ const Home: NextPage<PageProps<"/">> = async () => {
   const database = await retrieveDatabase(database_id);
 
   if (!database) {
-    throw new Error(
-      `Unable to retrieve Notion Database: ${database_id ?? ""}.`,
-    );
+    throw new Error(`Unable to retrieve Notion Database: ${database_id}.`);
   }
 
   return (

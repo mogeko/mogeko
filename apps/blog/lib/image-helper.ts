@@ -1,8 +1,8 @@
 import { Buffer } from "node:buffer";
 import { lookup } from "mime-types";
-import { cacheLife, cacheTag, updateTag } from "next/cache";
-import { after } from "next/server";
+import { cacheLife, cacheTag } from "next/cache";
 import sharp from "sharp";
+import { NotFoundError } from "@/lib/errors";
 import { redis } from "@/lib/redis";
 
 export async function setImage<T extends ImageResp>(
@@ -20,12 +20,6 @@ export async function setImage<T extends ImageResp>(
     const res = await fetch(options.url);
 
     if (!res.ok) {
-      if ((await res.text()).match("Request has expired")) {
-        after(() => updateTag("notion"));
-
-        throw new Error("Notion image request has expired, revalidating tag");
-      }
-
       throw new Error(`Failed to fetch image: ${res.status}`);
     }
 
@@ -45,21 +39,23 @@ export async function setImage<T extends ImageResp>(
 
     await redis.hset(`image:${key}`, data);
 
-    after(() => updateTag(key));
-
     return data;
   }
 }
 
-export async function getImage<T extends ImageResp>(
-  key: string,
-): Promise<T | null> {
+export async function getImage<T extends ImageResp>(key: string): Promise<T> {
   "use cache";
 
-  cacheTag("image", key);
+  const data = await redis.hgetall<T>(`image:${key}`);
+
+  if (!data) {
+    throw new NotFoundError(`No record found with key: ${key}`);
+  }
+
+  cacheTag("image", data.name, key);
   cacheLife("max");
 
-  return await redis.hgetall<T>(`image:${key}`);
+  return data;
 }
 
 type Options = {

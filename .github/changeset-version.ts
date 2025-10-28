@@ -21,7 +21,7 @@ try {
   ];
 
   console.log(results.map(({ stdout, stderr }) => stdout || stderr).join("\n"));
-} catch (error) {
+} catch (error: any) {
   console.error(error.message);
   process.exit(1);
 }

@@ -1,11 +1,7 @@
-import {
-  APIErrorCode,
-  Client,
-  isFullDatabase,
-  isFullPage,
-} from "@notionhq/client";
+import { Client, isFullDatabase, isFullPage } from "@notionhq/client";
 import { cacheLife, cacheTag } from "next/cache";
 import { notFound } from "next/navigation";
+import { APIErrorCode, NotFoundError } from "@/lib/errors";
 
 import "server-only";
 
@@ -27,7 +23,7 @@ export async function retrieveDatabase(database_id?: string) {
 
   try {
     if (!database_id) {
-      throw { code: APIErrorCode.ObjectNotFound };
+      throw new NotFoundError(`Database ID is required`);
     }
 
     cacheTag("notion", "database", database_id);
@@ -38,8 +34,8 @@ export async function retrieveDatabase(database_id?: string) {
     if (isFullDatabase(database)) {
       return database;
     }
-  } catch (err: any) {
-    if ("code" in err) {
+  } catch (err: unknown) {
+    if (err instanceof Error && "code" in err) {
       switch (err.code) {
         case APIErrorCode.ObjectNotFound: {
           notFound();
@@ -54,7 +50,7 @@ export async function retrievePage(page_id?: string) {
 
   try {
     if (!page_id) {
-      throw { code: APIErrorCode.ObjectNotFound };
+      throw new NotFoundError(`No page found with id: ${page_id}`);
     }
 
     cacheTag("notion", "page", page_id);
@@ -66,7 +62,7 @@ export async function retrievePage(page_id?: string) {
       return page;
     }
   } catch (err: any) {
-    if ("code" in err) {
+    if (err instanceof Error && "code" in err) {
       switch (err.code) {
         case APIErrorCode.ObjectNotFound: {
           notFound();

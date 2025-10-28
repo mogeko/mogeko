@@ -3,6 +3,7 @@ import { parse } from "node:path/posix";
 import { URL } from "node:url";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import NextImage from "next/image";
+import { NotFoundError } from "@/lib/errors";
 import { getImage, type ImageResp, setImage } from "@/lib/image-helper";
 import { BUCKET_NAME, s3 } from "@/lib/s3";
 
@@ -16,12 +17,12 @@ export const Image: React.FC<
   const { name: fileName } = parse(url.pathname);
 
   try {
-    const data: ImageResp | NotionImageResp = await getImage(key).then(
-      (imageResp) => {
-        if (!imageResp) {
+    const data = await getImage<ImageResp | NotionImageResp>(key).catch(
+      (err: unknown) => {
+        if (NotFoundError.isNotFoundError(err)) {
           return (notionId ? upload : setImage)({ key, url, fileName });
         } else {
-          return imageResp;
+          throw err;
         }
       },
     );
@@ -39,7 +40,7 @@ export const Image: React.FC<
         {...props}
       />
     );
-  } catch (_err) {
+  } catch (_err: unknown) {
     // biome-ignore lint: Rollback to unoptimized original image
     return <img src={url.toString()} alt={alt} />;
   }
