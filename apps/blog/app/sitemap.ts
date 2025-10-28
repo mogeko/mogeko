@@ -1,10 +1,12 @@
 import type { MetadataRoute } from "next";
 import {
-  isFullDatabase,
   isFullPage,
   iteratePaginatedAPI,
   notion,
+  retrieveDatabase,
 } from "@/lib/notion";
+
+const queryDataSource = notion.dataSources.query;
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const databaseId = process.env.NOTION_DATABASE_ID;
@@ -15,25 +17,25 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   if (databaseId) {
-    const database = await notion.databases.retrieve({
-      database_id: databaseId,
-    });
+    const database = await retrieveDatabase(databaseId);
 
-    if (isFullDatabase(database)) {
-      database.data_sources.forEach(async ({ id }) => {
-        for await (const page of iteratePaginatedAPI(notion.dataSources.query, {
-          data_source_id: id,
-        })) {
-          if (isFullPage(page)) {
-            feeds.push({
-              url: `${baseUrl}/posts/${page.id}`,
-              lastModified: new Date(page.last_edited_time),
-              changeFrequency: "weekly",
-              priority: 0.8,
-            });
+    if (database) {
+      await Promise.all(
+        database.data_sources.map(async ({ id }) => {
+          for await (const page of iteratePaginatedAPI(queryDataSource, {
+            data_source_id: id,
+          })) {
+            if (isFullPage(page)) {
+              feeds.push({
+                url: `${baseUrl}/posts/${page.id}`,
+                lastModified: new Date(page.last_edited_time),
+                changeFrequency: "weekly",
+                priority: 0.8,
+              });
+            }
           }
-        }
-      });
+        }),
+      );
     }
   }
 
