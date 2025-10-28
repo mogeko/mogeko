@@ -10,8 +10,6 @@ export async function GET(req: NextRequest, ctx: RouteContext<"/image/[id]">) {
   try {
     const data = await getImage<ImageResp | NotionImageResp>(id);
 
-    console.log(data);
-
     if ("filePath" in data) {
       return NextResponse.redirect(new URL(`/image/${data.filePath}`, req.url));
     } else {
