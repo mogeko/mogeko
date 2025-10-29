@@ -2,11 +2,11 @@ import { intlFormat } from "date-fns";
 import { Suspense } from "react";
 import { Image } from "@/components/image";
 import { Spinner } from "@/components/ui/spinner";
-import { notion, type PageObjectResponse } from "@/lib/notion";
+import { type PageObjectResponse, retrieveUsers } from "@/lib/notion";
 
 export const Author: React.FC<{ page: PageObjectResponse }> = async (props) => {
   const user_id = props.page.created_by.id /* Long ID */;
-  const { avatar_url, name } = await notion.users.retrieve({ user_id });
+  const { avatar_url, name } = await retrieveUsers(user_id);
   const date = props.page.properties["Publish Date"];
   const publidhDate = date.type === "date" ? date.date?.start : null;
 

@@ -1,14 +1,14 @@
 import { TRow } from "@/components/table-row";
 import { Table, TableBody, TableHeader } from "@/components/ui/table";
-import { notion, type TableBlockObjectResponse } from "@/lib/notion";
+import { queryBlocks, type TableBlockObjectResponse } from "@/lib/notion";
 
 export const TableBox: React.FC<
   React.ComponentProps<typeof Table> & { block: TableBlockObjectResponse }
 > = async ({ block, ...props }) => {
   const { has_column_header: hy, has_row_header: hx } = block.table;
-  const [head, ...rest] = (
-    await notion.blocks.children.list({ block_id: block.id })
-  ).results;
+  const [head, ...rest] = await queryBlocks({ block_id: block.id }).then(
+    ({ results }) => results,
+  );
 
   return (
     <Table {...props}>

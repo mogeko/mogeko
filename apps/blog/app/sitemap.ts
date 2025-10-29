@@ -1,12 +1,5 @@
 import type { MetadataRoute } from "next";
-import {
-  isFullPage,
-  iteratePaginatedAPI,
-  notion,
-  retrieveDatabase,
-} from "@/lib/notion";
-
-const queryDataSource = notion.dataSources.query;
+import { isFullPage, queryDataSource, retrieveDatabase } from "@/lib/notion";
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const databaseId = process.env.NOTION_DATABASE_ID;
@@ -22,18 +15,18 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     if (database) {
       await Promise.all(
         database.data_sources.map(async ({ id }) => {
-          for await (const page of iteratePaginatedAPI(queryDataSource, {
-            data_source_id: id,
-          })) {
-            if (isFullPage(page)) {
-              feeds.push({
-                url: `${baseUrl}/posts/${page.id}`,
-                lastModified: new Date(page.last_edited_time),
-                changeFrequency: "weekly",
-                priority: 0.8,
-              });
-            }
-          }
+          await queryDataSource({ data_source_id: id }).then((dataSources) => {
+            dataSources.results.forEach((page) => {
+              if (isFullPage(page)) {
+                feeds.push({
+                  url: `${baseUrl}/posts/${page.id}`,
+                  lastModified: new Date(page.last_edited_time),
+                  changeFrequency: "weekly",
+                  priority: 0.8,
+                });
+              }
+            });
+          });
         }),
       );
     }

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { plainText } from "@/components/text";
-import { isFullDatabase, notion } from "@/lib/notion";
+import { retrieveDatabase } from "@/lib/notion";
 import pkg from "@/package.json";
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
@@ -11,9 +11,9 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
   ];
 
   if (database_id) {
-    const database = await notion.databases.retrieve({ database_id });
+    const database = await retrieveDatabase(database_id);
 
-    if (isFullDatabase(database)) {
+    if (database) {
       return {
         name: plainText(database.title),
         short_name: plainText(database.title),
