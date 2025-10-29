@@ -7,7 +7,7 @@ import { ActionLink } from "@/components/ui/action-link";
 import { Badges } from "@/components/ui/badges";
 import { Heading } from "@/components/ui/heading";
 import { Spinner } from "@/components/ui/spinner";
-import { isFullPage, notion, retrieveDatabase } from "@/lib/notion";
+import { isFullPage, queryDataSource, retrieveDatabase } from "@/lib/notion";
 import { groupBy, shortenUUID } from "@/lib/utils";
 import pkg from "@/package.json";
 
@@ -42,7 +42,7 @@ const Home: NextPage<PageProps<"/">> = async () => {
 };
 
 const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
-  const { results } = await notion.dataSources.query({
+  const { results } = await queryDataSource({
     data_source_id: id,
     sorts: [{ property: "%3DTrF", direction: "descending" }],
     filter:

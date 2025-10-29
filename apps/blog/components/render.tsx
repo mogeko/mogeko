@@ -1,4 +1,3 @@
-import { cacheLife, cacheTag } from "next/cache";
 import dynamic from "next/dynamic";
 import { Fragment, Suspense } from "react";
 import { twMerge } from "tailwind-merge";
@@ -18,7 +17,7 @@ import {
   type BlockObjectResponse,
   isFullBlock,
   type ListBlockChildrenParameters,
-  notion,
+  queryBlocks,
 } from "@/lib/notion";
 import { shortenUUID } from "@/lib/utils";
 
@@ -346,12 +345,3 @@ export const NotionRender: React.FC<
     </Fragment>
   );
 };
-
-async function queryBlocks(args: ListBlockChildrenParameters) {
-  "use cache";
-
-  cacheTag("notion", "block", args.block_id);
-  cacheLife("default");
-
-  return await notion.blocks.children.list(args);
-}

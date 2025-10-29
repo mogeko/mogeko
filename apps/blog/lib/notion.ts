@@ -5,18 +5,7 @@ import { APIErrorCode, NotFoundError } from "@/lib/errors";
 
 import "server-only";
 
-export const notion = new Client({
-  auth: process.env.NOTION_AUTH_TOKEN,
-  fetch: async (input, init) => {
-    return await fetch(input, {
-      next: {
-        revalidate: 10 * 60, // 10 minute
-        tags: ["notion", "fetch"],
-      },
-      ...init,
-    });
-  },
-});
+const notion = new Client({ auth: process.env.NOTION_AUTH_TOKEN, fetch });
 
 export async function retrieveDatabase(database_id?: string) {
   "use cache";
@@ -34,14 +23,15 @@ export async function retrieveDatabase(database_id?: string) {
     if (isFullDatabase(database)) {
       return database;
     }
-  } catch (err: unknown) {
-    if (err instanceof Error && "code" in err) {
-      switch (err.code) {
+  } catch (error: unknown) {
+    if (error instanceof Error && "code" in error) {
+      switch (error.code) {
         case APIErrorCode.ObjectNotFound: {
           notFound();
         }
       }
     }
+    throw error;
   }
 }
 
@@ -61,14 +51,79 @@ export async function retrievePage(page_id?: string) {
     if (isFullPage(page)) {
       return page;
     }
-  } catch (err: any) {
-    if (err instanceof Error && "code" in err) {
-      switch (err.code) {
+  } catch (error: any) {
+    if (error instanceof Error && "code" in error) {
+      switch (error.code) {
         case APIErrorCode.ObjectNotFound: {
           notFound();
         }
       }
     }
+    throw error;
+  }
+}
+
+export async function retrieveUsers(user_id: string) {
+  "use cache";
+
+  cacheTag("notion", "user", user_id);
+  cacheLife("default");
+
+  try {
+    return await notion.users.retrieve({ user_id });
+  } catch (error: unknown) {
+    if (error instanceof Error && "code" in error) {
+      switch (error.code) {
+        case APIErrorCode.ObjectNotFound: {
+          notFound();
+        }
+      }
+    }
+    throw error;
+  }
+}
+
+export async function queryDataSource(
+  params: Parameters<typeof notion.dataSources.query>[number],
+) {
+  "use cache";
+
+  cacheTag("notion", "data_source", params.data_source_id);
+  cacheLife("default");
+
+  try {
+    return await notion.dataSources.query(params);
+  } catch (error: unknown) {
+    if (error instanceof Error && "code" in error) {
+      switch (error.code) {
+        case APIErrorCode.ObjectNotFound: {
+          notFound();
+        }
+      }
+    }
+    throw error;
+  }
+}
+
+export async function queryBlocks(
+  params: Parameters<typeof notion.blocks.children.list>[number],
+) {
+  "use cache";
+
+  cacheTag("notion", "block", params.block_id);
+  cacheLife("default");
+
+  try {
+    return await notion.blocks.children.list(params);
+  } catch (error: unknown) {
+    if (error instanceof Error && "code" in error) {
+      switch (error.code) {
+        case APIErrorCode.ObjectNotFound: {
+          notFound();
+        }
+      }
+    }
+    throw error;
   }
 }
 
