@@ -8,7 +8,11 @@ export class NotFoundError extends Error {
   }
 
   static isNotFoundError(err: unknown): err is NotFoundError {
-    return err instanceof Error && err.name === "NotFoundError";
+    return (
+      err instanceof Error &&
+      (("code" in err && err.code === APIErrorCode.ObjectNotFound) ||
+        err.name === "NotFoundError")
+    );
   }
 }
 
