@@ -9,7 +9,6 @@ export const Equation: React.FC<
 
   return (
     <Comp
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: HTML is sanitized
       dangerouslySetInnerHTML={{
         __html: renderToString(expression, {
           throwOnError: false,

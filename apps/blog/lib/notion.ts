@@ -83,7 +83,7 @@ export async function retrieveUsers(user_id: string) {
   }
 }
 
-export async function queryDataSource(
+export async function queryDataSources(
   params: Parameters<typeof notion.dataSources.query>[number],
 ) {
   "use cache";

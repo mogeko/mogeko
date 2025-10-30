@@ -5,12 +5,16 @@
     "domains": { "next": "recommended" },
     "rules": {
       "suspicious": {
-        "noAssignInExpressions": "off",
-        "noUnknownAtRules": "off"
+        "noAssignInExpressions": "off"
       },
       "complexity": {
         "noUselessStringRaw": "off"
       }
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
     }
   }
 }
