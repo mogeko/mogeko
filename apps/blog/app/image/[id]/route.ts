@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import { type NextRequest, NextResponse } from "next/server";
 import type { NotionImageResp } from "@/components/image";
 import { NotFoundError } from "@/lib/errors";
@@ -17,7 +16,8 @@ export async function GET(req: NextRequest, ctx: RouteContext<"/image/[id]">) {
     }
   } catch (err: unknown) {
     if (NotFoundError.isNotFoundError(err)) {
-      notFound();
+      return new NextResponse(err.message, { status: 404 });
     }
+    return NextResponse.error();
   }
 }
