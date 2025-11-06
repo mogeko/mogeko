@@ -3,7 +3,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   define: { "import.meta.vitest": "undefined" },
   test: {
-    includeSource: ["./**/*.{js,ts}"],
+    includeSource: ["./{lib,tests}/*.{js,ts}"],
     coverage: {
       reporter: ["text", "json", "html"],
       provider: "v8",

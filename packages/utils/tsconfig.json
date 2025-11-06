@@ -3,7 +3,7 @@
   "extends": "@mogeko/tsconfig/default.tsconfig.json",
   "compilerOptions": {
     "target": "ESNext",
-    "types": ["vitest/importMeta"],
+    "types": ["vitest/importMeta", "node"],
     "baseUrl": ".",
     "paths": { "@/*": ["./src/*"] }
   },
