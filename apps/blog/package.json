@@ -11,7 +11,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.920.0",
+    "@aws-sdk/client-s3": "^3.922.0",
     "@chinese-fonts/maple-mono-cn": "^2.0.0",
     "@notionhq/client": "^5.3.0",
     "@radix-ui/react-slot": "^1.2.3",
