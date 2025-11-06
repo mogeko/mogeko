@@ -35,11 +35,11 @@
     "urlpattern-polyfill": "^10.1.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.2",
+    "@biomejs/biome": "^2.3.4",
     "@tailwindcss/postcss": "^4.1.16",
     "@tsconfig/next": "^2.0.3",
     "@types/mime-types": "^3.0.1",
-    "@types/node": "^24.9.2",
+    "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "babel-plugin-react-compiler": "^1.0.0",
