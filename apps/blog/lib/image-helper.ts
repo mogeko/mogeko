@@ -1,8 +1,8 @@
 import { Buffer } from "node:buffer";
-import { lookup } from "mime-types";
 import { cacheLife, cacheTag } from "next/cache";
 import sharp from "sharp";
 import { NotFoundError } from "@/lib/errors";
+import { lookup } from "@/lib/mime";
 import { redis } from "@/lib/redis";
 
 export async function setImage<T extends ImageResp>(
