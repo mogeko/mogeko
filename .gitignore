@@ -9,6 +9,7 @@ node_modules/
 
 # testing
 coverage/
+test-report.junit.xml
 
 # turbo
 .turbo/

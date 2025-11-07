@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  id-token: write
 
 jobs:
   test:
@@ -29,12 +30,16 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm biome ci --reporter=github
       - run: pnpm run build -F "./packages/*"
-      - run: pnpm run test
       - name: Generate Coverage Reports
         run: pnpm run cov
+      - name: Upload test results to Codecov
+        uses: codecov/codecov-action@v5.5.1
+        with:
+          report_type: test_results
+          files: .github/test-report.junit.xml
+          use_oidc: true
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5.5.1
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: mogeko/mogeko
-          fail_ci_if_error: false
+          report_type: coverage
+          use_oidc: true
