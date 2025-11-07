@@ -51,7 +51,7 @@ export const TableHead: React.FC<
   return (
     <th
       className={cn(
-        "[&:not(:first-child)]:pl-[1ch] shrink-0 font-normal text-left",
+        "not-first:pl-[1ch] shrink-0 font-normal text-left",
         className,
       )}
       {...props}
@@ -63,10 +63,7 @@ export const TableCell: React.FC<
   React.TdHTMLAttributes<HTMLTableCellElement>
 > = ({ className, ...props }) => {
   return (
-    <td
-      className={cn("[&:not(:first-child)]:pl-[1ch] shrink-0", className)}
-      {...props}
-    />
+    <td className={cn("not-first:pl-[1ch] shrink-0", className)} {...props} />
   );
 };
 
