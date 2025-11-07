@@ -14,6 +14,9 @@ jobs:
   test:
     name: Test Monorepo Packages
     runs-on: ubuntu-latest
+    env:
+     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+     TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
       - uses: actions/checkout@v5.0.0
       - name: Set up pnpm
