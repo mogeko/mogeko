@@ -33,7 +33,6 @@
   ],
   "scripts": {
     "test": "vitest run",
-    "cov": "vitest run --coverage",
     "build": "tsup"
   },
   "dependencies": {
@@ -44,7 +43,6 @@
   "devDependencies": {
     "@astrojs/markdown-remark": "^6.3.8",
     "@mogeko/tsconfig": "workspace:^",
-    "@vitest/coverage-v8": "^4.0.7",
     "astro": "^5.15.3",
     "tsup": "^8.5.0",
     "typescript": "^5.9.3",

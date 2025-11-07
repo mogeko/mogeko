@@ -1,9 +1,10 @@
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-  define: { "import.meta.vitest": "undefined" },
+  plugins: [react()],
   test: {
-    includeSource: ["{lib,tests}/*.{js,ts}"],
+    environment: "jsdom",
   },
   resolve: {
     alias: { "@": new URL(".", import.meta.url).pathname },
