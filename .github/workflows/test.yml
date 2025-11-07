@@ -2,7 +2,6 @@ name: Test
 
 on:
   push:
-    branches-ignore: [master]
   pull_request:
     branches: [master]
   workflow_dispatch:
@@ -15,8 +14,6 @@ jobs:
   test:
     name: Test Monorepo Packages
     runs-on: ubuntu-latest
-    env:
-      TURBO_FORCE: true
     steps:
       - uses: actions/checkout@v5.0.0
       - name: Set up pnpm
@@ -28,6 +25,7 @@ jobs:
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - run: pnpm biome ci --reporter=github
+      - run: pnpm run build -F "./packages/*"
       - run: pnpm run test
       - name: Generate Coverage Reports
         run: pnpm run cov

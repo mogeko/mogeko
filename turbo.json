@@ -8,8 +8,6 @@
       "env": ["APP_*", "NOTION_*", "GH_*", "AWS_*", "R2_*", "REDIS_*", "KV_*"],
       "outputs": ["dist", ".vercel", ".next"]
     },
-    "start": { "dependsOn": ["build"], "cache": false, "persistent": true },
-    "test": { "dependsOn": ["^build"], "inputs": ["$TURBO_DEFAULT$", "tests"] },
-    "cov": { "dependsOn": ["^build"], "inputs": ["$TURBO_DEFAULT$", "tests"] }
+    "start": { "dependsOn": ["build"], "cache": false, "persistent": true }
   }
 }
