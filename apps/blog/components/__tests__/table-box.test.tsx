@@ -5,9 +5,12 @@ import { RowSeparator } from "@/components/table-box";
 
 // Mock the notion module to avoid server-only imports
 vi.mock("@/lib/notion", () => ({
-  isFullBlock: (block: any): block is GetBlockResponse => {
+  isFullBlock: vi.fn((block: any): block is GetBlockResponse => {
     return block && block.type === "table_row";
-  },
+  }),
+  queryBlocks: vi.fn((_args: { block_id: string }) => {
+    return { results: [] };
+  }),
 }));
 
 describe("RowSeparator", () => {

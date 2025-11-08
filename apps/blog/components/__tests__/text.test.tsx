@@ -1,5 +1,5 @@
-import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { render } from "vitest-browser-react";
 import { plainText, RichText } from "@/components/text";
 import type { RichTextItemResponse } from "@/lib/notion";
 
@@ -70,7 +70,7 @@ describe("plainText", () => {
 });
 
 describe("RichText", () => {
-  it("should render plain text without annotations", () => {
+  it("should render plain text without annotations", async () => {
     const richText: Array<RichTextItemResponse> = [
       {
         type: "text",
@@ -88,14 +88,14 @@ describe("RichText", () => {
       },
     ];
 
-    const { container } = render(<RichText richText={richText} />);
+    const { container } = await render(<RichText richText={richText} />);
     const spanElement = container.querySelector("span");
     expect(spanElement).toBeTruthy();
     expect(spanElement?.textContent).toBe("Simple text");
     expect(spanElement?.className).toBe("");
   });
 
-  it("should render text with bold annotation", () => {
+  it("should render text with bold annotation", async () => {
     const richText: Array<RichTextItemResponse> = [
       {
         type: "text",
@@ -113,13 +113,13 @@ describe("RichText", () => {
       },
     ];
 
-    const { container } = render(<RichText richText={richText} />);
+    const { container } = await render(<RichText richText={richText} />);
     const spanElement = container.querySelector("span");
     expect(spanElement).toBeTruthy();
     expect(spanElement?.className).toContain("font-bold");
   });
 
-  it("should render text with italic annotation", () => {
+  it("should render text with italic annotation", async () => {
     const richText: Array<RichTextItemResponse> = [
       {
         type: "text",
@@ -137,13 +137,13 @@ describe("RichText", () => {
       },
     ];
 
-    const { container } = render(<RichText richText={richText} />);
+    const { container } = await render(<RichText richText={richText} />);
     const spanElement = container.querySelector("span");
     expect(spanElement).toBeTruthy();
     expect(spanElement?.className).toContain("italic");
   });
 
-  it("should render text with code annotation", () => {
+  it("should render text with code annotation", async () => {
     const richText: Array<RichTextItemResponse> = [
       {
         type: "text",
@@ -161,14 +161,14 @@ describe("RichText", () => {
       },
     ];
 
-    const { container } = render(<RichText richText={richText} />);
+    const { container } = await render(<RichText richText={richText} />);
     const spanElement = container.querySelector("span");
     expect(spanElement).toBeTruthy();
     expect(spanElement?.className).toContain("bg-muted");
     expect(spanElement?.className).toContain("text-destructive");
   });
 
-  it("should render text with external link", () => {
+  it("should render text with external link", async () => {
     const richText: Array<RichTextItemResponse> = [
       {
         type: "text",
@@ -189,14 +189,14 @@ describe("RichText", () => {
       },
     ];
 
-    const { container } = render(<RichText richText={richText} />);
+    const { container } = await render(<RichText richText={richText} />);
     const linkElement = container.querySelector("a");
     expect(linkElement).toBeTruthy();
     expect(linkElement?.getAttribute("href")).toBe("https://example.com");
     expect(linkElement?.textContent).toBe("External link");
   });
 
-  it("should render text with internal link", () => {
+  it("should render text with internal link", async () => {
     const richText: Array<RichTextItemResponse> = [
       {
         type: "text",
@@ -217,14 +217,14 @@ describe("RichText", () => {
       },
     ];
 
-    const { container } = render(<RichText richText={richText} />);
+    const { container } = await render(<RichText richText={richText} />);
     const linkElement = container.querySelector("a");
     expect(linkElement).toBeTruthy();
     expect(linkElement?.getAttribute("href")).toBe("/posts/some-post");
     expect(linkElement?.textContent).toBe("Internal link");
   });
 
-  it("should apply custom className", () => {
+  it("should apply custom className", async () => {
     const richText: Array<RichTextItemResponse> = [
       {
         type: "text",
@@ -242,7 +242,7 @@ describe("RichText", () => {
       },
     ];
 
-    const { container } = render(
+    const { container } = await render(
       <RichText richText={richText} className="custom-class" />,
     );
     const spanElement = container.querySelector("span");
@@ -250,7 +250,7 @@ describe("RichText", () => {
     expect(spanElement?.className).toContain("custom-class");
   });
 
-  it("should handle multiple rich text items", () => {
+  it("should handle multiple rich text items", async () => {
     const richText: Array<RichTextItemResponse> = [
       {
         type: "text",
@@ -282,16 +282,16 @@ describe("RichText", () => {
       },
     ];
 
-    const { container } = render(<RichText richText={richText} />);
+    const { container } = await render(<RichText richText={richText} />);
     const spanElements = container.querySelectorAll("span");
     expect(spanElements).toHaveLength(2);
     expect(spanElements[0]?.className).toContain("font-bold");
     expect(spanElements[1]?.className).toContain("italic");
   });
 
-  it("should handle empty rich text array", () => {
+  it("should handle empty rich text array", async () => {
     const richText: Array<RichTextItemResponse> = [];
-    const { container } = render(<RichText richText={richText} />);
+    const { container } = await render(<RichText richText={richText} />);
     expect(container.children).toHaveLength(0);
   });
 });
