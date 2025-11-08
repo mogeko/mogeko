@@ -1,13 +1,9 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { Details, Summary } from "@/components/ui/accordion";
 
 describe("Summary", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render summary with default props", () => {
     render(<Summary>Test Summary</Summary>);
 
@@ -68,10 +64,6 @@ describe("Summary", () => {
 });
 
 describe("Details", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render details with default props", () => {
     render(
       <Details>
@@ -166,10 +158,6 @@ describe("Details", () => {
 });
 
 describe("Accordion Interaction", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should toggle open/close state when summary is clicked", async () => {
     const user = userEvent.setup();
     render(
@@ -215,10 +203,6 @@ describe("Accordion Interaction", () => {
 });
 
 describe("Color Variants Integration", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should integrate with color variants system", () => {
     render(
       <Details color="blue">

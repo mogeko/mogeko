@@ -1,13 +1,9 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { ActionButton } from "@/components/ui/action-button";
 
 describe("ActionButton", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render button with children", () => {
     render(<ActionButton>Click me</ActionButton>);
 

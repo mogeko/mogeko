@@ -1,12 +1,8 @@
-import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import { Heading } from "@/components/ui/heading";
 
 describe("Heading", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render h1 heading with level 1", () => {
     render(<Heading level={1}>Heading 1</Heading>);
 

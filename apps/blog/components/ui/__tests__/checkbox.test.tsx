@@ -1,13 +1,9 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { Checkbox } from "@/components/ui/checkbox";
 
 describe("Checkbox", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render checkbox with children", () => {
     render(<Checkbox>Checkbox label</Checkbox>);
 

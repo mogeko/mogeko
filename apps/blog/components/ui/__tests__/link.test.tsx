@@ -1,6 +1,6 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { Link, linkVariants } from "@/components/ui/link";
 
 describe("linkVariants", () => {
@@ -45,10 +45,6 @@ describe("linkVariants", () => {
 });
 
 describe("Link", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render link with default props", () => {
     render(<Link href="/test">Test Link</Link>);
 

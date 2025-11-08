@@ -1,6 +1,6 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   Table,
   TableBody,
@@ -13,10 +13,6 @@ import {
 } from "@/components/ui/table";
 
 describe("Table", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render table with default styles", () => {
     render(
       <Table>
@@ -89,10 +85,6 @@ describe("Table", () => {
 });
 
 describe("TableHeader", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render table header", () => {
     render(
       <Table>
@@ -126,10 +118,6 @@ describe("TableHeader", () => {
 });
 
 describe("TableBody", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render table body", () => {
     render(
       <Table>
@@ -162,10 +150,6 @@ describe("TableBody", () => {
 });
 
 describe("TableFooter", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render table footer", () => {
     render(
       <Table>
@@ -198,10 +182,6 @@ describe("TableFooter", () => {
 });
 
 describe("TableRow", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render table row with default styles", () => {
     render(
       <Table>
@@ -274,10 +254,6 @@ describe("TableRow", () => {
 });
 
 describe("TableHead", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render table head with default styles", () => {
     render(
       <Table>
@@ -333,10 +309,6 @@ describe("TableHead", () => {
 });
 
 describe("Table data-slot attributes", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should have correct data-slot attribute for Table", () => {
     render(
       <Table>
@@ -460,10 +432,6 @@ describe("Table data-slot attributes", () => {
 });
 
 describe("TableCell", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render table cell with default styles", () => {
     render(
       <Table>
@@ -517,10 +485,6 @@ describe("TableCell", () => {
 });
 
 describe("TableCaption", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render table caption", () => {
     render(
       <Table>

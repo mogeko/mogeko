@@ -10,6 +10,11 @@ export const TRow: React.FC<
   if (isFullBlock(block) && block.type === "table_row") {
     const [head, ...rest] = block.table_row.cells;
 
+    // Don't render if there are no cells
+    if (!head) {
+      return null;
+    }
+
     const RestCell = hy ? TableHead : TableCell;
     const HeadCell = hx ? TableHead : RestCell;
 

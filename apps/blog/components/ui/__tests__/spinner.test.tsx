@@ -1,12 +1,8 @@
-import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import { Spinner } from "@/components/ui/spinner";
 
 describe("Spinner", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render spinner with default styles", () => {
     render(<Spinner />);
 

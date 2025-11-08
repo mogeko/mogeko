@@ -1,6 +1,6 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { AlertBanner, alertBannerVariants } from "@/components/ui/alert-banner";
 
 describe("alertBannerVariants", () => {
@@ -26,10 +26,6 @@ describe("alertBannerVariants", () => {
 });
 
 describe("AlertBanner", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render with default icon when no icon provided", () => {
     render(<AlertBanner icon={null}>Test message</AlertBanner>);
 
