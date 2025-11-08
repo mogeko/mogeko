@@ -43,9 +43,9 @@
   "devDependencies": {
     "@astrojs/markdown-remark": "^6.3.8",
     "@mogeko/tsconfig": "workspace:^",
-    "astro": "^5.15.3",
+    "astro": "^5.15.4",
     "tsup": "^8.5.0",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.7"
+    "vitest": "^4.0.8"
   }
 }
