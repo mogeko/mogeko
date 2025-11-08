@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { Badges } from "@/components/ui/badges";
+import { Badge } from "@/components/ui/badges";
 
 describe("Badges", () => {
   afterEach(() => {
@@ -8,7 +8,7 @@ describe("Badges", () => {
   });
 
   it("should render children correctly", () => {
-    render(<Badges>Test Badge</Badges>);
+    render(<Badge>Test Badge</Badge>);
 
     const badge = screen.getByText("Test Badge");
     expect(badge).toBeDefined();
@@ -16,7 +16,7 @@ describe("Badges", () => {
   });
 
   it("should apply default classes", () => {
-    render(<Badges>Test Badge</Badges>);
+    render(<Badge>Test Badge</Badge>);
 
     const badge = screen.getByText("Test Badge");
     expect(badge.className).toContain("inline-flex");
@@ -31,7 +31,7 @@ describe("Badges", () => {
   });
 
   it("should merge custom className with default classes", () => {
-    render(<Badges className="custom-class">Test Badge</Badges>);
+    render(<Badge className="custom-class">Test Badge</Badge>);
 
     const badge = screen.getByText("Test Badge");
     expect(badge.className).toContain("custom-class");
@@ -40,20 +40,27 @@ describe("Badges", () => {
 
   it("should pass through additional HTML attributes", () => {
     render(
-      <Badges id="test-badge" data-testid="badge-element" title="Badge Title">
+      <Badge id="test-badge" role="status" title="Badge Title">
         Test Badge
-      </Badges>,
+      </Badge>,
     );
 
-    const badge = screen.getByTestId("badge-element");
+    const badge = screen.getByRole("status");
     expect(badge.getAttribute("id")).toBe("test-badge");
     expect(badge.getAttribute("title")).toBe("Badge Title");
   });
 
   it("should render as a span element", () => {
-    render(<Badges>Test Badge</Badges>);
+    render(<Badge>Test Badge</Badge>);
 
     const badge = screen.getByText("Test Badge");
     expect(badge.tagName).toBe("SPAN");
+  });
+
+  it("should have correct data-slot attribute", () => {
+    render(<Badge>Test Badge</Badge>);
+
+    const badge = screen.getByText("Test Badge");
+    expect(badge.getAttribute("data-slot")).toBe("badge");
   });
 });

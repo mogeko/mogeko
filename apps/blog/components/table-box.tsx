@@ -37,8 +37,8 @@ export const TableBox: React.FC<
 
 export const RowSeparator: React.FC<{ colSpan?: number }> = ({ colSpan }) => {
   return (
-    <tr>
-      <td className="h-1 w-full" colSpan={colSpan}>
+    <tr data-slot="table-row">
+      <td data-slot="table-cell" className="h-1 w-full" colSpan={colSpan}>
         <span className="block bg-foreground h-[2px] w-full" />
       </td>
     </tr>

@@ -10,6 +10,7 @@ export const Summary: React.FC<
 
   return (
     <summary
+      data-slot="accordion-summary"
       className={cn(
         "flex w-full outline-none before:content-['▸'] group-open:before:content-['▾'] hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground marker:hidden",
         className,
@@ -29,6 +30,7 @@ export const Details: React.FC<
 > = ({ className, color, ...props }) => {
   return (
     <details
+      data-slot="accordion-details"
       className={twMerge(
         colorVariants({ color, className: ["group", className] }),
       )}

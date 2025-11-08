@@ -8,6 +8,7 @@ export const Card: React.FC<
 > = ({ className, children, title, variant = "center", ...props }) => {
   return (
     <article
+      data-slot="card"
       className={cn("relative block whitespace-pre-wrap", className)}
       {...props}
     >

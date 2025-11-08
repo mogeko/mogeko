@@ -8,6 +8,7 @@ export const ActionButton: React.FC<
 > = ({ className, children, hotkey, open, ...props }) => {
   return (
     <button
+      data-slot="button"
       className={cn(
         "inline-flex items-center justify-center cursor-pointer outline-none shrink-0 hover:[&>kbd]:bg-accent hover:[&>kbd]:text-accent-foreground hover:[&>span]:shadow-accent focus:[&>kbd]:bg-accent focus:[&>kbd]:text-accent-foreground focus:[&>span]:shadow-accent",
         className,

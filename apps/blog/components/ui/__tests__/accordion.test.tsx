@@ -3,11 +3,11 @@ import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vitest";
 import { Details, Summary } from "@/components/ui/accordion";
 
-afterEach(() => {
-  cleanup();
-});
-
 describe("Summary", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it("should render summary with default props", () => {
     render(<Summary>Test Summary</Summary>);
 
@@ -58,9 +58,20 @@ describe("Summary", () => {
     expect(summary?.className).toContain("focus:bg-accent");
     expect(summary?.className).toContain("focus:text-accent-foreground");
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<Summary>Data Slot Summary</Summary>);
+
+    const summary = screen.getByText("Data Slot Summary").closest("summary");
+    expect(summary?.getAttribute("data-slot")).toBe("accordion-summary");
+  });
 });
 
 describe("Details", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it("should render details with default props", () => {
     render(
       <Details>
@@ -131,18 +142,34 @@ describe("Details", () => {
 
   it("should pass through HTML details attributes", () => {
     render(
-      <Details open data-testid="test-details">
+      <Details open role="region" aria-label="Accordion section">
         <Summary>Attributes Summary</Summary>
         <div>Test Content</div>
       </Details>,
     );
 
-    const details = screen.getByTestId("test-details");
+    const details = screen.getByRole("region", { name: "Accordion section" });
     expect(details.hasAttribute("open")).toBe(true);
+  });
+
+  it("should have correct data-slot attribute", () => {
+    render(
+      <Details>
+        <Summary>Data Slot Summary</Summary>
+        <div>Test Content</div>
+      </Details>,
+    );
+
+    const details = screen.getByText("Data Slot Summary").closest("details");
+    expect(details?.getAttribute("data-slot")).toBe("accordion-details");
   });
 });
 
 describe("Accordion Interaction", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it("should toggle open/close state when summary is clicked", async () => {
     const user = userEvent.setup();
     render(
@@ -188,6 +215,10 @@ describe("Accordion Interaction", () => {
 });
 
 describe("Color Variants Integration", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it("should integrate with color variants system", () => {
     render(
       <Details color="blue">

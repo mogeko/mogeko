@@ -7,6 +7,8 @@ export const ListItem: React.FC<
   return (
     // biome-ignore lint/a11y/useSemanticElements: Should be used in a list
     <div
+      data-slot="list-item"
+      role="listitem"
       className={twMerge(
         colorVariants({
           className: [
@@ -16,7 +18,6 @@ export const ListItem: React.FC<
           color,
         }),
       )}
-      role="listitem"
       {...props}
     />
   );

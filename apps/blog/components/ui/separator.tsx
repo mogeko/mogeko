@@ -2,13 +2,12 @@ import { cn } from "@/lib/utils";
 
 export const Separator: React.FC<{ className?: string }> = ({ className }) => {
   return (
-    <div
+    <hr
+      data-slot="separator"
       className={cn(
-        "flex flex-col justify-center items-center shrink-0 h-1 w-full outline-none",
+        "block bg-foreground shrink-0 h-[2px] w-full border-none",
         className,
       )}
-    >
-      <div className="block bg-foreground shrink-0 h-[2px] w-full" />
-    </div>
+    />
   );
 };

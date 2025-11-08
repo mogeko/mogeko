@@ -83,19 +83,14 @@ describe("ActionButton", () => {
 
   it("should forward all button attributes", () => {
     render(
-      <ActionButton
-        type="submit"
-        aria-label="Submit form"
-        data-testid="action-button"
-      >
+      <ActionButton type="submit" aria-label="Submit form">
         Submit
       </ActionButton>,
     );
 
-    const button = screen.getByRole("button");
+    const button = screen.getByRole("button", { name: "Submit form" });
     expect(button.getAttribute("type")).toBe("submit");
     expect(button.getAttribute("aria-label")).toBe("Submit form");
-    expect(button.getAttribute("data-testid")).toBe("action-button");
   });
 
   it("should render both hotkey and children correctly", () => {
@@ -121,5 +116,12 @@ describe("ActionButton", () => {
     expect(button.className).toContain("hover:[&>kbd]:text-accent-foreground");
     expect(button.className).toContain("focus:[&>kbd]:bg-accent");
     expect(button.className).toContain("focus:[&>kbd]:text-accent-foreground");
+  });
+
+  it("should have correct data-slot attribute", () => {
+    render(<ActionButton>Test Button</ActionButton>);
+
+    const button = screen.getByRole("button");
+    expect(button.getAttribute("data-slot")).toBe("button");
   });
 });

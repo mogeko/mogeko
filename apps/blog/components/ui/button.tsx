@@ -26,6 +26,7 @@ export const Button: React.FC<
 
   return (
     <Comp
+      data-slot="button"
       className={twMerge(buttonVariants({ variant, className }))}
       {...props}
     />
