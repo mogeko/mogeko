@@ -76,17 +76,17 @@ describe("ActionLink", () => {
         href="/test"
         target="_blank"
         rel="noopener"
-        data-testid="action-link"
+        aria-label="Test link"
       >
         Link with Attributes
       </ActionLink>,
     );
 
-    const link = screen.getByRole("link");
+    const link = screen.getByRole("link", { name: "Test link" });
     expect(link.getAttribute("href")).toBe("/test");
     expect(link.getAttribute("target")).toBe("_blank");
     expect(link.getAttribute("rel")).toBe("noopener");
-    expect(link.getAttribute("data-testid")).toBe("action-link");
+    expect(link.getAttribute("aria-label")).toBe("Test link");
   });
 
   it("should have correct hover and focus styles for icon", () => {

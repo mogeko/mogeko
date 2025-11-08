@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { RichText } from "@/components/text";
 import { Details, Summary } from "@/components/ui/accordion";
 import { ActionLink } from "@/components/ui/action-link";
-import { Badges } from "@/components/ui/badges";
+import { Badge } from "@/components/ui/badges";
 import { Heading } from "@/components/ui/heading";
 import { Spinner } from "@/components/ui/spinner";
 import { isFullPage, queryDataSources, retrieveDatabase } from "@/lib/notion";
@@ -26,7 +26,7 @@ const Home: NextPage<PageProps<"/">> = async () => {
           <h1>
             <RichText richText={database.title} />
           </h1>
-          <Badges>{pkg.version}</Badges>
+          <Badge>{pkg.version}</Badge>
         </hgroup>
         <p>
           <RichText richText={database.description} />

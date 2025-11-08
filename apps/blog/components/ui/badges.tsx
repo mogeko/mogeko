@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 type BadgesProps = React.HTMLAttributes<HTMLSpanElement>;
 
-export const Badges: React.FC<BadgesProps> = ({ className, ...props }) => {
+export const Badge: React.FC<BadgesProps> = ({ className, ...props }) => {
   return (
     <span
       className={cn(

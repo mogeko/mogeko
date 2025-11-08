@@ -22,6 +22,7 @@ export const AlertBanner: React.FC<
 > = ({ icon, children, className, color, ...props }) => {
   return (
     <div
+      role="alert"
       className={twMerge(alertBannerVariants({ color, className }))}
       {...props}
     >
