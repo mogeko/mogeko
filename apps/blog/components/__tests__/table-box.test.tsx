@@ -1,0 +1,46 @@
+import type { GetBlockResponse } from "@notionhq/client";
+import { render } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
+import { RowSeparator } from "@/components/table-box";
+
+// Mock the notion module to avoid server-only imports
+vi.mock("@/lib/notion", () => ({
+  isFullBlock: (block: any): block is GetBlockResponse => {
+    return block && block.type === "table_row";
+  },
+}));
+
+describe("RowSeparator", () => {
+  it("should render separator with default colSpan when not provided", () => {
+    const { container } = render(<RowSeparator />);
+
+    const separator = container.querySelector('[data-slot="table-cell"]');
+    expect(separator).toBeTruthy();
+    expect(separator?.getAttribute("colSpan")).toBeNull();
+  });
+
+  it("should render separator with specified colSpan", () => {
+    const { container } = render(<RowSeparator colSpan={5} />);
+
+    const separator = container.querySelector('[data-slot="table-cell"]');
+    expect(separator).toBeTruthy();
+    expect(separator?.getAttribute("colSpan")).toBe("5");
+  });
+
+  it("should have correct styling classes", () => {
+    const { container } = render(<RowSeparator />);
+
+    const separator = container.querySelector('[data-slot="table-cell"]');
+    expect(separator?.className).toContain("h-1");
+    expect(separator?.className).toContain("w-full");
+
+    const span = container.querySelector("span");
+    expect(span?.className).toContain("bg-foreground");
+    expect(span?.className).toContain("h-[2px]");
+    expect(span?.className).toContain("w-full");
+  });
+});
+
+// Note: TableBox component is an async server component and requires more complex mocking
+// that may not be suitable for simple unit tests. The component should be tested in integration tests
+// or with proper server component testing setup.
