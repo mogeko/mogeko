@@ -1,12 +1,8 @@
-import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 import { Separator } from "@/components/ui/separator";
 
 describe("Separator", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render separator with default styles", () => {
     render(<Separator />);
 

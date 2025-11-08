@@ -1,13 +1,9 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { ListItem } from "@/components/ui/list";
 
 describe("ListItem", () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it("should render list item with children", () => {
     render(<ListItem>List item content</ListItem>);
 
