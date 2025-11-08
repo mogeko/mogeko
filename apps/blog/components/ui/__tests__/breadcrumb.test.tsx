@@ -50,6 +50,13 @@ describe("Breadcrumb", () => {
     expect(nav).toBeDefined();
     expect(nav.className).toContain("custom-class");
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<Breadcrumb>Test breadcrumb</Breadcrumb>);
+
+    const nav = screen.getByRole("navigation", { name: "breadcrumb" });
+    expect(nav.getAttribute("data-slot")).toBe("breadcrumb");
+  });
 });
 
 describe("BreadcrumbItem", () => {

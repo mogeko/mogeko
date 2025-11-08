@@ -161,4 +161,11 @@ describe("Card", () => {
     expect(screen.getByText("children")).toBeDefined();
     expect(screen.getByText("content")).toBeDefined();
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<Card>Test card</Card>);
+
+    const article = screen.getByRole("article");
+    expect(article.getAttribute("data-slot")).toBe("card");
+  });
 });

@@ -179,4 +179,12 @@ describe("Checkbox", () => {
 
     expect(checkSpan.textContent).toBe("\u2573"); // Checked
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<Checkbox>Test Checkbox</Checkbox>);
+
+    const checkbox = screen.getByText("Test Checkbox");
+    const parentDiv = checkbox.closest("div");
+    expect(parentDiv?.getAttribute("data-slot")).toBe("checkbox");
+  });
 });

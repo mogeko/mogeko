@@ -5,6 +5,7 @@ export const Checkbox: React.FC<
 > = ({ checked = false, className, children, ...props }) => {
   return (
     <div
+      data-slot="checkbox"
       className={cn(
         "inline-flex items-center justify-center cursor-pointer outline-none shrink-0",
         className,

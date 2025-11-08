@@ -188,4 +188,11 @@ describe("Link", () => {
     const link = screen.getByRole("link", { name: "Accessible link" });
     expect(link.className).toContain("outline-none");
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<Link href="/test">Test Link</Link>);
+
+    const link = screen.getByRole("link");
+    expect(link.getAttribute("data-slot")).toBe("link");
+  });
 });

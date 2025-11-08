@@ -76,4 +76,11 @@ describe("Separator", () => {
     expect(separator.className).toContain("block");
     expect(separator.className).toContain("my-custom-class");
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<Separator />);
+
+    const separator = screen.getByRole("separator");
+    expect(separator.getAttribute("data-slot")).toBe("separator");
+  });
 });

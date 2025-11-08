@@ -200,4 +200,11 @@ describe("Heading", () => {
     expect(heading.className).toContain("flex");
     expect(heading.className).toContain("gap-[1ch]");
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<Heading level={1}>Test Heading</Heading>);
+
+    const heading = screen.getByRole("heading", { level: 1 });
+    expect(heading.getAttribute("data-slot")).toBe("heading");
+  });
 });

@@ -11,6 +11,7 @@ export const Heading: React.FC<
 
   return (
     <Comp
+      data-slot="heading"
       id={id}
       className={twMerge(
         colorVariants({

@@ -128,4 +128,11 @@ describe("ActionLink", () => {
 
     expect(handleClick).toHaveBeenCalledOnce();
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<ActionLink href="/test">Test Link</ActionLink>);
+
+    const link = screen.getByRole("link");
+    expect(link.getAttribute("data-slot")).toBe("link");
+  });
 });

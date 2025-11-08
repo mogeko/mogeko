@@ -332,6 +332,133 @@ describe("TableHead", () => {
   });
 });
 
+describe("Table data-slot attributes", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("should have correct data-slot attribute for Table", () => {
+    render(
+      <Table>
+        <tbody>
+          <tr>
+            <td>Content</td>
+          </tr>
+        </tbody>
+      </Table>,
+    );
+
+    const table = screen.getByRole("table");
+    expect(table.getAttribute("data-slot")).toBe("table-container");
+  });
+
+  it("should have correct data-slot attribute for TableHeader", () => {
+    render(
+      <Table>
+        <TableHeader>
+          <tr>
+            <th>Header</th>
+          </tr>
+        </TableHeader>
+      </Table>,
+    );
+
+    const header = screen.getByRole("rowgroup");
+    expect(header.getAttribute("data-slot")).toBe("table-header");
+  });
+
+  it("should have correct data-slot attribute for TableBody", () => {
+    render(
+      <Table>
+        <TableBody>
+          <tr>
+            <td>Body content</td>
+          </tr>
+        </TableBody>
+      </Table>,
+    );
+
+    const body = screen.getByRole("rowgroup");
+    expect(body.getAttribute("data-slot")).toBe("table-body");
+  });
+
+  it("should have correct data-slot attribute for TableFooter", () => {
+    render(
+      <Table>
+        <TableFooter>
+          <tr>
+            <td>Footer content</td>
+          </tr>
+        </TableFooter>
+      </Table>,
+    );
+
+    const footer = screen.getByRole("rowgroup");
+    expect(footer.getAttribute("data-slot")).toBe("table-footer");
+  });
+
+  it("should have correct data-slot attribute for TableRow", () => {
+    render(
+      <Table>
+        <tbody>
+          <TableRow>
+            <td>Row content</td>
+          </TableRow>
+        </tbody>
+      </Table>,
+    );
+
+    const row = screen.getByRole("row");
+    expect(row.getAttribute("data-slot")).toBe("table-row");
+  });
+
+  it("should have correct data-slot attribute for TableHead", () => {
+    render(
+      <Table>
+        <thead>
+          <tr>
+            <TableHead>Header cell</TableHead>
+          </tr>
+        </thead>
+      </Table>,
+    );
+
+    const headerCell = screen.getByRole("columnheader");
+    expect(headerCell.getAttribute("data-slot")).toBe("table-head");
+  });
+
+  it("should have correct data-slot attribute for TableCell", () => {
+    render(
+      <Table>
+        <tbody>
+          <tr>
+            <TableCell>Cell content</TableCell>
+          </tr>
+        </tbody>
+      </Table>,
+    );
+
+    const cell = screen.getByRole("cell");
+    expect(cell.getAttribute("data-slot")).toBe("table-cell");
+  });
+
+  it("should have correct data-slot attribute for TableCaption", () => {
+    render(
+      <Table>
+        <TableCaption>Table description</TableCaption>
+        <tbody>
+          <tr>
+            <td>Content</td>
+          </tr>
+        </tbody>
+      </Table>,
+    );
+
+    const caption = screen.getByText("Table description");
+    expect(caption.getAttribute("data-slot")).toBe("table-caption");
+  });
+});
+
 describe("TableCell", () => {
   afterEach(() => {
     cleanup();

@@ -58,6 +58,13 @@ describe("Summary", () => {
     expect(summary?.className).toContain("focus:bg-accent");
     expect(summary?.className).toContain("focus:text-accent-foreground");
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<Summary>Data Slot Summary</Summary>);
+
+    const summary = screen.getByText("Data Slot Summary").closest("summary");
+    expect(summary?.getAttribute("data-slot")).toBe("accordion-summary");
+  });
 });
 
 describe("Details", () => {
@@ -143,6 +150,18 @@ describe("Details", () => {
 
     const details = screen.getByRole("region", { name: "Accordion section" });
     expect(details.hasAttribute("open")).toBe(true);
+  });
+
+  it("should have correct data-slot attribute", () => {
+    render(
+      <Details>
+        <Summary>Data Slot Summary</Summary>
+        <div>Test Content</div>
+      </Details>,
+    );
+
+    const details = screen.getByText("Data Slot Summary").closest("details");
+    expect(details?.getAttribute("data-slot")).toBe("accordion-details");
   });
 });
 

@@ -117,4 +117,11 @@ describe("ActionButton", () => {
     expect(button.className).toContain("focus:[&>kbd]:bg-accent");
     expect(button.className).toContain("focus:[&>kbd]:text-accent-foreground");
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<ActionButton>Test Button</ActionButton>);
+
+    const button = screen.getByRole("button");
+    expect(button.getAttribute("data-slot")).toBe("button");
+  });
 });

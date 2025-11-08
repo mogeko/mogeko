@@ -171,4 +171,11 @@ describe("Button", () => {
     expect(button.className).toContain("uppercase");
     expect(button.className).toContain("tracking-[1px]");
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<Button>Test Button</Button>);
+
+    const button = screen.getByRole("button");
+    expect(button.getAttribute("data-slot")).toBe("button");
+  });
 });

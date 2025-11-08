@@ -56,4 +56,11 @@ describe("Badges", () => {
     const badge = screen.getByText("Test Badge");
     expect(badge.tagName).toBe("SPAN");
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<Badge>Test Badge</Badge>);
+
+    const badge = screen.getByText("Test Badge");
+    expect(badge.getAttribute("data-slot")).toBe("badge");
+  });
 });

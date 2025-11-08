@@ -131,4 +131,11 @@ describe("ListItem", () => {
     expect(listItem.className).toContain("custom-class");
     expect(listItem.className).toContain("outline-none");
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<ListItem>Test List Item</ListItem>);
+
+    const listItem = screen.getByRole("listitem");
+    expect(listItem.getAttribute("data-slot")).toBe("list-item");
+  });
 });

@@ -126,4 +126,11 @@ describe("AlertBanner", () => {
     expect(banner.className).toContain("flex");
     expect(banner.className).toContain("my-custom-class");
   });
+
+  it("should have correct data-slot attribute", () => {
+    render(<AlertBanner icon={null}>Test message</AlertBanner>);
+
+    const banner = screen.getByRole("alert");
+    expect(banner.getAttribute("data-slot")).toBe("alert");
+  });
 });

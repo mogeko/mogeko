@@ -23,6 +23,7 @@ export const Link: React.FC<
 > = ({ className, variant, tabIndex = 0, ...props }) => {
   return (
     <NextLink
+      data-slot="link"
       className={twMerge(linkVariants({ variant, className }))}
       tabIndex={tabIndex}
       {...props}
