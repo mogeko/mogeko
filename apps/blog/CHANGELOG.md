@@ -1,5 +1,11 @@
 # @mogeko/blog
 
+## 0.2.12
+
+### Patch Changes
+
+- [#422](https://github.com/mogeko/mogeko/pull/422) [`53785f6`](https://github.com/mogeko/mogeko/commit/53785f680626b5aeacdefa2f2a531d3ec1dbff99) Thanks [@mogeko](https://github.com/mogeko)! - Add data-slot attributes to components.
+
 ## 0.2.11
 
 ### Patch Changes
