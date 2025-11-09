@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import { Card } from "@/components/ui/card";
 
 describe("Card", () => {
   it("should render card with children", async () => {
-    await render(<Card>Test content</Card>);
+    await page.render(<Card>Test content</Card>);
 
     const article = page.getByRole("article").query();
     expect(article).toBeDefined();
@@ -13,7 +12,7 @@ describe("Card", () => {
   });
 
   it("should render card with title", async () => {
-    await render(<Card title="Card Title">Test content</Card>);
+    await page.render(<Card title="Card Title">Test content</Card>);
 
     const title = page.getByRole("heading", { level: 2 }).query();
     expect(title).toBeDefined();
@@ -21,14 +20,14 @@ describe("Card", () => {
   });
 
   it("should not render title when not provided", async () => {
-    await render(<Card>Test content</Card>);
+    await page.render(<Card>Test content</Card>);
 
     const headings = page.getByRole("heading", { level: 2 }).all();
     expect(headings).toHaveLength(0);
   });
 
   it("should apply default center variant styles", async () => {
-    await render(<Card>Center variant</Card>);
+    await page.render(<Card>Center variant</Card>);
 
     const article = page.getByRole("article").query();
     expect(article?.className).toContain("relative");
@@ -48,7 +47,7 @@ describe("Card", () => {
   });
 
   it("should apply left variant styles", async () => {
-    await render(<Card variant="left">Left variant</Card>);
+    await page.render(<Card variant="left">Left variant</Card>);
 
     const article = page.getByRole("article").query();
     const header = article?.querySelector("header");
@@ -60,7 +59,7 @@ describe("Card", () => {
   });
 
   it("should apply right variant styles", async () => {
-    await render(<Card variant="right">Right variant</Card>);
+    await page.render(<Card variant="right">Right variant</Card>);
 
     const article = page.getByRole("article").query();
     const header = article?.querySelector("header");
@@ -72,7 +71,7 @@ describe("Card", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(<Card className="custom-card">Custom card</Card>);
+    await page.render(<Card className="custom-card">Custom card</Card>);
 
     const article = page.getByRole("article").query();
     expect(article?.className).toContain("custom-card");
@@ -80,7 +79,7 @@ describe("Card", () => {
   });
 
   it("should pass through additional HTML attributes", async () => {
-    await render(
+    await page.render(
       <Card data-testid="test-card" aria-label="Card component" id="card-1">
         Card with attributes
       </Card>,
@@ -93,7 +92,7 @@ describe("Card", () => {
   });
 
   it("should have correct shadow styles", async () => {
-    await render(<Card>Shadow test</Card>);
+    await page.render(<Card>Shadow test</Card>);
 
     const article = page.getByRole("article").query();
     const header = article?.querySelector("header");
@@ -120,7 +119,7 @@ describe("Card", () => {
   });
 
   it("should have correct padding and spacing", async () => {
-    await render(<Card>Spacing test</Card>);
+    await page.render(<Card>Spacing test</Card>);
 
     const article = page.getByRole("article").query();
     const header = article?.querySelector("header");
@@ -136,7 +135,7 @@ describe("Card", () => {
   });
 
   it("should have overflow handling in section", async () => {
-    await render(<Card>Overflow test</Card>);
+    await page.render(<Card>Overflow test</Card>);
 
     const article = page.getByRole("article").query();
     const section = article?.querySelector("section");
@@ -146,7 +145,7 @@ describe("Card", () => {
   });
 
   it("should render complex children correctly", async () => {
-    await render(
+    await page.render(
       <Card>
         <div>Complex</div>
         <span>children</span>
@@ -160,7 +159,7 @@ describe("Card", () => {
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(<Card>Test card</Card>);
+    await page.render(<Card>Test card</Card>);
 
     const article = page.getByRole("article").query();
     expect(article?.getAttribute("data-slot")).toBe("card");

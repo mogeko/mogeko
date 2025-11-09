@@ -1,6 +1,6 @@
 import type { MentionRichTextItemResponse } from "@notionhq/client";
 import { describe, expect, it } from "vitest";
-import { render } from "vitest-browser-react";
+import { page } from "vitest/browser";
 import { Mention } from "@/components/mention";
 
 describe("Mention", () => {
@@ -12,7 +12,7 @@ describe("Mention", () => {
       },
     };
 
-    const { container } = await render(
+    const { container } = await page.render(
       <Mention mention={mention}>Test Page</Mention>,
     );
     const linkElement = container.querySelector("a");
@@ -29,7 +29,7 @@ describe("Mention", () => {
       },
     };
 
-    const { container } = await render(
+    const { container } = await page.render(
       <Mention mention={mention}>Test Database</Mention>,
     );
     const linkElement = container.querySelector("a");
@@ -46,7 +46,7 @@ describe("Mention", () => {
       },
     };
 
-    const { container } = await render(
+    const { container } = await page.render(
       <Mention mention={mention} className="custom-class">
         Test Page
       </Mention>,

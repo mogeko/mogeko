@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import { Badge } from "@/components/ui/badges";
 
 describe("Badges", () => {
   it("should render children correctly", async () => {
-    await render(<Badge>Test Badge</Badge>);
+    await page.render(<Badge>Test Badge</Badge>);
 
     const badge = page.getByText("Test Badge").query();
     expect(badge).toBeDefined();
@@ -13,7 +12,7 @@ describe("Badges", () => {
   });
 
   it("should apply default classes", async () => {
-    await render(<Badge>Test Badge</Badge>);
+    await page.render(<Badge>Test Badge</Badge>);
 
     const badge = page.getByText("Test Badge").query();
     expect(badge?.className).toContain("inline-flex");
@@ -28,7 +27,7 @@ describe("Badges", () => {
   });
 
   it("should merge custom className with default classes", async () => {
-    await render(<Badge className="custom-class">Test Badge</Badge>);
+    await page.render(<Badge className="custom-class">Test Badge</Badge>);
 
     const badge = page.getByText("Test Badge").query();
     expect(badge?.className).toContain("custom-class");
@@ -36,7 +35,7 @@ describe("Badges", () => {
   });
 
   it("should pass through additional HTML attributes", async () => {
-    await render(
+    await page.render(
       <Badge id="test-badge" role="status" title="Badge Title">
         Test Badge
       </Badge>,
@@ -48,14 +47,14 @@ describe("Badges", () => {
   });
 
   it("should render as a span element", async () => {
-    await render(<Badge>Test Badge</Badge>);
+    await page.render(<Badge>Test Badge</Badge>);
 
     const badge = page.getByText("Test Badge").query();
     expect(badge?.tagName).toBe("SPAN");
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(<Badge>Test Badge</Badge>);
+    await page.render(<Badge>Test Badge</Badge>);
 
     const badge = page.getByText("Test Badge").query();
     expect(badge?.getAttribute("data-slot")).toBe("badge");

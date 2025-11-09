@@ -1,11 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import { ActionLink } from "@/components/ui/action-link";
 
 describe("ActionLink", () => {
   it("should render link with children", async () => {
-    await render(<ActionLink href="/test">Test Link</ActionLink>);
+    await page.render(<ActionLink href="/test">Test Link</ActionLink>);
 
     const link = page.getByRole("link").query();
     expect(link).toBeDefined();
@@ -14,7 +13,9 @@ describe("ActionLink", () => {
   });
 
   it("should render default icon when no icon provided", async () => {
-    await render(<ActionLink href="/test">Link with Default Icon</ActionLink>);
+    await page.render(
+      <ActionLink href="/test">Link with Default Icon</ActionLink>,
+    );
 
     const link = page.getByRole("link").query();
     const figure = link?.querySelector("figure");
@@ -24,7 +25,7 @@ describe("ActionLink", () => {
   });
 
   it("should render custom icon when provided", async () => {
-    await render(
+    await page.render(
       <ActionLink href="/test" icon="★">
         Link with Custom Icon
       </ActionLink>,
@@ -38,7 +39,7 @@ describe("ActionLink", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(
+    await page.render(
       <ActionLink href="/test" className="custom-class">
         Custom Link
       </ActionLink>,
@@ -49,14 +50,14 @@ describe("ActionLink", () => {
   });
 
   it("should have correct tabIndex", async () => {
-    await render(<ActionLink href="/test">Default TabIndex</ActionLink>);
+    await page.render(<ActionLink href="/test">Default TabIndex</ActionLink>);
 
     const link = page.getByRole("link").query();
     expect(link?.getAttribute("tabIndex")).toBe("0");
   });
 
   it("should allow custom tabIndex", async () => {
-    await render(
+    await page.render(
       <ActionLink href="/test" tabIndex={-1}>
         Custom TabIndex
       </ActionLink>,
@@ -67,7 +68,7 @@ describe("ActionLink", () => {
   });
 
   it("should forward all link attributes", async () => {
-    await render(
+    await page.render(
       <ActionLink
         href="/test"
         target="_blank"
@@ -86,7 +87,7 @@ describe("ActionLink", () => {
   });
 
   it("should have correct hover and focus styles for icon", async () => {
-    await render(<ActionLink href="/test">Styled Link</ActionLink>);
+    await page.render(<ActionLink href="/test">Styled Link</ActionLink>);
 
     const link = page.getByRole("link").query();
 
@@ -95,7 +96,7 @@ describe("ActionLink", () => {
   });
 
   it("should have correct structure with figure and span", async () => {
-    await render(<ActionLink href="/test">Structured Link</ActionLink>);
+    await page.render(<ActionLink href="/test">Structured Link</ActionLink>);
 
     const link = page.getByRole("link").query();
     const figure = link?.querySelector("figure");
@@ -113,7 +114,7 @@ describe("ActionLink", () => {
     const handleClick = vi.fn((e) => e.preventDefault());
     const user = userEvent.setup();
 
-    await render(
+    await page.render(
       <ActionLink href="/test" onClick={handleClick}>
         Clickable Link
       </ActionLink>,
@@ -126,7 +127,7 @@ describe("ActionLink", () => {
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(<ActionLink href="/test">Test Link</ActionLink>);
+    await page.render(<ActionLink href="/test">Test Link</ActionLink>);
 
     const link = page.getByRole("link").query();
     expect(link?.getAttribute("data-slot")).toBe("link");

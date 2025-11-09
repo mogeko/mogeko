@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { page, userEvent } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import { Details, Summary } from "@/components/ui/accordion";
 
 describe("Summary", () => {
   it("should render summary with default props", async () => {
-    await render(<Summary>Test Summary</Summary>);
+    await page.render(<Summary>Test Summary</Summary>);
 
     const summary = page.getByText("Test Summary").query()?.closest("summary");
     expect(summary).toBeDefined();
@@ -16,7 +15,9 @@ describe("Summary", () => {
   });
 
   it("should render summary with custom className", async () => {
-    await render(<Summary className="custom-class">Custom Summary</Summary>);
+    await page.render(
+      <Summary className="custom-class">Custom Summary</Summary>,
+    );
 
     const summary = page
       .getByText("Custom Summary")
@@ -26,7 +27,7 @@ describe("Summary", () => {
   });
 
   it("should render as child component when asChild is true", async () => {
-    await render(
+    await page.render(
       <Summary asChild>
         <button type="button">Button Summary</button>
       </Summary>,
@@ -40,7 +41,7 @@ describe("Summary", () => {
   });
 
   it("should have correct marker styles", async () => {
-    await render(<Summary>Marker Summary</Summary>);
+    await page.render(<Summary>Marker Summary</Summary>);
 
     const summary = page
       .getByText("Marker Summary")
@@ -52,7 +53,7 @@ describe("Summary", () => {
   });
 
   it("should have hover and focus styles", async () => {
-    await render(<Summary>Hover Summary</Summary>);
+    await page.render(<Summary>Hover Summary</Summary>);
 
     const summary = page.getByText("Hover Summary").query()?.closest("summary");
     expect(summary?.className).toContain("hover:bg-accent");
@@ -62,7 +63,7 @@ describe("Summary", () => {
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(<Summary>Data Slot Summary</Summary>);
+    await page.render(<Summary>Data Slot Summary</Summary>);
 
     const summary = page
       .getByText("Data Slot Summary")
@@ -74,7 +75,7 @@ describe("Summary", () => {
 
 describe("Details", () => {
   it("should render details with default props", async () => {
-    await render(
+    await page.render(
       <Details>
         <Summary>Details Summary</Summary>
         <div>Test Content</div>
@@ -90,7 +91,7 @@ describe("Details", () => {
   });
 
   it("should render details with custom className", async () => {
-    await render(
+    await page.render(
       <Details className="custom-details">
         <Summary>Custom Details Summary</Summary>
         <div>Test Content</div>
@@ -105,7 +106,7 @@ describe("Details", () => {
   });
 
   it("should apply color variants correctly", async () => {
-    await render(
+    await page.render(
       <Details color="blue">
         <Summary>Blue Summary</Summary>
         <div>Test Content</div>
@@ -117,7 +118,7 @@ describe("Details", () => {
   });
 
   it("should apply background color variants correctly", async () => {
-    await render(
+    await page.render(
       <Details color="blue_background">
         <Summary>Blue Background Summary</Summary>
         <div>Test Content</div>
@@ -132,7 +133,7 @@ describe("Details", () => {
   });
 
   it("should handle default color variant", async () => {
-    await render(
+    await page.render(
       <Details color="default">
         <Summary>Default Summary</Summary>
         <div>Test Content</div>
@@ -150,7 +151,7 @@ describe("Details", () => {
   });
 
   it("should pass through HTML details attributes", async () => {
-    await render(
+    await page.render(
       <Details open role="region" aria-label="Accordion section">
         <Summary>Attributes Summary</Summary>
         <div>Test Content</div>
@@ -164,7 +165,7 @@ describe("Details", () => {
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(
+    await page.render(
       <Details>
         <Summary>Data Slot Summary</Summary>
         <div>Test Content</div>
@@ -182,7 +183,7 @@ describe("Details", () => {
 describe("Accordion Interaction", () => {
   it("should toggle open/close state when summary is clicked", async () => {
     const user = userEvent.setup();
-    await render(
+    await page.render(
       <Details>
         <Summary>Interaction Summary</Summary>
         <div>Test Content</div>
@@ -210,7 +211,7 @@ describe("Accordion Interaction", () => {
 
   it("should handle keyboard interaction", async () => {
     const user = userEvent.setup();
-    await render(
+    await page.render(
       <Details>
         <Summary>Keyboard Summary</Summary>
         <div>Test Content</div>
@@ -233,7 +234,7 @@ describe("Accordion Interaction", () => {
 
 describe("Color Variants Integration", () => {
   it("should integrate with color variants system", async () => {
-    await render(
+    await page.render(
       <Details color="blue">
         <Summary>Color Variant Summary</Summary>
         <div>Test Content</div>
@@ -248,7 +249,7 @@ describe("Color Variants Integration", () => {
   });
 
   it("should integrate with background color variants system", async () => {
-    await render(
+    await page.render(
       <Details color="blue_background">
         <Summary>Background Color Variant Summary</Summary>
         <div>Test Content</div>
@@ -263,7 +264,7 @@ describe("Color Variants Integration", () => {
   });
 
   it("should handle default color variant correctly", async () => {
-    await render(
+    await page.render(
       <Details color="default">
         <Summary>Default Color Summary</Summary>
         <div>Test Content</div>

@@ -1,6 +1,6 @@
 import type { GetBlockResponse } from "@notionhq/client";
 import { describe, expect, it, vi } from "vitest";
-import { render } from "vitest-browser-react";
+import { page } from "vitest/browser";
 import { RowSeparator } from "@/components/table-box";
 
 // Mock the notion module to avoid server-only imports
@@ -23,7 +23,7 @@ const TableWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
 
 describe("RowSeparator", () => {
   it("should render separator with default colSpan when not provided", async () => {
-    const { container } = await render(<RowSeparator />, {
+    const { container } = await page.render(<RowSeparator />, {
       wrapper: TableWrapper,
     });
 
@@ -33,7 +33,7 @@ describe("RowSeparator", () => {
   });
 
   it("should render separator with specified colSpan", async () => {
-    const { container } = await render(<RowSeparator colSpan={5} />, {
+    const { container } = await page.render(<RowSeparator colSpan={5} />, {
       wrapper: TableWrapper,
     });
 
@@ -43,7 +43,7 @@ describe("RowSeparator", () => {
   });
 
   it("should have correct styling classes", async () => {
-    const { container } = await render(<RowSeparator />, {
+    const { container } = await page.render(<RowSeparator />, {
       wrapper: TableWrapper,
     });
 

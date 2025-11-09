@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import { Separator } from "@/components/ui/separator";
 
 describe("Separator", () => {
   it("should render separator with default styles", async () => {
-    await render(<Separator />);
+    await page.render(<Separator />);
 
     const separator = page.getByRole("separator").query();
     expect(separator).toBeDefined();
@@ -18,7 +17,7 @@ describe("Separator", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(<Separator className="custom-separator" />);
+    await page.render(<Separator className="custom-separator" />);
 
     const separator = page.getByRole("separator").query();
     expect(separator?.className).toContain("custom-separator");
@@ -26,7 +25,7 @@ describe("Separator", () => {
   });
 
   it("should have correct dimensions", async () => {
-    await render(<Separator />);
+    await page.render(<Separator />);
 
     const separator = page.getByRole("separator").query();
 
@@ -35,7 +34,7 @@ describe("Separator", () => {
   });
 
   it("should have correct background color", async () => {
-    await render(<Separator />);
+    await page.render(<Separator />);
 
     const separator = page.getByRole("separator").query();
 
@@ -43,7 +42,7 @@ describe("Separator", () => {
   });
 
   it("should be shrinkable", async () => {
-    await render(<Separator />);
+    await page.render(<Separator />);
 
     const separator = page.getByRole("separator").query();
 
@@ -51,7 +50,7 @@ describe("Separator", () => {
   });
 
   it("should have correct role as separator", async () => {
-    await render(<Separator />);
+    await page.render(<Separator />);
 
     const separator = page.getByRole("separator").query();
     expect(separator).toBeDefined();
@@ -59,7 +58,7 @@ describe("Separator", () => {
   });
 
   it("should only accept className prop", async () => {
-    await render(<Separator className="test-class" />);
+    await page.render(<Separator className="test-class" />);
 
     const separator = page.getByRole("separator").query();
     expect(separator).toBeDefined();
@@ -67,7 +66,7 @@ describe("Separator", () => {
   });
 
   it("should merge custom className with default styles", async () => {
-    await render(<Separator className="my-custom-class" />);
+    await page.render(<Separator className="my-custom-class" />);
 
     const separator = page.getByRole("separator").query();
     expect(separator?.className).toContain("block");
@@ -75,7 +74,7 @@ describe("Separator", () => {
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(<Separator />);
+    await page.render(<Separator />);
 
     const separator = page.getByRole("separator").query();
     expect(separator?.getAttribute("data-slot")).toBe("separator");

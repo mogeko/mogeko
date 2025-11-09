@@ -1,11 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import { Heading } from "@/components/ui/heading";
 
 describe("Heading", () => {
   it("should render h1 heading with level 1", async () => {
-    await render(<Heading level={1}>Heading 1</Heading>);
+    await page.render(<Heading level={1}>Heading 1</Heading>);
 
     const heading = page.getByRole("heading", { level: 1 }).query();
     expect(heading).toBeDefined();
@@ -13,7 +12,7 @@ describe("Heading", () => {
   });
 
   it("should render h2 heading with level 2", async () => {
-    await render(<Heading level={2}>Heading 2</Heading>);
+    await page.render(<Heading level={2}>Heading 2</Heading>);
 
     const heading = page.getByRole("heading", { level: 2 }).query();
     expect(heading).toBeDefined();
@@ -21,7 +20,7 @@ describe("Heading", () => {
   });
 
   it("should render h3 heading with level 3", async () => {
-    await render(<Heading level={3}>Heading 3</Heading>);
+    await page.render(<Heading level={3}>Heading 3</Heading>);
 
     const heading = page.getByRole("heading", { level: 3 }).query();
     expect(heading).toBeDefined();
@@ -29,7 +28,7 @@ describe("Heading", () => {
   });
 
   it("should render anchor link when id is provided", async () => {
-    await render(
+    await page.render(
       <Heading level={1} id="test-heading">
         Heading with ID
       </Heading>,
@@ -47,7 +46,7 @@ describe("Heading", () => {
   });
 
   it("should not render anchor link when id is not provided", async () => {
-    await render(<Heading level={1}>Heading without ID</Heading>);
+    await page.render(<Heading level={1}>Heading without ID</Heading>);
 
     const heading = page.getByRole("heading", { level: 1 }).query();
     const links = page.getByRole("link").all();
@@ -58,7 +57,7 @@ describe("Heading", () => {
   });
 
   it("should render correct anchor symbols for different levels", async () => {
-    const { rerender } = await render(
+    const { rerender } = await page.render(
       <Heading level={1} id="h1">
         H1
       </Heading>,
@@ -84,7 +83,7 @@ describe("Heading", () => {
   });
 
   it("should apply default classes", async () => {
-    await render(<Heading level={1}>Default styles</Heading>);
+    await page.render(<Heading level={1}>Default styles</Heading>);
 
     const heading = page.getByRole("heading", { level: 1 }).query();
     expect(heading?.className).toContain("scroll-m-3.5");
@@ -95,7 +94,7 @@ describe("Heading", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(
+    await page.render(
       <Heading level={1} className="custom-heading">
         Custom heading
       </Heading>,
@@ -107,7 +106,7 @@ describe("Heading", () => {
   });
 
   it("should pass through additional HTML attributes", async () => {
-    await render(
+    await page.render(
       <Heading
         level={1}
         data-testid="test-heading"
@@ -125,7 +124,7 @@ describe("Heading", () => {
   });
 
   it("should handle color variants", async () => {
-    await render(
+    await page.render(
       <Heading level={1} color="blue">
         Blue heading
       </Heading>,
@@ -139,7 +138,7 @@ describe("Heading", () => {
   });
 
   it("should have correct structure with link and children", async () => {
-    await render(
+    await page.render(
       <Heading level={1} id="structured-heading">
         Structured heading
       </Heading>,
@@ -156,7 +155,7 @@ describe("Heading", () => {
   });
 
   it("should render complex children correctly", async () => {
-    await render(
+    await page.render(
       <Heading level={1}>
         <span>Complex</span>
         <span>heading</span>
@@ -168,7 +167,7 @@ describe("Heading", () => {
   });
 
   it("should handle scroll margin for anchor links", async () => {
-    await render(
+    await page.render(
       <Heading level={1} id="scroll-heading">
         Scroll heading
       </Heading>,
@@ -179,7 +178,7 @@ describe("Heading", () => {
   });
 
   it("should have correct typography styles", async () => {
-    await render(<Heading level={1}>Typography test</Heading>);
+    await page.render(<Heading level={1}>Typography test</Heading>);
 
     const heading = page.getByRole("heading", { level: 1 }).query();
     expect(heading?.className).toContain("font-extrabold");
@@ -187,7 +186,7 @@ describe("Heading", () => {
   });
 
   it("should have correct flex layout", async () => {
-    await render(
+    await page.render(
       <Heading level={1} id="flex-heading">
         Flex heading
       </Heading>,
@@ -199,7 +198,7 @@ describe("Heading", () => {
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(<Heading level={1}>Test Heading</Heading>);
+    await page.render(<Heading level={1}>Test Heading</Heading>);
 
     const heading = page.getByRole("heading", { level: 1 }).query();
     expect(heading?.getAttribute("data-slot")).toBe("heading");

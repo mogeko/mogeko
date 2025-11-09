@@ -1,6 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 
 describe("buttonVariants", () => {
@@ -69,7 +68,7 @@ describe("buttonVariants", () => {
 
 describe("Button", () => {
   it("should render button with default props", async () => {
-    await render(<Button>Click me</Button>);
+    await page.render(<Button>Click me</Button>);
 
     const button = page.getByRole("button", { name: "Click me" }).query();
     expect(button).toBeDefined();
@@ -79,7 +78,7 @@ describe("Button", () => {
   });
 
   it("should render button with secondary variant", async () => {
-    await render(<Button variant="secndary">Secondary Button</Button>);
+    await page.render(<Button variant="secndary">Secondary Button</Button>);
 
     const button = page
       .getByRole("button", { name: "Secondary Button" })
@@ -92,7 +91,7 @@ describe("Button", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(<Button className="custom-button">Custom Button</Button>);
+    await page.render(<Button className="custom-button">Custom Button</Button>);
 
     const button = page.getByRole("button", { name: "Custom Button" }).query();
     expect(button?.className).toContain("custom-button");
@@ -103,7 +102,7 @@ describe("Button", () => {
     const handleClick = vi.fn();
     const user = userEvent.setup();
 
-    await render(<Button onClick={handleClick}>Clickable Button</Button>);
+    await page.render(<Button onClick={handleClick}>Clickable Button</Button>);
 
     const button = page.getByRole("button", { name: "Clickable Button" });
     await user.click(button);
@@ -112,7 +111,7 @@ describe("Button", () => {
   });
 
   it("should be disabled when disabled prop is true", async () => {
-    render(<Button disabled>Disabled Button</Button>);
+    await page.render(<Button disabled>Disabled Button</Button>);
 
     const button = page
       .getByRole("button", { name: "Disabled Button" })
@@ -124,7 +123,7 @@ describe("Button", () => {
   });
 
   it("should forward all button attributes", async () => {
-    await render(
+    await page.render(
       <Button type="submit" aria-label="Submit form" tabIndex={0}>
         Submit
       </Button>,
@@ -137,7 +136,7 @@ describe("Button", () => {
   });
 
   it("should render as child component when asChild is true", async () => {
-    await render(
+    await page.render(
       <Button asChild>
         <a href="/test">Link Button</a>
       </Button>,
@@ -151,7 +150,7 @@ describe("Button", () => {
   });
 
   it("should have correct hover and focus behavior", async () => {
-    await render(<Button>Hover Button</Button>);
+    await page.render(<Button>Hover Button</Button>);
 
     const button = page.getByRole("button", { name: "Hover Button" }).query();
     expect(button?.className).toContain("hover:bg-accent");
@@ -159,7 +158,7 @@ describe("Button", () => {
   });
 
   it("should have correct dimensions and typography", async () => {
-    await render(<Button>Styled Button</Button>);
+    await page.render(<Button>Styled Button</Button>);
 
     const button = page.getByRole("button", { name: "Styled Button" }).query();
     expect(button?.className).toContain("min-h-2");
@@ -171,7 +170,7 @@ describe("Button", () => {
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(<Button>Test Button</Button>);
+    await page.render(<Button>Test Button</Button>);
 
     const button = page.getByRole("button").query();
     expect(button?.getAttribute("data-slot")).toBe("button");

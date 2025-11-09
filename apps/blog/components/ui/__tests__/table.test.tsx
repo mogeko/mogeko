@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { page, userEvent } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import {
   Table,
   TableBody,
@@ -14,7 +13,7 @@ import {
 
 describe("Table", () => {
   it("should render table with default styles", async () => {
-    await render(
+    await page.render(
       <Table>
         <tbody>
           <tr>
@@ -32,7 +31,7 @@ describe("Table", () => {
   });
 
   it("should apply custom className to table", async () => {
-    await render(
+    await page.render(
       <Table className="custom-table">
         <tbody>
           <tr>
@@ -48,7 +47,7 @@ describe("Table", () => {
   });
 
   it("should have wrapper div with overflow handling", async () => {
-    await render(
+    await page.render(
       <Table>
         <tbody>
           <tr>
@@ -68,7 +67,7 @@ describe("Table", () => {
   });
 
   it("should pass through additional HTML attributes", async () => {
-    await render(
+    await page.render(
       <Table data-testid="test-table" aria-label="Data table">
         <tbody>
           <tr>
@@ -86,7 +85,7 @@ describe("Table", () => {
 
 describe("TableHeader", () => {
   it("should render table header", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableHeader>
           <tr>
@@ -102,7 +101,7 @@ describe("TableHeader", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableHeader className="custom-header">
           <tr>
@@ -119,7 +118,7 @@ describe("TableHeader", () => {
 
 describe("TableBody", () => {
   it("should render table body", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableBody>
           <tr>
@@ -134,7 +133,7 @@ describe("TableBody", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableBody className="custom-body">
           <tr>
@@ -151,7 +150,7 @@ describe("TableBody", () => {
 
 describe("TableFooter", () => {
   it("should render table footer", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableFooter>
           <tr>
@@ -166,7 +165,7 @@ describe("TableFooter", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableFooter className="custom-footer">
           <tr>
@@ -183,7 +182,7 @@ describe("TableFooter", () => {
 
 describe("TableRow", () => {
   it("should render table row with default styles", async () => {
-    await render(
+    await page.render(
       <Table>
         <tbody>
           <TableRow>
@@ -201,7 +200,7 @@ describe("TableRow", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(
+    await page.render(
       <Table>
         <tbody>
           <TableRow className="custom-row">
@@ -218,7 +217,7 @@ describe("TableRow", () => {
 
   it("should be focusable and have focus styles", async () => {
     const user = userEvent.setup();
-    await render(
+    await page.render(
       <Table>
         <tbody>
           <TableRow tabIndex={0}>
@@ -237,7 +236,7 @@ describe("TableRow", () => {
   });
 
   it("should pass through additional HTML attributes", async () => {
-    await render(
+    await page.render(
       <Table>
         <tbody>
           <TableRow data-testid="test-row" aria-label="Table row">
@@ -255,7 +254,7 @@ describe("TableRow", () => {
 
 describe("TableHead", () => {
   it("should render table head with default styles", async () => {
-    await render(
+    await page.render(
       <Table>
         <thead>
           <tr>
@@ -274,7 +273,7 @@ describe("TableHead", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(
+    await page.render(
       <Table>
         <thead>
           <tr>
@@ -290,7 +289,7 @@ describe("TableHead", () => {
   });
 
   it("should pass through additional HTML attributes", async () => {
-    await render(
+    await page.render(
       <Table>
         <thead>
           <tr>
@@ -310,7 +309,7 @@ describe("TableHead", () => {
 
 describe("Table data-slot attributes", () => {
   it("should have correct data-slot attribute for Table", async () => {
-    await render(
+    await page.render(
       <Table>
         <tbody>
           <tr>
@@ -325,7 +324,7 @@ describe("Table data-slot attributes", () => {
   });
 
   it("should have correct data-slot attribute for TableHeader", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableHeader>
           <tr>
@@ -340,7 +339,7 @@ describe("Table data-slot attributes", () => {
   });
 
   it("should have correct data-slot attribute for TableBody", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableBody>
           <tr>
@@ -355,7 +354,7 @@ describe("Table data-slot attributes", () => {
   });
 
   it("should have correct data-slot attribute for TableFooter", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableFooter>
           <tr>
@@ -370,7 +369,7 @@ describe("Table data-slot attributes", () => {
   });
 
   it("should have correct data-slot attribute for TableRow", async () => {
-    await render(
+    await page.render(
       <Table>
         <tbody>
           <TableRow>
@@ -385,7 +384,7 @@ describe("Table data-slot attributes", () => {
   });
 
   it("should have correct data-slot attribute for TableHead", async () => {
-    await render(
+    await page.render(
       <Table>
         <thead>
           <tr>
@@ -400,7 +399,7 @@ describe("Table data-slot attributes", () => {
   });
 
   it("should have correct data-slot attribute for TableCell", async () => {
-    await render(
+    await page.render(
       <Table>
         <tbody>
           <tr>
@@ -415,7 +414,7 @@ describe("Table data-slot attributes", () => {
   });
 
   it("should have correct data-slot attribute for TableCaption", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableCaption>Table description</TableCaption>
         <tbody>
@@ -433,7 +432,7 @@ describe("Table data-slot attributes", () => {
 
 describe("TableCell", () => {
   it("should render table cell with default styles", async () => {
-    await render(
+    await page.render(
       <Table>
         <tbody>
           <tr>
@@ -450,7 +449,7 @@ describe("TableCell", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(
+    await page.render(
       <Table>
         <tbody>
           <tr>
@@ -466,7 +465,7 @@ describe("TableCell", () => {
   });
 
   it("should pass through additional HTML attributes", async () => {
-    await render(
+    await page.render(
       <Table>
         <tbody>
           <tr>
@@ -486,7 +485,7 @@ describe("TableCell", () => {
 
 describe("TableCaption", () => {
   it("should render table caption", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableCaption>Table description</TableCaption>
         <tbody>
@@ -503,7 +502,7 @@ describe("TableCaption", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableCaption className="custom-caption">
           Table description
@@ -521,7 +520,7 @@ describe("TableCaption", () => {
   });
 
   it("should pass through additional HTML attributes", async () => {
-    await render(
+    await page.render(
       <Table>
         <TableCaption data-testid="test-caption" aria-label="Table summary">
           Table description

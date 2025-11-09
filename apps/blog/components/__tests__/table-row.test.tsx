@@ -1,6 +1,6 @@
 import type { GetBlockResponse } from "@notionhq/client";
 import { describe, expect, it, vi } from "vitest";
-import { render } from "vitest-browser-react";
+import { page } from "vitest/browser";
 import { TRow } from "@/components/table-row";
 
 // Mock the notion module to avoid server-only imports
@@ -78,7 +78,7 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} />, {
+    const { container } = await page.render(<TRow block={mockBlock} />, {
       wrapper: ({ children }) => {
         return (
           <table>
@@ -141,9 +141,12 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} hx={true} />, {
-      wrapper: TableWrapper,
-    });
+    const { container } = await page.render(
+      <TRow block={mockBlock} hx={true} />,
+      {
+        wrapper: TableWrapper,
+      },
+    );
 
     const headerCell = container.querySelector("th");
     expect(headerCell).toBeTruthy();
@@ -197,9 +200,12 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} hy={true} />, {
-      wrapper: TableWrapper,
-    });
+    const { container } = await page.render(
+      <TRow block={mockBlock} hy={true} />,
+      {
+        wrapper: TableWrapper,
+      },
+    );
 
     const headerCells = container.querySelectorAll("th");
     expect(headerCells).toHaveLength(2);
@@ -250,7 +256,7 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(
+    const { container } = await page.render(
       <TRow block={mockBlock} hx={true} hy={true} />,
       {
         wrapper: TableWrapper,
@@ -269,7 +275,7 @@ describe("TRow", () => {
       id: "test-id",
     };
 
-    const { container } = await render(<TRow block={mockBlock} />, {
+    const { container } = await page.render(<TRow block={mockBlock} />, {
       wrapper: TableWrapper,
     });
 
@@ -289,7 +295,7 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} />, {
+    const { container } = await page.render(<TRow block={mockBlock} />, {
       wrapper: TableWrapper,
     });
 
@@ -306,7 +312,7 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} />);
+    const { container } = await page.render(<TRow block={mockBlock} />);
 
     // When cells array is empty, the component should not render anything
     expect(container.children).toHaveLength(0);
@@ -339,7 +345,7 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} />, {
+    const { container } = await page.render(<TRow block={mockBlock} />, {
       wrapper: TableWrapper,
     });
 
@@ -378,7 +384,7 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(
+    const { container } = await page.render(
       <TRow block={mockBlock} className="custom-row" data-testid="test-row" />,
       {
         wrapper: TableWrapper,
@@ -434,7 +440,7 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} />, {
+    const { container } = await page.render(<TRow block={mockBlock} />, {
       wrapper: TableWrapper,
     });
 

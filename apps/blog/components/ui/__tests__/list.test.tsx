@@ -1,11 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import { ListItem } from "@/components/ui/list";
 
 describe("ListItem", () => {
   it("should render list item with children", async () => {
-    await render(<ListItem>List item content</ListItem>);
+    await page.render(<ListItem>List item content</ListItem>);
 
     const listItem = page.getByRole("listitem").query();
     expect(listItem).toBeDefined();
@@ -13,7 +12,7 @@ describe("ListItem", () => {
   });
 
   it("should apply default classes", async () => {
-    await render(<ListItem>Default styles</ListItem>);
+    await page.render(<ListItem>Default styles</ListItem>);
 
     const listItem = page.getByRole("listitem").query();
     expect(listItem?.className).toContain("outline-none");
@@ -22,7 +21,7 @@ describe("ListItem", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(
+    await page.render(
       <ListItem className="custom-list-item">Custom list item</ListItem>,
     );
 
@@ -32,7 +31,7 @@ describe("ListItem", () => {
   });
 
   it("should pass through additional HTML attributes", async () => {
-    await render(
+    await page.render(
       <ListItem
         data-testid="test-list-item"
         aria-label="List item"
@@ -49,7 +48,7 @@ describe("ListItem", () => {
   });
 
   it("should handle color variants", async () => {
-    await render(<ListItem color="blue">Blue list item</ListItem>);
+    await page.render(<ListItem color="blue">Blue list item</ListItem>);
 
     const listItem = page.getByRole("listitem").query();
     // The color variants are applied through the colorVariants function
@@ -60,7 +59,7 @@ describe("ListItem", () => {
   });
 
   it("should have correct role as listitem", async () => {
-    await render(<ListItem>Role test</ListItem>);
+    await page.render(<ListItem>Role test</ListItem>);
 
     const listItem = page.getByRole("listitem").query();
     expect(listItem).toBeDefined();
@@ -68,7 +67,7 @@ describe("ListItem", () => {
   });
 
   it("should be focusable and have focus styles", async () => {
-    await render(<ListItem>Focusable list item</ListItem>);
+    await page.render(<ListItem>Focusable list item</ListItem>);
 
     const listItem = page.getByRole("listitem").query();
 
@@ -78,14 +77,14 @@ describe("ListItem", () => {
   });
 
   it("should have outline-none for accessibility", async () => {
-    await render(<ListItem>Accessible list item</ListItem>);
+    await page.render(<ListItem>Accessible list item</ListItem>);
 
     const listItem = page.getByRole("listitem").query();
     expect(listItem?.className).toContain("outline-none");
   });
 
   it("should render complex children correctly", async () => {
-    await render(
+    await page.render(
       <ListItem>
         <span>Complex</span>
         <span>list</span>
@@ -102,7 +101,7 @@ describe("ListItem", () => {
     const handleClick = vi.fn();
     const user = userEvent.setup();
 
-    await render(
+    await page.render(
       <ListItem onClick={handleClick}>Clickable list item</ListItem>,
     );
 
@@ -113,7 +112,7 @@ describe("ListItem", () => {
   });
 
   it("should be a div element with listitem role", async () => {
-    await render(<ListItem>Element test</ListItem>);
+    await page.render(<ListItem>Element test</ListItem>);
 
     const listItem = page.getByRole("listitem").query();
     expect(listItem?.tagName).toBe("DIV");
@@ -121,7 +120,7 @@ describe("ListItem", () => {
   });
 
   it("should merge color variants with custom className", async () => {
-    await render(
+    await page.render(
       <ListItem className="custom-class" color="blue">
         Combined styles
       </ListItem>,
@@ -133,7 +132,7 @@ describe("ListItem", () => {
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(<ListItem>Test List Item</ListItem>);
+    await page.render(<ListItem>Test List Item</ListItem>);
 
     const listItem = page.getByRole("listitem").query();
     expect(listItem?.getAttribute("data-slot")).toBe("list-item");

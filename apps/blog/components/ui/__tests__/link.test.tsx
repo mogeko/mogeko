@@ -1,6 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import { Link, linkVariants } from "@/components/ui/link";
 
 describe("linkVariants", () => {
@@ -46,7 +45,7 @@ describe("linkVariants", () => {
 
 describe("Link", () => {
   it("should render link with default props", async () => {
-    await render(<Link href="/test">Test Link</Link>);
+    await page.render(<Link href="/test">Test Link</Link>);
 
     const link = page.getByRole("link", { name: "Test Link" }).query();
     expect(link).toBeDefined();
@@ -57,7 +56,7 @@ describe("Link", () => {
   });
 
   it("should render link with ghost variant", async () => {
-    await render(
+    await page.render(
       <Link href="/test" variant="ghost">
         Ghost Link
       </Link>,
@@ -71,7 +70,7 @@ describe("Link", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(
+    await page.render(
       <Link href="/test" className="custom-link">
         Custom Link
       </Link>,
@@ -83,14 +82,14 @@ describe("Link", () => {
   });
 
   it("should have default tabIndex of 0", async () => {
-    await render(<Link href="/test">Default tabIndex</Link>);
+    await page.render(<Link href="/test">Default tabIndex</Link>);
 
     const link = page.getByRole("link", { name: "Default tabIndex" }).query();
     expect(link?.getAttribute("tabIndex")).toBe("0");
   });
 
   it("should allow custom tabIndex", async () => {
-    await render(
+    await page.render(
       <Link href="/test" tabIndex={-1}>
         Custom tabIndex
       </Link>,
@@ -101,7 +100,7 @@ describe("Link", () => {
   });
 
   it("should pass through additional HTML attributes", async () => {
-    await render(
+    await page.render(
       <Link
         href="/test"
         target="_blank"
@@ -122,7 +121,7 @@ describe("Link", () => {
   });
 
   it("should have correct hover and focus styles", async () => {
-    await render(<Link href="/test">Hover styles</Link>);
+    await page.render(<Link href="/test">Hover styles</Link>);
 
     const link = page.getByRole("link", { name: "Hover styles" }).query();
     expect(link?.className).toContain("hover:bg-accent");
@@ -132,7 +131,7 @@ describe("Link", () => {
   });
 
   it("should have correct underline styles for primary variant", async () => {
-    await render(<Link href="/test">Underline styles</Link>);
+    await page.render(<Link href="/test">Underline styles</Link>);
 
     const link = page.getByRole("link", { name: "Underline styles" }).query();
     expect(link?.className).toContain("underline");
@@ -144,7 +143,7 @@ describe("Link", () => {
     const handleClick = vi.fn((e) => e.preventDefault());
     const user = userEvent.setup();
 
-    await render(
+    await page.render(
       <Link href="/test" onClick={handleClick}>
         Clickable Link
       </Link>,
@@ -158,7 +157,7 @@ describe("Link", () => {
 
   it("should be focusable", async () => {
     const user = userEvent.setup();
-    await render(<Link href="/test">Focusable Link</Link>);
+    await page.render(<Link href="/test">Focusable Link</Link>);
 
     const link = page.getByRole("link", { name: "Focusable Link" });
     await user.tab();
@@ -167,7 +166,7 @@ describe("Link", () => {
   });
 
   it("should render complex children correctly", async () => {
-    await render(
+    await page.render(
       <Link href="/test">
         <span>Complex</span>
         <span>link</span>
@@ -179,14 +178,14 @@ describe("Link", () => {
   });
 
   it("should have outline-none for accessibility", async () => {
-    await render(<Link href="/test">Accessible link</Link>);
+    await page.render(<Link href="/test">Accessible link</Link>);
 
     const link = page.getByRole("link", { name: "Accessible link" }).query();
     expect(link?.className).toContain("outline-none");
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(<Link href="/test">Test Link</Link>);
+    await page.render(<Link href="/test">Test Link</Link>);
 
     const link = page.getByRole("link").query();
     expect(link?.getAttribute("data-slot")).toBe("link");

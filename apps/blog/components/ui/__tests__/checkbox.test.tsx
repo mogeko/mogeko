@@ -1,11 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import { Checkbox } from "@/components/ui/checkbox";
 
 describe("Checkbox", () => {
   it("should render checkbox with children", async () => {
-    await render(<Checkbox>Checkbox label</Checkbox>);
+    await page.render(<Checkbox>Checkbox label</Checkbox>);
 
     const checkbox = page.getByText("Checkbox label").query();
     expect(checkbox).toBeDefined();
@@ -13,7 +12,7 @@ describe("Checkbox", () => {
   });
 
   it("should render unchecked checkbox by default", async () => {
-    await render(<Checkbox>Unchecked</Checkbox>);
+    await page.render(<Checkbox>Unchecked</Checkbox>);
 
     const checkbox = page.getByText("Unchecked").query();
     const parentDiv = checkbox?.closest("div");
@@ -24,7 +23,7 @@ describe("Checkbox", () => {
   });
 
   it("should render checked checkbox when checked prop is true", async () => {
-    await render(<Checkbox checked>Checked</Checkbox>);
+    await page.render(<Checkbox checked>Checked</Checkbox>);
 
     const checkbox = page.getByText("Checked").query();
     const parentDiv = checkbox?.closest("div");
@@ -35,7 +34,7 @@ describe("Checkbox", () => {
   });
 
   it("should apply default classes", async () => {
-    await render(<Checkbox>Default styles</Checkbox>);
+    await page.render(<Checkbox>Default styles</Checkbox>);
 
     const checkbox = page.getByText("Default styles").query();
     const parentDiv = checkbox?.closest("div");
@@ -49,7 +48,7 @@ describe("Checkbox", () => {
   });
 
   it("should apply custom className", async () => {
-    await render(
+    await page.render(
       <Checkbox className="custom-checkbox">Custom checkbox</Checkbox>,
     );
 
@@ -61,7 +60,7 @@ describe("Checkbox", () => {
   });
 
   it("should pass through additional HTML attributes", async () => {
-    await render(
+    await page.render(
       <Checkbox role="checkbox" aria-label="Checkbox option" id="checkbox-1">
         Checkbox with attributes
       </Checkbox>,
@@ -76,7 +75,7 @@ describe("Checkbox", () => {
   });
 
   it("should have correct structure with two spans", async () => {
-    await render(<Checkbox>Structure test</Checkbox>);
+    await page.render(<Checkbox>Structure test</Checkbox>);
 
     const checkbox = page.getByText("Structure test").query();
     const parentDiv = checkbox?.closest("div");
@@ -93,7 +92,7 @@ describe("Checkbox", () => {
   });
 
   it("should have correct styles for check span", async () => {
-    await render(<Checkbox>Check span styles</Checkbox>);
+    await page.render(<Checkbox>Check span styles</Checkbox>);
 
     const checkbox = page.getByText("Check span styles").query();
     const parentDiv = checkbox?.closest("div");
@@ -109,7 +108,7 @@ describe("Checkbox", () => {
   });
 
   it("should have correct styles for label span", async () => {
-    await render(<Checkbox>Label span styles</Checkbox>);
+    await page.render(<Checkbox>Label span styles</Checkbox>);
 
     const checkbox = page.getByText("Label span styles").query();
     const parentDiv = checkbox?.closest("div");
@@ -126,7 +125,9 @@ describe("Checkbox", () => {
     const handleClick = vi.fn();
     const user = userEvent.setup();
 
-    await render(<Checkbox onClick={handleClick}>Clickable checkbox</Checkbox>);
+    await page.render(
+      <Checkbox onClick={handleClick}>Clickable checkbox</Checkbox>,
+    );
 
     const checkbox = page.getByText("Clickable checkbox").query();
     const parentDiv = checkbox?.closest("div");
@@ -139,7 +140,7 @@ describe("Checkbox", () => {
   });
 
   it("should be focusable and have cursor pointer", async () => {
-    await render(<Checkbox>Focusable checkbox</Checkbox>);
+    await page.render(<Checkbox>Focusable checkbox</Checkbox>);
 
     const checkbox = page.getByText("Focusable checkbox").query();
     const parentDiv = checkbox?.closest("div");
@@ -149,7 +150,7 @@ describe("Checkbox", () => {
   });
 
   it("should render complex children correctly", async () => {
-    await render(
+    await page.render(
       <Checkbox>
         <span>Complex</span>
         <span>label</span>
@@ -161,7 +162,7 @@ describe("Checkbox", () => {
   });
 
   it("should toggle between checked and unchecked states", async () => {
-    const { rerender } = await render(
+    const { rerender } = await page.render(
       <Checkbox checked={false}>Toggle test</Checkbox>,
     );
 
@@ -181,7 +182,7 @@ describe("Checkbox", () => {
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(<Checkbox>Test Checkbox</Checkbox>);
+    await page.render(<Checkbox>Test Checkbox</Checkbox>);
 
     const checkbox = page.getByText("Test Checkbox").query();
     const parentDiv = checkbox?.closest("div");

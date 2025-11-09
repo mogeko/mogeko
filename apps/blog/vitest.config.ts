@@ -9,7 +9,7 @@ export default defineConfig({
     "process.env": JSON.stringify({}),
   },
   test: {
-    setupFiles: ["./scripts/vitest-setup-css.ts"],
+    setupFiles: ["./scripts/vitest-setup.ts"],
     browser: {
       provider: playwright(),
       enabled: true,

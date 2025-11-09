@@ -1,6 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import { AlertBanner, alertBannerVariants } from "@/components/ui/alert-banner";
 
 describe("alertBannerVariants", () => {
@@ -27,7 +26,7 @@ describe("alertBannerVariants", () => {
 
 describe("AlertBanner", () => {
   it("should render with default icon when no icon provided", async () => {
-    await render(<AlertBanner icon={null}>Test message</AlertBanner>);
+    await page.render(<AlertBanner icon={null}>Test message</AlertBanner>);
 
     const banner = page.getByText("Test message").query();
     expect(banner).toBeDefined();
@@ -37,7 +36,7 @@ describe("AlertBanner", () => {
   });
 
   it("should render with custom icon", async () => {
-    await render(
+    await page.render(
       <AlertBanner icon={<span>🚨</span>}>Warning message</AlertBanner>,
     );
 
@@ -49,7 +48,7 @@ describe("AlertBanner", () => {
   });
 
   it("should apply correct CSS classes", async () => {
-    const { container } = await render(
+    const { container } = await page.render(
       <AlertBanner icon={null} className="custom-class">
         Test message
       </AlertBanner>,
@@ -62,7 +61,7 @@ describe("AlertBanner", () => {
   });
 
   it("should handle color variants", async () => {
-    const { container } = await render(
+    const { container } = await page.render(
       <AlertBanner icon={null} color="gray_background">
         Test message
       </AlertBanner>,
@@ -74,7 +73,7 @@ describe("AlertBanner", () => {
   });
 
   it("should pass through additional HTML attributes", async () => {
-    await render(
+    await page.render(
       <AlertBanner icon={null} aria-label="Important notice">
         Test message
       </AlertBanner>,
@@ -89,7 +88,7 @@ describe("AlertBanner", () => {
     const handleClick = vi.fn();
     const user = userEvent.setup();
 
-    render(
+    await page.render(
       <AlertBanner icon={null} onClick={handleClick}>
         Clickable banner
       </AlertBanner>,
@@ -102,7 +101,7 @@ describe("AlertBanner", () => {
   });
 
   it("should render children correctly", async () => {
-    await render(
+    await page.render(
       <AlertBanner icon={null}>
         <span>Complex</span>
         <span>children</span>
@@ -114,7 +113,7 @@ describe("AlertBanner", () => {
   });
 
   it("should merge custom className with default styles", async () => {
-    const { container } = await render(
+    const { container } = await page.render(
       <AlertBanner icon={null} className="my-custom-class">
         Test message
       </AlertBanner>,
@@ -126,7 +125,7 @@ describe("AlertBanner", () => {
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(<AlertBanner icon={null}>Test message</AlertBanner>);
+    await page.render(<AlertBanner icon={null}>Test message</AlertBanner>);
 
     const banner = page.getByRole("alert").query();
     expect(banner?.getAttribute("data-slot")).toBe("alert");

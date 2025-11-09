@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { render } from "vitest-browser-react";
+import { page } from "vitest/browser";
 import { Equation } from "@/components/equation";
 
 describe("Equation", () => {
-  it("should render inline equation as span", async () => {
-    const { container } = await render(
+  it("should page.render inline equation as span", async () => {
+    const { container } = await page.render(
       <Equation expression="x^2 + y^2 = z^2" inline />,
     );
     const spanElement = container.querySelector("span");
@@ -12,8 +12,8 @@ describe("Equation", () => {
     expect(spanElement?.innerHTML).toContain("x^2 + y^2 = z^2");
   });
 
-  it("should render block equation as paragraph", async () => {
-    const { container } = await render(
+  it("should page.render block equation as paragraph", async () => {
+    const { container } = await page.render(
       <Equation expression="\\sum_{i=1}^n i = \\frac{n(n+1)}{2}" />,
     );
     const paragraphElement = container.querySelector("p");
@@ -22,7 +22,7 @@ describe("Equation", () => {
   });
 
   it("should apply custom className", async () => {
-    const { container } = await render(
+    const { container } = await page.render(
       <Equation expression="E = mc^2" className="custom-class" />,
     );
     const paragraphElement = container.querySelector("p");
@@ -31,7 +31,7 @@ describe("Equation", () => {
   });
 
   it("should pass additional HTML attributes", async () => {
-    const { container } = await render(
+    const { container } = await page.render(
       <Equation expression="a^2 + b^2 = c^2" title="Pythagorean theorem" />,
     );
     const paragraphElement = container.querySelector("p");

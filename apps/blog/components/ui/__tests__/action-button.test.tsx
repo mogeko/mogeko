@@ -1,11 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 import { page, userEvent } from "vitest/browser";
-import { render } from "vitest-browser-react";
 import { ActionButton } from "@/components/ui/action-button";
 
 describe("ActionButton", () => {
   it("should render button with children", async () => {
-    await render(<ActionButton>Click me</ActionButton>);
+    await page.render(<ActionButton>Click me</ActionButton>);
 
     const button = page.getByRole("button", { name: "Click me" }).query();
     expect(button).toBeDefined();
@@ -13,7 +12,7 @@ describe("ActionButton", () => {
   });
 
   it("should render hotkey when provided", async () => {
-    await render(<ActionButton hotkey="⌘K">Open</ActionButton>);
+    await page.render(<ActionButton hotkey="⌘K">Open</ActionButton>);
 
     const button = page.getByRole("button").query();
     const kbd = page.getByText("⌘K").query();
@@ -24,7 +23,7 @@ describe("ActionButton", () => {
   });
 
   it("should not render hotkey when not provided", async () => {
-    await render(<ActionButton>Open</ActionButton>);
+    await page.render(<ActionButton>Open</ActionButton>);
 
     const button = page.getByRole("button").query();
     const kbdElements = page.getByText("⌘K").all();
@@ -34,7 +33,7 @@ describe("ActionButton", () => {
   });
 
   it("should apply open styles when open prop is true", async () => {
-    await render(<ActionButton open>Menu</ActionButton>);
+    await page.render(<ActionButton open>Menu</ActionButton>);
 
     const button = page.getByRole("button").query();
     const span = button?.querySelector("span");
@@ -43,7 +42,7 @@ describe("ActionButton", () => {
   });
 
   it("should not apply open styles when open prop is false", async () => {
-    await render(<ActionButton open={false}>Menu</ActionButton>);
+    await page.render(<ActionButton open={false}>Menu</ActionButton>);
 
     const button = page.getByRole("button").query();
     const span = button?.querySelector("span");
@@ -55,7 +54,9 @@ describe("ActionButton", () => {
     const handleClick = vi.fn();
     const user = userEvent.setup();
 
-    await render(<ActionButton onClick={handleClick}>Click me</ActionButton>);
+    await page.render(
+      <ActionButton onClick={handleClick}>Click me</ActionButton>,
+    );
 
     const button = page.getByRole("button");
     await user.click(button);
@@ -64,21 +65,23 @@ describe("ActionButton", () => {
   });
 
   it("should be disabled when disabled prop is true", async () => {
-    await render(<ActionButton disabled>Disabled Button</ActionButton>);
+    await page.render(<ActionButton disabled>Disabled Button</ActionButton>);
 
     const button = page.getByRole("button").query() as HTMLButtonElement | null;
     expect(button?.disabled).toBe(true);
   });
 
   it("should apply custom className", async () => {
-    await render(<ActionButton className="custom-class">Button</ActionButton>);
+    await page.render(
+      <ActionButton className="custom-class">Button</ActionButton>,
+    );
 
     const button = page.getByRole("button").query();
     expect(button?.className).toContain("custom-class");
   });
 
   it("should forward all button attributes", async () => {
-    await render(
+    await page.render(
       <ActionButton type="submit" aria-label="Submit form">
         Submit
       </ActionButton>,
@@ -90,7 +93,7 @@ describe("ActionButton", () => {
   });
 
   it("should render both hotkey and children correctly", async () => {
-    await render(<ActionButton hotkey="⌘S">Save</ActionButton>);
+    await page.render(<ActionButton hotkey="⌘S">Save</ActionButton>);
 
     const button = page.getByRole("button").query();
     expect(button?.textContent).toContain("⌘S");
@@ -104,7 +107,7 @@ describe("ActionButton", () => {
   });
 
   it("should have correct hover and focus styles for hotkey", async () => {
-    await render(<ActionButton hotkey="⌘K">Open</ActionButton>);
+    await page.render(<ActionButton hotkey="⌘K">Open</ActionButton>);
 
     const button = page.getByRole("button").query();
 
@@ -115,7 +118,7 @@ describe("ActionButton", () => {
   });
 
   it("should have correct data-slot attribute", async () => {
-    await render(<ActionButton>Test Button</ActionButton>);
+    await page.render(<ActionButton>Test Button</ActionButton>);
 
     const button = page.getByRole("button").query();
     expect(button?.getAttribute("data-slot")).toBe("button");
