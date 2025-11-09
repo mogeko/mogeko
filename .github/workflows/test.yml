@@ -32,8 +32,11 @@ jobs:
         id: playwright-version
         with:
           script: |
-            const res = await fetch("https://registry.npmjs.org/-/package/playwright/dist-tags")
-            return await res.json().then((data) => data.latest)
+            return await fetch(
+              "https://registry.npmjs.org/-/package/playwright/dist-tags",
+            ).then((res) => {
+              return res.json().then((data) => data.latest);
+            });
           result-encoding: string
       - name: Cache playwright binaries
         uses: actions/cache@v4.3.0
