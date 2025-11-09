@@ -1,9 +1,10 @@
+import { env } from "node:process";
 import type { MetadataRoute } from "next";
 import { isFullPage, queryDataSources, retrieveDatabase } from "@/lib/notion";
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
-  const databaseId = process.env.NOTION_DATABASE_ID;
-  const domain = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  const databaseId = env.NOTION_DATABASE_ID;
+  const domain = env.VERCEL_PROJECT_PRODUCTION_URL;
   const baseUrl = domain ? `https://${domain}` : "http://localhost:3000";
   const feeds: MetadataRoute.Sitemap = [
     { url: baseUrl, changeFrequency: "weekly", priority: 1 },

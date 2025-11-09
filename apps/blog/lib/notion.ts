@@ -1,3 +1,4 @@
+import { env } from "node:process";
 import { Client, isFullDatabase, isFullPage } from "@notionhq/client";
 import { cacheLife, cacheTag } from "next/cache";
 import { notFound } from "next/navigation";
@@ -5,7 +6,7 @@ import { APIErrorCode, NotFoundError } from "@/lib/errors";
 
 import "server-only";
 
-const notion = new Client({ auth: process.env.NOTION_AUTH_TOKEN, fetch });
+export const notion = new Client({ auth: env.NOTION_AUTH_TOKEN, fetch });
 
 export async function retrieveDatabase(database_id?: string) {
   "use cache";

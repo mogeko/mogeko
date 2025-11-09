@@ -1,3 +1,4 @@
+import { argv, env } from "node:process";
 import react from "@vitejs/plugin-react-swc";
 import { playwright } from "@vitest/browser-playwright";
 import { defineConfig } from "vitest/config";
@@ -12,8 +13,8 @@ export default defineConfig({
     browser: {
       provider: playwright(),
       enabled: true,
+      headless: !argv.includes("--watch") || !!env.CI,
       instances: [{ browser: "chromium" }],
-      headless: true,
     },
   },
   resolve: {

@@ -1,10 +1,11 @@
+import { env } from "node:process";
 import type { MetadataRoute } from "next";
 import { plainText } from "@/components/text";
 import { retrieveDatabase } from "@/lib/notion";
 import pkg from "@/package.json";
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
-  const database_id = process.env.NOTION_DATABASE_ID;
+  const database_id = env.NOTION_DATABASE_ID;
   const icons = [
     { src: "/icon/192", type: "image/png", sizes: "192x192" },
     { src: "/icon/512", type: "image/png", sizes: "512x512" },
