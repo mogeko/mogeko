@@ -1,3 +1,8 @@
+import {
+  type BlockObjectResponse,
+  isFullBlock,
+  type ListBlockChildrenParameters,
+} from "@notionhq/client";
 import dynamic from "next/dynamic";
 import { Fragment, Suspense } from "react";
 import { twMerge } from "tailwind-merge";
@@ -13,12 +18,7 @@ import { ListItem } from "@/components/ui/list";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { colorVariants } from "@/lib/colors";
-import {
-  type BlockObjectResponse,
-  isFullBlock,
-  type ListBlockChildrenParameters,
-  queryBlocks,
-} from "@/lib/notion";
+import { queryBlocks } from "@/lib/notion";
 import { shortenUUID } from "@/lib/utils";
 
 const Equation = dynamic(async () => {

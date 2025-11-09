@@ -1,3 +1,4 @@
+import type { CodeBlockObjectResponse } from "@notionhq/client";
 import { transformerColorizedBrackets } from "@shikijs/colorized-brackets";
 import {
   transformerNotationDiff,
@@ -8,7 +9,6 @@ import {
 } from "@shikijs/transformers";
 import { type BundledLanguage, codeToHtml, type SpecialLanguage } from "shiki";
 import { plainText } from "@/components/text";
-import type { CodeBlockObjectResponse } from "@/lib/notion";
 import { cn } from "@/lib/utils";
 
 export const Code: React.FC<

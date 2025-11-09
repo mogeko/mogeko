@@ -1,6 +1,7 @@
+import type { TableBlockObjectResponse } from "@notionhq/client";
 import { TRow } from "@/components/table-row";
 import { Table, TableBody, TableHeader } from "@/components/ui/table";
-import { queryBlocks, type TableBlockObjectResponse } from "@/lib/notion";
+import { queryBlocks } from "@/lib/notion";
 
 export const TableBox: React.FC<
   React.ComponentProps<typeof Table> & { block: TableBlockObjectResponse }

@@ -1,7 +1,7 @@
+import type { MentionRichTextItemResponse } from "@notionhq/client";
 import { describe, expect, it } from "vitest";
 import { render } from "vitest-browser-react";
 import { Mention } from "@/components/mention";
-import type { MentionRichTextItemResponse } from "@/lib/notion";
 
 describe("Mention", () => {
   it("should render page mention as link", async () => {

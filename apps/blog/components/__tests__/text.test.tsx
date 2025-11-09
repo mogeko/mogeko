@@ -1,7 +1,7 @@
+import type { RichTextItemResponse } from "@notionhq/client";
 import { describe, expect, it } from "vitest";
 import { render } from "vitest-browser-react";
 import { plainText, RichText } from "@/components/text";
-import type { RichTextItemResponse } from "@/lib/notion";
 
 describe("plainText", () => {
   it("should convert rich text array to plain text string", () => {

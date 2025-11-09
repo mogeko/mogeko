@@ -1,4 +1,5 @@
 import { env } from "node:process";
+import { isFullPage } from "@notionhq/client";
 import { getYear } from "date-fns";
 import type { NextPage } from "next";
 import { Suspense } from "react";
@@ -8,7 +9,7 @@ import { ActionLink } from "@/components/ui/action-link";
 import { Badge } from "@/components/ui/badges";
 import { Heading } from "@/components/ui/heading";
 import { Spinner } from "@/components/ui/spinner";
-import { isFullPage, queryDataSources, retrieveDatabase } from "@/lib/notion";
+import { queryDataSources, retrieveDatabase } from "@/lib/notion";
 import { groupBy, shortenUUID } from "@/lib/utils";
 import pkg from "@/package.json";
 

@@ -127,5 +127,3 @@ export async function queryBlocks(
     throw error;
   }
 }
-
-export * from "@notionhq/client";
