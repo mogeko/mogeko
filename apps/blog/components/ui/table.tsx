@@ -53,6 +53,7 @@ export const TableHead: React.FC<
   return (
     <th
       data-slot="table-head"
+      scope="col"
       className={cn(
         "not-first:pl-[1ch] shrink-0 font-normal text-left",
         className,

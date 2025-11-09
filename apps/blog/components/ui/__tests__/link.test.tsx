@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
+import { render } from "vitest-browser-react";
 import { Link, linkVariants } from "@/components/ui/link";
 
 describe("linkVariants", () => {
@@ -45,63 +45,63 @@ describe("linkVariants", () => {
 });
 
 describe("Link", () => {
-  it("should render link with default props", () => {
-    render(<Link href="/test">Test Link</Link>);
+  it("should render link with default props", async () => {
+    await render(<Link href="/test">Test Link</Link>);
 
-    const link = screen.getByRole("link", { name: "Test Link" });
+    const link = page.getByRole("link", { name: "Test Link" }).query();
     expect(link).toBeDefined();
-    expect(link.textContent).toBe("Test Link");
-    expect(link.getAttribute("href")).toBe("/test");
-    expect(link.className).toContain("underline");
-    expect(link.className).toContain("bg-muted");
+    expect(link?.textContent).toBe("Test Link");
+    expect(link?.getAttribute("href")).toBe("/test");
+    expect(link?.className).toContain("underline");
+    expect(link?.className).toContain("bg-muted");
   });
 
-  it("should render link with ghost variant", () => {
-    render(
+  it("should render link with ghost variant", async () => {
+    await render(
       <Link href="/test" variant="ghost">
         Ghost Link
       </Link>,
     );
 
-    const link = screen.getByRole("link", { name: "Ghost Link" });
+    const link = page.getByRole("link", { name: "Ghost Link" }).query();
     expect(link).toBeDefined();
-    expect(link.className).not.toContain("underline");
-    expect(link.className).not.toContain("bg-muted");
-    expect(link.className).not.toContain("text-muted-foreground");
+    expect(link?.className).not.toContain("underline");
+    expect(link?.className).not.toContain("bg-muted");
+    expect(link?.className).not.toContain("text-muted-foreground");
   });
 
-  it("should apply custom className", () => {
-    render(
+  it("should apply custom className", async () => {
+    await render(
       <Link href="/test" className="custom-link">
         Custom Link
       </Link>,
     );
 
-    const link = screen.getByRole("link", { name: "Custom Link" });
-    expect(link.className).toContain("custom-link");
-    expect(link.className).toContain("underline"); // Ensure default styles are still included
+    const link = page.getByRole("link", { name: "Custom Link" }).query();
+    expect(link?.className).toContain("custom-link");
+    expect(link?.className).toContain("underline"); // Ensure default styles are still included
   });
 
-  it("should have default tabIndex of 0", () => {
-    render(<Link href="/test">Default tabIndex</Link>);
+  it("should have default tabIndex of 0", async () => {
+    await render(<Link href="/test">Default tabIndex</Link>);
 
-    const link = screen.getByRole("link", { name: "Default tabIndex" });
-    expect(link.getAttribute("tabIndex")).toBe("0");
+    const link = page.getByRole("link", { name: "Default tabIndex" }).query();
+    expect(link?.getAttribute("tabIndex")).toBe("0");
   });
 
-  it("should allow custom tabIndex", () => {
-    render(
+  it("should allow custom tabIndex", async () => {
+    await render(
       <Link href="/test" tabIndex={-1}>
         Custom tabIndex
       </Link>,
     );
 
-    const link = screen.getByRole("link", { name: "Custom tabIndex" });
-    expect(link.getAttribute("tabIndex")).toBe("-1");
+    const link = page.getByRole("link", { name: "Custom tabIndex" }).query();
+    expect(link?.getAttribute("tabIndex")).toBe("-1");
   });
 
-  it("should pass through additional HTML attributes", () => {
-    render(
+  it("should pass through additional HTML attributes", async () => {
+    await render(
       <Link
         href="/test"
         target="_blank"
@@ -113,44 +113,44 @@ describe("Link", () => {
       </Link>,
     );
 
-    const link = screen.getByTestId("test-link");
+    const link = page.getByTestId("test-link").query();
     expect(link).toBeDefined();
-    expect(link.getAttribute("href")).toBe("/test");
-    expect(link.getAttribute("target")).toBe("_blank");
-    expect(link.getAttribute("rel")).toBe("noopener");
-    expect(link.getAttribute("aria-label")).toBe("External link");
+    expect(link?.getAttribute("href")).toBe("/test");
+    expect(link?.getAttribute("target")).toBe("_blank");
+    expect(link?.getAttribute("rel")).toBe("noopener");
+    expect(link?.getAttribute("aria-label")).toBe("External link");
   });
 
-  it("should have correct hover and focus styles", () => {
-    render(<Link href="/test">Hover styles</Link>);
+  it("should have correct hover and focus styles", async () => {
+    await render(<Link href="/test">Hover styles</Link>);
 
-    const link = screen.getByRole("link", { name: "Hover styles" });
-    expect(link.className).toContain("hover:bg-accent");
-    expect(link.className).toContain("hover:text-accent-foreground");
-    expect(link.className).toContain("focus:bg-accent");
-    expect(link.className).toContain("focus:text-accent-foreground");
+    const link = page.getByRole("link", { name: "Hover styles" }).query();
+    expect(link?.className).toContain("hover:bg-accent");
+    expect(link?.className).toContain("hover:text-accent-foreground");
+    expect(link?.className).toContain("focus:bg-accent");
+    expect(link?.className).toContain("focus:text-accent-foreground");
   });
 
-  it("should have correct underline styles for primary variant", () => {
-    render(<Link href="/test">Underline styles</Link>);
+  it("should have correct underline styles for primary variant", async () => {
+    await render(<Link href="/test">Underline styles</Link>);
 
-    const link = screen.getByRole("link", { name: "Underline styles" });
-    expect(link.className).toContain("underline");
-    expect(link.className).toContain("underline-offset-2");
-    expect(link.className).toContain("decoration-2");
+    const link = page.getByRole("link", { name: "Underline styles" }).query();
+    expect(link?.className).toContain("underline");
+    expect(link?.className).toContain("underline-offset-2");
+    expect(link?.className).toContain("decoration-2");
   });
 
   it("should handle click events", async () => {
-    const handleClick = vi.fn();
+    const handleClick = vi.fn((e) => e.preventDefault());
     const user = userEvent.setup();
 
-    render(
+    await render(
       <Link href="/test" onClick={handleClick}>
         Clickable Link
       </Link>,
     );
 
-    const link = screen.getByRole("link", { name: "Clickable Link" });
+    const link = page.getByRole("link", { name: "Clickable Link" });
     await user.click(link);
 
     expect(handleClick).toHaveBeenCalledOnce();
@@ -158,37 +158,37 @@ describe("Link", () => {
 
   it("should be focusable", async () => {
     const user = userEvent.setup();
-    render(<Link href="/test">Focusable Link</Link>);
+    await render(<Link href="/test">Focusable Link</Link>);
 
-    const link = screen.getByRole("link", { name: "Focusable Link" });
+    const link = page.getByRole("link", { name: "Focusable Link" });
     await user.tab();
 
-    expect(document.activeElement).toBe(link);
+    expect(document.activeElement).toBe(link.query());
   });
 
-  it("should render complex children correctly", () => {
-    render(
+  it("should render complex children correctly", async () => {
+    await render(
       <Link href="/test">
         <span>Complex</span>
         <span>link</span>
       </Link>,
     );
 
-    expect(screen.getByText("Complex")).toBeDefined();
-    expect(screen.getByText("link")).toBeDefined();
+    await expect.element(page.getByText("Complex")).toBeDefined();
+    await expect.element(page.getByText("link")).toBeDefined();
   });
 
-  it("should have outline-none for accessibility", () => {
-    render(<Link href="/test">Accessible link</Link>);
+  it("should have outline-none for accessibility", async () => {
+    await render(<Link href="/test">Accessible link</Link>);
 
-    const link = screen.getByRole("link", { name: "Accessible link" });
-    expect(link.className).toContain("outline-none");
+    const link = page.getByRole("link", { name: "Accessible link" }).query();
+    expect(link?.className).toContain("outline-none");
   });
 
-  it("should have correct data-slot attribute", () => {
-    render(<Link href="/test">Test Link</Link>);
+  it("should have correct data-slot attribute", async () => {
+    await render(<Link href="/test">Test Link</Link>);
 
-    const link = screen.getByRole("link");
-    expect(link.getAttribute("data-slot")).toBe("link");
+    const link = page.getByRole("link").query();
+    expect(link?.getAttribute("data-slot")).toBe("link");
   });
 });

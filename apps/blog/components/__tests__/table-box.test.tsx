@@ -1,6 +1,6 @@
 import type { GetBlockResponse } from "@notionhq/client";
-import { render } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { render } from "vitest-browser-react";
 import { RowSeparator } from "@/components/table-box";
 
 // Mock the notion module to avoid server-only imports
@@ -14,24 +14,24 @@ vi.mock("@/lib/notion", () => ({
 }));
 
 describe("RowSeparator", () => {
-  it("should render separator with default colSpan when not provided", () => {
-    const { container } = render(<RowSeparator />);
+  it("should render separator with default colSpan when not provided", async () => {
+    const { container } = await render(<RowSeparator />);
 
     const separator = container.querySelector('[data-slot="table-cell"]');
     expect(separator).toBeTruthy();
     expect(separator?.getAttribute("colSpan")).toBeNull();
   });
 
-  it("should render separator with specified colSpan", () => {
-    const { container } = render(<RowSeparator colSpan={5} />);
+  it("should render separator with specified colSpan", async () => {
+    const { container } = await render(<RowSeparator colSpan={5} />);
 
     const separator = container.querySelector('[data-slot="table-cell"]');
     expect(separator).toBeTruthy();
     expect(separator?.getAttribute("colSpan")).toBe("5");
   });
 
-  it("should have correct styling classes", () => {
-    const { container } = render(<RowSeparator />);
+  it("should have correct styling classes", async () => {
+    const { container } = await render(<RowSeparator />);
 
     const separator = container.querySelector('[data-slot="table-cell"]');
     expect(separator?.className).toContain("h-1");
