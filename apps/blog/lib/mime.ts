@@ -1,4 +1,4 @@
-import { extname } from "node:path";
+import { extname } from "@std/path";
 import { cache } from "react";
 
 export const db = [

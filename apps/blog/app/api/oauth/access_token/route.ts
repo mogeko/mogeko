@@ -1,5 +1,4 @@
 import { env } from "node:process";
-import { URLSearchParams } from "node:url";
 import { type NextRequest, NextResponse } from "next/server";
 import { decrypt, encrypt } from "@/lib/aes-gcm";
 

@@ -1,7 +1,7 @@
-import { subtle } from "node:crypto";
-import { parse } from "node:path/posix";
 import { URL } from "node:url";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { crypto } from "@std/crypto/crypto";
+import { parse } from "@std/path/posix";
 import NextImage from "next/image";
 import { NotFoundError } from "@/lib/errors";
 import { getImage, type ImageResp, setImage } from "@/lib/image-helper";
@@ -49,7 +49,7 @@ export const Image: React.FC<
 export async function sha1(plaintext: string): Promise<string> {
   const utf8 = new TextEncoder().encode(plaintext);
 
-  return await subtle.digest("SHA-1", utf8).then((hash) => {
+  return await crypto.subtle.digest("SHA-1", utf8).then((hash) => {
     return Buffer.from(hash).toString("hex");
   });
 }
