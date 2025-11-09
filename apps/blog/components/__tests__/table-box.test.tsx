@@ -13,9 +13,19 @@ vi.mock("@/lib/notion", () => ({
   }),
 }));
 
+const TableWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
+  return (
+    <table>
+      <tbody>{children}</tbody>
+    </table>
+  );
+};
+
 describe("RowSeparator", () => {
   it("should render separator with default colSpan when not provided", async () => {
-    const { container } = await render(<RowSeparator />);
+    const { container } = await render(<RowSeparator />, {
+      wrapper: TableWrapper,
+    });
 
     const separator = container.querySelector('[data-slot="table-cell"]');
     expect(separator).toBeTruthy();
@@ -23,7 +33,9 @@ describe("RowSeparator", () => {
   });
 
   it("should render separator with specified colSpan", async () => {
-    const { container } = await render(<RowSeparator colSpan={5} />);
+    const { container } = await render(<RowSeparator colSpan={5} />, {
+      wrapper: TableWrapper,
+    });
 
     const separator = container.querySelector('[data-slot="table-cell"]');
     expect(separator).toBeTruthy();
@@ -31,7 +43,9 @@ describe("RowSeparator", () => {
   });
 
   it("should have correct styling classes", async () => {
-    const { container } = await render(<RowSeparator />);
+    const { container } = await render(<RowSeparator />, {
+      wrapper: TableWrapper,
+    });
 
     const separator = container.querySelector('[data-slot="table-cell"]');
     expect(separator?.className).toContain("h-1");

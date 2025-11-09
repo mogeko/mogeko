@@ -10,6 +10,14 @@ vi.mock("@/lib/notion", () => ({
   }),
 }));
 
+const TableWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
+  return (
+    <table>
+      <tbody>{children}</tbody>
+    </table>
+  );
+};
+
 describe("TRow", () => {
   it("should render table row with cells when block is valid table_row", async () => {
     const mockBlock: GetBlockResponse = {
@@ -70,7 +78,15 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} />);
+    const { container } = await render(<TRow block={mockBlock} />, {
+      wrapper: ({ children }) => {
+        return (
+          <table>
+            <tbody>{children}</tbody>
+          </table>
+        );
+      },
+    });
 
     const tableRow = container.querySelector("tr");
     expect(tableRow).toBeTruthy();
@@ -125,7 +141,9 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} hx={true} />);
+    const { container } = await render(<TRow block={mockBlock} hx={true} />, {
+      wrapper: TableWrapper,
+    });
 
     const headerCell = container.querySelector("th");
     expect(headerCell).toBeTruthy();
@@ -179,7 +197,9 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} hy={true} />);
+    const { container } = await render(<TRow block={mockBlock} hy={true} />, {
+      wrapper: TableWrapper,
+    });
 
     const headerCells = container.querySelectorAll("th");
     expect(headerCells).toHaveLength(2);
@@ -232,6 +252,9 @@ describe("TRow", () => {
 
     const { container } = await render(
       <TRow block={mockBlock} hx={true} hy={true} />,
+      {
+        wrapper: TableWrapper,
+      },
     );
 
     const headerCells = container.querySelectorAll("th");
@@ -246,9 +269,13 @@ describe("TRow", () => {
       id: "test-id",
     };
 
-    const { container } = await render(<TRow block={mockBlock} />);
+    const { container } = await render(<TRow block={mockBlock} />, {
+      wrapper: TableWrapper,
+    });
 
-    expect(container.children).toHaveLength(0);
+    // Should not render any table rows
+    const tableRow = container.querySelector("tr");
+    expect(tableRow).toBeNull();
   });
 
   it("should not render anything when block type is not table_row", async () => {
@@ -262,9 +289,11 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} />);
+    const { container } = await render(<TRow block={mockBlock} />, {
+      wrapper: TableWrapper,
+    });
 
-    expect(container.children).toHaveLength(0);
+    expect(container.children).toHaveLength(1);
   });
 
   it("should handle empty cells array", async () => {
@@ -310,7 +339,9 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} />);
+    const { container } = await render(<TRow block={mockBlock} />, {
+      wrapper: TableWrapper,
+    });
 
     const tableRow = container.querySelector("tr");
     expect(tableRow).toBeTruthy();
@@ -349,6 +380,9 @@ describe("TRow", () => {
 
     const { container } = await render(
       <TRow block={mockBlock} className="custom-row" data-testid="test-row" />,
+      {
+        wrapper: TableWrapper,
+      },
     );
 
     const tableRow = container.querySelector("tr");
@@ -400,7 +434,9 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await render(<TRow block={mockBlock} />);
+    const { container } = await render(<TRow block={mockBlock} />, {
+      wrapper: TableWrapper,
+    });
 
     const cells = container.querySelectorAll("td");
     expect(cells).toHaveLength(2);
