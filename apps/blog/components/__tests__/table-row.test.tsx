@@ -1,14 +1,7 @@
 import type { GetBlockResponse } from "@notionhq/client";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 import { page } from "vitest/browser";
 import { TRow } from "@/components/table-row";
-
-// Mock the notion module to avoid server-only imports
-vi.mock("@/lib/notion", () => ({
-  isFullBlock: vi.fn((block: any): block is GetBlockResponse => {
-    return block && block.type === "table_row";
-  }),
-}));
 
 const TableWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
@@ -79,13 +72,7 @@ describe("TRow", () => {
     };
 
     const { container } = await page.render(<TRow block={mockBlock} />, {
-      wrapper: ({ children }) => {
-        return (
-          <table>
-            <tbody>{children}</tbody>
-          </table>
-        );
-      },
+      wrapper: TableWrapper,
     });
 
     const tableRow = container.querySelector("tr");
