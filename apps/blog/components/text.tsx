@@ -1,10 +1,10 @@
+import type { RichTextItemResponse } from "@notionhq/client";
 import { cva } from "class-variance-authority";
 import { URLPattern } from "urlpattern-polyfill";
 import { Equation } from "@/components/equation";
 import { Mention } from "@/components/mention";
 import { Link } from "@/components/ui/link";
 import { colorVariants } from "@/lib/colors";
-import type { RichTextItemResponse } from "@/lib/notion";
 import { cn as cx } from "@/lib/utils";
 
 const textVariants = cva([], {

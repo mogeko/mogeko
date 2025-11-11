@@ -1,6 +1,6 @@
+import { type GetBlockResponse, isFullBlock } from "@notionhq/client";
 import { RichText } from "@/components/text";
 import { TableCell, TableHead, TableRow } from "@/components/ui/table";
-import { type GetBlockResponse, isFullBlock } from "@/lib/notion";
 
 type TRowProps = { hy?: boolean; hx?: boolean; block: GetBlockResponse };
 

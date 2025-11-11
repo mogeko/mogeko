@@ -1,6 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { page, userEvent } from "vitest/browser";
 import { AlertBanner, alertBannerVariants } from "@/components/ui/alert-banner";
 
 describe("alertBannerVariants", () => {
@@ -26,107 +25,109 @@ describe("alertBannerVariants", () => {
 });
 
 describe("AlertBanner", () => {
-  it("should render with default icon when no icon provided", () => {
-    render(<AlertBanner icon={null}>Test message</AlertBanner>);
+  it("should render with default icon when no icon provided", async () => {
+    await page.render(<AlertBanner icon={null}>Test message</AlertBanner>);
 
-    const banner = screen.getByText("Test message");
+    const banner = page.getByText("Test message").query();
     expect(banner).toBeDefined();
 
-    const defaultIcon = screen.getByText("💡");
+    const defaultIcon = page.getByText("💡").query();
     expect(defaultIcon).toBeDefined();
   });
 
-  it("should render with custom icon", () => {
-    render(<AlertBanner icon={<span>🚨</span>}>Warning message</AlertBanner>);
+  it("should render with custom icon", async () => {
+    await page.render(
+      <AlertBanner icon={<span>🚨</span>}>Warning message</AlertBanner>,
+    );
 
-    const banner = screen.getByText("Warning message");
+    const banner = page.getByText("Warning message");
     expect(banner).toBeDefined();
 
-    const customIcon = screen.getByText("🚨");
+    const customIcon = page.getByText("🚨");
     expect(customIcon).toBeDefined();
   });
 
-  it("should apply correct CSS classes", () => {
-    const { container } = render(
+  it("should apply correct CSS classes", async () => {
+    const { container } = await page.render(
       <AlertBanner icon={null} className="custom-class">
         Test message
       </AlertBanner>,
     );
 
-    const banner = container.firstChild as HTMLElement;
-    expect(banner.className).toContain("flex");
-    expect(banner.className).toContain("gap-[1ch]");
-    expect(banner.className).toContain("custom-class");
+    const banner = container.firstChild as HTMLElement | null;
+    expect(banner?.className).toContain("flex");
+    expect(banner?.className).toContain("gap-[1ch]");
+    expect(banner?.className).toContain("custom-class");
   });
 
-  it("should handle color variants", () => {
-    const { container } = render(
+  it("should handle color variants", async () => {
+    const { container } = await page.render(
       <AlertBanner icon={null} color="gray_background">
         Test message
       </AlertBanner>,
     );
 
-    const banner = container.firstChild as HTMLElement;
-    expect(banner.className).toContain("bg-secondary");
-    expect(banner.className).toContain("text-secondary-foreground");
+    const banner = container.firstChild as HTMLElement | null;
+    expect(banner?.className).toContain("bg-secondary");
+    expect(banner?.className).toContain("text-secondary-foreground");
   });
 
-  it("should pass through additional HTML attributes", () => {
-    render(
+  it("should pass through additional HTML attributes", async () => {
+    await page.render(
       <AlertBanner icon={null} aria-label="Important notice">
         Test message
       </AlertBanner>,
     );
 
-    const banner = screen.getByRole("alert");
+    const banner = page.getByRole("alert").query();
     expect(banner).toBeDefined();
-    expect(banner.getAttribute("aria-label")).toBe("Important notice");
+    expect(banner?.getAttribute("aria-label")).toBe("Important notice");
   });
 
   it("should handle click events", async () => {
     const handleClick = vi.fn();
     const user = userEvent.setup();
 
-    render(
+    await page.render(
       <AlertBanner icon={null} onClick={handleClick}>
         Clickable banner
       </AlertBanner>,
     );
 
-    const banner = screen.getByText("Clickable banner");
+    const banner = page.getByText("Clickable banner");
     await user.click(banner);
 
     expect(handleClick).toHaveBeenCalledOnce();
   });
 
-  it("should render children correctly", () => {
-    render(
+  it("should render children correctly", async () => {
+    await page.render(
       <AlertBanner icon={null}>
         <span>Complex</span>
         <span>children</span>
       </AlertBanner>,
     );
 
-    expect(screen.getByText("Complex")).toBeDefined();
-    expect(screen.getByText("children")).toBeDefined();
+    await expect.element(page.getByText("Complex")).toBeDefined();
+    await expect.element(page.getByText("children")).toBeDefined();
   });
 
-  it("should merge custom className with default styles", () => {
-    const { container } = render(
+  it("should merge custom className with default styles", async () => {
+    const { container } = await page.render(
       <AlertBanner icon={null} className="my-custom-class">
         Test message
       </AlertBanner>,
     );
 
-    const banner = container.firstChild as HTMLElement;
-    expect(banner.className).toContain("flex");
-    expect(banner.className).toContain("my-custom-class");
+    const banner = container.firstChild as HTMLElement | null;
+    expect(banner?.className).toContain("flex");
+    expect(banner?.className).toContain("my-custom-class");
   });
 
-  it("should have correct data-slot attribute", () => {
-    render(<AlertBanner icon={null}>Test message</AlertBanner>);
+  it("should have correct data-slot attribute", async () => {
+    await page.render(<AlertBanner icon={null}>Test message</AlertBanner>);
 
-    const banner = screen.getByRole("alert");
-    expect(banner.getAttribute("data-slot")).toBe("alert");
+    const banner = page.getByRole("alert").query();
+    expect(banner?.getAttribute("data-slot")).toBe("alert");
   });
 });

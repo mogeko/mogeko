@@ -1,4 +1,3 @@
-import { Buffer } from "node:buffer";
 import { cacheLife, cacheTag } from "next/cache";
 import sharp from "sharp";
 import { NotFoundError } from "@/lib/errors";

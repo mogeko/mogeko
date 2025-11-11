@@ -1,9 +1,10 @@
 import { performance } from "node:perf_hooks";
+import { env } from "node:process";
 import { getYear } from "date-fns";
 import type { Metadata } from "next";
 import { GlobalHotkey } from "@/components/global-hotkey";
 import { plainText } from "@/components/text";
-import { retrieveDatabase } from "@/lib/notion";
+import { retrieveDatabase } from "@/lib/notion-staffs";
 import { shortenUUID } from "@/lib/utils";
 import pkg from "@/package.json";
 
@@ -17,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: pkg.description,
   };
 
-  const database_id = shortenUUID(process.env.NOTION_DATABASE_ID);
+  const database_id = shortenUUID(env.NOTION_DATABASE_ID);
   const database = await retrieveDatabase(database_id);
 
   if (database) {

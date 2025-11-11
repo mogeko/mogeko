@@ -1,10 +1,10 @@
-import { render } from "@testing-library/react";
+import type { MentionRichTextItemResponse } from "@notionhq/client";
 import { describe, expect, it } from "vitest";
+import { page } from "vitest/browser";
 import { Mention } from "@/components/mention";
-import type { MentionRichTextItemResponse } from "@/lib/notion";
 
 describe("Mention", () => {
-  it("should render page mention as link", () => {
+  it("should render page mention as link", async () => {
     const mention: MentionRichTextItemResponse["mention"] = {
       type: "page",
       page: {
@@ -12,7 +12,7 @@ describe("Mention", () => {
       },
     };
 
-    const { container } = render(
+    const { container } = await page.render(
       <Mention mention={mention}>Test Page</Mention>,
     );
     const linkElement = container.querySelector("a");
@@ -21,7 +21,7 @@ describe("Mention", () => {
     expect(linkElement?.textContent).toBe("Test Page");
   });
 
-  it("should render database mention as link", () => {
+  it("should render database mention as link", async () => {
     const mention: MentionRichTextItemResponse["mention"] = {
       type: "database",
       database: {
@@ -29,7 +29,7 @@ describe("Mention", () => {
       },
     };
 
-    const { container } = render(
+    const { container } = await page.render(
       <Mention mention={mention}>Test Database</Mention>,
     );
     const linkElement = container.querySelector("a");
@@ -38,7 +38,7 @@ describe("Mention", () => {
     expect(linkElement?.textContent).toBe("Test Database");
   });
 
-  it("should apply custom className", () => {
+  it("should apply custom className", async () => {
     const mention: MentionRichTextItemResponse["mention"] = {
       type: "page",
       page: {
@@ -46,7 +46,7 @@ describe("Mention", () => {
       },
     };
 
-    const { container } = render(
+    const { container } = await page.render(
       <Mention mention={mention} className="custom-class">
         Test Page
       </Mention>,

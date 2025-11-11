@@ -1,5 +1,5 @@
+import type { MentionRichTextItemResponse } from "@notionhq/client";
 import { Link } from "@/components/ui/link";
-import type { MentionRichTextItemResponse } from "@/lib/notion";
 import { shortenUUID } from "@/lib/utils";
 
 export const Mention: React.FC<

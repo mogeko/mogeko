@@ -1,3 +1,4 @@
+import { env } from "node:process";
 import { importPKCS8, SignJWT } from "jose";
 import { UnauthorizedError } from "@/lib/errors";
 
@@ -29,8 +30,8 @@ export async function discussions() {
 }
 
 export async function jwt(): Promise<string> {
-  const clientId = process.env.GH_APP_CLIENT_ID;
-  const pkcs8 = process.env.GH_APP_PRIVATE_KEY;
+  const clientId = env.GH_APP_CLIENT_ID;
+  const pkcs8 = env.GH_APP_PRIVATE_KEY;
 
   if (!pkcs8 || !clientId) {
     throw new UnauthorizedError(
