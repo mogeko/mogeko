@@ -9,7 +9,7 @@ import { ActionLink } from "@/components/ui/action-link";
 import { Badge } from "@/components/ui/badges";
 import { Heading } from "@/components/ui/heading";
 import { Spinner } from "@/components/ui/spinner";
-import { queryDataSources, retrieveDatabase } from "@/lib/notion";
+import { queryDataSources, retrieveDatabase } from "@/lib/notion-staffs";
 import { groupBy, shortenUUID } from "@/lib/utils";
 import pkg from "@/package.json";
 

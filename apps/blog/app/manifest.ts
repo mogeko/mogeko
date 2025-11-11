@@ -1,7 +1,7 @@
 import { env } from "node:process";
 import type { MetadataRoute } from "next";
 import { plainText } from "@/components/text";
-import { retrieveDatabase } from "@/lib/notion";
+import { retrieveDatabase } from "@/lib/notion-staffs";
 import pkg from "@/package.json";
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {

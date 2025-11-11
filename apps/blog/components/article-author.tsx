@@ -3,7 +3,7 @@ import { intlFormat } from "date-fns";
 import { Suspense } from "react";
 import { Image } from "@/components/image";
 import { Spinner } from "@/components/ui/spinner";
-import { retrieveUsers } from "@/lib/notion";
+import { retrieveUsers } from "@/lib/notion-staffs";
 
 export const Author: React.FC<{ page: PageObjectResponse }> = async (props) => {
   const user_id = props.page.created_by.id /* Long ID */;

@@ -1,7 +1,7 @@
 import { env } from "node:process";
 import { isFullPage } from "@notionhq/client";
 import type { MetadataRoute } from "next";
-import { queryDataSources, retrieveDatabase } from "@/lib/notion";
+import { queryDataSources, retrieveDatabase } from "@/lib/notion-staffs";
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
   const databaseId = env.NOTION_DATABASE_ID;

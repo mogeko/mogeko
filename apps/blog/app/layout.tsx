@@ -4,7 +4,7 @@ import { getYear } from "date-fns";
 import type { Metadata } from "next";
 import { GlobalHotkey } from "@/components/global-hotkey";
 import { plainText } from "@/components/text";
-import { retrieveDatabase } from "@/lib/notion";
+import { retrieveDatabase } from "@/lib/notion-staffs";
 import { shortenUUID } from "@/lib/utils";
 import pkg from "@/package.json";
 

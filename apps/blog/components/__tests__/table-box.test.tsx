@@ -3,7 +3,7 @@ import { page } from "vitest/browser";
 import { RowSeparator } from "@/components/table-box";
 
 // Mock the notion module to avoid server-only imports
-vi.mock("@/lib/notion", () => ({
+vi.mock("@/lib/notion-staffs", () => ({
   queryBlocks: vi.fn((_args: { block_id: string }) => {
     return { results: [] };
   }),

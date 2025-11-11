@@ -18,7 +18,7 @@ import { ListItem } from "@/components/ui/list";
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { colorVariants } from "@/lib/colors";
-import { queryBlocks } from "@/lib/notion";
+import { queryBlocks } from "@/lib/notion-staffs";
 import { shortenUUID } from "@/lib/utils";
 
 const Equation = dynamic(async () => {
