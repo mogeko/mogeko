@@ -20,7 +20,6 @@
  * @module
  */
 
-import { crypto } from "@std/crypto/crypto";
 import { decodeBase64, encodeBase64 } from "@std/encoding/base64";
 import { decodeHex, encodeHex } from "@std/encoding/hex";
 

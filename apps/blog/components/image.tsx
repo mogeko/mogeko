@@ -1,5 +1,4 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { crypto } from "@std/crypto/crypto";
 import { encodeHex } from "@std/encoding";
 import { parse } from "@std/path/posix";
 import NextImage from "next/image";
