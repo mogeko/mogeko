@@ -1,3 +1,4 @@
+import { encodeBase64 } from "@std/encoding";
 import { cacheLife, cacheTag } from "next/cache";
 import sharp from "sharp";
 import { NotFoundError } from "@/lib/errors";
@@ -5,12 +6,12 @@ import { lookup } from "@/lib/mime";
 import { redis } from "@/lib/redis";
 
 export async function setImage<T extends ImageResp>(
-  uploader: (buff: Buffer, meta: ImageResp) => Promise<T>,
+  uploader: (buff: ArrayBufferLike, meta: ImageResp) => Promise<T>,
   options: Options,
 ): Promise<T>;
 export async function setImage(options: Options): Promise<ImageResp>;
 export async function setImage<T extends ImageResp>(
-  uploader: Options | ((buff: Buffer, meta: ImageResp) => Promise<T>),
+  uploader: Options | ((buff: ArrayBufferLike, meta: ImageResp) => Promise<T>),
   options?: Options,
 ): Promise<T> {
   if (!(uploader instanceof Function) || !options) {
@@ -28,13 +29,13 @@ export async function setImage<T extends ImageResp>(
     const blur = image.resize(10).blur();
     const mimeType = lookup(format) || "application/octet-stream";
     const blurDataURL = await blur.toBuffer().then((data) => {
-      return `data:${mimeType};base64,${data.toString("base64")}`;
+      return `data:${mimeType};base64,${encodeBase64(data)}`;
     });
     const { fileName: name, key } = options;
 
     const meta = { mimeType, name, height, width, blurDataURL };
 
-    const data = await uploader(Buffer.from(buffer), meta);
+    const data = await uploader(buffer, meta);
 
     await redis.hset(`image:${key}`, data);
 

@@ -1,5 +1,6 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { crypto } from "@std/crypto/crypto";
+import { encodeHex } from "@std/encoding";
 import { parse } from "@std/path/posix";
 import NextImage from "next/image";
 import { NotFoundError } from "@/lib/errors";
@@ -46,11 +47,9 @@ export const Image: React.FC<
 };
 
 export async function sha1(plaintext: string): Promise<string> {
-  const utf8 = new TextEncoder().encode(plaintext);
-
-  return await crypto.subtle.digest("SHA-1", utf8).then((hash) => {
-    return Buffer.from(hash).toString("hex");
-  });
+  return encodeHex(
+    await crypto.subtle.digest("SHA-1", new TextEncoder().encode(plaintext)),
+  );
 }
 
 async function upload(
@@ -62,7 +61,7 @@ async function upload(
     const { ETag: _eTag } = await s3.send(
       new PutObjectCommand({
         Bucket: BUCKET_NAME,
-        Body: buffer,
+        Body: new Uint8Array(buffer),
         Key: filePath,
         ContentType: meta.mimeType,
         Metadata: {
