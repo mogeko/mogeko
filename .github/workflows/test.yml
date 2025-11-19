@@ -16,8 +16,8 @@ jobs:
     name: Test Monorepo Packages
     runs-on: ubuntu-latest
     env:
-     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-     TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
       - name: Get installed Playwright version
         uses: actions/github-script@v8.0.0

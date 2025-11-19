@@ -1,6 +1,3 @@
-import { performance } from "node:perf_hooks";
-import { env } from "node:process";
-import { getYear } from "date-fns";
 import type { Metadata } from "next";
 import { GlobalHotkey } from "@/components/global-hotkey";
 import { plainText } from "@/components/text";
@@ -11,6 +8,11 @@ import pkg from "@/package.json";
 import "@chinese-fonts/maple-mono-cn/dist/MapleMono-CN-Regular/result.css";
 import "@/styles/globals.css";
 
+export async function year(): Promise<number> {
+  "use cache";
+  return new Date().getFullYear();
+}
+
 export async function generateMetadata(): Promise<Metadata> {
   const metadata: Metadata = {
     title: pkg.name,
@@ -18,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: pkg.description,
   };
 
-  const database_id = shortenUUID(env.NOTION_DATABASE_ID);
+  const database_id = shortenUUID(process.env.NOTION_DATABASE_ID);
   const database = await retrieveDatabase(database_id);
 
   if (database) {
@@ -32,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return metadata;
 }
 
-const RootLayout: React.FC<LayoutProps<"/">> = ({ children }) => {
+const RootLayout: React.FC<LayoutProps<"/">> = async ({ children }) => {
   return (
     <html lang="zh-CN">
       <head>
@@ -43,8 +45,7 @@ const RootLayout: React.FC<LayoutProps<"/">> = ({ children }) => {
           <main className="flex flex-1 flex-col">{children}</main>
           <footer className="mb-3">
             <p className="px-[2ch]">
-              Copyright © 2017 - {getYear(performance.now())}. All rights
-              reserved.
+              Copyright © 2017 - {await year()}. All rights reserved.
             </p>
           </footer>
         </div>

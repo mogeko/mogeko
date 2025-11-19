@@ -1,4 +1,3 @@
-import { env } from "node:process";
 import { isFullPage } from "@notionhq/client";
 import { getYear } from "date-fns";
 import type { NextPage } from "next";
@@ -14,7 +13,7 @@ import { groupBy, shortenUUID } from "@/lib/utils";
 import pkg from "@/package.json";
 
 const Home: NextPage<PageProps<"/">> = async () => {
-  const database_id = shortenUUID(env.NOTION_DATABASE_ID);
+  const database_id = shortenUUID(process.env.NOTION_DATABASE_ID);
   const database = await retrieveDatabase(database_id);
 
   if (!database) {
@@ -48,7 +47,7 @@ const PageFeeds: React.FC<{ id: string }> = async ({ id }) => {
     data_source_id: id,
     sorts: [{ property: "%3DTrF", direction: "descending" }],
     filter:
-      env.NODE_ENV === "production"
+      process.env.NODE_ENV === "production"
         ? { property: "wG%5CE", status: { equals: "Published" } }
         : void 0,
   });
