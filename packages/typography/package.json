@@ -40,9 +40,9 @@
   },
   "devDependencies": {
     "@mogeko/tsconfig": "workspace:^",
-    "@types/node": "^24.10.0",
+    "@types/node": "^24.10.1",
     "@types/ramda": "^0.31.1",
-    "tsup": "^8.5.0",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   }
 }
