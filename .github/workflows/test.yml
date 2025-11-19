@@ -37,7 +37,7 @@ jobs:
           path: |
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.result }}
-      - uses: actions/checkout@v5.0.0
+      - uses: actions/checkout@v5.0.1
       - name: Set up PNPM
         uses: pnpm/action-setup@v4.2.0
       - name: Set up Node.js
