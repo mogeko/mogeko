@@ -23,7 +23,7 @@
     "default.tsconfig.json"
   ],
   "dependencies": {
-    "@tsconfig/strictest": "^2.0.7"
+    "@tsconfig/strictest": "^2.0.8"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
