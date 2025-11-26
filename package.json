@@ -19,11 +19,12 @@
     "@changesets/cli": "^2.29.7",
     "@types/node": "^24.10.1",
     "@vitest/coverage-v8": "^4.0.10",
+    "playwright": "^1.57.0",
     "turbo": "^2.6.1",
     "vite-node": "^5.2.0",
     "vitest": "^4.0.10"
   },
-  "packageManager": "pnpm@10.22.0",
+  "packageManager": "pnpm@10.23.0",
   "engines": {
     "node": ">=20.1.0"
   }
