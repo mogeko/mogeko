@@ -27,7 +27,7 @@
     "hast-util-class-list": "^2.0.1",
     "hastscript": "^9.0.1",
     "rehype-mermaid": "^3.0.0",
-    "shiki": "^3.15.0",
+    "shiki": "^3.19.0",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
