@@ -19,11 +19,11 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ vars.TURBO_TEAM }}
     steps:
-      - uses: actions/checkout@v6.0.0
+      - uses: actions/checkout@v6.0.1
       - name: Set up PNPM
         uses: pnpm/action-setup@v4.2.0
       - name: Set up Node.js
-        uses: actions/setup-node@v6.0.0
+        uses: actions/setup-node@v6.1.0
         with:
           node-version-file: package.json
           cache: "pnpm"
@@ -35,7 +35,7 @@ jobs:
           EOF
         id: playwright-version
       - name: Cache Playwright Binaries
-        uses: actions/cache@v4.3.0
+        uses: actions/cache@v5.0.1
         id: playwright-cache
         with:
           path: |
@@ -48,13 +48,13 @@ jobs:
       - name: Generate Coverage Reports
         run: pnpm run cov
       - name: Upload test results to Codecov
-        uses: codecov/codecov-action@v5.5.1
+        uses: codecov/codecov-action@v5.5.2
         with:
           report_type: test_results
           files: .github/test-report.junit.xml
           use_oidc: true
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5.5.1
+        uses: codecov/codecov-action@v5.5.2
         with:
           report_type: coverage
           use_oidc: true
