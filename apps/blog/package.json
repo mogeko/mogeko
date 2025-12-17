@@ -38,8 +38,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:biome",
-    "@tailwindcss/postcss": "^4.1.17",
-    "@tsconfig/next": "^2.0.4",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@tsconfig/next": "^2.0.5",
     "@types/node": "catalog:",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",

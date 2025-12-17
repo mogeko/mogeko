@@ -41,9 +41,9 @@
     "reading-time": "^1.5.0"
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^6.3.9",
+    "@astrojs/markdown-remark": "^6.3.10",
     "@mogeko/tsconfig": "workspace:^",
-    "astro": "^5.16.1",
+    "astro": "^5.16.6",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "vitest": "catalog:vitest"
