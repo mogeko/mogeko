@@ -31,7 +31,7 @@ export const remarkAnchorLink: Plugin<[Options?], Root> = ({
         const slug = slugger.slug(text.value);
 
         node.children[location === "suffix" ? "push" : "unshift"](
-          updateProperties({ class: className, ariaHidden: "true" })(
+          updateProperties({ class: className, ariaHidden: "true", tabindex: "-1" })(
             u("link", { url: `#${slug}` }, [u("text", marker)]),
           ),
         );
