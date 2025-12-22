@@ -20,7 +20,7 @@
     "@types/node": "catalog:",
     "@vitest/coverage-v8": "catalog:vitest",
     "playwright": "catalog:",
-    "turbo": "^2.6.3",
+    "turbo": "^2.7.1",
     "vite-node": "^5.2.0",
     "vitest": "catalog:vitest"
   },
