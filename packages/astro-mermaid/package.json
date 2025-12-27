@@ -3,7 +3,12 @@
   "version": "0.1.5",
   "description": "Astro Integration for Mermaid",
   "type": "module",
-  "types": "dist/astro-mermaid.d.ts",
+  "types": "dist/astro-mermaid.d.mts",
+  "exports": {
+    ".": "./dist/astro-mermaid.mjs",
+    "./shiki-transformer": "./dist/shiki-transformer.mjs",
+    "./rehype-wrapper": "./dist/rehype-wrapper.mjs"
+  },
   "private": true,
   "keywords": [
     "astro-integration",
@@ -11,14 +16,10 @@
   ],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
-  "exports": {
-    ".": "./dist/astro-mermaid.js",
-    "./shiki-transformer": "./dist/shiki-transformer.js",
-    "./rehype-wrapper": "./dist/rehype-wrapper.js"
-  },
+
   "scripts": {
     "test": "vitest run",
-    "build": "tsup"
+    "build": "tsdown"
   },
   "peerDependencies": {
     "playwright-core": "^1.0.0"
@@ -35,7 +36,7 @@
     "@types/hast": "^3.0.4",
     "@types/node": "^25.0.3",
     "astro": "^5.16.6",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.18.3",
     "typescript": "^5.9.3",
     "unified": "^11.0.5",
     "vitest": "^4.0.16"
