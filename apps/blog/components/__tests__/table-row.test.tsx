@@ -1,7 +1,12 @@
 import type { GetBlockResponse } from "@notionhq/client";
-import { describe, expect, it } from "vitest";
-import { page } from "vitest/browser";
+import { cleanup, render } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
 import { TRow } from "@/components/table-row";
+
+afterEach(() => {
+  cleanup();
+  document.body.innerHTML = "";
+});
 
 const TableWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
@@ -12,7 +17,7 @@ const TableWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
 };
 
 describe("TRow", () => {
-  it("should render table row with cells when block is valid table_row", async () => {
+  it("should render table row with cells when block is valid table_row", () => {
     const mockBlock: GetBlockResponse = {
       object: "block",
       id: "test-id",
@@ -71,21 +76,23 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await page.render(<TRow block={mockBlock} />, {
+    const { container } = render(<TRow block={mockBlock} />, {
       wrapper: TableWrapper,
     });
 
     const tableRow = container.querySelector("tr");
-    expect(tableRow).toBeTruthy();
+
+    expect(tableRow).toBeDefined();
 
     const cells = container.querySelectorAll("td");
+
     expect(cells).toHaveLength(3);
     expect(cells[0]?.textContent).toBe("Header");
     expect(cells[1]?.textContent).toBe("Cell 1");
     expect(cells[2]?.textContent).toBe("Cell 2");
   });
 
-  it("should render first cell as TableHead when hx is true", async () => {
+  it("should render first cell as TableHead when hx is true", () => {
     const mockBlock: GetBlockResponse = {
       object: "block",
       id: "test-id",
@@ -128,23 +135,22 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await page.render(
-      <TRow block={mockBlock} hx={true} />,
-      {
-        wrapper: TableWrapper,
-      },
-    );
+    const { container } = render(<TRow block={mockBlock} hx={true} />, {
+      wrapper: TableWrapper,
+    });
 
     const headerCell = container.querySelector("th");
-    expect(headerCell).toBeTruthy();
+
+    expect(headerCell).toBeDefined();
     expect(headerCell?.textContent).toBe("Header");
 
     const dataCell = container.querySelector("td");
-    expect(dataCell).toBeTruthy();
+
+    expect(dataCell).toBeDefined();
     expect(dataCell?.textContent).toBe("Cell");
   });
 
-  it("should render all cells as TableHead when hy is true", async () => {
+  it("should render all cells as TableHead when hy is true", () => {
     const mockBlock: GetBlockResponse = {
       object: "block",
       id: "test-id",
@@ -187,20 +193,18 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await page.render(
-      <TRow block={mockBlock} hy={true} />,
-      {
-        wrapper: TableWrapper,
-      },
-    );
+    const { container } = render(<TRow block={mockBlock} hy={true} />, {
+      wrapper: TableWrapper,
+    });
 
     const headerCells = container.querySelectorAll("th");
+
     expect(headerCells).toHaveLength(2);
     expect(headerCells[0]?.textContent).toBe("Header 1");
     expect(headerCells[1]?.textContent).toBe("Header 2");
   });
 
-  it("should render first cell as TableHead and others as TableHead when both hx and hy are true", async () => {
+  it("should render first cell as TableHead and others as TableHead when both hx and hy are true", () => {
     const mockBlock: GetBlockResponse = {
       object: "block",
       id: "test-id",
@@ -243,7 +247,7 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await page.render(
+    const { container } = render(
       <TRow block={mockBlock} hx={true} hy={true} />,
       {
         wrapper: TableWrapper,
@@ -251,27 +255,29 @@ describe("TRow", () => {
     );
 
     const headerCells = container.querySelectorAll("th");
+
     expect(headerCells).toHaveLength(2);
     expect(headerCells[0]?.textContent).toBe("Main Header");
     expect(headerCells[1]?.textContent).toBe("Sub Header");
   });
 
-  it("should not render anything when block is not a full block", async () => {
+  it("should not render anything when block is not a full block", () => {
     const mockBlock: GetBlockResponse = {
       object: "block",
       id: "test-id",
     };
 
-    const { container } = await page.render(<TRow block={mockBlock} />, {
+    const { container } = render(<TRow block={mockBlock} />, {
       wrapper: TableWrapper,
     });
 
     // Should not render any table rows
     const tableRow = container.querySelector("tr");
+
     expect(tableRow).toBeNull();
   });
 
-  it("should not render anything when block type is not table_row", async () => {
+  it("should not render anything when block type is not table_row", () => {
     const mockBlock: GetBlockResponse = {
       object: "block",
       id: "test-id",
@@ -282,14 +288,14 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await page.render(<TRow block={mockBlock} />, {
+    const { container } = render(<TRow block={mockBlock} />, {
       wrapper: TableWrapper,
     });
 
     expect(container.children).toHaveLength(1);
   });
 
-  it("should handle empty cells array", async () => {
+  it("should handle empty cells array", () => {
     const mockBlock: GetBlockResponse = {
       object: "block",
       id: "test-id",
@@ -299,13 +305,13 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await page.render(<TRow block={mockBlock} />);
+    const { container } = render(<TRow block={mockBlock} />);
 
     // When cells array is empty, the component should not render anything
     expect(container.children).toHaveLength(0);
   });
 
-  it("should handle single cell", async () => {
+  it("should handle single cell", () => {
     const mockBlock: GetBlockResponse = {
       object: "block",
       id: "test-id",
@@ -332,19 +338,21 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await page.render(<TRow block={mockBlock} />, {
+    const { container } = render(<TRow block={mockBlock} />, {
       wrapper: TableWrapper,
     });
 
     const tableRow = container.querySelector("tr");
-    expect(tableRow).toBeTruthy();
+
+    expect(tableRow).toBeDefined();
 
     const cells = container.querySelectorAll("td");
+
     expect(cells).toHaveLength(1);
     expect(cells[0]?.textContent).toBe("Single Cell");
   });
 
-  it("should pass additional props to TableRow component", async () => {
+  it("should pass additional props to TableRow component", () => {
     const mockBlock: GetBlockResponse = {
       object: "block",
       id: "test-id",
@@ -371,7 +379,7 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await page.render(
+    const { container } = render(
       <TRow block={mockBlock} className="custom-row" data-testid="test-row" />,
       {
         wrapper: TableWrapper,
@@ -379,12 +387,13 @@ describe("TRow", () => {
     );
 
     const tableRow = container.querySelector("tr");
-    expect(tableRow).toBeTruthy();
+
+    expect(tableRow).toBeDefined();
     expect(tableRow?.className).toContain("custom-row");
     expect(tableRow?.getAttribute("data-testid")).toBe("test-row");
   });
 
-  it("should generate unique keys for cells", async () => {
+  it("should generate unique keys for cells", () => {
     const mockBlock: GetBlockResponse = {
       object: "block",
       id: "test-id",
@@ -427,11 +436,12 @@ describe("TRow", () => {
       },
     };
 
-    const { container } = await page.render(<TRow block={mockBlock} />, {
+    const { container } = render(<TRow block={mockBlock} />, {
       wrapper: TableWrapper,
     });
 
     const cells = container.querySelectorAll("td");
+
     expect(cells).toHaveLength(2);
     expect(cells[0]?.textContent).toBe("Cell 1");
     expect(cells[1]?.textContent).toBe("Cell 2");

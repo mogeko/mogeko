@@ -1,5 +1,6 @@
-import { describe, expect, it } from "vitest";
-import { page, userEvent } from "vitest/browser";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { afterEach, describe, expect, it } from "vitest";
 import {
   Table,
   TableBody,
@@ -11,9 +12,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+afterEach(() => {
+  cleanup();
+  document.body.innerHTML = "";
+});
+
 describe("Table", () => {
-  it("should render table with default styles", async () => {
-    await page.render(
+  it("should render table with default styles", () => {
+    render(
       <Table>
         <tbody>
           <tr>
@@ -23,15 +29,15 @@ describe("Table", () => {
       </Table>,
     );
 
-    const table = page.getByRole("table").query();
-    expect(table).toBeDefined();
-    expect(table?.className).toContain("w-full");
-    expect(table?.className).toContain("caption-bottom");
-    expect(table?.className).toContain("border-spacing-0");
+    const table = screen.getByRole("table");
+
+    expect(table.className).toContain("w-full");
+    expect(table.className).toContain("caption-bottom");
+    expect(table.className).toContain("border-spacing-0");
   });
 
-  it("should apply custom className to table", async () => {
-    await page.render(
+  it("should apply custom className to table", () => {
+    render(
       <Table className="custom-table">
         <tbody>
           <tr>
@@ -41,13 +47,14 @@ describe("Table", () => {
       </Table>,
     );
 
-    const table = page.getByRole("table").query();
-    expect(table?.className).toContain("custom-table");
-    expect(table?.className).toContain("w-full"); // Ensure default styles are still included
+    const table = screen.getByRole("table");
+
+    expect(table.className).toContain("custom-table");
+    expect(table.className).toContain("w-full"); // Ensure default styles are still included
   });
 
-  it("should have wrapper div with overflow handling", async () => {
-    await page.render(
+  it("should have wrapper div with overflow handling", () => {
+    render(
       <Table>
         <tbody>
           <tr>
@@ -57,8 +64,9 @@ describe("Table", () => {
       </Table>,
     );
 
-    const table = page.getByRole("table").query();
-    const wrapper = table?.parentElement;
+    const table = screen.getByRole("table");
+
+    const wrapper = table.parentElement;
 
     expect(wrapper).toBeDefined();
     expect(wrapper?.className).toContain("relative");
@@ -66,8 +74,8 @@ describe("Table", () => {
     expect(wrapper?.className).toContain("overflow-x-auto");
   });
 
-  it("should pass through additional HTML attributes", async () => {
-    await page.render(
+  it("should pass through additional HTML attributes", () => {
+    render(
       <Table data-testid="test-table" aria-label="Data table">
         <tbody>
           <tr>
@@ -77,15 +85,15 @@ describe("Table", () => {
       </Table>,
     );
 
-    const table = page.getByTestId("test-table").query();
-    expect(table).toBeDefined();
-    expect(table?.getAttribute("aria-label")).toBe("Data table");
+    const table = screen.getByTestId("test-table");
+
+    expect(table.getAttribute("aria-label")).toBe("Data table");
   });
 });
 
 describe("TableHeader", () => {
-  it("should render table header", async () => {
-    await page.render(
+  it("should render table header", () => {
+    render(
       <Table>
         <TableHeader>
           <tr>
@@ -95,13 +103,13 @@ describe("TableHeader", () => {
       </Table>,
     );
 
-    const header = page.getByRole("rowgroup").query();
-    expect(header).toBeDefined();
-    expect(header?.tagName).toBe("THEAD");
+    const header = screen.getByRole("rowgroup");
+
+    expect(header.tagName).toBe("THEAD");
   });
 
-  it("should apply custom className", async () => {
-    await page.render(
+  it("should apply custom className", () => {
+    render(
       <Table>
         <TableHeader className="custom-header">
           <tr>
@@ -111,14 +119,15 @@ describe("TableHeader", () => {
       </Table>,
     );
 
-    const header = page.getByRole("rowgroup").query();
-    expect(header?.className).toContain("custom-header");
+    const header = screen.getByRole("rowgroup");
+
+    expect(header.className).toContain("custom-header");
   });
 });
 
 describe("TableBody", () => {
-  it("should render table body", async () => {
-    await page.render(
+  it("should render table body", () => {
+    render(
       <Table>
         <TableBody>
           <tr>
@@ -128,12 +137,13 @@ describe("TableBody", () => {
       </Table>,
     );
 
-    const body = page.getByRole("rowgroup").query();
+    const body = screen.queryByRole("rowgroup");
+
     expect(body).toBeDefined();
   });
 
-  it("should apply custom className", async () => {
-    await page.render(
+  it("should apply custom className", () => {
+    render(
       <Table>
         <TableBody className="custom-body">
           <tr>
@@ -143,14 +153,15 @@ describe("TableBody", () => {
       </Table>,
     );
 
-    const body = page.getByRole("rowgroup").query();
-    expect(body?.className).toContain("custom-body");
+    const body = screen.getByRole("rowgroup");
+
+    expect(body.className).toContain("custom-body");
   });
 });
 
 describe("TableFooter", () => {
-  it("should render table footer", async () => {
-    await page.render(
+  it("should render table footer", () => {
+    render(
       <Table>
         <TableFooter>
           <tr>
@@ -160,12 +171,13 @@ describe("TableFooter", () => {
       </Table>,
     );
 
-    const footer = page.getByRole("rowgroup").query();
+    const footer = screen.queryByRole("rowgroup");
+
     expect(footer).toBeDefined();
   });
 
-  it("should apply custom className", async () => {
-    await page.render(
+  it("should apply custom className", () => {
+    render(
       <Table>
         <TableFooter className="custom-footer">
           <tr>
@@ -175,14 +187,15 @@ describe("TableFooter", () => {
       </Table>,
     );
 
-    const footer = page.getByRole("rowgroup").query();
-    expect(footer?.className).toContain("custom-footer");
+    const footer = screen.getByRole("rowgroup");
+
+    expect(footer.className).toContain("custom-footer");
   });
 });
 
 describe("TableRow", () => {
-  it("should render table row with default styles", async () => {
-    await page.render(
+  it("should render table row with default styles", () => {
+    render(
       <Table>
         <tbody>
           <TableRow>
@@ -192,15 +205,15 @@ describe("TableRow", () => {
       </Table>,
     );
 
-    const row = page.getByRole("row").query();
-    expect(row).toBeDefined();
-    expect(row?.className).toContain("outline-none");
-    expect(row?.className).toContain("focus:bg-accent");
-    expect(row?.className).toContain("focus:text-accent-foreground");
+    const row = screen.getByRole("row");
+
+    expect(row.className).toContain("outline-none");
+    expect(row.className).toContain("focus:bg-accent");
+    expect(row.className).toContain("focus:text-accent-foreground");
   });
 
-  it("should apply custom className", async () => {
-    await page.render(
+  it("should apply custom className", () => {
+    render(
       <Table>
         <tbody>
           <TableRow className="custom-row">
@@ -210,14 +223,16 @@ describe("TableRow", () => {
       </Table>,
     );
 
-    const row = page.getByRole("row").query();
-    expect(row?.className).toContain("custom-row");
-    expect(row?.className).toContain("outline-none"); // Ensure default styles are still included
+    const row = screen.getByRole("row");
+
+    expect(row.className).toContain("custom-row");
+    expect(row.className).toContain("outline-none"); // Ensure default styles are still included
   });
 
   it("should be focusable and have focus styles", async () => {
     const user = userEvent.setup();
-    await page.render(
+
+    render(
       <Table>
         <tbody>
           <TableRow tabIndex={0}>
@@ -227,16 +242,18 @@ describe("TableRow", () => {
       </Table>,
     );
 
-    const row = page.getByRole("row");
+    const row = screen.getByRole("row");
+
     await user.tab();
 
-    expect(document.activeElement).toBe(row.query());
-    expect(row.query()?.className).toContain("focus:bg-accent");
-    expect(row.query()?.className).toContain("focus:text-accent-foreground");
+    expect(document.activeElement).toBe(row);
+
+    expect(row.className).toContain("focus:bg-accent");
+    expect(row.className).toContain("focus:text-accent-foreground");
   });
 
-  it("should pass through additional HTML attributes", async () => {
-    await page.render(
+  it("should pass through additional HTML attributes", () => {
+    render(
       <Table>
         <tbody>
           <TableRow data-testid="test-row" aria-label="Table row">
@@ -246,15 +263,15 @@ describe("TableRow", () => {
       </Table>,
     );
 
-    const row = page.getByTestId("test-row").query();
-    expect(row).toBeDefined();
-    expect(row?.getAttribute("aria-label")).toBe("Table row");
+    const row = screen.getByTestId("test-row");
+
+    expect(row.getAttribute("aria-label")).toBe("Table row");
   });
 });
 
 describe("TableHead", () => {
-  it("should render table head with default styles", async () => {
-    await page.render(
+  it("should render table head with default styles", () => {
+    render(
       <Table>
         <thead>
           <tr>
@@ -264,16 +281,16 @@ describe("TableHead", () => {
       </Table>,
     );
 
-    const headerCell = page.getByRole("columnheader").query();
-    expect(headerCell).toBeDefined();
-    expect(headerCell?.className).toContain("not-first:pl-[1ch]");
-    expect(headerCell?.className).toContain("shrink-0");
-    expect(headerCell?.className).toContain("font-normal");
-    expect(headerCell?.className).toContain("text-left");
+    const headerCell = screen.getByRole("columnheader");
+
+    expect(headerCell.className).toContain("not-first:pl-[1ch]");
+    expect(headerCell.className).toContain("shrink-0");
+    expect(headerCell.className).toContain("font-normal");
+    expect(headerCell.className).toContain("text-left");
   });
 
-  it("should apply custom className", async () => {
-    await page.render(
+  it("should apply custom className", () => {
+    render(
       <Table>
         <thead>
           <tr>
@@ -283,13 +300,14 @@ describe("TableHead", () => {
       </Table>,
     );
 
-    const headerCell = page.getByRole("columnheader").query();
-    expect(headerCell?.className).toContain("custom-head");
-    expect(headerCell?.className).toContain("not-first:pl-[1ch]"); // Ensure default styles are still included
+    const headerCell = screen.getByRole("columnheader");
+
+    expect(headerCell.className).toContain("custom-head");
+    expect(headerCell.className).toContain("not-first:pl-[1ch]"); // Ensure default styles are still included
   });
 
-  it("should pass through additional HTML attributes", async () => {
-    await page.render(
+  it("should pass through additional HTML attributes", () => {
+    render(
       <Table>
         <thead>
           <tr>
@@ -301,15 +319,15 @@ describe("TableHead", () => {
       </Table>,
     );
 
-    const headerCell = page.getByTestId("test-head").query();
-    expect(headerCell).toBeDefined();
-    expect(headerCell?.getAttribute("scope")).toBe("col");
+    const headerCell = screen.getByTestId("test-head");
+
+    expect(headerCell.getAttribute("scope")).toBe("col");
   });
 });
 
 describe("Table data-slot attributes", () => {
-  it("should have correct data-slot attribute for Table", async () => {
-    await page.render(
+  it("should have correct data-slot attribute for Table", () => {
+    render(
       <Table>
         <tbody>
           <tr>
@@ -319,12 +337,13 @@ describe("Table data-slot attributes", () => {
       </Table>,
     );
 
-    const table = page.getByRole("table").query();
-    expect(table?.getAttribute("data-slot")).toBe("table-container");
+    const table = screen.getByRole("table");
+
+    expect(table.getAttribute("data-slot")).toBe("table-container");
   });
 
-  it("should have correct data-slot attribute for TableHeader", async () => {
-    await page.render(
+  it("should have correct data-slot attribute for TableHeader", () => {
+    render(
       <Table>
         <TableHeader>
           <tr>
@@ -334,12 +353,13 @@ describe("Table data-slot attributes", () => {
       </Table>,
     );
 
-    const header = page.getByRole("rowgroup").query();
-    expect(header?.getAttribute("data-slot")).toBe("table-header");
+    const header = screen.getByRole("rowgroup");
+
+    expect(header.getAttribute("data-slot")).toBe("table-header");
   });
 
-  it("should have correct data-slot attribute for TableBody", async () => {
-    await page.render(
+  it("should have correct data-slot attribute for TableBody", () => {
+    render(
       <Table>
         <TableBody>
           <tr>
@@ -349,12 +369,13 @@ describe("Table data-slot attributes", () => {
       </Table>,
     );
 
-    const body = page.getByRole("rowgroup").query();
-    expect(body?.getAttribute("data-slot")).toBe("table-body");
+    const body = screen.getByRole("rowgroup");
+
+    expect(body.getAttribute("data-slot")).toBe("table-body");
   });
 
-  it("should have correct data-slot attribute for TableFooter", async () => {
-    await page.render(
+  it("should have correct data-slot attribute for TableFooter", () => {
+    render(
       <Table>
         <TableFooter>
           <tr>
@@ -364,12 +385,13 @@ describe("Table data-slot attributes", () => {
       </Table>,
     );
 
-    const footer = page.getByRole("rowgroup").query();
-    expect(footer?.getAttribute("data-slot")).toBe("table-footer");
+    const footer = screen.getByRole("rowgroup");
+
+    expect(footer.getAttribute("data-slot")).toBe("table-footer");
   });
 
-  it("should have correct data-slot attribute for TableRow", async () => {
-    await page.render(
+  it("should have correct data-slot attribute for TableRow", () => {
+    render(
       <Table>
         <tbody>
           <TableRow>
@@ -379,12 +401,13 @@ describe("Table data-slot attributes", () => {
       </Table>,
     );
 
-    const row = page.getByRole("row").query();
-    expect(row?.getAttribute("data-slot")).toBe("table-row");
+    const row = screen.getByRole("row");
+
+    expect(row.getAttribute("data-slot")).toBe("table-row");
   });
 
-  it("should have correct data-slot attribute for TableHead", async () => {
-    await page.render(
+  it("should have correct data-slot attribute for TableHead", () => {
+    render(
       <Table>
         <thead>
           <tr>
@@ -394,12 +417,13 @@ describe("Table data-slot attributes", () => {
       </Table>,
     );
 
-    const headerCell = page.getByRole("columnheader").query();
-    expect(headerCell?.getAttribute("data-slot")).toBe("table-head");
+    const headerCell = screen.getByRole("columnheader");
+
+    expect(headerCell.getAttribute("data-slot")).toBe("table-head");
   });
 
-  it("should have correct data-slot attribute for TableCell", async () => {
-    await page.render(
+  it("should have correct data-slot attribute for TableCell", () => {
+    render(
       <Table>
         <tbody>
           <tr>
@@ -409,12 +433,13 @@ describe("Table data-slot attributes", () => {
       </Table>,
     );
 
-    const cell = page.getByRole("cell").query();
-    expect(cell?.getAttribute("data-slot")).toBe("table-cell");
+    const cell = screen.getByRole("cell");
+
+    expect(cell.getAttribute("data-slot")).toBe("table-cell");
   });
 
-  it("should have correct data-slot attribute for TableCaption", async () => {
-    await page.render(
+  it("should have correct data-slot attribute for TableCaption", () => {
+    render(
       <Table>
         <TableCaption>Table description</TableCaption>
         <tbody>
@@ -425,14 +450,15 @@ describe("Table data-slot attributes", () => {
       </Table>,
     );
 
-    const caption = page.getByText("Table description").query();
-    expect(caption?.getAttribute("data-slot")).toBe("table-caption");
+    const caption = screen.getByText("Table description");
+
+    expect(caption.getAttribute("data-slot")).toBe("table-caption");
   });
 });
 
 describe("TableCell", () => {
-  it("should render table cell with default styles", async () => {
-    await page.render(
+  it("should render table cell with default styles", () => {
+    render(
       <Table>
         <tbody>
           <tr>
@@ -442,14 +468,14 @@ describe("TableCell", () => {
       </Table>,
     );
 
-    const cell = page.getByRole("cell").query();
-    expect(cell).toBeDefined();
-    expect(cell?.className).toContain("not-first:pl-[1ch]");
-    expect(cell?.className).toContain("shrink-0");
+    const cell = screen.getByRole("cell");
+
+    expect(cell.className).toContain("not-first:pl-[1ch]");
+    expect(cell.className).toContain("shrink-0");
   });
 
-  it("should apply custom className", async () => {
-    await page.render(
+  it("should apply custom className", () => {
+    render(
       <Table>
         <tbody>
           <tr>
@@ -459,13 +485,14 @@ describe("TableCell", () => {
       </Table>,
     );
 
-    const cell = page.getByRole("cell").query();
-    expect(cell?.className).toContain("custom-cell");
-    expect(cell?.className).toContain("not-first:pl-[1ch]"); // Ensure default styles are still included
+    const cell = screen.getByRole("cell");
+
+    expect(cell.className).toContain("custom-cell");
+    expect(cell.className).toContain("not-first:pl-[1ch]"); // Ensure default styles are still included
   });
 
-  it("should pass through additional HTML attributes", async () => {
-    await page.render(
+  it("should pass through additional HTML attributes", () => {
+    render(
       <Table>
         <tbody>
           <tr>
@@ -477,15 +504,15 @@ describe("TableCell", () => {
       </Table>,
     );
 
-    const cell = page.getByTestId("test-cell").query();
-    expect(cell).toBeDefined();
-    expect(cell?.getAttribute("colSpan")).toBe("2");
+    const cell = screen.getByTestId("test-cell");
+
+    expect(cell.getAttribute("colSpan")).toBe("2");
   });
 });
 
 describe("TableCaption", () => {
-  it("should render table caption", async () => {
-    await page.render(
+  it("should render table caption", () => {
+    render(
       <Table>
         <TableCaption>Table description</TableCaption>
         <tbody>
@@ -496,13 +523,13 @@ describe("TableCaption", () => {
       </Table>,
     );
 
-    const caption = page.getByText("Table description").query();
-    expect(caption).toBeDefined();
-    expect(caption?.tagName).toBe("CAPTION");
+    const caption = screen.getByText("Table description");
+
+    expect(caption.tagName).toBe("CAPTION");
   });
 
-  it("should apply custom className", async () => {
-    await page.render(
+  it("should apply custom className", () => {
+    render(
       <Table>
         <TableCaption className="custom-caption">
           Table description
@@ -515,12 +542,13 @@ describe("TableCaption", () => {
       </Table>,
     );
 
-    const caption = page.getByText("Table description").query();
-    expect(caption?.className).toContain("custom-caption");
+    const caption = screen.getByText("Table description");
+
+    expect(caption.className).toContain("custom-caption");
   });
 
-  it("should pass through additional HTML attributes", async () => {
-    await page.render(
+  it("should pass through additional HTML attributes", () => {
+    render(
       <Table>
         <TableCaption data-testid="test-caption" aria-label="Table summary">
           Table description
@@ -533,8 +561,8 @@ describe("TableCaption", () => {
       </Table>,
     );
 
-    const caption = page.getByTestId("test-caption").query();
-    expect(caption).toBeDefined();
-    expect(caption?.getAttribute("aria-label")).toBe("Table summary");
+    const caption = screen.getByTestId("test-caption");
+
+    expect(caption.getAttribute("aria-label")).toBe("Table summary");
   });
 });

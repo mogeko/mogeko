@@ -1,10 +1,12 @@
-import { describe, expect, it, vi } from "vitest";
-import { page, userEvent } from "vitest/browser";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { AlertBanner, alertBannerVariants } from "@/components/ui/alert-banner";
 
 describe("alertBannerVariants", () => {
   it("should return default styles for gray_background color", () => {
     const result = alertBannerVariants();
+
     expect(result).toContain("bg-secondary");
     expect(result).toContain("text-secondary-foreground");
     expect(result).toContain("shadow-muted");
@@ -12,6 +14,7 @@ describe("alertBannerVariants", () => {
 
   it("should include base styles", () => {
     const result = alertBannerVariants();
+
     expect(result).toContain(
       "flex gap-[1ch] py-1 px-[2ch] shadow-[1ch_1ch_0_0]",
     );
@@ -19,115 +22,128 @@ describe("alertBannerVariants", () => {
 
   it("should handle custom color variants", () => {
     const result = alertBannerVariants({ color: "gray_background" });
+
     expect(result).toContain("bg-secondary");
     expect(result).toContain("text-secondary-foreground");
   });
 });
 
 describe("AlertBanner", () => {
-  it("should render with default icon when no icon provided", async () => {
-    await page.render(<AlertBanner icon={null}>Test message</AlertBanner>);
+  afterEach(() => {
+    cleanup();
+    document.body.innerHTML = "";
+  });
 
-    const banner = page.getByText("Test message").query();
+  it("should render with default icon when no icon provided", () => {
+    render(<AlertBanner icon={null}>Test message</AlertBanner>);
+
+    const banner = screen.queryByText("Test message");
+
     expect(banner).toBeDefined();
 
-    const defaultIcon = page.getByText("💡").query();
+    const defaultIcon = screen.queryByText("💡");
+
     expect(defaultIcon).toBeDefined();
   });
 
-  it("should render with custom icon", async () => {
-    await page.render(
-      <AlertBanner icon={<span>🚨</span>}>Warning message</AlertBanner>,
-    );
+  it("should render with custom icon", () => {
+    render(<AlertBanner icon={<span>🚨</span>}>Warning message</AlertBanner>);
 
-    const banner = page.getByText("Warning message");
+    const banner = screen.queryByText("Warning message");
+
     expect(banner).toBeDefined();
 
-    const customIcon = page.getByText("🚨");
+    const customIcon = screen.queryByText("🚨");
+
     expect(customIcon).toBeDefined();
   });
 
-  it("should apply correct CSS classes", async () => {
-    const { container } = await page.render(
+  it("should apply correct CSS classes", () => {
+    const { container } = render(
       <AlertBanner icon={null} className="custom-class">
         Test message
       </AlertBanner>,
     );
 
     const banner = container.firstChild as HTMLElement | null;
+
     expect(banner?.className).toContain("flex");
     expect(banner?.className).toContain("gap-[1ch]");
     expect(banner?.className).toContain("custom-class");
   });
 
   it("should handle color variants", async () => {
-    const { container } = await page.render(
+    const { container } = render(
       <AlertBanner icon={null} color="gray_background">
         Test message
       </AlertBanner>,
     );
 
     const banner = container.firstChild as HTMLElement | null;
+
     expect(banner?.className).toContain("bg-secondary");
     expect(banner?.className).toContain("text-secondary-foreground");
   });
 
-  it("should pass through additional HTML attributes", async () => {
-    await page.render(
+  it("should pass through additional HTML attributes", () => {
+    render(
       <AlertBanner icon={null} aria-label="Important notice">
         Test message
       </AlertBanner>,
     );
 
-    const banner = page.getByRole("alert").query();
-    expect(banner).toBeDefined();
-    expect(banner?.getAttribute("aria-label")).toBe("Important notice");
+    const banner = screen.getByRole("alert");
+
+    expect(banner.getAttribute("aria-label")).toBe("Important notice");
   });
 
   it("should handle click events", async () => {
-    const handleClick = vi.fn();
     const user = userEvent.setup();
+    const handleClick = vi.fn();
 
-    await page.render(
+    render(
       <AlertBanner icon={null} onClick={handleClick}>
         Clickable banner
       </AlertBanner>,
     );
 
-    const banner = page.getByText("Clickable banner");
+    const banner = screen.getByText("Clickable banner");
+
     await user.click(banner);
 
-    expect(handleClick).toHaveBeenCalledOnce();
+    expect(handleClick).toBeCalledTimes(1);
   });
 
-  it("should render children correctly", async () => {
-    await page.render(
+  it("should render children correctly", () => {
+    render(
       <AlertBanner icon={null}>
         <span>Complex</span>
         <span>children</span>
       </AlertBanner>,
     );
 
-    await expect.element(page.getByText("Complex")).toBeDefined();
-    await expect.element(page.getByText("children")).toBeDefined();
+    expect(screen.queryByText("Complex")).toBeDefined();
+    expect(screen.queryByText("children")).toBeDefined();
   });
 
   it("should merge custom className with default styles", async () => {
-    const { container } = await page.render(
+    const { container } = render(
       <AlertBanner icon={null} className="my-custom-class">
         Test message
       </AlertBanner>,
     );
 
     const banner = container.firstChild as HTMLElement | null;
+
     expect(banner?.className).toContain("flex");
     expect(banner?.className).toContain("my-custom-class");
   });
 
-  it("should have correct data-slot attribute", async () => {
-    await page.render(<AlertBanner icon={null}>Test message</AlertBanner>);
+  it("should have correct data-slot attribute", () => {
+    render(<AlertBanner icon={null}>Test message</AlertBanner>);
 
-    const banner = page.getByRole("alert").query();
-    expect(banner?.getAttribute("data-slot")).toBe("alert");
+    const banner = screen.getByRole("alert");
+
+    expect(banner.getAttribute("data-slot")).toBe("alert");
   });
 });

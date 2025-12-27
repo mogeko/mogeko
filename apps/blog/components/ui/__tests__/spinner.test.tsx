@@ -1,41 +1,40 @@
-import { describe, expect, it } from "vitest";
-import { page } from "vitest/browser";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
 import { Spinner } from "@/components/ui/spinner";
 
+afterEach(() => {
+  cleanup();
+  document.body.innerHTML = "";
+});
+
 describe("Spinner", () => {
-  it("should render spinner with default styles", async () => {
-    await page.render(<Spinner />);
+  it("should apply custom className", () => {
+    render(<Spinner className="custom-spinner" />);
 
-    const spinner = page.getByRole("status").query();
-    expect(spinner).toBeDefined();
-    expect(spinner?.className).toContain("spinner");
+    const spinner = screen.getByRole("status");
+
+    expect(spinner.className).toContain("custom-spinner");
+    expect(spinner.className).toContain("spinner"); // Ensure default styles are still included
   });
 
-  it("should apply custom className", async () => {
-    await page.render(<Spinner className="custom-spinner" />);
+  it("should have correct role as status", () => {
+    render(<Spinner />);
 
-    const spinner = page.getByRole("status").query();
-    expect(spinner?.className).toContain("custom-spinner");
-    expect(spinner?.className).toContain("spinner"); // Ensure default styles are still included
+    const spinner = screen.getByRole("status");
+
+    expect(spinner.getAttribute("role")).toBeNull();
   });
 
-  it("should have correct role as status", async () => {
-    await page.render(<Spinner />);
+  it("should be a span element", () => {
+    render(<Spinner />);
 
-    const spinner = page.getByRole("status").query();
-    expect(spinner).toBeDefined();
-    expect(spinner?.getAttribute("role")).toBeNull();
+    const spinner = screen.getByRole("status");
+
+    expect(spinner.tagName).toBe("OUTPUT");
   });
 
-  it("should be a span element", async () => {
-    await page.render(<Spinner />);
-
-    const spinner = page.getByRole("status").query();
-    expect(spinner?.tagName).toBe("OUTPUT");
-  });
-
-  it("should pass through additional HTML attributes", async () => {
-    await page.render(
+  it("should pass through additional HTML attributes", () => {
+    render(
       <Spinner
         data-testid="test-spinner"
         aria-label="Loading content"
@@ -43,47 +42,44 @@ describe("Spinner", () => {
       />,
     );
 
-    const spinner = page.getByRole("status").query();
-    expect(spinner).toBeDefined();
-    expect(spinner?.getAttribute("aria-label")).toBe("Loading content");
-    expect(spinner?.getAttribute("id")).toBe("spinner-1");
+    const spinner = screen.getByRole("status");
+
+    expect(spinner.getAttribute("aria-label")).toBe("Loading content");
+    expect(spinner.getAttribute("id")).toBe("spinner-1");
   });
 
-  it("should not render children", async () => {
+  it("should not render children", () => {
     // This test ensures that children are properly omitted from the props
     // Since the component uses Omit<React.HTMLAttributes<HTMLSpanElement>, "children">
     // we can't pass children, but we can verify the component renders without them
-    await page.render(<Spinner />);
+    render(<Spinner />);
 
-    const spinner = page.getByRole("status").query();
-    expect(spinner).toBeDefined();
-    expect(spinner?.textContent).toBe("");
+    const spinner = screen.getByRole("status");
+
+    expect(spinner.textContent).toBe("");
   });
 
-  it("should merge custom className with default styles", async () => {
-    await page.render(
-      <Spinner className="my-custom-class" data-testid="spinner" />,
-    );
+  it("should merge custom className with default styles", () => {
+    render(<Spinner className="my-custom-class" />);
 
-    const spinner = page.getByRole("status").query();
-    expect(spinner?.className).toContain("spinner");
-    expect(spinner?.className).toContain("my-custom-class");
+    const spinner = screen.getByRole("status");
+
+    expect(spinner.className).toContain("my-custom-class");
   });
 
-  it("should be accessible with appropriate ARIA attributes", async () => {
-    await page.render(
-      <Spinner aria-label="Loading data" data-testid="spinner" />,
-    );
+  it("should be accessible with appropriate ARIA attributes", () => {
+    render(<Spinner aria-label="Loading data" />);
 
-    const spinner = page.getByRole("status").query();
-    expect(spinner).toBeDefined();
-    expect(spinner?.getAttribute("aria-label")).toBe("Loading data");
+    const spinner = screen.getByRole("status");
+
+    expect(spinner.getAttribute("aria-label")).toBe("Loading data");
   });
 
-  it("should have no text content", async () => {
-    await page.render(<Spinner data-testid="spinner" />);
+  it("should have no text content", () => {
+    render(<Spinner data-testid="spinner" />);
 
-    const spinner = page.getByRole("status").query();
-    expect(spinner?.textContent).toBe("");
+    const spinner = screen.getByRole("status");
+
+    expect(spinner.textContent).toBe("");
   });
 });

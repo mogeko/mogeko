@@ -1,14 +1,13 @@
-import { Redis } from "@upstash/redis";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-// Mock dependencies
-vi.mock("@upstash/redis", () => ({
-  Redis: {
-    fromEnv: vi.fn(),
-  },
-}));
-
+vi.mock("@upstash/redis", () => {
+  return {
+    Redis: { fromEnv: vi.fn() },
+  };
+});
 vi.mock("server-only", () => ({}));
+
+const { Redis } = await import("@upstash/redis");
 
 describe("redis", () => {
   beforeEach(async () => vi.clearAllMocks());
