@@ -8,8 +8,9 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
-  contents: write
   pull-requests: write
+  contents: write
+  id-token: write
 
 jobs:
   release:
@@ -35,11 +36,10 @@ jobs:
         with:
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
-          version: pnpm vite-node .github/changeset-version.ts
+          version: pnpm jiti .github/changeset-version.ts
           publish: pnpm changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_ENV: "production"
       - name: Enable auto-merge for Changesets PRs
         if: steps.changesets.outputs.hasChangesets == 'true'
