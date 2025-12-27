@@ -5,12 +5,8 @@
   "type": "module",
   "types": "dist/index.d.ts",
   "exports": {
-    "./ase-gcm": {
-      "import": "./dist/ase-gcm.js"
-    },
-    ".": {
-      "import": "./dist/index.js"
-    }
+    ".": "./dist/index.js",
+    "./ase-gcm": "./dist/ase-gcm.js"
   },
   "keywords": [
     "snippets",
