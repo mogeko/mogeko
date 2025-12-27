@@ -1,5 +1,11 @@
 # @mogeko/utils
 
+## 0.7.1
+
+### Patch Changes
+
+- [#456](https://github.com/mogeko/mogeko/pull/456) [`d39c837`](https://github.com/mogeko/mogeko/commit/d39c837b500a712bd2a5251f592cd722408f494d) Thanks [@mogeko](https://github.com/mogeko)! - Update AES-GCM implementation to use crypto module directly
+
 ## 0.7.0
 
 ### Minor Changes
