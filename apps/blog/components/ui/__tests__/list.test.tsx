@@ -1,37 +1,43 @@
-import { describe, expect, it, vi } from "vitest";
-import { page, userEvent } from "vitest/browser";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { ListItem } from "@/components/ui/list";
 
+afterEach(() => {
+  cleanup();
+  document.body.innerHTML = "";
+});
+
 describe("ListItem", () => {
-  it("should render list item with children", async () => {
-    await page.render(<ListItem>List item content</ListItem>);
+  it("should render list item with children", () => {
+    render(<ListItem>List item content</ListItem>);
 
-    const listItem = page.getByRole("listitem").query();
-    expect(listItem).toBeDefined();
-    expect(listItem?.textContent).toBe("List item content");
+    const listItem = screen.getByRole("listitem");
+
+    expect(listItem.textContent).toBe("List item content");
   });
 
-  it("should apply default classes", async () => {
-    await page.render(<ListItem>Default styles</ListItem>);
+  it("should apply default classes", () => {
+    render(<ListItem>Default styles</ListItem>);
 
-    const listItem = page.getByRole("listitem").query();
-    expect(listItem?.className).toContain("outline-none");
-    expect(listItem?.className).toContain("focus:bg-accent");
-    expect(listItem?.className).toContain("focus:text-accent-foreground");
+    const listItem = screen.getByRole("listitem");
+
+    expect(listItem.className).toContain("outline-none");
+    expect(listItem.className).toContain("focus:bg-accent");
+    expect(listItem.className).toContain("focus:text-accent-foreground");
   });
 
-  it("should apply custom className", async () => {
-    await page.render(
-      <ListItem className="custom-list-item">Custom list item</ListItem>,
-    );
+  it("should apply custom className", () => {
+    render(<ListItem className="custom-list-item">Custom list item</ListItem>);
 
-    const listItem = page.getByRole("listitem").query();
-    expect(listItem?.className).toContain("custom-list-item");
-    expect(listItem?.className).toContain("outline-none"); // Ensure default styles are still included
+    const listItem = screen.getByRole("listitem");
+
+    expect(listItem.className).toContain("custom-list-item");
+    expect(listItem.className).toContain("outline-none"); // Ensure default styles are still included
   });
 
-  it("should pass through additional HTML attributes", async () => {
-    await page.render(
+  it("should pass through additional HTML attributes", () => {
+    render(
       <ListItem
         data-testid="test-list-item"
         aria-label="List item"
@@ -41,50 +47,50 @@ describe("ListItem", () => {
       </ListItem>,
     );
 
-    const listItem = page.getByTestId("test-list-item").query();
-    expect(listItem).toBeDefined();
-    expect(listItem?.getAttribute("aria-label")).toBe("List item");
-    expect(listItem?.getAttribute("id")).toBe("list-item-1");
+    const listItem = screen.getByTestId("test-list-item");
+
+    expect(listItem.getAttribute("aria-label")).toBe("List item");
+    expect(listItem.getAttribute("id")).toBe("list-item-1");
   });
 
-  it("should handle color variants", async () => {
-    await page.render(<ListItem color="blue">Blue list item</ListItem>);
+  it("should handle color variants", () => {
+    render(<ListItem color="blue">Blue list item</ListItem>);
 
-    const listItem = page.getByRole("listitem").query();
-    // The color variants are applied through the colorVariants function
-    // We can check that the className contains the expected base classes
-    expect(listItem?.className).toContain("outline-none");
-    expect(listItem?.className).toContain("focus:bg-accent");
-    expect(listItem?.className).toContain("focus:text-accent-foreground");
+    const listItem = screen.getByRole("listitem");
+
+    expect(listItem.className).toContain("outline-none");
+    expect(listItem.className).toContain("focus:bg-accent");
+    expect(listItem.className).toContain("focus:text-accent-foreground");
   });
 
-  it("should have correct role as listitem", async () => {
-    await page.render(<ListItem>Role test</ListItem>);
+  it("should have correct role as listitem", () => {
+    render(<ListItem>Role test</ListItem>);
 
-    const listItem = page.getByRole("listitem").query();
-    expect(listItem).toBeDefined();
-    expect(listItem?.getAttribute("role")).toBe("listitem");
+    const listItem = screen.getByRole("listitem");
+
+    expect(listItem.getAttribute("role")).toBe("listitem");
   });
 
-  it("should be focusable and have focus styles", async () => {
-    await page.render(<ListItem>Focusable list item</ListItem>);
+  it("should be focusable and have focus styles", () => {
+    render(<ListItem>Focusable list item</ListItem>);
 
-    const listItem = page.getByRole("listitem").query();
+    const listItem = screen.getByRole("listitem");
 
     // Check that the list item has focus styles
-    expect(listItem?.className).toContain("focus:bg-accent");
-    expect(listItem?.className).toContain("focus:text-accent-foreground");
+    expect(listItem.className).toContain("focus:bg-accent");
+    expect(listItem.className).toContain("focus:text-accent-foreground");
   });
 
-  it("should have outline-none for accessibility", async () => {
-    await page.render(<ListItem>Accessible list item</ListItem>);
+  it("should have outline-none for accessibility", () => {
+    render(<ListItem>Accessible list item</ListItem>);
 
-    const listItem = page.getByRole("listitem").query();
-    expect(listItem?.className).toContain("outline-none");
+    const listItem = screen.getByRole("listitem");
+
+    expect(listItem.className).toContain("outline-none");
   });
 
-  it("should render complex children correctly", async () => {
-    await page.render(
+  it("should render complex children correctly", () => {
+    render(
       <ListItem>
         <span>Complex</span>
         <span>list</span>
@@ -92,49 +98,51 @@ describe("ListItem", () => {
       </ListItem>,
     );
 
-    await expect.element(page.getByText("Complex")).toBeDefined();
-    await expect.element(page.getByText("list")).toBeDefined();
-    await expect.element(page.getByText("item")).toBeDefined();
+    expect(screen.queryByText("Complex")).toBeDefined();
+    expect(screen.queryByText("list")).toBeDefined();
+    expect(screen.queryByText("item")).toBeDefined();
   });
 
   it("should handle click events", async () => {
-    const handleClick = vi.fn();
     const user = userEvent.setup();
+    const handleClick = vi.fn();
 
-    await page.render(
-      <ListItem onClick={handleClick}>Clickable list item</ListItem>,
-    );
+    render(<ListItem onClick={handleClick}>Clickable list item</ListItem>);
 
-    const listItem = page.getByRole("listitem");
+    const listItem = screen.getByRole("listitem");
+
     await user.click(listItem);
 
-    expect(handleClick).toHaveBeenCalledOnce();
+    expect(handleClick).toBeCalledTimes(1);
   });
 
-  it("should be a div element with listitem role", async () => {
-    await page.render(<ListItem>Element test</ListItem>);
+  it("should be a div element with listitem role", () => {
+    render(<ListItem>Element test</ListItem>);
 
-    const listItem = page.getByRole("listitem").query();
-    expect(listItem?.tagName).toBe("DIV");
-    expect(listItem?.getAttribute("role")).toBe("listitem");
+    const listItem = screen.getByRole("listitem");
+
+    expect(listItem.tagName).toBe("DIV");
+    expect(listItem.getAttribute("role")).toBe("listitem");
   });
 
-  it("should merge color variants with custom className", async () => {
-    await page.render(
+  it("should merge color variants with custom className", () => {
+    render(
       <ListItem className="custom-class" color="blue">
         Combined styles
       </ListItem>,
     );
 
-    const listItem = page.getByRole("listitem").query();
-    expect(listItem?.className).toContain("custom-class");
-    expect(listItem?.className).toContain("outline-none");
+    const listItem = screen.getByRole("listitem");
+
+    expect(listItem.className).toContain("custom-class");
+    expect(listItem.className).toContain("outline-none");
   });
 
-  it("should have correct data-slot attribute", async () => {
-    await page.render(<ListItem>Test List Item</ListItem>);
+  it("should have correct data-slot attribute", () => {
+    render(<ListItem>Test List Item</ListItem>);
 
-    const listItem = page.getByRole("listitem").query();
-    expect(listItem?.getAttribute("data-slot")).toBe("list-item");
+    const listItem = screen.getByRole("listitem");
+
+    expect(listItem.getAttribute("data-slot")).toBe("list-item");
   });
 });

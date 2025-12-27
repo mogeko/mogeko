@@ -1,43 +1,46 @@
-import { describe, expect, it, vi } from "vitest";
-import { page, userEvent } from "vitest/browser";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { Checkbox } from "@/components/ui/checkbox";
 
-describe("Checkbox", () => {
-  it("should render checkbox with children", async () => {
-    await page.render(<Checkbox>Checkbox label</Checkbox>);
+afterEach(() => {
+  cleanup();
+  document.body.innerHTML = "";
+});
 
-    const checkbox = page.getByText("Checkbox label").query();
-    expect(checkbox).toBeDefined();
-    expect(checkbox?.textContent).toContain("Checkbox label");
+describe("Checkbox", () => {
+  it("should render checkbox with children", () => {
+    render(<Checkbox>Checkbox label</Checkbox>);
+
+    const checkbox = screen.getByText("Checkbox label");
+
+    expect(checkbox.textContent).toContain("Checkbox label");
   });
 
-  it("should render unchecked checkbox by default", async () => {
-    await page.render(<Checkbox>Unchecked</Checkbox>);
+  it("should render unchecked checkbox by default", () => {
+    render(<Checkbox>Unchecked</Checkbox>);
 
-    const checkbox = page.getByText("Unchecked").query();
-    const parentDiv = checkbox?.closest("div");
-    const checkSpan = parentDiv?.firstChild as HTMLElement;
+    const parentDiv = screen.getByText("Unchecked").closest("div");
+    const checkSpan = parentDiv?.firstChild as HTMLElement | null;
 
     expect(checkSpan).toBeDefined();
     expect(checkSpan?.textContent).toBe("\u00A0"); // Non-breaking space for unchecked
   });
 
-  it("should render checked checkbox when checked prop is true", async () => {
-    await page.render(<Checkbox checked>Checked</Checkbox>);
+  it("should render checked checkbox when checked prop is true", () => {
+    render(<Checkbox checked>Checked</Checkbox>);
 
-    const checkbox = page.getByText("Checked").query();
-    const parentDiv = checkbox?.closest("div");
+    const parentDiv = screen.getByText("Checked").closest("div");
     const checkSpan = parentDiv?.firstChild as HTMLElement;
 
     expect(checkSpan).toBeDefined();
     expect(checkSpan?.textContent).toBe("\u2573"); // X mark for checked
   });
 
-  it("should apply default classes", async () => {
-    await page.render(<Checkbox>Default styles</Checkbox>);
+  it("should apply default classes", () => {
+    render(<Checkbox>Default styles</Checkbox>);
 
-    const checkbox = page.getByText("Default styles").query();
-    const parentDiv = checkbox?.closest("div");
+    const parentDiv = screen.getByText("Default styles").closest("div");
 
     expect(parentDiv?.className).toContain("inline-flex");
     expect(parentDiv?.className).toContain("items-center");
@@ -47,55 +50,51 @@ describe("Checkbox", () => {
     expect(parentDiv?.className).toContain("shrink-0");
   });
 
-  it("should apply custom className", async () => {
-    await page.render(
-      <Checkbox className="custom-checkbox">Custom checkbox</Checkbox>,
-    );
+  it("should apply custom className", () => {
+    render(<Checkbox className="custom-checkbox">Custom checkbox</Checkbox>);
 
-    const checkbox = page.getByText("Custom checkbox").query();
-    const parentDiv = checkbox?.closest("div");
+    const parentDiv = screen.getByText("Custom checkbox").closest("div");
 
     expect(parentDiv?.className).toContain("custom-checkbox");
     expect(parentDiv?.className).toContain("inline-flex"); // Ensure default styles are still included
   });
 
-  it("should pass through additional HTML attributes", async () => {
-    await page.render(
+  it("should pass through additional HTML attributes", () => {
+    render(
       <Checkbox role="checkbox" aria-label="Checkbox option" id="checkbox-1">
         Checkbox with attributes
       </Checkbox>,
     );
 
-    const checkbox = page
-      .getByRole("checkbox", { name: "Checkbox option" })
-      .query();
-    expect(checkbox).toBeDefined();
-    expect(checkbox?.getAttribute("aria-label")).toBe("Checkbox option");
-    expect(checkbox?.getAttribute("id")).toBe("checkbox-1");
+    const checkbox = screen.getByRole("checkbox", { name: "Checkbox option" });
+
+    expect(checkbox.getAttribute("aria-label")).toBe("Checkbox option");
+    expect(checkbox.getAttribute("id")).toBe("checkbox-1");
   });
 
-  it("should have correct structure with two spans", async () => {
-    await page.render(<Checkbox>Structure test</Checkbox>);
+  it("should have correct structure with two spans", () => {
+    render(<Checkbox>Structure test</Checkbox>);
 
-    const checkbox = page.getByText("Structure test").query();
-    const parentDiv = checkbox?.closest("div");
+    const parentDiv = screen.getByText("Structure test").closest("div");
+
     const spans = parentDiv?.querySelectorAll("span");
 
     expect(spans).toHaveLength(2);
 
     const checkSpan = spans?.[0];
-    const labelSpan = spans?.[1];
 
     expect(checkSpan).toBeDefined();
+
+    const labelSpan = spans?.[1];
+
     expect(labelSpan).toBeDefined();
     expect(labelSpan?.textContent).toBe("Structure test");
   });
 
-  it("should have correct styles for check span", async () => {
-    await page.render(<Checkbox>Check span styles</Checkbox>);
+  it("should have correct styles for check span", () => {
+    render(<Checkbox>Check span styles</Checkbox>);
 
-    const checkbox = page.getByText("Check span styles").query();
-    const parentDiv = checkbox?.closest("div");
+    const parentDiv = screen.getByText("Check span styles").closest("div");
     const checkSpan = parentDiv?.firstChild as HTMLElement;
 
     expect(checkSpan?.className).toContain("inline-flex");
@@ -107,12 +106,11 @@ describe("Checkbox", () => {
     expect(checkSpan?.className).toContain("items-stretch");
   });
 
-  it("should have correct styles for label span", async () => {
-    await page.render(<Checkbox>Label span styles</Checkbox>);
+  it("should have correct styles for label span", () => {
+    render(<Checkbox>Label span styles</Checkbox>);
 
-    const checkbox = page.getByText("Label span styles").query();
-    const parentDiv = checkbox?.closest("div");
-    const labelSpan = parentDiv?.lastChild as HTMLElement;
+    const parentDiv = screen.getByText("Label span styles").closest("div");
+    const labelSpan = parentDiv?.lastChild as HTMLElement | null;
 
     expect(labelSpan?.className).toContain("inline-flex");
     expect(labelSpan?.className).toContain("bg-secondary");
@@ -122,70 +120,65 @@ describe("Checkbox", () => {
   });
 
   it("should handle click events", async () => {
-    const handleClick = vi.fn();
     const user = userEvent.setup();
+    const handleClick = vi.fn();
 
-    await page.render(
-      <Checkbox onClick={handleClick}>Clickable checkbox</Checkbox>,
-    );
+    render(<Checkbox onClick={handleClick}>Clickable checkbox</Checkbox>);
 
-    const checkbox = page.getByText("Clickable checkbox").query();
-    const parentDiv = checkbox?.closest("div");
+    const parentDiv = screen.getByText("Clickable checkbox").closest("div");
+
+    expect(parentDiv).toBeDefined();
 
     if (parentDiv) {
       await user.click(parentDiv);
     }
 
-    expect(handleClick).toHaveBeenCalledOnce();
+    expect(handleClick).toBeCalledTimes(1);
   });
 
-  it("should be focusable and have cursor pointer", async () => {
-    await page.render(<Checkbox>Focusable checkbox</Checkbox>);
+  it("should be focusable and have cursor pointer", () => {
+    render(<Checkbox>Focusable checkbox</Checkbox>);
 
-    const checkbox = page.getByText("Focusable checkbox").query();
-    const parentDiv = checkbox?.closest("div");
+    const parentDiv = screen.getByText("Focusable checkbox").closest("div");
 
     expect(parentDiv?.className).toContain("cursor-pointer");
     expect(parentDiv?.className).toContain("outline-none");
   });
 
-  it("should render complex children correctly", async () => {
-    await page.render(
+  it("should render complex children correctly", () => {
+    render(
       <Checkbox>
         <span>Complex</span>
         <span>label</span>
       </Checkbox>,
     );
 
-    await expect.element(page.getByText("Complex")).toBeDefined();
-    await expect.element(page.getByText("label")).toBeDefined();
+    expect(screen.queryByText("Complex")).toBeDefined();
+    expect(screen.queryByText("label")).toBeDefined();
   });
 
-  it("should toggle between checked and unchecked states", async () => {
-    const { rerender } = await page.render(
+  it("should toggle between checked and unchecked states", () => {
+    const { rerender } = render(
       <Checkbox checked={false}>Toggle test</Checkbox>,
     );
 
-    let checkbox = page.getByText("Toggle test").query();
-    let parentDiv = checkbox?.closest("div");
-    let checkSpan = parentDiv?.firstChild as HTMLElement;
+    let parentDiv = screen.getByText("Toggle test").closest("div");
+    let checkSpan = parentDiv?.firstChild as HTMLElement | null;
 
     expect(checkSpan?.textContent).toBe("\u00A0"); // Unchecked
 
-    await rerender(<Checkbox checked>Toggle test</Checkbox>);
+    rerender(<Checkbox checked>Toggle test</Checkbox>);
 
-    checkbox = page.getByText("Toggle test").query();
-    parentDiv = checkbox?.closest("div");
-    checkSpan = parentDiv?.firstChild as HTMLElement;
+    parentDiv = screen.getByText("Toggle test").closest("div");
+    checkSpan = parentDiv?.firstChild as HTMLElement | null;
 
     expect(checkSpan?.textContent).toBe("\u2573"); // Checked
   });
 
-  it("should have correct data-slot attribute", async () => {
-    await page.render(<Checkbox>Test Checkbox</Checkbox>);
+  it("should have correct data-slot attribute", () => {
+    render(<Checkbox>Test Checkbox</Checkbox>);
 
-    const checkbox = page.getByText("Test Checkbox").query();
-    const parentDiv = checkbox?.closest("div");
+    const parentDiv = screen.getByText("Test Checkbox").closest("div");
     expect(parentDiv?.getAttribute("data-slot")).toBe("checkbox");
   });
 });

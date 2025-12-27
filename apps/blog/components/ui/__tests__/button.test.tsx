@@ -1,10 +1,12 @@
-import { describe, expect, it, vi } from "vitest";
-import { page, userEvent } from "vitest/browser";
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { Button, buttonVariants } from "@/components/ui/button";
 
 describe("buttonVariants", () => {
   it("should return default styles for primary variant", () => {
     const result = buttonVariants();
+
     expect(result).toContain("bg-primary");
     expect(result).toContain("text-primary-foreground");
     expect(result).toContain("flex");
@@ -15,6 +17,7 @@ describe("buttonVariants", () => {
 
   it("should return secondary variant styles", () => {
     const result = buttonVariants({ variant: "secndary" });
+
     expect(result).toContain("bg-background");
     expect(result).toContain("text-foreground");
     expect(result).toContain("shadow-[inset_0_0_0_1px]");
@@ -23,7 +26,6 @@ describe("buttonVariants", () => {
 
   it("should include base styles for all variants", () => {
     const primaryResult = buttonVariants();
-    const secondaryResult = buttonVariants({ variant: "secndary" });
 
     expect(primaryResult).toContain("font-bold");
     expect(primaryResult).toContain("min-h-2");
@@ -34,6 +36,8 @@ describe("buttonVariants", () => {
     expect(primaryResult).toContain("transition-colors");
     expect(primaryResult).toContain("duration-200");
     expect(primaryResult).toContain("cursor-pointer");
+
+    const secondaryResult = buttonVariants({ variant: "secndary" });
 
     expect(secondaryResult).toContain("font-bold");
     expect(secondaryResult).toContain("min-h-2");
@@ -48,12 +52,14 @@ describe("buttonVariants", () => {
 
   it("should include hover and focus styles", () => {
     const result = buttonVariants();
+
     expect(result).toContain("hover:bg-accent");
     expect(result).toContain("focus:bg-accent");
   });
 
   it("should include disabled styles", () => {
     const result = buttonVariants();
+
     expect(result).toContain("disabled:bg-secondary");
     expect(result).toContain("disabled:text-border");
     expect(result).toContain("disabled:cursor-not-allowed");
@@ -61,118 +67,129 @@ describe("buttonVariants", () => {
 
   it("should merge custom className", () => {
     const result = buttonVariants({ className: "custom-class" });
+
     expect(result).toContain("custom-class");
     expect(result).toContain("bg-primary"); // Ensure default styles are still included
   });
 });
 
 describe("Button", () => {
-  it("should render button with default props", async () => {
-    await page.render(<Button>Click me</Button>);
-
-    const button = page.getByRole("button", { name: "Click me" }).query();
-    expect(button).toBeDefined();
-    expect(button?.textContent).toBe("Click me");
-    expect(button?.className).toContain("bg-primary");
-    expect(button?.className).toContain("text-primary-foreground");
+  afterEach(() => {
+    cleanup();
+    document.body.innerHTML = "";
   });
 
-  it("should render button with secondary variant", async () => {
-    await page.render(<Button variant="secndary">Secondary Button</Button>);
+  it("should render button with default props", () => {
+    render(<Button>Click me</Button>);
 
-    const button = page
-      .getByRole("button", { name: "Secondary Button" })
-      .query();
-    expect(button).toBeDefined();
-    expect(button?.className).toContain("bg-background");
-    expect(button?.className).toContain("text-foreground");
-    expect(button?.className).toContain("shadow-[inset_0_0_0_1px]");
-    expect(button?.className).toContain("shadow-secondary");
+    const button = screen.getByRole("button", { name: "Click me" });
+
+    expect(button.textContent).toBe("Click me");
+    expect(button.className).toContain("bg-primary");
+    expect(button.className).toContain("text-primary-foreground");
   });
 
-  it("should apply custom className", async () => {
-    await page.render(<Button className="custom-button">Custom Button</Button>);
+  it("should render button with secondary variant", () => {
+    render(<Button variant="secndary">Secondary Button</Button>);
 
-    const button = page.getByRole("button", { name: "Custom Button" }).query();
-    expect(button?.className).toContain("custom-button");
-    expect(button?.className).toContain("bg-primary"); // Ensure default styles are still included
+    const button = screen.getByRole("button", { name: "Secondary Button" });
+
+    expect(button.className).toContain("bg-background");
+    expect(button.className).toContain("text-foreground");
+    expect(button.className).toContain("shadow-[inset_0_0_0_1px]");
+    expect(button.className).toContain("shadow-secondary");
+  });
+
+  it("should apply custom className", () => {
+    render(<Button className="custom-button">Custom Button</Button>);
+
+    const button = screen.getByRole("button", { name: "Custom Button" });
+
+    expect(button.className).toContain("custom-button");
+    expect(button.className).toContain("bg-primary"); // Ensure default styles are still included
   });
 
   it("should handle click events", async () => {
-    const handleClick = vi.fn();
     const user = userEvent.setup();
+    const handleClick = vi.fn();
 
-    await page.render(<Button onClick={handleClick}>Clickable Button</Button>);
+    render(<Button onClick={handleClick}>Clickable Button</Button>);
 
-    const button = page.getByRole("button", { name: "Clickable Button" });
+    const button = screen.getByRole("button", { name: "Clickable Button" });
+
     await user.click(button);
 
-    expect(handleClick).toHaveBeenCalledOnce();
+    expect(handleClick).toBeCalledTimes(1);
   });
 
-  it("should be disabled when disabled prop is true", async () => {
-    await page.render(<Button disabled>Disabled Button</Button>);
+  it("should be disabled when disabled prop is true", () => {
+    render(<Button disabled>Disabled Button</Button>);
 
-    const button = page
-      .getByRole("button", { name: "Disabled Button" })
-      .query() as HTMLButtonElement | null;
-    expect(button?.disabled).toBe(true);
-    expect(button?.className).toContain("disabled:bg-secondary");
-    expect(button?.className).toContain("disabled:text-border");
-    expect(button?.className).toContain("disabled:cursor-not-allowed");
+    const button = screen.getByRole<HTMLButtonElement>("button", {
+      name: "Disabled Button",
+    });
+
+    expect(button.disabled).toBe(true);
+    expect(button.className).toContain("disabled:bg-secondary");
+    expect(button.className).toContain("disabled:text-border");
+    expect(button.className).toContain("disabled:cursor-not-allowed");
   });
 
-  it("should forward all button attributes", async () => {
-    await page.render(
+  it("should forward all button attributes", () => {
+    render(
       <Button type="submit" aria-label="Submit form" tabIndex={0}>
         Submit
       </Button>,
     );
 
-    const button = page.getByRole("button", { name: "Submit form" }).query();
-    expect(button?.getAttribute("type")).toBe("submit");
-    expect(button?.getAttribute("aria-label")).toBe("Submit form");
-    expect(button?.getAttribute("tabIndex")).toBe("0");
+    const button = screen.getByRole("button", { name: "Submit form" });
+
+    expect(button.getAttribute("type")).toBe("submit");
+    expect(button.getAttribute("aria-label")).toBe("Submit form");
+    expect(button.getAttribute("tabIndex")).toBe("0");
   });
 
-  it("should render as child component when asChild is true", async () => {
-    await page.render(
+  it("should render as child component when asChild is true", () => {
+    render(
       <Button asChild>
         <a href="/test">Link Button</a>
       </Button>,
     );
 
-    const link = page.getByRole("link", { name: "Link Button" }).query();
-    expect(link).toBeDefined();
-    expect(link?.getAttribute("href")).toBe("/test");
-    expect(link?.className).toContain("bg-primary");
-    expect(link?.className).toContain("text-primary-foreground");
+    const link = screen.getByRole("link", { name: "Link Button" });
+
+    expect(link.getAttribute("href")).toBe("/test");
+    expect(link.className).toContain("bg-primary");
+    expect(link.className).toContain("text-primary-foreground");
   });
 
-  it("should have correct hover and focus behavior", async () => {
-    await page.render(<Button>Hover Button</Button>);
+  it("should have correct hover and focus behavior", () => {
+    render(<Button>Hover Button</Button>);
 
-    const button = page.getByRole("button", { name: "Hover Button" }).query();
-    expect(button?.className).toContain("hover:bg-accent");
-    expect(button?.className).toContain("focus:bg-accent");
+    const button = screen.getByRole("button", { name: "Hover Button" });
+
+    expect(button.className).toContain("hover:bg-accent");
+    expect(button.className).toContain("focus:bg-accent");
   });
 
-  it("should have correct dimensions and typography", async () => {
-    await page.render(<Button>Styled Button</Button>);
+  it("should have correct dimensions and typography", () => {
+    render(<Button>Styled Button</Button>);
 
-    const button = page.getByRole("button", { name: "Styled Button" }).query();
-    expect(button?.className).toContain("min-h-2");
-    expect(button?.className).toContain("w-full");
-    expect(button?.className).toContain("px-[2ch]");
-    expect(button?.className).toContain("font-bold");
-    expect(button?.className).toContain("uppercase");
-    expect(button?.className).toContain("tracking-[1px]");
+    const button = screen.getByRole("button", { name: "Styled Button" });
+
+    expect(button.className).toContain("min-h-2");
+    expect(button.className).toContain("w-full");
+    expect(button.className).toContain("px-[2ch]");
+    expect(button.className).toContain("font-bold");
+    expect(button.className).toContain("uppercase");
+    expect(button.className).toContain("tracking-[1px]");
   });
 
-  it("should have correct data-slot attribute", async () => {
-    await page.render(<Button>Test Button</Button>);
+  it("should have correct data-slot attribute", () => {
+    render(<Button>Test Button</Button>);
 
-    const button = page.getByRole("button").query();
-    expect(button?.getAttribute("data-slot")).toBe("button");
+    const button = screen.getByRole("button");
+
+    expect(button.getAttribute("data-slot")).toBe("button");
   });
 });

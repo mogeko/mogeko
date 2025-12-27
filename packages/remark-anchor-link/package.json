@@ -38,10 +38,10 @@
   "devDependencies": {
     "@mogeko/tsconfig": "workspace:^",
     "@types/mdast": "^4.0.4",
-    "@types/node": "catalog:",
+    "@types/node": "^25.0.3",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "unified": "^11.0.5",
-    "vitest": "catalog:vitest"
+    "vitest": "^4.0.16"
   }
 }

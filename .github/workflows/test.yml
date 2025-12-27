@@ -27,22 +27,7 @@ jobs:
         with:
           node-version-file: package.json
           cache: "pnpm"
-      - name: Get installed Playwright version
-        run: |
-          PLAYWRIGHT_META=$(pnpm list --json --lockfile-only playwright)
-          cat << EOF >> $GITHUB_OUTPUT
-          result=$(echo $PLAYWRIGHT_META | jq -r '.[0].devDependencies.playwright.version')
-          EOF
-        id: playwright-version
-      - name: Cache Playwright Binaries
-        uses: actions/cache@v5.0.1
-        id: playwright-cache
-        with:
-          path: |
-            ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.result }}
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm biome ci --reporter=github
       - run: pnpm run build --filter="./packages/*"
       - name: Generate Coverage Reports

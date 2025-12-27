@@ -1,54 +1,63 @@
-import { describe, expect, it } from "vitest";
-import { page } from "vitest/browser";
+import { cleanup, render } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
 import { Icon } from "@/components/icon";
 
+afterEach(() => {
+  cleanup();
+  document.body.innerHTML = "";
+});
+
 describe("Icon", () => {
-  it("should render emoji icon when icon type is emoji", async () => {
+  it("should render emoji icon when icon type is emoji", () => {
     const emojiIcon = {
       type: "emoji" as const,
       emoji: "🌟",
     };
 
-    const { container } = await page.render(<Icon icon={emojiIcon} />);
+    const { container } = render(<Icon icon={emojiIcon} />);
 
     const spanElement = container.querySelector("span");
-    expect(spanElement).toBeTruthy();
+
+    expect(spanElement).toBeDefined();
     expect(spanElement?.textContent).toBe("🌟");
   });
 
-  it("should pass additional HTML attributes to the span element", async () => {
+  it("should pass additional HTML attributes to the span element", () => {
     const emojiIcon = {
       type: "emoji" as const,
       emoji: "🔥",
     };
 
-    const { container } = await page.render(
+    const { container } = render(
       <Icon icon={emojiIcon} className="custom-class" title="fire icon" />,
     );
 
     const spanElement = container.querySelector("span");
-    expect(spanElement).toBeTruthy();
+
+    expect(spanElement).toBeDefined();
     expect(spanElement?.className).toContain("custom-class");
     expect(spanElement?.getAttribute("title")).toBe("fire icon");
   });
 
-  it("should handle null or undefined icon gracefully", async () => {
-    const { container } = await page.render(<Icon icon={null as any} />);
+  it("should handle null or undefined icon gracefully", () => {
+    const { container } = render(<Icon icon={null} />);
 
     const spanElement = container.querySelector("span");
-    expect(spanElement).toBeFalsy();
+
+    expect(spanElement).toBeNull();
   });
 
-  it("should handle icon with undefined emoji property", async () => {
+  it("should handle icon with undefined emoji property", () => {
     const invalidIcon = {
       type: "emoji" as const,
-      emoji: undefined,
+      emoji: undefined as unknown as string,
     };
 
-    const { container } = await page.render(<Icon icon={invalidIcon as any} />);
+    const { container } = render(<Icon icon={invalidIcon} />);
 
     const spanElement = container.querySelector("span");
-    expect(spanElement).toBeTruthy();
+
+    expect(spanElement).toBeDefined();
     expect(spanElement?.textContent).toBe("");
   });
 });

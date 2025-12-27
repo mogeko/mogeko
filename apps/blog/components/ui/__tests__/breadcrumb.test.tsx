@@ -1,17 +1,23 @@
-import { describe, expect, it } from "vitest";
-import { page } from "vitest/browser";
+import { cleanup, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it } from "vitest";
 import { Breadcrumb, BreadcrumbItem } from "@/components/ui/breadcrumb";
 
-describe("Breadcrumb", () => {
-  it("should render with correct aria-label", async () => {
-    await page.render(<Breadcrumb>Test breadcrumb</Breadcrumb>);
+afterEach(() => {
+  cleanup();
+  document.body.innerHTML = "";
+});
 
-    const nav = page.getByRole("navigation", { name: "breadcrumb" });
-    await expect.element(nav).toBeDefined();
+describe("Breadcrumb", () => {
+  it("should render with correct aria-label", () => {
+    render(<Breadcrumb>Test breadcrumb</Breadcrumb>);
+
+    const nav = screen.queryByRole("navigation", { name: "breadcrumb" });
+
+    expect(nav).toBeDefined();
   });
 
-  it("should render children inside ordered list", async () => {
-    await page.render(
+  it("should render children inside ordered list", () => {
+    render(
       <Breadcrumb>
         <BreadcrumbItem>Home</BreadcrumbItem>
         <BreadcrumbItem>Posts</BreadcrumbItem>
@@ -19,109 +25,112 @@ describe("Breadcrumb", () => {
       </Breadcrumb>,
     );
 
-    const list = page.getByRole("list").query();
-    expect(list).toBeDefined();
-    expect(list?.className).toContain("flex");
-    expect(list?.className).toContain("flex-wrap");
-    expect(list?.className).toContain("items-center");
-    expect(list?.className).toContain("gap-[1ch]");
+    const list = screen.getByRole("list");
 
-    const items = page.getByRole("listitem").all();
+    expect(list.className).toContain("flex");
+    expect(list.className).toContain("flex-wrap");
+    expect(list.className).toContain("items-center");
+    expect(list.className).toContain("gap-[1ch]");
+
+    const items = screen.getAllByRole("listitem");
+
     expect(items).toHaveLength(3);
-    await expect.element(page.getByText("Home")).toBeDefined();
-    await expect.element(page.getByText("Posts")).toBeDefined();
-    await expect.element(page.getByText("Current")).toBeDefined();
+
+    expect(screen.queryByText("Home")).toBeDefined();
+    expect(screen.queryByText("Posts")).toBeDefined();
+    expect(screen.queryByText("Current")).toBeDefined();
   });
 
-  it("should pass through additional HTML attributes", async () => {
-    await page.render(
+  it("should pass through additional HTML attributes", () => {
+    render(
       <Breadcrumb className="custom-class" aria-label="Navigation breadcrumb">
         <BreadcrumbItem>Home</BreadcrumbItem>
       </Breadcrumb>,
     );
 
-    const nav = page
-      .getByRole("navigation", { name: "Navigation breadcrumb" })
-      .query();
-    expect(nav).toBeDefined();
-    expect(nav?.className).toContain("custom-class");
+    const nav = screen.getByRole("navigation", {
+      name: "Navigation breadcrumb",
+    });
+
+    expect(nav.className).toContain("custom-class");
   });
 
-  it("should have correct data-slot attribute", async () => {
-    await page.render(<Breadcrumb>Test breadcrumb</Breadcrumb>);
+  it("should have correct data-slot attribute", () => {
+    render(<Breadcrumb>Test breadcrumb</Breadcrumb>);
 
-    const nav = page.getByRole("navigation", { name: "breadcrumb" }).query();
-    expect(nav?.getAttribute("data-slot")).toBe("breadcrumb");
+    const nav = screen.getByRole("navigation", { name: "breadcrumb" });
+
+    expect(nav.getAttribute("data-slot")).toBe("breadcrumb");
   });
 });
 
 describe("BreadcrumbItem", () => {
-  it("should render with correct classes", async () => {
-    await page.render(<BreadcrumbItem>Test item</BreadcrumbItem>);
+  it("should render with correct classes", () => {
+    render(<BreadcrumbItem>Test item</BreadcrumbItem>);
 
-    const item = page.getByRole("listitem").query();
-    expect(item).toBeDefined();
-    expect(item?.className).toContain("inline-flex");
-    expect(item?.className).toContain("items-center");
-    expect(item?.className).toContain("gap-[1ch]");
+    const item = screen.getByRole("listitem");
+
+    expect(item.className).toContain("inline-flex");
+    expect(item.className).toContain("items-center");
+    expect(item.className).toContain("gap-[1ch]");
   });
 
-  it("should merge custom className with default styles", async () => {
-    await page.render(
+  it("should merge custom className with default styles", () => {
+    render(
       <BreadcrumbItem className="custom-item-class">Test item</BreadcrumbItem>,
     );
 
-    const item = page.getByRole("listitem").query();
-    expect(item?.className).toContain("inline-flex");
-    expect(item?.className).toContain("items-center");
-    expect(item?.className).toContain("gap-[1ch]");
-    expect(item?.className).toContain("custom-item-class");
+    const item = screen.getByRole("listitem");
+
+    expect(item.className).toContain("inline-flex");
+    expect(item.className).toContain("items-center");
+    expect(item.className).toContain("gap-[1ch]");
+    expect(item.className).toContain("custom-item-class");
   });
 
-  it("should pass through additional HTML attributes", async () => {
-    await page.render(
-      <BreadcrumbItem aria-label="Home page">Home</BreadcrumbItem>,
-    );
+  it("should pass through additional HTML attributes", () => {
+    render(<BreadcrumbItem aria-label="Home page">Home</BreadcrumbItem>);
 
-    const item = page.getByRole("listitem", { name: "Home page" }).query();
-    expect(item).toBeDefined();
-    expect(item?.getAttribute("aria-label")).toBe("Home page");
+    const item = screen.getByRole("listitem", { name: "Home page" });
+
+    expect(item.getAttribute("aria-label")).toBe("Home page");
   });
 
-  it("should render children correctly", async () => {
-    await page.render(
+  it("should render children correctly", () => {
+    render(
       <BreadcrumbItem>
         <span>Complex</span>
         <span>children</span>
       </BreadcrumbItem>,
     );
 
-    await expect.element(page.getByText("Complex")).toBeDefined();
-    await expect.element(page.getByText("children")).toBeDefined();
+    expect(screen.queryByText("Complex")).toBeDefined();
+    expect(screen.queryByText("children")).toBeDefined();
   });
 });
 
 describe("BreadcrumbItem.Separator", () => {
-  it("should render default separator when no children provided", async () => {
-    await page.render(<BreadcrumbItem.Separator />);
+  it("should render default separator when no children provided", () => {
+    render(<BreadcrumbItem.Separator />);
 
-    const separator = page.getByText("\u276f").query();
+    const separator = screen.queryByText("\u276f");
+
     expect(separator).toBeDefined();
   });
 
-  it("should render custom separator when children provided", async () => {
-    await page.render(<BreadcrumbItem.Separator>/</BreadcrumbItem.Separator>);
+  it("should render custom separator when children provided", () => {
+    render(<BreadcrumbItem.Separator>/</BreadcrumbItem.Separator>);
 
-    const separator = page.getByText("/").query();
+    const separator = screen.queryByText("/");
+
     expect(separator).toBeDefined();
   });
 
-  it("should pass through additional HTML attributes", async () => {
-    await page.render(
-      <BreadcrumbItem.Separator aria-label="Breadcrumb separator" />,
-    );
+  it("should pass through additional HTML attributes", () => {
+    render(<BreadcrumbItem.Separator aria-label="Breadcrumb separator" />);
 
-    const separator = page.getByLabelText("Breadcrumb separator").query();
+    const separator = screen.queryByLabelText("Breadcrumb separator");
+
     expect(separator).toBeDefined();
   });
 });
