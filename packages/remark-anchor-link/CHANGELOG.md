@@ -1,5 +1,14 @@
 # remark-anchor-link
 
+## 0.1.14
+
+### Patch Changes
+
+- [#456](https://github.com/mogeko/mogeko/pull/456) [`79eac1f`](https://github.com/mogeko/mogeko/commit/79eac1f5d0f498eedda015a10e351bb89362938b) Thanks [@mogeko](https://github.com/mogeko)! - Add tabindex to anchor link properties
+
+- Updated dependencies [[`d39c837`](https://github.com/mogeko/mogeko/commit/d39c837b500a712bd2a5251f592cd722408f494d)]:
+  - @mogeko/utils@0.7.1
+
 ## 0.1.13
 
 ### Patch Changes
