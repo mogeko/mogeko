@@ -1,5 +1,14 @@
 # astro-reading-time
 
+## 0.1.16
+
+### Patch Changes
+
+- [#460](https://github.com/mogeko/mogeko/pull/460) [`ee1f63f`](https://github.com/mogeko/mogeko/commit/ee1f63f997d1c1a114bdb24b5c77b06e4279454c) Thanks [@mogeko](https://github.com/mogeko)! - Use tsupdown instead of tsup as the bundling tool.
+
+- Updated dependencies [[`ee1f63f`](https://github.com/mogeko/mogeko/commit/ee1f63f997d1c1a114bdb24b5c77b06e4279454c)]:
+  - @mogeko/utils@0.7.2
+
 ## 0.1.15
 
 ### Patch Changes

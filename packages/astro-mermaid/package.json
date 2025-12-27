@@ -1,6 +1,6 @@
 {
   "name": "astro-mermaid",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Astro Integration for Mermaid",
   "type": "module",
   "types": "dist/astro-mermaid.d.mts",
@@ -16,7 +16,6 @@
   ],
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
-
   "scripts": {
     "test": "vitest run",
     "build": "tsdown"
