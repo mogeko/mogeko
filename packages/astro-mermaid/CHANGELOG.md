@@ -1,5 +1,11 @@
 # astro-mermaid
 
+## 0.1.6
+
+### Patch Changes
+
+- [#460](https://github.com/mogeko/mogeko/pull/460) [`ee1f63f`](https://github.com/mogeko/mogeko/commit/ee1f63f997d1c1a114bdb24b5c77b06e4279454c) Thanks [@mogeko](https://github.com/mogeko)! - Use tsupdown instead of tsup as the bundling tool.
+
 ## 0.1.5
 
 ### Patch Changes
