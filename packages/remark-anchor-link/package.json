@@ -3,8 +3,8 @@
   "version": "0.1.14",
   "description": "Add anchor links to Headings",
   "type": "module",
-  "types": "dist/index.d.ts",
-  "main": "dist/index.js",
+  "types": "dist/index.d.mts",
+  "main": "dist/index.mjs",
   "keywords": [
     "remark",
     "plugin"
@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "test": "vitest run",
-    "build": "tsup"
+    "build": "tsdown"
   },
   "dependencies": {
     "@mogeko/utils": "workspace:^",
@@ -39,7 +39,7 @@
     "@mogeko/tsconfig": "workspace:^",
     "@types/mdast": "^4.0.4",
     "@types/node": "^25.0.3",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.18.3",
     "typescript": "^5.9.3",
     "unified": "^11.0.5",
     "vitest": "^4.0.16"
