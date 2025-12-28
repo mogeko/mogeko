@@ -14,6 +14,6 @@
  * // logs "x is 100"
  * ```
  */
-export function tap<T>(fn: (x: T) => void) {
+export function tap<T>(fn: (x: T) => void): (x: T) => T {
   return (x: T) => (fn(x), x);
 }

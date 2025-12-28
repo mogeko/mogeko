@@ -4,6 +4,8 @@
   "compilerOptions": {
     "target": "ESNext",
     "types": ["vitest/importMeta", "node"],
+    "declaration": true,
+    "isolatedDeclarations": true,
     "baseUrl": ".",
     "paths": { "@/*": ["./src/*"] }
   },
