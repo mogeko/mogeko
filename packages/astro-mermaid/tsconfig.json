@@ -3,6 +3,8 @@
   "extends": "@mogeko/tsconfig/default.tsconfig.json",
   "compilerOptions": {
     "target": "ESNext",
+    "declaration": true,
+    "isolatedDeclarations": true,
     "baseUrl": ".",
     "paths": { "@/*": ["./src/*"] }
   },

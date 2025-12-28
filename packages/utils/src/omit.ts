@@ -12,13 +12,13 @@
  * ```
  */
 
-export function omit<T extends object, K extends keyof T>(
-  obj: T,
-  keys: K[],
-): Omit<T, K> {
+export function omit<U extends object, Keys extends keyof U>(
+  obj: U,
+  names: readonly Keys[],
+): Omit<U, Keys> {
   const result = structuredClone(obj);
 
-  for (const key of keys) {
+  for (const key of names) {
     if (key in result) {
       delete result[key];
     }

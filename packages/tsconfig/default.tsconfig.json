@@ -7,8 +7,7 @@
     "moduleResolution": "Bundler",
     "verbatimModuleSyntax": true,
     "noEmit": true,
-    "resolveJsonModule": true,
-    "allowJs": true
+    "resolveJsonModule": true
   },
   "name": "Default TypeScript Configuration",
   "exclude": ["node_modules"]

@@ -25,7 +25,9 @@ import { isNil } from "@/is-nil";
  * ); // { a: true, b: true, c: { value: [1, 2, 3, 4] } }
  * ```
  */
-export function deepMergeWith(fn: (a: any, b: any) => any) {
+export function deepMergeWith<T1, T2>(
+  fn: (x: any, z: any) => any,
+): (a: T1, b: T2) => any {
   const _isObject = (x: any) => x.toString() === "[object Object]";
   const deepMerge = (...objs: any[]) => {
     return objs.reduce((acc, obj) => {
