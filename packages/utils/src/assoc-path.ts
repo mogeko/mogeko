@@ -24,6 +24,12 @@ export function assocPath(path: Path, value: any, obj: Obj): Obj {
   if (path.length === 0) return value;
 
   const [idx, ...tail] = path as [Path[0], ...Path];
+
+  // Prevent prototype pollution by rejecting dangerous property names
+  if (idx === '__proto__' || idx === 'constructor' || idx === 'prototype') {
+    throw new Error(`Invalid property name: ${idx}`);
+  }
+
   const next = is(Object, obj[idx]) ? obj[idx] : is(Number, tail[0]) ? [] : {};
 
   return Object.assign(obj, { [idx]: assocPath(tail, value, next) });
