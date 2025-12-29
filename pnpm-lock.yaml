@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      typescript:
+        specifier: ^5
+        version: 5.9.3
     devDependencies:
       '@biomejs/biome':
         specifier: ^2.3.10
@@ -101,6 +105,9 @@ importers:
       tailwind-merge:
         specifier: ^3.4.0
         version: 3.4.0
+      typescript:
+        specifier: ^5
+        version: 5.9.3
       urlpattern-polyfill:
         specifier: ^10.1.0
         version: 10.1.0
@@ -147,9 +154,6 @@ importers:
       tailwindcss:
         specifier: ^4.1.18
         version: 4.1.18
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
       vitest:
         specifier: ^4.0.16
         version: 4.0.16(@types/node@25.0.3)(@vitest/browser-playwright@4.0.16)(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.30.2)(yaml@2.7.0)
@@ -171,6 +175,9 @@ importers:
       shiki:
         specifier: ^3.20.0
         version: 3.20.0
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
@@ -190,9 +197,6 @@ importers:
       tsdown:
         specifier: ^0.18.3
         version: 0.18.3(typescript@5.9.3)
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -211,6 +215,9 @@ importers:
       reading-time:
         specifier: ^1.5.0
         version: 1.5.0
+      typescript:
+        specifier: ^5
+        version: 5.9.3
     devDependencies:
       '@astrojs/markdown-remark':
         specifier: ^6.3.10
@@ -224,9 +231,6 @@ importers:
       tsdown:
         specifier: ^0.18.3
         version: 0.18.3(typescript@5.9.3)
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
       vitest:
         specifier: ^4.0.16
         version: 4.0.16(@types/node@25.0.3)(@vitest/browser-playwright@4.0.16)(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.30.2)(yaml@2.7.0)
@@ -239,6 +243,9 @@ importers:
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
+      typescript:
+        specifier: ^5
+        version: 5.9.3
       unist-builder:
         specifier: ^4.0.0
         version: 4.0.0
@@ -258,9 +265,6 @@ importers:
       tsdown:
         specifier: ^0.18.3
         version: 0.18.3(typescript@5.9.3)
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -273,9 +277,8 @@ importers:
       '@tsconfig/strictest':
         specifier: ^2.0.8
         version: 2.0.8
-    devDependencies:
       typescript:
-        specifier: ^5.9.3
+        specifier: ^5
         version: 5.9.3
 
   packages/typography:
@@ -292,6 +295,9 @@ importers:
       tailwindcss:
         specifier: ^4.1.18
         version: 4.1.18
+      typescript:
+        specifier: ^5
+        version: 5.9.3
     devDependencies:
       '@mogeko/tsconfig':
         specifier: workspace:^
@@ -305,15 +311,15 @@ importers:
       tsdown:
         specifier: ^0.18.3
         version: 0.18.3(typescript@5.9.3)
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
 
   packages/utils:
     dependencies:
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
+      typescript:
+        specifier: ^5
+        version: 5.9.3
     devDependencies:
       '@mogeko/tsconfig':
         specifier: workspace:^
@@ -324,9 +330,6 @@ importers:
       tsdown:
         specifier: ^0.18.3
         version: 0.18.3(typescript@5.9.3)
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
       vitest:
         specifier: ^4.0.16
         version: 4.0.16(@types/node@25.0.3)(@vitest/browser-playwright@4.0.16)(happy-dom@20.0.11)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.30.2)(yaml@2.7.0)
@@ -4492,6 +4495,7 @@ packages:
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@3.0.0:
     resolution: {integrity: sha512-nt+N2dzIutVRxARx1nghPKGv1xHikU7HKdfafKkLNLindmPU/ch3U31NOCGGA/dmPcmb1VlofO0vnKAcsm0o/Q==}
