@@ -43,4 +43,16 @@ describe("assocPath", () => {
 
     expect(result).toEqual({ a: { b: [undefined, 2] } });
   });
+
+  it("throws an error for dangerous property names", () => {
+    expect(() => assocPath(["__proto__"], 2, {})).toThrowError(
+      /Invalid property name: __proto__/,
+    );
+    expect(() => assocPath(["constructor"], 2, {})).toThrowError(
+      /Invalid property name: constructor/,
+    );
+    expect(() => assocPath(["prototype"], 2, {})).toThrowError(
+      /Invalid property name: prototype/,
+    );
+  });
 });
