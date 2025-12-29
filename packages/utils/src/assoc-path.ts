@@ -26,7 +26,7 @@ export function assocPath(path: Path, value: any, obj: Obj): Obj {
   const [idx, ...tail] = path as [Path[0], ...Path];
 
   // Prevent prototype pollution by rejecting dangerous property names
-  if (idx === '__proto__' || idx === 'constructor' || idx === 'prototype') {
+  if (idx === "__proto__" || idx === "constructor" || idx === "prototype") {
     throw new Error(`Invalid property name: ${idx}`);
   }
 
