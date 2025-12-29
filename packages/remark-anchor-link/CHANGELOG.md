@@ -1,5 +1,14 @@
 # remark-anchor-link
 
+## 0.1.16
+
+### Patch Changes
+
+- [#463](https://github.com/mogeko/mogeko/pull/463) [`72d5ad7`](https://github.com/mogeko/mogeko/commit/72d5ad73ece365d50f6e64dc519f44e63b912a94) Thanks [@mogeko](https://github.com/mogeko)! - Update TypeScript configurations and enhance type declarations
+
+- Updated dependencies [[`72d5ad7`](https://github.com/mogeko/mogeko/commit/72d5ad73ece365d50f6e64dc519f44e63b912a94)]:
+  - @mogeko/utils@0.7.3
+
 ## 0.1.15
 
 ### Patch Changes

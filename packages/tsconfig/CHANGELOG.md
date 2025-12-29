@@ -1,5 +1,11 @@
 # @mogeko/tsconfig
 
+## 0.0.8
+
+### Patch Changes
+
+- [#463](https://github.com/mogeko/mogeko/pull/463) [`72d5ad7`](https://github.com/mogeko/mogeko/commit/72d5ad73ece365d50f6e64dc519f44e63b912a94) Thanks [@mogeko](https://github.com/mogeko)! - Update TypeScript configurations and enhance type declarations
+
 ## 0.0.7
 
 ### Patch Changes
