@@ -25,9 +25,11 @@ vi.mock("sharp", () => ({
   })),
 }));
 
-describe("getImage", () => {
-  beforeEach(() => vi.clearAllMocks());
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
+describe("getImage", () => {
   it("should return image data when key exists", async () => {
     const mockImageData = {
       name: "test-image.jpg",
@@ -83,8 +85,6 @@ describe("getImage", () => {
 });
 
 describe("setImage", () => {
-  beforeEach(() => vi.clearAllMocks());
-
   it("should handle fetch errors", async () => {
     vi.spyOn(global, "fetch").mockResolvedValue(
       new Response(null, { status: 404 }),

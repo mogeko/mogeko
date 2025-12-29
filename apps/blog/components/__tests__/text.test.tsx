@@ -1,12 +1,7 @@
 import type { RichTextItemResponse } from "@notionhq/client";
 import { cleanup, render } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { plainText, RichText } from "@/components/text";
-
-afterEach(() => {
-  cleanup();
-  document.body.innerHTML = "";
-});
 
 describe("plainText", () => {
   it("should convert rich text array to plain text string", () => {
@@ -78,6 +73,18 @@ describe("plainText", () => {
 });
 
 describe("RichText", () => {
+  afterEach(() => {
+    vi.resetAllMocks();
+    cleanup();
+    document.body.innerHTML = "";
+  });
+
+  vi.mock("katex", () => {
+    return {
+      renderToString: vi.fn(),
+    };
+  });
+
   it("should render plain text without annotations", () => {
     const richText: Array<RichTextItemResponse> = [
       {

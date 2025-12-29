@@ -1,11 +1,11 @@
-import { afterAll, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { tryCatch } from "@/try-catch";
 
-describe("tryCatch", () => {
-  afterAll(() => {
-    vi.resetAllMocks();
-  });
+afterEach(() => {
+  vi.resetAllMocks();
+});
 
+describe("tryCatch", () => {
   it("should catch the error", () => {
     const tryer = vi.fn((_) => {
       throw "this is not a valid value";

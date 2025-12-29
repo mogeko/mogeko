@@ -1,11 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+vi.mock("server-only", () => ({}));
 vi.mock("@upstash/redis", () => {
   return {
     Redis: { fromEnv: vi.fn() },
   };
 });
-vi.mock("server-only", () => ({}));
 
 const { Redis } = await import("@upstash/redis");
 
