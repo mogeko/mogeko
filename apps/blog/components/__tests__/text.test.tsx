@@ -78,7 +78,6 @@ describe("RichText", async () => {
   const { RichText } = await import("@/components/text");
 
   afterEach(() => {
-    vi.clearAllMocks();
     cleanup();
     document.body.innerHTML = "";
   });

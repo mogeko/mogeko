@@ -1,14 +1,10 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("katex", () => ({ renderToString: vi.fn() }));
 
 const { Details, Summary } = await import("@/components/ui/accordion");
-
-beforeEach(() => {
-  vi.resetAllMocks();
-});
 
 afterEach(() => {
   cleanup();
