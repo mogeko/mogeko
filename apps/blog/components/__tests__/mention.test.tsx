@@ -1,9 +1,9 @@
 import type { MentionRichTextItemResponse } from "@notionhq/client";
 import { cleanup, render } from "@testing-library/react";
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import { Mention } from "@/components/mention";
 
-beforeEach(() => {
+afterEach(() => {
   cleanup();
   document.body.innerHTML = "";
 });

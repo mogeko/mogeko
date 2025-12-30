@@ -27,7 +27,7 @@ const mockPage = {
 } as PageObjectResponse;
 
 beforeEach(() => {
-  vi.clearAllMocks();
+  vi.resetAllMocks();
 });
 
 describe("retrievePage", () => {

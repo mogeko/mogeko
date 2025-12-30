@@ -26,7 +26,7 @@ vi.mock("sharp", () => ({
 const { getImage, setImage } = await import("@/lib/image-helper");
 
 beforeEach(() => {
-  vi.clearAllMocks();
+  vi.resetAllMocks();
 });
 
 describe("getImage", () => {

@@ -22,7 +22,7 @@ const mockUser: UserObjectResponse = {
 };
 
 beforeEach(() => {
-  vi.clearAllMocks();
+  vi.resetAllMocks();
 });
 
 describe("retrieveUsers", () => {

@@ -2,14 +2,14 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const mockRedisInstance = { hset: vi.fn(), hgetall: vi.fn() };
 const Redis = {
-  fromEnv: vi.fn().mockReturnValue(mockRedisInstance),
+  fromEnv: vi.fn(() => mockRedisInstance),
 };
 
 vi.mock("@upstash/redis", () => ({ Redis }));
 vi.mock("server-only", () => ({}));
 
 beforeEach(() => {
-  vi.clearAllMocks();
+  vi.resetAllMocks();
 });
 
 describe("redis", () => {

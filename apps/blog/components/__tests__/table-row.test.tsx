@@ -1,6 +1,6 @@
 import type { GetBlockResponse } from "@notionhq/client";
 import { cleanup, render } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("katex", () => ({ renderToString: vi.fn() }));
 
@@ -16,6 +16,9 @@ const TableWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
 
 beforeEach(() => {
   vi.resetAllMocks();
+});
+
+afterEach(() => {
   cleanup();
   document.body.innerHTML = "";
 });

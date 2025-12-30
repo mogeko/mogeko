@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { Button, buttonVariants } from "@/components/ui/button";
 
 describe("buttonVariants", () => {
@@ -74,8 +74,7 @@ describe("buttonVariants", () => {
 });
 
 describe("Button", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
+  afterEach(() => {
     cleanup();
     document.body.innerHTML = "";
   });

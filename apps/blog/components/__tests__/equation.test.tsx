@@ -1,5 +1,5 @@
 import { cleanup, render } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const renderToString = vi.fn();
 
@@ -9,6 +9,9 @@ const { Equation } = await import("@/components/equation");
 
 beforeEach(() => {
   vi.resetAllMocks();
+});
+
+afterEach(() => {
   cleanup();
   document.body.innerHTML = "";
 });

@@ -40,7 +40,7 @@ const mockQueryResult: QueryDataSourceResponse = {
 };
 
 beforeEach(() => {
-  vi.clearAllMocks();
+  vi.resetAllMocks();
 });
 
 describe("queryDataSources", () => {

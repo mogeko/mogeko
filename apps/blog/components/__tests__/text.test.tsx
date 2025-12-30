@@ -1,6 +1,6 @@
 import type { RichTextItemResponse } from "@notionhq/client";
 import { cleanup, render } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { plainText } from "@/components/text";
 
 describe("plainText", () => {
@@ -77,8 +77,8 @@ describe("RichText", async () => {
 
   const { RichText } = await import("@/components/text");
 
-  beforeEach(() => {
-    vi.resetAllMocks();
+  afterEach(() => {
+    vi.clearAllMocks();
     cleanup();
     document.body.innerHTML = "";
   });

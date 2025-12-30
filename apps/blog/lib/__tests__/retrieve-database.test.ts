@@ -29,7 +29,7 @@ const mockDatabase = {
 } as unknown as DatabaseObjectResponse;
 
 beforeEach(() => {
-  vi.clearAllMocks();
+  vi.resetAllMocks();
 });
 
 describe("retrieveDatabase", () => {
