@@ -1,18 +1,15 @@
 import { cleanup, render } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vitest";
-import { RowSeparator } from "@/components/table-box";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-afterEach(() => {
+vi.mock("katex", () => ({ renderToString: vi.fn() }));
+vi.mock("server-only", () => ({}));
+
+const { RowSeparator } = await import("@/components/table-box");
+
+beforeEach(() => {
   vi.resetAllMocks();
   cleanup();
   document.body.innerHTML = "";
-});
-
-vi.mock("server-only", () => ({}));
-vi.mock("katex", () => {
-  return {
-    renderToString: vi.fn(),
-  };
 });
 
 const TableWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {

@@ -1,8 +1,8 @@
 import { cleanup, render } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { Icon } from "@/components/icon";
 
-afterEach(() => {
+beforeEach(() => {
   cleanup();
   document.body.innerHTML = "";
 });

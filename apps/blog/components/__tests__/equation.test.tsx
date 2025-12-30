@@ -1,24 +1,21 @@
 import { cleanup, render } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vitest";
-import { Equation } from "@/components/equation";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-afterEach(() => {
+const renderToString = vi.fn();
+
+vi.mock("katex", () => ({ renderToString }));
+
+const { Equation } = await import("@/components/equation");
+
+beforeEach(() => {
   vi.resetAllMocks();
   cleanup();
   document.body.innerHTML = "";
 });
 
-vi.mock("katex", () => {
-  return {
-    renderToString: vi.fn(),
-  };
-});
-
-const { renderToString } = await import("katex");
-
 describe("Equation", () => {
   it("should page.render inline equation as span", () => {
-    vi.mocked(renderToString).mockReturnValue("x^2 + y^2 = z^2");
+    renderToString.mockReturnValue("x^2 + y^2 = z^2");
 
     const { container } = render(
       <Equation expression="x^2 + y^2 = z^2" inline />,
@@ -32,7 +29,7 @@ describe("Equation", () => {
   });
 
   it("should page.render block equation as paragraph", () => {
-    vi.mocked(renderToString).mockReturnValue("\\sum_{i=1}^n i");
+    renderToString.mockReturnValue("\\sum_{i=1}^n i");
 
     const { container } = render(
       <Equation expression="\\sum_{i=1}^n i = \\frac{n(n+1)}{2}" />,

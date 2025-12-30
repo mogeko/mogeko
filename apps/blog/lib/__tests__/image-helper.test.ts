@@ -2,12 +2,10 @@ import { cacheLife, cacheTag } from "next/cache";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NotFoundError } from "@/lib/errors";
 
-vi.mock("@/lib/redis", () => ({
-  redis: { hset: vi.fn(), hgetall: vi.fn() },
-}));
+const redis = { hset: vi.fn(), hgetall: vi.fn() };
+const fetch = vi.spyOn(global, "fetch");
 
-const { redis } = await import("@/lib/redis");
-
+vi.mock("@/lib/redis", () => ({ redis }));
 vi.mock("server-only", () => ({}));
 vi.mock("next/cache", () => ({ cacheLife: vi.fn(), cacheTag: vi.fn() }));
 vi.mock("sharp", () => ({
@@ -25,6 +23,8 @@ vi.mock("sharp", () => ({
   })),
 }));
 
+const { getImage, setImage } = await import("@/lib/image-helper");
+
 beforeEach(() => {
   vi.clearAllMocks();
 });
@@ -39,9 +39,7 @@ describe("getImage", () => {
       mimeType: "image/jpeg",
     };
 
-    vi.mocked(redis).hgetall.mockResolvedValue(mockImageData);
-
-    const { getImage } = await import("@/lib/image-helper");
+    redis.hgetall.mockResolvedValue(mockImageData);
 
     const result = await getImage("test-key");
 
@@ -50,9 +48,7 @@ describe("getImage", () => {
   });
 
   it("should throw NotFoundError when key does not exist", async () => {
-    vi.mocked(redis).hgetall.mockResolvedValue(null);
-
-    const { getImage } = await import("@/lib/image-helper");
+    redis.hgetall.mockResolvedValue(null);
 
     await expect(getImage("non-existent-key")).rejects.toThrow(NotFoundError);
     await expect(getImage("non-existent-key")).rejects.toThrow(
@@ -69,9 +65,7 @@ describe("getImage", () => {
       mimeType: "image/jpeg",
     };
 
-    vi.mocked(redis).hgetall.mockResolvedValue(mockImageData);
-
-    const { getImage } = await import("@/lib/image-helper");
+    redis.hgetall.mockResolvedValue(mockImageData);
 
     await getImage("test-key");
 
@@ -86,11 +80,7 @@ describe("getImage", () => {
 
 describe("setImage", () => {
   it("should handle fetch errors", async () => {
-    vi.spyOn(global, "fetch").mockResolvedValue(
-      new Response(null, { status: 404 }),
-    );
-
-    const { setImage } = await import("@/lib/image-helper");
+    fetch.mockResolvedValue(new Response(null, { status: 404 }));
 
     const options = {
       fileName: "test-image.jpg",
@@ -104,9 +94,7 @@ describe("setImage", () => {
   });
 
   it("should handle network errors during fetch", async () => {
-    vi.spyOn(global, "fetch").mockRejectedValue(new Error("Network error"));
-
-    const { setImage } = await import("@/lib/image-helper");
+    fetch.mockRejectedValue(new Error("Network error"));
 
     const options = {
       fileName: "test-image.jpg",

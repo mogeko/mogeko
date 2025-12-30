@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { Link, linkVariants } from "@/components/ui/link";
 
 describe("linkVariants", () => {
@@ -49,7 +49,8 @@ describe("linkVariants", () => {
 });
 
 describe("Link", () => {
-  afterEach(() => {
+  beforeEach(() => {
+    vi.clearAllMocks();
     cleanup();
     document.body.innerHTML = "";
   });

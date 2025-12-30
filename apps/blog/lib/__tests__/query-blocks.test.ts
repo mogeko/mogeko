@@ -3,16 +3,13 @@ import { notFound } from "next/navigation";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NotFoundError, UnauthorizedError } from "@/lib/errors";
 
-vi.mock("@/lib/notion", () => {
-  return {
-    notion: { blocks: { children: { list: vi.fn() } } },
-  };
-});
+const notion = { blocks: { children: { list: vi.fn() } } };
 
-const { notion } = await import("@/lib/notion");
-
+vi.mock("@/lib/notion", () => ({ notion }));
 vi.mock("next/cache", () => ({ cacheLife: vi.fn(), cacheTag: vi.fn() }));
 vi.mock("next/navigation", () => ({ notFound: vi.fn() }));
+
+const { queryBlocks } = await import("@/lib/notion-staffs");
 
 const mockBlockId = "test-block-id";
 const mockParams = { block_id: mockBlockId, page_size: 100 };
@@ -79,13 +76,13 @@ const mockBlocksResult: ListBlockChildrenResponse = {
   has_more: false,
 };
 
+beforeEach(() => {
+  vi.clearAllMocks();
+});
+
 describe("queryBlocks", () => {
-  beforeEach(() => vi.clearAllMocks());
-
   it("Should be successfully queried", async () => {
-    vi.mocked(notion.blocks.children).list.mockResolvedValue(mockBlocksResult);
-
-    const { queryBlocks } = await import("@/lib/notion-staffs");
+    notion.blocks.children.list.mockResolvedValue(mockBlocksResult);
 
     const result = await queryBlocks(mockParams);
 
@@ -94,9 +91,7 @@ describe("queryBlocks", () => {
   });
 
   it("Cache tags should be used", async () => {
-    vi.mocked(notion.blocks.children).list.mockResolvedValue(mockBlocksResult);
-
-    const { queryBlocks } = await import("@/lib/notion-staffs");
+    notion.blocks.children.list.mockResolvedValue(mockBlocksResult);
 
     await queryBlocks(mockParams);
 
@@ -106,9 +101,7 @@ describe("queryBlocks", () => {
   it("NotFound should be called when returning an ObjectNotFound error", async () => {
     const apiError = new NotFoundError("Object not found");
 
-    vi.mocked(notion.blocks.children).list.mockRejectedValue(apiError);
-
-    const { queryBlocks } = await import("@/lib/notion-staffs");
+    notion.blocks.children.list.mockRejectedValue(apiError);
 
     await expect(queryBlocks(mockParams)).rejects.toThrow(Error);
     expect(notFound).toHaveBeenCalled();
@@ -117,9 +110,7 @@ describe("queryBlocks", () => {
   it("Should rethrow the error when returning other errors", async () => {
     const apiError = new Error("API Error");
 
-    vi.mocked(notion.blocks.children).list.mockRejectedValue(apiError);
-
-    const { queryBlocks } = await import("@/lib/notion-staffs");
+    notion.blocks.children.list.mockRejectedValue(apiError);
 
     await expect(queryBlocks(mockParams)).rejects.toThrow("API Error");
     expect(notFound).not.toHaveBeenCalled();
@@ -128,9 +119,7 @@ describe("queryBlocks", () => {
   it("Network errors should be handled", async () => {
     const networkError = new Error("Network error");
 
-    vi.mocked(notion.blocks.children).list.mockRejectedValue(networkError);
-
-    const { queryBlocks } = await import("@/lib/notion-staffs");
+    notion.blocks.children.list.mockRejectedValue(networkError);
 
     await expect(queryBlocks(mockParams)).rejects.toThrow("Network error");
     expect(notFound).not.toHaveBeenCalled();
@@ -139,9 +128,7 @@ describe("queryBlocks", () => {
   it("Authentication errors should be handled", async () => {
     const authError = new UnauthorizedError("Unauthorized");
 
-    vi.mocked(notion.blocks.children).list.mockRejectedValue(authError);
-
-    const { queryBlocks } = await import("@/lib/notion-staffs");
+    notion.blocks.children.list.mockRejectedValue(authError);
 
     await expect(queryBlocks(mockParams)).rejects.toThrow("Unauthorized");
     expect(notFound).not.toHaveBeenCalled();
@@ -154,9 +141,7 @@ describe("queryBlocks", () => {
       start_cursor: "cursor-123",
     };
 
-    vi.mocked(notion.blocks.children).list.mockResolvedValue(mockBlocksResult);
-
-    const { queryBlocks } = await import("@/lib/notion-staffs");
+    notion.blocks.children.list.mockResolvedValue(mockBlocksResult);
 
     const result = await queryBlocks(complexParams);
 
@@ -171,9 +156,7 @@ describe("queryBlocks", () => {
       has_more: true,
     };
 
-    vi.mocked(notion.blocks.children).list.mockResolvedValue(paginatedResult);
-
-    const { queryBlocks } = await import("@/lib/notion-staffs");
+    notion.blocks.children.list.mockResolvedValue(paginatedResult);
 
     const result = await queryBlocks(mockParams);
 
