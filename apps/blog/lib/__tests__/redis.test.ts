@@ -1,22 +1,19 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("@upstash/redis", () => {
-  return {
-    Redis: { fromEnv: vi.fn() },
-  };
-});
+const mockRedisInstance = { hset: vi.fn(), hgetall: vi.fn() };
+const Redis = {
+  fromEnv: vi.fn().mockReturnValue(mockRedisInstance),
+};
+
+vi.mock("@upstash/redis", () => ({ Redis }));
 vi.mock("server-only", () => ({}));
 
-const { Redis } = await import("@upstash/redis");
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
 describe("redis", () => {
-  beforeEach(async () => vi.clearAllMocks());
-
   it("should export a Redis instance created with fromEnv", async () => {
-    const mockRedisInstance = { hset: vi.fn(), hgetall: vi.fn() };
-
-    vi.mocked(Redis.fromEnv).mockReturnValue(mockRedisInstance as any);
-
     const { redis } = await import("@/lib/redis");
 
     expect(Redis.fromEnv).toHaveBeenCalledTimes(1);
@@ -24,10 +21,6 @@ describe("redis", () => {
   });
 
   it("should have basic Redis methods available", async () => {
-    const mockRedisInstance = { hset: vi.fn(), hgetall: vi.fn() };
-
-    vi.mocked(Redis.fromEnv).mockReturnValue(mockRedisInstance as any);
-
     const { redis } = await import("@/lib/redis");
 
     expect(typeof redis.hset).toBe("function");

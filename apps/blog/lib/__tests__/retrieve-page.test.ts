@@ -3,16 +3,13 @@ import { notFound } from "next/navigation";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NotFoundError, UnauthorizedError } from "@/lib/errors";
 
-vi.mock("@/lib/notion", () => {
-  return {
-    notion: { pages: { retrieve: vi.fn() } },
-  };
-});
+const notion = { pages: { retrieve: vi.fn() } };
 
-const { notion } = await import("@/lib/notion");
-
+vi.mock("@/lib/notion", () => ({ notion }));
 vi.mock("next/cache", () => ({ cacheLife: vi.fn(), cacheTag: vi.fn() }));
 vi.mock("next/navigation", () => ({ notFound: vi.fn() }));
+
+const { retrievePage } = await import("@/lib/notion-staffs");
 
 const mockPageId = "test-page-id";
 const mockPage = {
@@ -29,13 +26,13 @@ const mockPage = {
   cover: null,
 } as PageObjectResponse;
 
+beforeEach(() => {
+  vi.clearAllMocks();
+});
+
 describe("retrievePage", () => {
-  beforeEach(() => vi.clearAllMocks());
-
   it("Should be successfully retrieved", async () => {
-    vi.mocked(notion.pages).retrieve.mockResolvedValue(mockPage);
-
-    const { retrievePage } = await import("@/lib/notion-staffs");
+    notion.pages.retrieve.mockResolvedValue(mockPage);
 
     const result = await retrievePage(mockPageId);
 
@@ -46,8 +43,6 @@ describe("retrievePage", () => {
   });
 
   it("NotFoundError should be thrown when the page ID is empty", async () => {
-    const { retrievePage } = await import("@/lib/notion-staffs");
-
     await expect(retrievePage(undefined)).rejects.toThrow(NotFoundError);
     await expect(retrievePage("")).rejects.toThrow(NotFoundError);
     expect(notion.pages.retrieve).not.toHaveBeenCalled();
@@ -56,9 +51,7 @@ describe("retrievePage", () => {
   it("NotFound should be called when returning an ObjectNotFound error", async () => {
     const apiError = new NotFoundError("Object not found");
 
-    vi.mocked(notion.pages).retrieve.mockRejectedValue(apiError);
-
-    const { retrievePage } = await import("@/lib/notion-staffs");
+    notion.pages.retrieve.mockRejectedValue(apiError);
 
     await expect(retrievePage(mockPageId)).rejects.toThrow(Error);
     expect(notFound).toHaveBeenCalled();
@@ -67,9 +60,7 @@ describe("retrievePage", () => {
   it("Should rethrow the error when returning other errors", async () => {
     const apiError = new Error("API Error");
 
-    vi.mocked(notion.pages).retrieve.mockRejectedValue(apiError);
-
-    const { retrievePage } = await import("@/lib/notion-staffs");
+    notion.pages.retrieve.mockRejectedValue(apiError);
 
     await expect(retrievePage(mockPageId)).rejects.toThrow("API Error");
     expect(notFound).not.toHaveBeenCalled();
@@ -81,9 +72,7 @@ describe("retrievePage", () => {
       object: "partial_page" as const,
     } as unknown as PageObjectResponse;
 
-    vi.mocked(notion.pages).retrieve.mockResolvedValue(partialPage);
-
-    const { retrievePage } = await import("@/lib/notion-staffs");
+    notion.pages.retrieve.mockResolvedValue(partialPage);
 
     const result = await retrievePage(mockPageId);
 
@@ -91,9 +80,7 @@ describe("retrievePage", () => {
   });
 
   it("Cache tags should be used", async () => {
-    vi.mocked(notion.pages).retrieve.mockResolvedValue(mockPage);
-
-    const { retrievePage } = await import("@/lib/notion-staffs");
+    notion.pages.retrieve.mockResolvedValue(mockPage);
 
     await retrievePage(mockPageId);
 
@@ -105,9 +92,7 @@ describe("retrievePage", () => {
   it("Network errors should be handled", async () => {
     const networkError = new Error("Network error");
 
-    vi.mocked(notion.pages).retrieve.mockRejectedValue(networkError);
-
-    const { retrievePage } = await import("@/lib/notion-staffs");
+    notion.pages.retrieve.mockRejectedValue(networkError);
 
     await expect(retrievePage(mockPageId)).rejects.toThrow("Network error");
     expect(notFound).not.toHaveBeenCalled();
@@ -116,9 +101,7 @@ describe("retrievePage", () => {
   it("Authentication errors should be handled", async () => {
     const authError = new UnauthorizedError("Unauthorized");
 
-    vi.mocked(notion.pages).retrieve.mockRejectedValue(authError);
-
-    const { retrievePage } = await import("@/lib/notion-staffs");
+    notion.pages.retrieve.mockRejectedValue(authError);
 
     await expect(retrievePage(mockPageId)).rejects.toThrow("Unauthorized");
     expect(notFound).not.toHaveBeenCalled();

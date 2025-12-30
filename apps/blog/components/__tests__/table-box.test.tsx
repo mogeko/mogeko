@@ -1,10 +1,13 @@
 import { cleanup, render } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vitest";
-import { RowSeparator } from "@/components/table-box";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
+vi.mock("katex", () => ({ renderToString: vi.fn() }));
 vi.mock("server-only", () => ({}));
 
-afterEach(() => {
+const { RowSeparator } = await import("@/components/table-box");
+
+beforeEach(() => {
+  vi.resetAllMocks();
   cleanup();
   document.body.innerHTML = "";
 });

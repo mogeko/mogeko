@@ -1,8 +1,8 @@
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import { Heading } from "@/components/ui/heading";
 
-afterEach(() => {
+beforeEach(() => {
   cleanup();
   document.body.innerHTML = "";
 });

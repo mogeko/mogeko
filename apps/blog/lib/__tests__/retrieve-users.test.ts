@@ -3,16 +3,13 @@ import { notFound } from "next/navigation";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NotFoundError, UnauthorizedError } from "@/lib/errors";
 
-vi.mock("@/lib/notion", () => {
-  return {
-    notion: { users: { retrieve: vi.fn() } },
-  };
-});
+const notion = { users: { retrieve: vi.fn() } };
 
-const { notion } = await import("@/lib/notion");
-
+vi.mock("@/lib/notion", () => ({ notion }));
 vi.mock("next/cache", () => ({ cacheLife: vi.fn(), cacheTag: vi.fn() }));
 vi.mock("next/navigation", () => ({ notFound: vi.fn() }));
+
+const { retrieveUsers } = await import("@/lib/notion-staffs");
 
 const mockUserId = "test-user-id";
 const mockUser: UserObjectResponse = {
@@ -24,13 +21,13 @@ const mockUser: UserObjectResponse = {
   person: { email: "test@example.com" },
 };
 
+beforeEach(() => {
+  vi.clearAllMocks();
+});
+
 describe("retrieveUsers", () => {
-  beforeEach(() => vi.clearAllMocks());
-
   it("Should be successfully retrieved", async () => {
-    vi.mocked(notion.users).retrieve.mockResolvedValue(mockUser);
-
-    const { retrieveUsers } = await import("@/lib/notion-staffs");
+    notion.users.retrieve.mockResolvedValue(mockUser);
 
     const result = await retrieveUsers(mockUserId);
 
@@ -41,9 +38,7 @@ describe("retrieveUsers", () => {
   });
 
   it("Cache tags should be used", async () => {
-    vi.mocked(notion.users).retrieve.mockResolvedValue(mockUser);
-
-    const { retrieveUsers } = await import("@/lib/notion-staffs");
+    notion.users.retrieve.mockResolvedValue(mockUser);
 
     await retrieveUsers(mockUserId);
 
@@ -55,9 +50,7 @@ describe("retrieveUsers", () => {
   it("NotFound should be called when returning an ObjectNotFound error", async () => {
     const apiError = new NotFoundError("Object not found");
 
-    vi.mocked(notion.users).retrieve.mockRejectedValue(apiError);
-
-    const { retrieveUsers } = await import("@/lib/notion-staffs");
+    notion.users.retrieve.mockRejectedValue(apiError);
 
     await expect(retrieveUsers(mockUserId)).rejects.toThrow(Error);
     expect(notFound).toHaveBeenCalled();
@@ -66,9 +59,7 @@ describe("retrieveUsers", () => {
   it("Should rethrow the error when returning other errors", async () => {
     const apiError = new Error("API Error");
 
-    vi.mocked(notion.users).retrieve.mockRejectedValue(apiError);
-
-    const { retrieveUsers } = await import("@/lib/notion-staffs");
+    notion.users.retrieve.mockRejectedValue(apiError);
 
     await expect(retrieveUsers(mockUserId)).rejects.toThrow("API Error");
     expect(notFound).not.toHaveBeenCalled();
@@ -77,9 +68,7 @@ describe("retrieveUsers", () => {
   it("Network errors should be handled", async () => {
     const networkError = new Error("Network error");
 
-    vi.mocked(notion.users).retrieve.mockRejectedValue(networkError);
-
-    const { retrieveUsers } = await import("@/lib/notion-staffs");
+    notion.users.retrieve.mockRejectedValue(networkError);
 
     await expect(retrieveUsers(mockUserId)).rejects.toThrow("Network error");
     expect(notFound).not.toHaveBeenCalled();
@@ -88,9 +77,7 @@ describe("retrieveUsers", () => {
   it("Authentication errors should be handled", async () => {
     const authError = new UnauthorizedError("Unauthorized");
 
-    vi.mocked(notion.users).retrieve.mockRejectedValue(authError);
-
-    const { retrieveUsers } = await import("@/lib/notion-staffs");
+    notion.users.retrieve.mockRejectedValue(authError);
 
     await expect(retrieveUsers(mockUserId)).rejects.toThrow("Unauthorized");
     expect(notFound).not.toHaveBeenCalled();

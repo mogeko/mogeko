@@ -1,11 +1,11 @@
-import { afterAll, describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { tap } from "@/tap";
 
-describe("tap", () => {
-  afterAll(() => {
-    vi.resetAllMocks();
-  });
+beforeEach(() => {
+  vi.resetAllMocks();
+});
 
+describe("tap", () => {
   it("calls the function with the value", () => {
     const fn = vi.fn();
     const result = tap(fn)(1);

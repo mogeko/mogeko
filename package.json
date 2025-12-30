@@ -24,6 +24,9 @@
     "turbo": "^2.7.2",
     "vitest": "^4.0.16"
   },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
   "packageManager": "pnpm@10.26.2",
   "engines": {
     "node": ">=20.19.0"

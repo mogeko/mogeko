@@ -1,12 +1,10 @@
 import type { GetBlockResponse } from "@notionhq/client";
 import { cleanup, render } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
-import { TRow } from "@/components/table-row";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
-afterEach(() => {
-  cleanup();
-  document.body.innerHTML = "";
-});
+vi.mock("katex", () => ({ renderToString: vi.fn() }));
+
+const { TRow } = await import("@/components/table-row");
 
 const TableWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
@@ -15,6 +13,12 @@ const TableWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
     </table>
   );
 };
+
+beforeEach(() => {
+  vi.resetAllMocks();
+  cleanup();
+  document.body.innerHTML = "";
+});
 
 describe("TRow", () => {
   it("should render table row with cells when block is valid table_row", () => {
