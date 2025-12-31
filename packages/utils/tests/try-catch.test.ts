@@ -1,9 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { tryCatch } from "@/try-catch";
-
-beforeEach(() => {
-  vi.resetAllMocks();
-});
 
 describe("tryCatch", () => {
   it("should catch the error", () => {

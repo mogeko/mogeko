@@ -1,9 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { tap } from "@/tap";
-
-beforeEach(() => {
-  vi.resetAllMocks();
-});
 
 describe("tap", () => {
   it("calls the function with the value", () => {

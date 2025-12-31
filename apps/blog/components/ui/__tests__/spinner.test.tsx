@@ -1,8 +1,8 @@
 import { cleanup, render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import { Spinner } from "@/components/ui/spinner";
 
-beforeEach(() => {
+afterEach(() => {
   cleanup();
   document.body.innerHTML = "";
 });

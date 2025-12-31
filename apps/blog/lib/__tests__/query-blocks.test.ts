@@ -77,7 +77,7 @@ const mockBlocksResult: ListBlockChildrenResponse = {
 };
 
 beforeEach(() => {
-  vi.clearAllMocks();
+  vi.resetAllMocks();
 });
 
 describe("queryBlocks", () => {

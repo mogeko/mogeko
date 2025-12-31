@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import {
   Table,
   TableBody,
@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-beforeEach(() => {
+afterEach(() => {
   cleanup();
   document.body.innerHTML = "";
 });

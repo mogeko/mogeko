@@ -1,5 +1,4 @@
 import type { DatabaseObjectResponse } from "@notionhq/client";
-import { notFound } from "next/navigation";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NotFoundError, UnauthorizedError } from "@/lib/errors";
 
@@ -10,6 +9,7 @@ vi.mock("next/cache", () => ({ cacheLife: vi.fn(), cacheTag: vi.fn() }));
 vi.mock("next/navigation", () => ({ notFound: vi.fn() }));
 
 const { retrieveDatabase } = await import("@/lib/notion-staffs");
+const { notFound } = await import("next/navigation");
 
 const mockDatabaseId = "test-database-id";
 const mockDatabase = {
@@ -29,7 +29,7 @@ const mockDatabase = {
 } as unknown as DatabaseObjectResponse;
 
 beforeEach(() => {
-  vi.clearAllMocks();
+  vi.resetAllMocks();
 });
 
 describe("retrieveDatabase", () => {

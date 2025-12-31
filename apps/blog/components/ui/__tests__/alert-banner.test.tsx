@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { AlertBanner, alertBannerVariants } from "@/components/ui/alert-banner";
 
 describe("alertBannerVariants", () => {
@@ -29,7 +29,7 @@ describe("alertBannerVariants", () => {
 });
 
 describe("AlertBanner", () => {
-  beforeEach(() => {
+  afterEach(() => {
     cleanup();
     document.body.innerHTML = "";
   });
