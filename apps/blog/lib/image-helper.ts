@@ -1,4 +1,3 @@
-import { encodeBase64 } from "@std/encoding";
 import { cacheLife, cacheTag } from "next/cache";
 import sharp from "sharp";
 import { NotFoundError } from "@/lib/errors";
@@ -29,7 +28,7 @@ export async function setImage<T extends ImageResp>(
     const blur = image.resize(10).blur();
     const mimeType = lookup(format) || "application/octet-stream";
     const blurDataURL = await blur.toBuffer().then((data) => {
-      return `data:${mimeType};base64,${encodeBase64(data)}`;
+      return `data:${mimeType};base64,${data.toString("base64")}`;
     });
     const { fileName: name, key } = options;
 

@@ -1,6 +1,5 @@
+import { parse } from "node:path/posix";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import { encodeHex } from "@std/encoding";
-import { parse } from "@std/path/posix";
 import NextImage from "next/image";
 import { NotFoundError } from "@/lib/errors";
 import { getImage, type ImageResp, setImage } from "@/lib/image-helper";
@@ -46,9 +45,9 @@ export const Image: React.FC<
 };
 
 export async function sha1(plaintext: string): Promise<string> {
-  return encodeHex(
+  return Buffer.from(
     await crypto.subtle.digest("SHA-1", new TextEncoder().encode(plaintext)),
-  );
+  ).toString("hex");
 }
 
 async function upload(
