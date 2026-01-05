@@ -42,7 +42,7 @@
     "@astrojs/markdown-remark": "^6.3.10",
     "@mogeko/tsconfig": "workspace:^",
     "astro": "^5.16.6",
-    "tsdown": "^0.18.3",
+    "tsdown": "^0.18.4",
     "vitest": "^4.0.16"
   },
   "peerDependencies": {
