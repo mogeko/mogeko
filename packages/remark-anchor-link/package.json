@@ -39,7 +39,7 @@
     "@mogeko/tsconfig": "workspace:^",
     "@types/mdast": "^4.0.4",
     "@types/node": "^25.0.3",
-    "tsdown": "^0.18.3",
+    "tsdown": "^0.18.4",
     "unified": "^11.0.5",
     "vitest": "^4.0.16"
   },
