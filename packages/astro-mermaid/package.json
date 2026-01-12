@@ -17,8 +17,8 @@
   "author": "Mogeko <zhengjunyi@live.com>",
   "license": "MIT",
   "scripts": {
-    "test": "vitest run",
-    "build": "tsdown"
+    "build": "bun ./build.ts",
+    "test": "vitest run"
   },
   "dependencies": {
     "hast-util-class-list": "^2.0.1",

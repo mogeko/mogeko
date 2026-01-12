@@ -30,8 +30,8 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "test": "vitest run",
-    "build": "tsdown"
+    "build": "bun ./build.ts",
+    "test": "vitest run"
   },
   "dependencies": {
     "@mogeko/utils": "workspace:^",

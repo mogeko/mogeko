@@ -2,13 +2,13 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@tsconfig/bun/tsconfig.json",
   "compilerOptions": {
-    "types": ["vitest/importMeta"],
+    "types": ["vitest/importMeta", "bun"],
     "allowJs": false,
     "isolatedDeclarations": true,
     "declaration": true,
     "baseUrl": ".",
     "paths": { "@/*": ["./*"] }
   },
-  "include": ["lib", "tests", "index.ts", "*.config.ts"],
+  "include": ["lib", "tests", "index.ts", "build.ts", "*.config.ts"],
   "exclude": ["node_modules", "dist"]
 }
