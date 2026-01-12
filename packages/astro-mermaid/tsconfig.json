@@ -1,10 +1,10 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@mogeko/tsconfig/default.tsconfig.json",
+  "extends": "@tsconfig/bun/tsconfig.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "declaration": true,
+    "allowJs": false,
     "isolatedDeclarations": true,
+    "declaration": true,
     "baseUrl": ".",
     "paths": { "@/*": ["./src/*"] }
   },

@@ -2,10 +2,10 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@mogeko/tsconfig/default.tsconfig.json",
   "compilerOptions": {
-    "target": "ESNext",
     "types": ["vitest/importMeta", "node"],
-    "declaration": true,
+    "allowJs": false,
     "isolatedDeclarations": true,
+    "declaration": true,
     "baseUrl": ".",
     "paths": { "@/*": ["./src/*"] }
   },
