@@ -7,6 +7,6 @@
     "isolatedDeclarations": true,
     "declaration": true
   },
-  "include": ["index.ts", "build.ts", "*.config.ts"],
+  "include": ["index.ts", "build.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -30,7 +30,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "bun ./build.ts",
+    "build": "tsdown ./index.ts",
     "test": "vitest run"
   },
   "dependencies": {
