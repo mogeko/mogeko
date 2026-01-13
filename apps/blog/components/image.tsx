@@ -1,9 +1,8 @@
 import { parse } from "node:path/posix";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { s3 } from "bun";
 import NextImage from "next/image";
 import { NotFoundError } from "@/lib/errors";
 import { getImage, type ImageResp, setImage } from "@/lib/image-helper";
-import { BUCKET_NAME, s3 } from "@/lib/s3";
 
 export type NotionImageResp = ImageResp & { filePath: string };
 
@@ -56,20 +55,7 @@ async function upload(
   const filePath = `${options.key}/${options.fileName}`;
 
   return await setImage(async (buffer, meta) => {
-    const { ETag: _eTag } = await s3.send(
-      new PutObjectCommand({
-        Bucket: BUCKET_NAME,
-        Body: new Uint8Array(buffer),
-        Key: filePath,
-        ContentType: meta.mimeType,
-        Metadata: {
-          uploadedBy: "mogeko-blog",
-          height: meta.height.toString(),
-          width: meta.width.toString(),
-          blurDataURL: meta.blurDataURL,
-        },
-      }),
-    );
+    await s3.write(filePath, buffer, { type: meta.mimeType });
 
     return { ...meta, filePath };
   }, options);

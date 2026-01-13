@@ -9,6 +9,11 @@ export default defineConfig({
     ],
     coverage: {
       exclude: ["**/dist/*"],
+      // It seems that Bun does not currently support `v8`, so using `istanbul`
+      // as a fallback to generate coverage reports.
+      // See: https://github.com/oven-sh/bun/issues/2445
+      // See: https://github.com/oven-sh/bun/issues/4145
+      provider: "istanbul",
     },
   },
 });

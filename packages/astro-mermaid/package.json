@@ -34,7 +34,7 @@
     "astro": "^5.16.6",
     "tsdown": "^0.18.3",
     "unified": "^11.0.5",
-    "vitest": "^4.0.16"
+    "vitest": "^4.0.17"
   },
   "peerDependencies": {
     "playwright-core": "^1.0.0",
