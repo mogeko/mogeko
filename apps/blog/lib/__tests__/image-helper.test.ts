@@ -1,11 +1,13 @@
 import { cacheLife, cacheTag } from "next/cache";
+import { ValiError } from "valibot";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { NotFoundError } from "@/lib/errors";
 
-const redis = { hset: vi.fn(), hgetall: vi.fn() };
+const redis = {
+  hgetall: vi.spyOn(Bun.redis, "hgetall"),
+  hset: vi.spyOn(Bun.redis, "hset"),
+};
 const fetch = vi.spyOn(global, "fetch");
 
-vi.mock("@/lib/redis", () => ({ redis }));
 vi.mock("server-only", () => ({}));
 vi.mock("next/cache", () => ({ cacheLife: vi.fn(), cacheTag: vi.fn() }));
 vi.mock("sharp", () => ({
@@ -33,8 +35,8 @@ describe("getImage", () => {
   it("should return image data when key exists", async () => {
     const mockImageData = {
       name: "test-image.jpg",
-      width: 800,
-      height: 600,
+      width: "800",
+      height: "600",
       blurDataURL: "data:image/jpeg;base64,test-blur-data",
       mimeType: "image/jpeg",
     };
@@ -44,23 +46,27 @@ describe("getImage", () => {
     const result = await getImage("test-key");
 
     expect(redis.hgetall).toHaveBeenCalledWith("image:test-key");
-    expect(result).toEqual(mockImageData);
+    expect(result.name).toEqual("test-image.jpg");
+    expect(result.width).toEqual(800);
+    expect(result.height).toEqual(600);
+    expect(result.blurDataURL).toEqual("data:image/jpeg;base64,test-blur-data");
+    expect(result.mimeType).toEqual("image/jpeg");
   });
 
   it("should throw NotFoundError when key does not exist", async () => {
-    redis.hgetall.mockResolvedValue(null);
+    redis.hgetall.mockResolvedValue({});
 
-    await expect(getImage("non-existent-key")).rejects.toThrow(NotFoundError);
+    await expect(getImage("non-existent-key")).rejects.toThrow(ValiError);
     await expect(getImage("non-existent-key")).rejects.toThrow(
-      "No record found with key: non-existent-key",
+      'Invalid key: Expected "name" but received undefined',
     );
   });
 
   it("should handle cache tags and lifecycle", async () => {
     const mockImageData = {
       name: "test-image.jpg",
-      width: 800,
-      height: 600,
+      width: "800",
+      height: "600",
       blurDataURL: "data:image/jpeg;base64,test-blur-data",
       mimeType: "image/jpeg",
     };

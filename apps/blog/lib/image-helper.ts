@@ -1,16 +1,16 @@
+import { redis } from "bun";
 import { cacheLife, cacheTag } from "next/cache";
 import sharp from "sharp";
-import { NotFoundError } from "@/lib/errors";
+import * as v from "valibot";
 import { lookup } from "@/lib/mime";
-import { redis } from "@/lib/redis";
 
-export async function setImage<T extends ImageResp>(
-  uploader: (buff: ArrayBufferLike, meta: ImageResp) => Promise<T>,
+export async function setImage<T extends DataResp>(
+  uploader: (buff: ArrayBufferLike, meta: DataResp) => Promise<T>,
   options: Options,
 ): Promise<T>;
-export async function setImage(options: Options): Promise<ImageResp>;
-export async function setImage<T extends ImageResp>(
-  uploader: Options | ((buff: ArrayBufferLike, meta: ImageResp) => Promise<T>),
+export async function setImage(options: Options): Promise<DataResp>;
+export async function setImage<T extends DataResp>(
+  uploader: Options | ((buff: ArrayBufferLike, meta: DataResp) => Promise<T>),
   options?: Options,
 ): Promise<T> {
   if (!(uploader instanceof Function) || !options) {
@@ -42,14 +42,20 @@ export async function setImage<T extends ImageResp>(
   }
 }
 
-export async function getImage<T extends ImageResp>(key: string): Promise<T> {
+const DataSchema = v.object({
+  name: v.string(),
+  blurDataURL: v.string(),
+  height: v.pipe(v.string(), v.decimal(), v.transform(Number)),
+  width: v.pipe(v.string(), v.decimal(), v.transform(Number)),
+  mimeType: v.optional(v.string()),
+  filePath: v.optional(v.string()),
+});
+
+export async function getImage(key: string): Promise<DataResp> {
   "use cache";
 
-  const data = await redis.hgetall<T>(`image:${key}`);
-
-  if (!data) {
-    throw new NotFoundError(`No record found with key: ${key}`);
-  }
+  const hash = await redis.hgetall(`image:${key}`);
+  const data = v.parse(DataSchema, hash);
 
   cacheTag("image", data.name, key);
   cacheLife("max");
@@ -57,16 +63,10 @@ export async function getImage<T extends ImageResp>(key: string): Promise<T> {
   return data;
 }
 
+export type DataResp = v.InferOutput<typeof DataSchema>;
+
 type Options = {
   fileName: string;
   url: string | URL | Request;
   key: string;
-};
-
-export type ImageResp = {
-  name: string;
-  height: number;
-  width: number;
-  blurDataURL: string;
-  mimeType?: string;
 };
