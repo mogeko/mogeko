@@ -6,17 +6,13 @@ type RContext = RouteContext<"/image/[...key]">;
 export async function GET(_req: NextRequest, ctx: RContext) {
   const { key } = await ctx.params;
 
-  try {
-    const s3File = s3.file(key.join("/"));
+  const s3File = s3.file(key.join("/"));
 
-    const { type } = await s3File.stat();
+  const { type } = await s3File.stat();
 
-    return new NextResponse(s3File.stream(), {
-      headers: {
-        "Content-Type": type || "application/octet-stream",
-      },
-    });
-  } catch (_err: unknown) {
-    return NextResponse.error();
-  }
+  return new NextResponse(s3File.stream(), {
+    headers: {
+      "Content-Type": type || "application/octet-stream",
+    },
+  });
 }
