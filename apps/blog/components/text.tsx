@@ -1,6 +1,5 @@
 import type { RichTextItemResponse } from "@notionhq/client";
 import { cva } from "class-variance-authority";
-import { URLPattern } from "urlpattern-polyfill";
 import { Equation } from "@/components/equation";
 import { Mention } from "@/components/mention";
 import { Link } from "@/components/ui/link";
