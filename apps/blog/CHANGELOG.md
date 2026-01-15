@@ -1,5 +1,15 @@
 # @mogeko/blog
 
+## 0.2.13
+
+### Patch Changes
+
+- [#476](https://github.com/mogeko/mogeko/pull/476) [`ec47e87`](https://github.com/mogeko/mogeko/commit/ec47e87cdb6ef967daa1752e100991aa51201ae7) Thanks [@mogeko](https://github.com/mogeko)! - Migrating the runtime from Node.js to Bun.
+
+- [#476](https://github.com/mogeko/mogeko/pull/476) [`ec47e87`](https://github.com/mogeko/mogeko/commit/ec47e87cdb6ef967daa1752e100991aa51201ae7) Thanks [@mogeko](https://github.com/mogeko)! - Use the built-in `Bun.s3` and `Bun.redis` as clients for S3 and Redis.
+
+- [#476](https://github.com/mogeko/mogeko/pull/476) [`ec47e87`](https://github.com/mogeko/mogeko/commit/ec47e87cdb6ef967daa1752e100991aa51201ae7) Thanks [@mogeko](https://github.com/mogeko)! - Let Vercel Image Optimization directly fetch images from Cloudflare R2.
+
 ## 0.2.12
 
 ### Patch Changes
