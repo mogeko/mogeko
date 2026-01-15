@@ -5,17 +5,34 @@ import * as v from "valibot";
 import { NotFoundError } from "@/lib/errors";
 import { lookup } from "@/lib/mime";
 
-export async function setImage<T extends DataResp>(
-  uploader: (buff: ArrayBufferLike, meta: DataResp) => Promise<T>,
+const DataSchema = v.object({
+  name: v.pipe(v.string(), v.nonEmpty()),
+  blurDataURL: v.pipe(v.string(), v.startsWith("data:")),
+  height: v.pipe(
+    v.union([v.pipe(v.string(), v.decimal()), v.number()]),
+    v.transform(Number),
+  ),
+  width: v.pipe(
+    v.union([v.pipe(v.string(), v.decimal()), v.number()]),
+    v.transform(Number),
+  ),
+  mimeType: v.optional(v.string()),
+  filePath: v.optional(v.string()),
+});
+
+export async function setImage(
+  uploader: (buff: ArrayBufferLike, meta: DataResp) => Promise<DataResp>,
   options: Options,
-): Promise<T>;
+): Promise<DataResp>;
 export async function setImage(options: Options): Promise<DataResp>;
-export async function setImage<T extends DataResp>(
-  uploader: Options | ((buff: ArrayBufferLike, meta: DataResp) => Promise<T>),
+export async function setImage(
+  uploader:
+    | ((buff: ArrayBufferLike, meta: DataResp) => Promise<DataResp>)
+    | Options,
   options?: Options,
-): Promise<T> {
+): Promise<DataResp> {
   if (!(uploader instanceof Function) || !options) {
-    return setImage<T>(async (_, meta) => meta as T, uploader as Options);
+    return setImage(async (_, meta) => meta, uploader as Options);
   } else {
     const res = await fetch(options.url);
 
@@ -33,24 +50,16 @@ export async function setImage<T extends DataResp>(
     });
     const { fileName: name, key } = options;
 
-    const meta = { mimeType, name, height, width, blurDataURL };
-
-    const data = await uploader(buffer, meta);
+    const data = v.parse(
+      DataSchema,
+      await uploader(buffer, { mimeType, name, height, width, blurDataURL }),
+    );
 
     await redis.hset(`image:${key}`, data);
 
     return data;
   }
 }
-
-const DataSchema = v.object({
-  name: v.string(),
-  blurDataURL: v.string(),
-  height: v.pipe(v.string(), v.decimal(), v.transform(Number)),
-  width: v.pipe(v.string(), v.decimal(), v.transform(Number)),
-  mimeType: v.optional(v.string()),
-  filePath: v.optional(v.string()),
-});
 
 export async function getImage(key: string): Promise<DataResp> {
   "use cache";
