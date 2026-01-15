@@ -30,8 +30,8 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "test": "vitest run",
-    "build": "tsdown"
+    "build": "tsdown ./index.ts",
+    "test": "vitest run"
   },
   "dependencies": {
     "@mogeko/utils": "workspace:^",
@@ -40,10 +40,11 @@
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^6.3.10",
-    "@mogeko/tsconfig": "workspace:^",
+    "@tsconfig/bun": "^1.0.10",
+    "@types/bun": "^1.3.5",
     "astro": "^5.16.6",
     "tsdown": "^0.18.3",
-    "vitest": "^4.0.16"
+    "vitest": "^4.0.17"
   },
   "peerDependencies": {
     "typescript": "^5"

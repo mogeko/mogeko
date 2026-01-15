@@ -6,7 +6,6 @@ const getImage = vi.fn();
 const setImage = vi.fn();
 
 vi.mock("server-only", () => ({}));
-vi.mock("@/lib/s3", () => ({ s3: { send: vi.fn() } }));
 vi.mock("@/lib/image-helper", () => ({ getImage, setImage }));
 
 const { Image } = await import("@/components/image");

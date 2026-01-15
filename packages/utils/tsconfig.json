@@ -1,14 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@mogeko/tsconfig/default.tsconfig.json",
+  "extends": "@tsconfig/bun/tsconfig.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "types": ["vitest/importMeta", "node"],
-    "declaration": true,
+    "types": ["vitest/importMeta", "bun"],
+    "allowJs": false,
     "isolatedDeclarations": true,
+    "declaration": true,
     "baseUrl": ".",
     "paths": { "@/*": ["./src/*"] }
   },
-  "include": ["src", "tests", "index.ts", "*.config.ts"],
+  "include": ["src", "tests", "index.ts", "build.ts"],
   "exclude": ["node_modules", "dist"]
 }

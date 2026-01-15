@@ -3,17 +3,15 @@
 
 version: 2
 updates:
-  # Enable version updates for PNPM
-  - package-ecosystem: "npm"
+  # Enable version updates for Bun
+  - package-ecosystem: "bun"
     directory: "/"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
     groups:
-      devDependencies:
-        dependency-type: "development"
-      dependencies:
-        dependency-type: "production"
+      bun-dependencies:
+        patterns: ["*"]
   # Enable version updates for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"

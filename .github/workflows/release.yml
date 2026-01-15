@@ -21,30 +21,17 @@ jobs:
       TURBO_TEAM: ${{ github.actor }}
     steps:
       - uses: actions/checkout@v6.0.1
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4.2.0
-      - name: Set up Node.js
-        uses: actions/setup-node@v6.1.0
-        with:
-          node-version-file: package.json
-          cache: "pnpm"
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build -F "./packages/*"
+      - uses: oven-sh/setup-bun@v2.1.0
+      - run: bun ci
+      - run: bun run build -F "./packages/*"
       - name: Create Version PR or Publish to NPM
         id: changesets
         uses: changesets/action@v1.5.3
         with:
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
-          version: pnpm jiti .github/changeset-version.ts
-          publish: pnpm changeset publish
+          version: bun changeset version
+          publish: bun changeset publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_ENV: "production"
-      - name: Enable auto-merge for Changesets PRs
-        if: steps.changesets.outputs.hasChangesets == 'true'
-        run: gh pr --repo "${REPO}" merge --auto --merge "${PR_NUM}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUM: ${{ steps.changesets.outputs.pullRequestNumber }}
-          REPO: ${{ github.repository }}

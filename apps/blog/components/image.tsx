@@ -1,11 +1,8 @@
 import { parse } from "node:path/posix";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { s3 } from "bun";
 import NextImage from "next/image";
 import { NotFoundError } from "@/lib/errors";
-import { getImage, type ImageResp, setImage } from "@/lib/image-helper";
-import { BUCKET_NAME, s3 } from "@/lib/s3";
-
-export type NotionImageResp = ImageResp & { filePath: string };
+import { type DataResp, getImage, setImage } from "@/lib/image-helper";
 
 export const Image: React.FC<
   React.ComponentProps<typeof NextImage> & { notionId?: string; src: string }
@@ -15,21 +12,21 @@ export const Image: React.FC<
   const { name: fileName } = parse(url.pathname);
 
   try {
-    const data = await getImage<ImageResp | NotionImageResp>(key).catch(
-      (err: unknown) => {
-        if (NotFoundError.isNotFoundError(err)) {
-          return (notionId ? upload : setImage)({ key, url, fileName });
-        } else {
-          throw err;
-        }
-      },
-    );
+    const data = await getImage(key).catch((err: unknown) => {
+      if (NotFoundError.isNotFoundError(err)) {
+        return (notionId ? upload : setImage)({ key, url, fileName });
+      } else {
+        throw err;
+      }
+    });
 
-    const { height, width, name, blurDataURL, mimeType, ...rest } = data;
+    const { height, width, name, blurDataURL, mimeType, filePath } = data;
+    const image_domain = process.env.APP_IMAGE_DOMAIN;
+    const image_base_url = image_domain ? `https://${image_domain}` : "/image";
 
     return (
       <NextImage
-        src={"filePath" in rest ? `/image/${rest.filePath}` : src}
+        src={filePath ? `${image_base_url}/${filePath}` : src}
         height={props.width ? (height / width) * Number(props.width) : height}
         alt={alt.length ? alt : name}
         unoptimized={mimeType === "image/svg+xml"}
@@ -52,24 +49,11 @@ export async function sha1(plaintext: string): Promise<string> {
 
 async function upload(
   options: Parameters<typeof setImage>[number],
-): Promise<NotionImageResp> {
+): Promise<DataResp> {
   const filePath = `${options.key}/${options.fileName}`;
 
   return await setImage(async (buffer, meta) => {
-    const { ETag: _eTag } = await s3.send(
-      new PutObjectCommand({
-        Bucket: BUCKET_NAME,
-        Body: new Uint8Array(buffer),
-        Key: filePath,
-        ContentType: meta.mimeType,
-        Metadata: {
-          uploadedBy: "mogeko-blog",
-          height: meta.height.toString(),
-          width: meta.width.toString(),
-          blurDataURL: meta.blurDataURL,
-        },
-      }),
-    );
+    await s3.write(filePath, buffer, { type: meta.mimeType });
 
     return { ...meta, filePath };
   }, options);
