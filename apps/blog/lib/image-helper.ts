@@ -21,13 +21,13 @@ const DataSchema = v.object({
 });
 
 export async function setImage(
-  uploader: (buff: ArrayBufferLike, meta: DataResp) => Promise<DataResp>,
+  uploader: (buff: ArrayBufferLike, meta: MetaType) => Promise<Uploaded>,
   options: Options,
 ): Promise<DataResp>;
 export async function setImage(options: Options): Promise<DataResp>;
 export async function setImage(
   uploader:
-    | ((buff: ArrayBufferLike, meta: DataResp) => Promise<DataResp>)
+    | ((buff: ArrayBufferLike, meta: MetaType) => Promise<Uploaded>)
     | Options,
   options?: Options,
 ): Promise<DataResp> {
@@ -80,6 +80,8 @@ export async function getImage(key: string): Promise<DataResp> {
 
 export type DataResp = v.InferOutput<typeof DataSchema>;
 
+type Uploaded = v.InferInput<typeof DataSchema>;
+type MetaType = Omit<DataResp, "filePath">;
 type Options = {
   fileName: string;
   url: string | URL | Request;
