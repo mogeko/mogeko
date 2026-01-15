@@ -21,10 +21,12 @@ export const Image: React.FC<
     });
 
     const { height, width, name, blurDataURL, mimeType, filePath } = data;
+    const image_domain = process.env.APP_IMAGE_DOMAIN;
+    const image_base_url = image_domain ? `https://${image_domain}` : "/image";
 
     return (
       <NextImage
-        src={filePath ? `/image/${filePath}` : src}
+        src={filePath ? `${image_base_url}/${filePath}` : src}
         height={props.width ? (height / width) * Number(props.width) : height}
         alt={alt.length ? alt : name}
         unoptimized={mimeType === "image/svg+xml"}

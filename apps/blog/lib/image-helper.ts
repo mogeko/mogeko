@@ -2,6 +2,7 @@ import { redis } from "bun";
 import { cacheLife, cacheTag } from "next/cache";
 import sharp from "sharp";
 import * as v from "valibot";
+import { NotFoundError } from "@/lib/errors";
 import { lookup } from "@/lib/mime";
 
 export async function setImage<T extends DataResp>(
@@ -55,6 +56,11 @@ export async function getImage(key: string): Promise<DataResp> {
   "use cache";
 
   const hash = await redis.hgetall(`image:${key}`);
+
+  if (!Object.keys(hash).length) {
+    throw new NotFoundError(`No record found with key: ${key}`);
+  }
+
   const data = v.parse(DataSchema, hash);
 
   cacheTag("image", data.name, key);

@@ -1,6 +1,6 @@
 import { cacheLife, cacheTag } from "next/cache";
-import { ValiError } from "valibot";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { NotFoundError } from "@/lib/errors";
 
 const redis = {
   hgetall: vi.spyOn(Bun.redis, "hgetall"),
@@ -56,9 +56,9 @@ describe("getImage", () => {
   it("should throw NotFoundError when key does not exist", async () => {
     redis.hgetall.mockResolvedValue({});
 
-    await expect(getImage("non-existent-key")).rejects.toThrow(ValiError);
+    await expect(getImage("non-existent-key")).rejects.toThrow(NotFoundError);
     await expect(getImage("non-existent-key")).rejects.toThrow(
-      'Invalid key: Expected "name" but received undefined',
+      "No record found with key: non-existent-key",
     );
   });
 
