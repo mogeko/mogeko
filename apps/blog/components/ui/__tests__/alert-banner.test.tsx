@@ -1,6 +1,6 @@
+import { afterEach, describe, expect, it, mock } from "bun:test";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
 import { AlertBanner, alertBannerVariants } from "@/components/ui/alert-banner";
 
 describe("alertBannerVariants", () => {
@@ -99,7 +99,7 @@ describe("AlertBanner", () => {
 
   it("should handle click events", async () => {
     const user = userEvent.setup();
-    const handleClick = vi.fn();
+    const handleClick = mock();
 
     render(
       <AlertBanner icon={null} onClick={handleClick}>

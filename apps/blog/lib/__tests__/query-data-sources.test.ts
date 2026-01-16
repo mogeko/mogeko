@@ -1,13 +1,13 @@
+import { beforeEach, describe, expect, it, mock } from "bun:test";
 import type { QueryDataSourceResponse } from "@notionhq/client";
 import { notFound } from "next/navigation";
-import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NotFoundError, UnauthorizedError } from "@/lib/errors";
 
-const notion = { dataSources: { query: vi.fn() } };
+const notion = { dataSources: { query: mock() } };
 
-vi.mock("@/lib/notion", () => ({ notion }));
-vi.mock("next/cache", () => ({ cacheLife: vi.fn(), cacheTag: vi.fn() }));
-vi.mock("next/navigation", () => ({ notFound: vi.fn() }));
+mock.module("@/lib/notion", () => ({ notion }));
+mock.module("next/cache", () => ({ cacheLife: mock(), cacheTag: mock() }));
+mock.module("next/navigation", () => ({ notFound: mock() }));
 
 const { queryDataSources } = await import("@/lib/notion-staffs");
 
@@ -40,7 +40,7 @@ const mockQueryResult: QueryDataSourceResponse = {
 };
 
 beforeEach(() => {
-  vi.resetAllMocks();
+  mock.clearAllMocks();
 });
 
 describe("queryDataSources", () => {

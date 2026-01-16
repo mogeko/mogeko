@@ -1,6 +1,6 @@
+import { afterEach, describe, expect, it, mock } from "bun:test";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
 import { Checkbox } from "@/components/ui/checkbox";
 
 afterEach(() => {
@@ -121,7 +121,7 @@ describe("Checkbox", () => {
 
   it("should handle click events", async () => {
     const user = userEvent.setup();
-    const handleClick = vi.fn();
+    const handleClick = mock();
 
     render(<Checkbox onClick={handleClick}>Clickable checkbox</Checkbox>);
 

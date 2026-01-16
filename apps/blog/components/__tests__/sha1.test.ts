@@ -1,7 +1,7 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, mock } from "bun:test";
 
-vi.mock("@/lib/image-helper", () => ({}));
-vi.mock("server-only", () => ({}));
+mock.module("@/lib/image-helper", () => ({}));
+mock.module("server-only", () => ({}));
 
 const { sha1 } = await import("@/components/image");
 

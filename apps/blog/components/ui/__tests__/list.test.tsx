@@ -1,6 +1,6 @@
+import { afterEach, describe, expect, it, mock } from "bun:test";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
 import { ListItem } from "@/components/ui/list";
 
 afterEach(() => {
@@ -105,7 +105,7 @@ describe("ListItem", () => {
 
   it("should handle click events", async () => {
     const user = userEvent.setup();
-    const handleClick = vi.fn();
+    const handleClick = mock();
 
     render(<ListItem onClick={handleClick}>Clickable list item</ListItem>);
 

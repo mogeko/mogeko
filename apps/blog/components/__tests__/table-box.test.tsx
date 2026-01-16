@@ -1,8 +1,8 @@
+import { afterEach, describe, expect, it, mock } from "bun:test";
 import { cleanup, render } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("katex", () => ({ renderToString: vi.fn() }));
-vi.mock("server-only", () => ({}));
+mock.module("katex", () => ({ renderToString: mock() }));
+mock.module("server-only", () => ({}));
 
 const { RowSeparator } = await import("@/components/table-box");
 

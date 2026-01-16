@@ -1,8 +1,8 @@
+import { afterEach, describe, expect, it, mock } from "bun:test";
 import type { GetBlockResponse } from "@notionhq/client";
 import { cleanup, render } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("katex", () => ({ renderToString: vi.fn() }));
+mock.module("katex", () => ({ renderToString: mock() }));
 
 const { TRow } = await import("@/components/table-row");
 

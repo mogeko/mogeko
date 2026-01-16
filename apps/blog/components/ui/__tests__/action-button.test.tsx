@@ -1,6 +1,6 @@
+import { afterEach, describe, expect, it, mock } from "bun:test";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
 import { ActionButton } from "@/components/ui/action-button";
 
 afterEach(() => {
@@ -57,7 +57,7 @@ describe("ActionButton", () => {
 
   it("should handle click events", async () => {
     const user = userEvent.setup();
-    const handleClick = vi.fn();
+    const handleClick = mock();
 
     render(<ActionButton onClick={handleClick}>Click me</ActionButton>);
 

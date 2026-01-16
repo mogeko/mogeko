@@ -1,6 +1,6 @@
+import { afterEach, describe, expect, it, mock } from "bun:test";
 import type { RichTextItemResponse } from "@notionhq/client";
 import { cleanup, render } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vitest";
 import { plainText } from "@/components/text";
 
 describe("plainText", () => {
@@ -73,7 +73,7 @@ describe("plainText", () => {
 });
 
 describe("RichText", async () => {
-  vi.mock("katex", () => ({ renderToString: vi.fn() }));
+  mock.module("katex", () => ({ renderToString: mock() }));
 
   const { RichText } = await import("@/components/text");
 

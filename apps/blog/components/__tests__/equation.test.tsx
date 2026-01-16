@@ -1,14 +1,14 @@
+import { afterEach, beforeEach, describe, expect, it, mock } from "bun:test";
 import { cleanup, render } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const renderToString = vi.fn();
+const renderToString = mock();
 
-vi.mock("katex", () => ({ renderToString }));
+mock.module("katex", () => ({ renderToString }));
 
 const { Equation } = await import("@/components/equation");
 
 beforeEach(() => {
-  vi.resetAllMocks();
+  mock.clearAllMocks();
 });
 
 afterEach(() => {

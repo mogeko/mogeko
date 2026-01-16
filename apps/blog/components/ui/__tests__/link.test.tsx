@@ -1,6 +1,6 @@
+import { afterEach, describe, expect, it, mock } from "bun:test";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it, vi } from "vitest";
 import { Link, linkVariants } from "@/components/ui/link";
 
 describe("linkVariants", () => {
@@ -156,7 +156,7 @@ describe("Link", () => {
 
   it("should handle click events", async () => {
     const user = userEvent.setup();
-    const handleClick = vi.fn((e) => e.preventDefault());
+    const handleClick = mock((e) => e.preventDefault());
 
     render(
       <Link href="/test" onClick={handleClick}>
