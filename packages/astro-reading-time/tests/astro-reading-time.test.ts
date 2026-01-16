@@ -1,7 +1,7 @@
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it, mock } from "bun:test";
 import readingTime from "@/index";
 
-const updateConfig = vi.fn(<T>(config: T): T => config);
+const updateConfig = mock(<T>(config: T): T => config);
 
 describe("readingTime", () => {
   it("update the config", () => {

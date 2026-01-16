@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { pick } from "@/pick";
 
 describe("pick", () => {
@@ -11,7 +11,7 @@ describe("pick", () => {
   it("should ignore keys that do not exist in the object", () => {
     const obj = { a: 1, b: 2 };
     const result = pick(obj, ["a", "c" as keyof typeof obj]);
-    expect(result).toEqual({ a: 1 });
+    expect(result).toEqual({ a: 1 } as any);
   });
 
   it("should return an empty object if no keys are provided", () => {
@@ -26,6 +26,6 @@ describe("pick", () => {
       "c" as keyof typeof obj,
       "d" as keyof typeof obj,
     ]);
-    expect(result).toEqual({});
+    expect(result).toEqual({} as any);
   });
 });

@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { assocPath } from "@/assoc-path";
 
 describe("assocPath", () => {
@@ -27,7 +27,7 @@ describe("assocPath", () => {
     const obj = { a: { b: { c: 1 } } };
     const result = assocPath([], 2, obj);
 
-    expect(result).toEqual(2);
+    expect(result).toEqual(2 as any);
   });
 
   it("if a path incloud a number", () => {

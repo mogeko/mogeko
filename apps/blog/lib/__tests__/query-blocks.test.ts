@@ -1,13 +1,13 @@
+import { beforeEach, describe, expect, it, mock } from "bun:test";
 import type { ListBlockChildrenResponse } from "@notionhq/client";
 import { notFound } from "next/navigation";
-import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NotFoundError, UnauthorizedError } from "@/lib/errors";
 
-const notion = { blocks: { children: { list: vi.fn() } } };
+const notion = { blocks: { children: { list: mock() } } };
 
-vi.mock("@/lib/notion", () => ({ notion }));
-vi.mock("next/cache", () => ({ cacheLife: vi.fn(), cacheTag: vi.fn() }));
-vi.mock("next/navigation", () => ({ notFound: vi.fn() }));
+mock.module("@/lib/notion", () => ({ notion }));
+mock.module("next/cache", () => ({ cacheLife: mock(), cacheTag: mock() }));
+mock.module("next/navigation", () => ({ notFound: mock() }));
 
 const { queryBlocks } = await import("@/lib/notion-staffs");
 
@@ -77,7 +77,7 @@ const mockBlocksResult: ListBlockChildrenResponse = {
 };
 
 beforeEach(() => {
-  vi.resetAllMocks();
+  mock.clearAllMocks();
 });
 
 describe("queryBlocks", () => {

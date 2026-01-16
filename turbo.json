@@ -8,6 +8,7 @@
       "env": ["APP_*", "NOTION_*", "GH_*", "S3_*", "REDIS_*", "KV_*"],
       "outputs": ["dist", ".vercel", ".next"]
     },
-    "start": { "dependsOn": ["build"], "cache": false, "persistent": true }
+    "start": { "dependsOn": ["build"], "cache": false, "persistent": true },
+    "test": { "dependsOn": ["^build"] }
   }
 }

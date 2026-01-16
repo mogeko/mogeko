@@ -1,9 +1,11 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
-exports[`remarkReadingTime > adds reading time to the frontmatter 1`] = `
+exports[`remarkReadingTime adds reading time to the frontmatter 1`] = `
 {
-  "code": "<h1 id="hello-world">Hello, world!</h1>
-<p>This is a test markdown content.</p>",
+  "code": 
+"<h1 id="hello-world">Hello, world!</h1>
+<p>This is a test markdown content.</p>"
+,
   "metadata": {
     "frontmatter": {
       "minutesRead": "1 min read",

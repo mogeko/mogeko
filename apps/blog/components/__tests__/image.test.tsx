@@ -1,17 +1,24 @@
+import { afterEach, beforeEach, describe, expect, it, mock } from "bun:test";
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { NotFoundError } from "@/lib/errors";
 
-const getImage = vi.fn();
-const setImage = vi.fn();
+const getImage = mock();
+const setImage = mock();
 
-vi.mock("server-only", () => ({}));
-vi.mock("@/lib/image-helper", () => ({ getImage, setImage }));
+mock.module("server-only", () => ({}));
+mock.module("@/lib/image-helper", () => ({ getImage, setImage }));
+mock.module("next/image", () => ({
+  __esModule: true,
+  default: mock(({ src, alt, height }: React.ComponentProps<"img">) => {
+    // biome-ignore lint: Only for test
+    return <img src={src} alt={alt} height={height} />;
+  }),
+}));
 
 const { Image } = await import("@/components/image");
 
 beforeEach(() => {
-  vi.resetAllMocks();
+  mock.clearAllMocks();
 });
 
 afterEach(() => {

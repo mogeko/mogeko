@@ -1,34 +1,34 @@
+import { beforeEach, describe, expect, it, mock, spyOn } from "bun:test";
 import { cacheLife, cacheTag } from "next/cache";
-import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NotFoundError } from "@/lib/errors";
 
 const redis = {
-  hgetall: vi.spyOn(Bun.redis, "hgetall"),
-  hset: vi.spyOn(Bun.redis, "hset"),
+  hgetall: spyOn(Bun.redis, "hgetall"),
+  hset: spyOn(Bun.redis, "hset"),
 };
-const fetch = vi.spyOn(global, "fetch");
+const fetch = spyOn(global, "fetch");
 
-vi.mock("server-only", () => ({}));
-vi.mock("next/cache", () => ({ cacheLife: vi.fn(), cacheTag: vi.fn() }));
-vi.mock("sharp", () => ({
+mock.module("server-only", () => ({}));
+mock.module("next/cache", () => ({ cacheLife: mock(), cacheTag: mock() }));
+mock.module("sharp", () => ({
   __esModule: true,
-  default: vi.fn().mockImplementation(() => ({
-    metadata: vi.fn().mockResolvedValue({
+  default: mock(() => ({
+    metadata: mock(() => ({
       width: 800,
       height: 600,
       format: "jpeg",
-    }),
-    resize: vi.fn().mockReturnThis(),
-    blur: vi.fn().mockReturnValue({
-      toBuffer: vi.fn().mockResolvedValue(new Uint8Array([1, 2, 3])),
-    }),
+    })),
+    resize: mock().mockReturnThis(),
+    blur: mock(() => ({
+      toBuffer: mock(async () => new Uint8Array([1, 2, 3])),
+    })),
   })),
 }));
 
 const { getImage, setImage } = await import("@/lib/image-helper");
 
 beforeEach(() => {
-  vi.resetAllMocks();
+  mock.clearAllMocks();
 });
 
 describe("getImage", () => {

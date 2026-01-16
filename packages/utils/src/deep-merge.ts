@@ -18,6 +18,6 @@ import { deepMergeWith } from "@/deep-merge-with";
  * ); // { name: "fred", age: 40, contact: { email: "baa@example.com" } }
  * ```
  */
-export function deepMerge<U extends object>(l: U, r: U): U {
+export function deepMerge<U>(l: U, r: U): U {
   return deepMergeWith((_a, b) => b)(l, r);
 }

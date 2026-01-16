@@ -1,10 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
 import { deepMerge } from "@/deep-merge";
 
 describe("deepMerge", () => {
   it("merges objects", () => {
     const result = deepMerge({ a: 1, b: 2 }, { b: 3, c: 4 });
-    expect(result).toEqual({ a: 1, b: 3, c: 4 });
+    expect(result).toEqual({ a: 1, b: 3, c: 4 } as any);
   });
 
   it("merges arrays", () => {
