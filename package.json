@@ -19,6 +19,7 @@
     "build": "turbo run build",
     "start": "turbo run start",
     "test": "turbo run test",
+    "cov": "turbo run test -- --coverage",
     "lint": "biome check",
     "fmt": "biome check --write",
     "changeset": "changeset"

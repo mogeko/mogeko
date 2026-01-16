@@ -23,14 +23,15 @@ jobs:
       - uses: oven-sh/setup-bun@v2.1.0
       - run: bun ci
       - run: bun biome ci --reporter=github
-      - run: bun run build -F "./packages/*"
       - name: Generate Coverage Reports
-        run: bun run cov
+        run: |
+          bun run cov --coverage-reporter=lcov \
+                      --reporter=junit \
+                      --reporter-outfile=./junit.xml
       - name: Upload test results to Codecov
         uses: codecov/codecov-action@v5.5.2
         with:
           report_type: test_results
-          files: .github/test-report.junit.xml
           use_oidc: true
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5.5.2
