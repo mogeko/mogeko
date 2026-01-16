@@ -1,6 +1,33 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
-exports[`wrapper > Wrap mermaid code block with custom tag 1`] = `
+exports[`wrapper Wrap mermaid code block with p tag 1`] = `
+{
+  "children": [
+    {
+      "children": [
+        {
+          "children": [],
+          "properties": {
+            "className": [
+              "mermaid",
+            ],
+          },
+          "tagName": "pre",
+          "type": "element",
+        },
+      ],
+      "properties": {},
+      "tagName": "p",
+      "type": "element",
+    },
+  ],
+  "properties": {},
+  "tagName": "body",
+  "type": "element",
+}
+`;
+
+exports[`wrapper Wrap mermaid code block with custom tag 1`] = `
 {
   "children": [
     {
@@ -27,78 +54,7 @@ exports[`wrapper > Wrap mermaid code block with custom tag 1`] = `
 }
 `;
 
-exports[`wrapper > Wrap mermaid code block with p tag 1`] = `
-{
-  "children": [
-    {
-      "children": [
-        {
-          "children": [],
-          "properties": {
-            "className": [
-              "mermaid",
-            ],
-          },
-          "tagName": "pre",
-          "type": "element",
-        },
-      ],
-      "properties": {},
-      "tagName": "p",
-      "type": "element",
-    },
-  ],
-  "properties": {},
-  "tagName": "body",
-  "type": "element",
-}
-`;
-
-exports[`wrapper > Wrap multiple mermaid code block with p tag 1`] = `
-{
-  "children": [
-    {
-      "children": [
-        {
-          "children": [],
-          "properties": {
-            "className": [
-              "mermaid",
-            ],
-          },
-          "tagName": "pre",
-          "type": "element",
-        },
-      ],
-      "properties": {},
-      "tagName": "p",
-      "type": "element",
-    },
-    {
-      "children": [
-        {
-          "children": [],
-          "properties": {
-            "className": [
-              "mermaid",
-            ],
-          },
-          "tagName": "pre",
-          "type": "element",
-        },
-      ],
-      "properties": {},
-      "tagName": "p",
-      "type": "element",
-    },
-  ],
-  "properties": {},
-  "tagName": "body",
-  "type": "element",
-}
-`;
-
-exports[`wrapper > Wrap pre with p tag 1`] = `
+exports[`wrapper Wrap pre with p tag 1`] = `
 {
   "children": [],
   "properties": {
@@ -107,6 +63,50 @@ exports[`wrapper > Wrap pre with p tag 1`] = `
     ],
   },
   "tagName": "pre",
+  "type": "element",
+}
+`;
+
+exports[`wrapper Wrap multiple mermaid code block with p tag 1`] = `
+{
+  "children": [
+    {
+      "children": [
+        {
+          "children": [],
+          "properties": {
+            "className": [
+              "mermaid",
+            ],
+          },
+          "tagName": "pre",
+          "type": "element",
+        },
+      ],
+      "properties": {},
+      "tagName": "p",
+      "type": "element",
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "properties": {
+            "className": [
+              "mermaid",
+            ],
+          },
+          "tagName": "pre",
+          "type": "element",
+        },
+      ],
+      "properties": {},
+      "tagName": "p",
+      "type": "element",
+    },
+  ],
+  "properties": {},
+  "tagName": "body",
   "type": "element",
 }
 `;

@@ -9,7 +9,7 @@
     "dev": "bun --bun next dev",
     "build": "bun --bun next build",
     "start": "bun --bun next start",
-    "test": "bun --bun vitest run"
+    "test": "bun --bun --no-env-file vitest run"
   },
   "dependencies": {
     "@chinese-fonts/maple-mono-cn": "^2.0.0",

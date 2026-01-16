@@ -1,6 +1,6 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
-exports[`readingTime > update the config 1`] = `
+exports[`readingTime update the config 1`] = `
 {
   "hooks": {
     "astro:config:setup": [Function],

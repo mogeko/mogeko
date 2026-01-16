@@ -1,6 +1,6 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
-exports[`addMermaidClass > Add mermaid class to code block 1`] = `
+exports[`addMermaidClass Add mermaid class to code block 1`] = `
 "<pre class="shiki nord mermaid" style="background-color:#2e3440ff;color:#d8dee9ff" tabindex="0"><code><span class="line"></span>
 <span class="line"><span style="color:#D8DEE9FF">flowchart TD</span></span>
 <span class="line"><span style="color:#D8DEE9FF">    A[Christmas] -->|Get money| B(Go shopping)</span></span>

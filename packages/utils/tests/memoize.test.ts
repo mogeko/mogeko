@@ -1,4 +1,5 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "bun:test";
+
 import { memoize } from "@/memoize";
 
 describe("memoize", () => {

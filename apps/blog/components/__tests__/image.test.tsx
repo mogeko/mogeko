@@ -46,6 +46,8 @@ describe("Image", () => {
   });
 
   it("uploads and uses filePath when NotFound and notionId provided", async () => {
+    vi.stubEnv("APP_IMAGE_DOMAIN", undefined);
+
     getImage.mockRejectedValue(new NotFoundError("not found"));
     setImage.mockResolvedValue({
       name: "uploaded",

@@ -18,7 +18,8 @@
   "license": "MIT",
   "scripts": {
     "build": "bun ./build.ts",
-    "test": "vitest run"
+    "test": "bun test",
+    "cov": "bun test --coverage"
   },
   "dependencies": {
     "hast-util-class-list": "^2.0.1",

@@ -31,7 +31,8 @@
   ],
   "scripts": {
     "build": "tsdown ./index.ts",
-    "test": "vitest run"
+    "test": "bun test",
+    "cov": "bun test --coverage"
   },
   "dependencies": {
     "@mogeko/utils": "workspace:^",

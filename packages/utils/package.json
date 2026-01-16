@@ -31,7 +31,8 @@
   ],
   "scripts": {
     "build": "bun ./build.ts",
-    "test": "vitest run"
+    "test": "bun test",
+    "cov": "bun test --coverage"
   },
   "dependencies": {
     "github-slugger": "^2.0.0"

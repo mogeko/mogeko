@@ -1,6 +1,6 @@
+import { describe, expect, it } from "bun:test";
 import { h } from "hastscript";
 import { unified } from "unified";
-import { describe, expect, it } from "vitest";
 import { rehypeWrapper } from "@/rehype-wrapper";
 
 describe("wrapper", () => {
