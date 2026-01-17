@@ -2,6 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, mock } from "bun:test";
 import { cleanup, render, screen } from "@testing-library/react";
 import { NotFoundError } from "@/lib/errors";
 
+const ORIGINAL_ENV_VARIABLE = process.env.APP_IMAGE_DOMAIN;
+
 const getImage = mock();
 const setImage = mock();
 
@@ -18,6 +20,7 @@ mock.module("next/image", () => ({
 const { Image } = await import("@/components/image");
 
 beforeEach(() => {
+  process.env.APP_IMAGE_DOMAIN = ORIGINAL_ENV_VARIABLE;
   mock.clearAllMocks();
 });
 
@@ -27,6 +30,28 @@ afterEach(() => {
 });
 
 describe("Image", () => {
+  it("renders NextImage with filePath when image domain exists", async () => {
+    process.env.APP_IMAGE_DOMAIN = "example.com";
+    getImage.mockResolvedValue({
+      name: "test",
+      height: 100,
+      width: 200,
+      blurDataURL: "data:...",
+      mimeType: "image/png",
+      filePath: "key/file.png",
+    });
+
+    render(await Image({ alt: "", src: "https://image.example.com/test.png" }));
+
+    const img = screen.getByRole("img");
+
+    expect(img.getAttribute("src")).toBe("https://example.com/key/file.png");
+    expect(img.getAttribute("alt")).toBe("test");
+    expect(img.getAttribute("height")).toBe("100");
+
+    process.env.APP_IMAGE_DOMAIN = ORIGINAL_ENV_VARIABLE;
+  });
+
   it("renders NextImage with original src when image exists", async () => {
     getImage.mockResolvedValue({
       name: "test",
@@ -41,7 +66,6 @@ describe("Image", () => {
         alt: "Alt text",
         src: "https://example.com/test.png",
         width: 100,
-        unoptimized: true,
       }),
     );
 
@@ -69,7 +93,6 @@ describe("Image", () => {
         src: "https://example.com/remote.png",
         notionId: "notion-1",
         width: 50,
-        unoptimized: true,
       }),
     );
 
