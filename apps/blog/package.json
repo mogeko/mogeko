@@ -10,7 +10,9 @@
     "build": "bun --bun next build",
     "start": "bun --bun next start",
     "test": "bun test",
-    "cov": "bun test --coverage"
+    "cov": "bun test --coverage",
+    "lint": "biome check",
+    "fmt": "biome check --write"
   },
   "dependencies": {
     "@chinese-fonts/maple-mono-cn": "^2.0.0",
