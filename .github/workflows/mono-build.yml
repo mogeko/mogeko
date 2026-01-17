@@ -1,4 +1,4 @@
-name: Release
+name: Build
 
 on:
   push:
@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 jobs:
-  release:
+  build-publish:
     name: Build and Publish Packages
     runs-on: ubuntu-latest
     env:
@@ -35,3 +35,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_ENV: "production"
+

@@ -47,7 +47,7 @@ export async function sha1(plaintext: string): Promise<string> {
   ).toString("hex");
 }
 
-async function upload(
+export async function upload(
   options: Parameters<typeof setImage>[number],
 ): Promise<DataResp> {
   const filePath = `${options.key}/${options.fileName}`;
