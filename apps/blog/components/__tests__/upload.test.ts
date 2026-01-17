@@ -55,6 +55,7 @@ describe("upload", () => {
     const error = new Error("Failed to upload");
 
     setImage.mockRejectedValue(error);
+    s3Write.mockResolvedValue(0);
 
     expect(upload(mockOptions)).rejects.toThrow("Failed to upload");
 
