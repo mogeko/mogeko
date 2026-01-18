@@ -19,7 +19,7 @@ jobs:
       TURBO_FORCE: true
     steps:
       - uses: actions/checkout@v6.0.1
-      - uses: oven-sh/setup-bun@v2.1.0
+      - uses: oven-sh/setup-bun@v2.1.2
       - run: bun ci
       - run: bun biome ci --reporter=github
       - name: Generate Coverage Reports
