@@ -20,13 +20,13 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
       TURBO_TEAM: ${{ github.actor }}
     steps:
-      - uses: actions/checkout@v6.0.1
+      - uses: actions/checkout@v6.0.2
       - uses: oven-sh/setup-bun@v2.1.2
       - run: bun ci
       - run: bun run build -F "./packages/*"
       - name: Create Version PR or Publish to NPM
         id: changesets
-        uses: changesets/action@v1.5.3
+        uses: changesets/action@v1.6.0
         with:
           commit: "chore(release): version packages"
           title: "chore(release): version packages"
