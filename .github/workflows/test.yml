@@ -19,7 +19,7 @@ jobs:
       TURBO_FORCE: true
     steps:
       - uses: actions/checkout@v6.0.2
-      - uses: oven-sh/setup-bun@v2.1.2
+      - uses: oven-sh/setup-bun@v2.2.0
       - run: bun ci
       - run: bun biome ci --reporter=github
       - name: Generate Coverage Reports
@@ -28,12 +28,12 @@ jobs:
                       --reporter=junit \
                       --reporter-outfile=./junit.xml
       - name: Upload test results to Codecov
-        uses: codecov/codecov-action@v5.5.2
+        uses: codecov/codecov-action@v6.0.0
         with:
           report_type: test_results
           use_oidc: true
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5.5.2
+        uses: codecov/codecov-action@v6.0.0
         with:
           report_type: coverage
           use_oidc: true
